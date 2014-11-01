@@ -17,33 +17,33 @@ class normal :public cell{//각각의 칸은 cell class를 상속받아 만들어진다.
 public:
    void call_option();//캐릭터가 칸에 도달하였을때 선택지를 호출한다.
 };
-class march :public cell{
+class march :public cell{//3월을 나타내는 칸
 public:
    void call_option();
 };
-class before_exam :public cell{
+class before_exam :public cell{//시험기간을 나타내는 칸
 public:
    void call_option();
 };
-class exam :public cell{
+class exam :public cell{//중간고사, 기말고사를 나타내는 칸
 public:
    exam(){ stop = true; }
    void call_option();
 };
-class after_exam :public cell{
+class after_exam :public cell{//시험 직후를 나타내는 칸
 public:
    void call_option();
 };
-class festival :public cell{
+class festival :public cell{//pop, 해맞이 한마당, 포카전 등 축제를 나타내는 칸
 public:
    festival(){ stop = true; }
    void call_option();
 };
-class dance :public cell{
+class dance :public cell{//학과춤 준비 기간을 나타내는 칸
 public:
    void call_option();
 };
-class special :public cell{
+class special :public cell{//개총, 종총, MT 등 반드시 멈추어야 하는 칸
 public:
    special(){ stop = true; }
    void call_option();

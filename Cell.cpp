@@ -6,7 +6,7 @@ void normal::call_option(){
 	cout<<"3. 동아리 활동하기"<<endl;
 	cout<<"4. 연애하기"<<endl;
 	cout<<"5. 휴식"<endl;
-	//칸에 맞는 옵션을 출력하여 사용자로 부터 옵션을 선택하도록 한다.
+	//칸에 맞는 옵션을 출력하여 사용자로부터 옵션을 선택하도록 한다.
 	cin>>option;
 
 	switch(option)
