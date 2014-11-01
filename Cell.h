@@ -17,33 +17,33 @@ class normal :public cell{//ê°ê°ì˜ ì¹¸ì€ cell classë¥¼ ìƒì†ë°›ì•„ ë§Œë“¤ì–
 public:
    void call_option();//ìºë¦­í„°ê°€ ì¹¸ì— ë„ë‹¬í•˜ì˜€ì„ë•Œ ì„ íƒì§€ë¥¼ í˜¸ì¶œí•œë‹¤.
 };
-class march :public cell{//3¿ùÀ» ³ªÅ¸³»´Â Ä­
+class march :public cell{//3ì›”ì„ ë‚˜íƒ€ë‚´ëŠ” ì¹¸
 public:
    void call_option();
 };
-class before_exam :public cell{//½ÃÇè±â°£À» ³ªÅ¸³»´Â Ä­
+class before_exam :public cell{//ì‹œí—˜ê¸°ê°„ì„ ë‚˜íƒ€ë‚´ëŠ” ì¹¸
 public:
    void call_option();
 };
-class exam :public cell{//Áß°£°í»ç, ±â¸»°í»ç¸¦ ³ªÅ¸³»´Â Ä­
+class exam :public cell{//ì¤‘ê°„ê³ ì‚¬, ê¸°ë§ê³ ì‚¬ë¥¼ ë‚˜íƒ€ë‚´ëŠ” ì¹¸
 public:
    exam(){ stop = true; }
    void call_option();
 };
-class after_exam :public cell{//½ÃÇè Á÷ÈÄ¸¦ ³ªÅ¸³»´Â Ä­
+class after_exam :public cell{//ì‹œí—˜ê¸°ê°„ ì§í›„
 public:
    void call_option();
 };
-class festival :public cell{//pop, ÇØ¸ÂÀÌ ÇÑ¸¶´ç, Æ÷Ä«Àü µî ÃàÁ¦¸¦ ³ªÅ¸³»´Â Ä­
+class festival :public cell{//pop, í•´ë§ì´ í•œë§ˆë‹¹, í¬ì¹´ì „ ë“± ì¶•ì œ
 public:
    festival(){ stop = true; }
    void call_option();
 };
-class dance :public cell{//ÇĞ°úÃã ÁØºñ ±â°£À» ³ªÅ¸³»´Â Ä­
+class dance :public cell{//í•™ê³¼ì¶¤ ì¤€ë¹„ ê¸°ê°„
 public:
    void call_option();
 };
-class special :public cell{//°³ÃÑ, Á¾ÃÑ, MT µî ¹İµå½Ã ¸ØÃß¾î¾ß ÇÏ´Â Ä­
+class special :public cell{//ê°œì´, ì¢…ì´, MT ë“± ë°˜ë“œì‹œ ë©ˆì¶°ì•¼í•˜ëŠ” ì¹¸
 public:
    special(){ stop = true; }
    void call_option();
