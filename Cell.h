@@ -1,21 +1,21 @@
-#ifndef _CELL_H_
+ï»¿#ifndef _CELL_H_
 #define _CELL_H_
 #include <iostream>
 using namespace std;
 
 class saram;
-class cell{//ÇÑ Ä­ÀÇ Á¤º¸·Î Abstract classÀÌ´Ù.
+class cell{//í•œ ì¹¸ì˜ ì •ë³´ë¡œ Abstract classì´ë‹¤.
 public:
    cell(){ stop = false; }
-   virtual void call_option() = 0;//pure virtual method·Î derived class¿¡¼­ ±¸ÇöÇÑ´Ù.
-   bool stop_cell(){ return stop; }//¹«Á¶°Ç ¸ØÃß´Â Ä­À» ³ªÅ¸³»±â À§ÇÔÀ¸·Î, ¸ØÃç¾ß ÇÏ´Â Ä­¿¡¼­´Â ÀÌ °ªÀÌ true·Î ¼³Á¤µÈ´Ù.
+   virtual void call_option() = 0;//pure virtual methodë¡œ derived classì—ì„œ êµ¬í˜„í•œë‹¤.
+   bool stop_cell(){ return stop; }//ë¬´ì¡°ê±´ ë©ˆì¶”ëŠ” ì¹¸ì„ ë‚˜íƒ€ë‚´ê¸° ìœ„í•¨ìœ¼ë¡œ, ë©ˆì¶°ì•¼ í•˜ëŠ” ì¹¸ì—ì„œëŠ” ì´ ê°’ì´ trueë¡œ ì„¤ì •ëœë‹¤.
 protected:
-   saram* saram;//character¸¦ °¡¸®Å°´Â Æ÷ÀÎÅÍ
+   saram* saram;//characterë¥¼ ê°€ë¦¬í‚¤ëŠ” í¬ì¸í„°
    bool stop;
 };
-class normal :public cell{//°¢°¢ÀÇ Ä­Àº cell class¸¦ »ó¼Ó¹Ş¾Æ ¸¸µé¾îÁø´Ù.
+class normal :public cell{//ê°ê°ì˜ ì¹¸ì€ cell classë¥¼ ìƒì†ë°›ì•„ ë§Œë“¤ì–´ì§„ë‹¤.
 public:
-   void call_option();//Ä³¸¯ÅÍ°¡ Ä­¿¡ µµ´ŞÇÏ¿´À»¶§ ¼±ÅÃÁö¸¦ È£ÃâÇÑ´Ù.
+   void call_option();//ìºë¦­í„°ê°€ ì¹¸ì— ë„ë‹¬í•˜ì˜€ì„ë•Œ ì„ íƒì§€ë¥¼ í˜¸ì¶œí•œë‹¤.
 };
 class march :public cell{
 public:
