@@ -1,17 +1,26 @@
-#include "Cell.h"
+ï»¿#include "Cell.h"
 void normal::call_option(){
 	int option;
+<<<<<<< HEAD
 	cout<<"1. °øºÎÇÏ±â"<<endl;
 	cout<<"2. ¼ú¸¶½Ã±â"<<endl;
 	cout<<"3. µ¿¾Æ¸® È°µ¿ÇÏ±â"<<endl;
 	cout<<"4. ¿¬¾ÖÇÏ±â"<<endl;
 	cout<<"5. ÈŞ½Ä"<endl;
 	//Ä­¿¡ ¸Â´Â ¿É¼ÇÀ» Ãâ·ÂÇÏ¿© »ç¿ëÀÚ·ÎºÎÅÍ ¿É¼ÇÀ» ¼±ÅÃÇÏµµ·Ï ÇÑ´Ù.
+=======
+	cout<<"1. ê³µë¶€í•˜ê¸°"<<endl;
+	cout<<"2. ìˆ ë§ˆì‹œê¸°"<<endl;
+	cout<<"3. ë™ì•„ë¦¬ í™œë™í•˜ê¸°"<<endl;
+	cout<<"4. ì—°ì• í•˜ê¸°"<<endl;
+	cout<<"5. íœ´ì‹"<endl;
+	//ì¹¸ì— ë§ëŠ” ì˜µì…˜ì„ ì¶œë ¥í•˜ì—¬ ì‚¬ìš©ìë¡œ ë¶€í„° ì˜µì…˜ì„ ì„ íƒí•˜ë„ë¡ í•œë‹¤.
+>>>>>>> origin/master
 	cin>>option;
 
 	switch(option)
 	{
-	case 1: change_value(); //ÀÔ·Â¹ŞÀº ¿É¼Ç¿¡ µû¶ó Ä³¸¯ÅÍÀÇ ÇöÀç status¸¦ º¯È­½ÃÅ°´Â ÇÔ¼ö change value¸¦ È£ÃâÇÏµµ·Ï ÇÑ´Ù.
+	case 1: change_value(); //ì…ë ¥ë°›ì€ ì˜µì…˜ì— ë”°ë¼ ìºë¦­í„°ì˜ í˜„ì¬ statusë¥¼ ë³€í™”ì‹œí‚¤ëŠ” í•¨ìˆ˜ change valueë¥¼ í˜¸ì¶œí•˜ë„ë¡ í•œë‹¤.
 		break;
 
 	case 2: change_value();
@@ -32,12 +41,12 @@ void normal::call_option(){
 
 void march::call_option(){
 	int option;
-	cout<<"1. °øºÎÇÏ±â"<<endl;
-	cout<<"2. ¼ú¸¶½Ã±â"<<endl;
-	cout<<"3. µ¿¾Æ¸® È°µ¿ÇÏ±â"<<endl;
-	cout<<"4. ¿¬¾ÖÇÏ±â"<<endl;
-	cout<<"5. ÈŞ½Ä"<endl;
-	cout<<"6. ¹ä»ç´Ş¶ó°íÇÏ±â"<endl;
+	cout<<"1. ê³µë¶€í•˜ê¸°"<<endl;
+	cout<<"2. ìˆ ë§ˆì‹œê¸°"<<endl;
+	cout<<"3. ë™ì•„ë¦¬ í™œë™í•˜ê¸°"<<endl;
+	cout<<"4. ì—°ì• í•˜ê¸°"<<endl;
+	cout<<"5. íœ´ì‹"<endl;
+	cout<<"6. ë°¥ì‚¬ë‹¬ë¼ê³ í•˜ê¸°"<endl;
 
 	cin>>option;
 
@@ -65,8 +74,8 @@ void march::call_option(){
 }
 void before_exam::call_option(){
 	int option;
-	cout<<"1. °øºÎÇÏ±â"<<endl;
-	cout<<"2. ¼ú¸¶½Ã±â"<<endl;
+	cout<<"1. ê³µë¶€í•˜ê¸°"<<endl;
+	cout<<"2. ìˆ ë§ˆì‹œê¸°"<<endl;
 
 	cin>>option;
 
@@ -87,9 +96,9 @@ void exam::call_option(){
 
 void after_exam::call_option(){
 	int option;
-	cout<<"1. °øºÎÇÏ±â"<<endl;
-	cout<<"2. ¼ú¸¶½Ã±â"<<endl;
-	cout<<"3. ¿¬¾ÖÇÏ±â"<<endl;
+	cout<<"1. ê³µë¶€í•˜ê¸°"<<endl;
+	cout<<"2. ìˆ ë§ˆì‹œê¸°"<<endl;
+	cout<<"3. ì—°ì• í•˜ê¸°"<<endl;
 
 
 	cin>>option;
@@ -110,9 +119,9 @@ void after_exam::call_option(){
 }
 void festival::call_option(){
 	int option;
-	cout<<"1. °øºÎÇÏ±â"<<endl;
-	cout<<"2. ¼ú¸¶½Ã±â"<<endl;
-	cout<<"3. Áı¿¡ °¡±â"<<endl;
+	cout<<"1. ê³µë¶€í•˜ê¸°"<<endl;
+	cout<<"2. ìˆ ë§ˆì‹œê¸°"<<endl;
+	cout<<"3. ì§‘ì— ê°€ê¸°"<<endl;
 
 
 	cin>>option;
@@ -134,9 +143,9 @@ void festival::call_option(){
 
 void dance::call_option(){
 	int option;
-	cout<<"1. °øºÎÇÏ±â"<<endl;
-	cout<<"2. ¼ú¸¶½Ã±â"<<endl;
-	cout<<"3. Ãã ¿¬½ÀÇÏ±â"<<endl;
+	cout<<"1. ê³µë¶€í•˜ê¸°"<<endl;
+	cout<<"2. ìˆ ë§ˆì‹œê¸°"<<endl;
+	cout<<"3. ì¶¤ ì—°ìŠµí•˜ê¸°"<<endl;
 	
 
 	cin>>option;
@@ -158,8 +167,8 @@ void dance::call_option(){
 
 void special::call_option(){
 	int option;
-	cout<<"1. Âü°¡ÇÑ´Ù"<<endl;
-	cout<<"2. Âü°¡ÇÏÁö ¾Ê´Â´Ù"<<endl;
+	cout<<"1. ì°¸ê°€í•œë‹¤"<<endl;
+	cout<<"2. ì°¸ê°€í•˜ì§€ ì•ŠëŠ”ë‹¤"<<endl;
 
 	cin>>option;
 
@@ -176,12 +185,12 @@ void special::call_option(){
 }
 
 
-int MoveCharacter(int current, int number, cell* cell_pointer){//board¿¡¼­ ±¸ÇöµÇ¾î¾ßÇÏ´Â ÇÔ¼ö·Î, ÁÖ»çÀ§ÀÇ ±¼·ÁÁø °ª¿¡µû¶ó ÀÌµ¿ÇØ¾ß ÇÏ´Â Ä­ÀÇ À§Ä¡¸¦ returnÇÑ´Ù.
-	//ÀÎÀÚ·Î´Â ÇöÀç Ä³¸¯ÅÍÀÇ À§Ä¡(¿¹¸¦ µé¾î 3ÀÏ), ÁÖ»çÀ§¸¦ ±¼·Á¼­ ³ª¿Â ¼ıÀÚ, ±×¸®°í ÇöÀç ´Ş¿¡ ÇØ´çÇÏ´Â cell ¹è¿­À» °¡¸®Å°´Â cell pointer¸¦ ¹Ş´Â´Ù(¿¹¸¦µé¾î march, novemberµî ¿ù¿¡ ÇØ´çÇÏ´Â cell array°¡ µÉ°Í)
+int MoveCharacter(int current, int number, cell* cell_pointer){//boardì—ì„œ êµ¬í˜„ë˜ì–´ì•¼í•˜ëŠ” í•¨ìˆ˜ë¡œ, ì£¼ì‚¬ìœ„ì˜ êµ´ë ¤ì§„ ê°’ì—ë”°ë¼ ì´ë™í•´ì•¼ í•˜ëŠ” ì¹¸ì˜ ìœ„ì¹˜ë¥¼ returní•œë‹¤.
+	//ì¸ìë¡œëŠ” í˜„ì¬ ìºë¦­í„°ì˜ ìœ„ì¹˜(ì˜ˆë¥¼ ë“¤ì–´ 3ì¼), ì£¼ì‚¬ìœ„ë¥¼ êµ´ë ¤ì„œ ë‚˜ì˜¨ ìˆ«ì, ê·¸ë¦¬ê³  í˜„ì¬ ë‹¬ì— í•´ë‹¹í•˜ëŠ” cell ë°°ì—´ì„ ê°€ë¦¬í‚¤ëŠ” cell pointerë¥¼ ë°›ëŠ”ë‹¤(ì˜ˆë¥¼ë“¤ì–´ march, novemberë“± ì›”ì— í•´ë‹¹í•˜ëŠ” cell arrayê°€ ë ê²ƒ)
 	for(int i=current; i<=(current+number); i++)
-	{	//¸¸¾à ÇöÀç°¡ 3ÀÏ¿¡ À§Ä¡ÇØ ÀÖ´Âµ¥ ÁÖ»çÀ§¸¦ ±¼·Á 5°¡ ³ª¿Ô´Ù°í °¡Á¤ÇÏÀÚ.
-		//ÀÌ¶§, 7ÀÏÀÌ Æ¯¼öÄ­ÀÏ °æ¿ì Ä³¸¯ÅÍ´Â 8ÀÏÀÌ ¾Æ´Ï¶ó 7ÀÏ¿¡¼­ ¸ØÃß¾î¾ß ÇÏ¹Ç·Î,
-		//±× »çÀÌ¿¡ stopÁ¤º¸°¡ trueÀÎ °ªÀÌ ÀÖ´ÂÁö¸¦ ÆÄ¾ÇÇÏ¿©¾ß ÇÑ´Ù.
+	{	//ë§Œì•½ í˜„ì¬ê°€ 3ì¼ì— ìœ„ì¹˜í•´ ìˆëŠ”ë° ì£¼ì‚¬ìœ„ë¥¼ êµ´ë ¤ 5ê°€ ë‚˜ì™”ë‹¤ê³  ê°€ì •í•˜ì.
+		//ì´ë•Œ, 7ì¼ì´ íŠ¹ìˆ˜ì¹¸ì¼ ê²½ìš° ìºë¦­í„°ëŠ” 8ì¼ì´ ì•„ë‹ˆë¼ 7ì¼ì—ì„œ ë©ˆì¶”ì–´ì•¼ í•˜ë¯€ë¡œ,
+		//ê·¸ ì‚¬ì´ì— stopì •ë³´ê°€ trueì¸ ê°’ì´ ìˆëŠ”ì§€ë¥¼ íŒŒì•…í•˜ì—¬ì•¼ í•œë‹¤.
 		if(cell_pointer[i].stop_cell()==true)
 			return i;
 	}
