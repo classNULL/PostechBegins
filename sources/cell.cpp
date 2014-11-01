@@ -1,4 +1,4 @@
-﻿#include "Cell.h"
+﻿#include "cell.h"
 void normal::call_option(){
 	int option;
 	cout<<"1. 공부하기"<<endl;
@@ -16,7 +16,7 @@ void normal::call_option(){
 
 	case 2: change_value();
 		break;
-	
+
 	case 3: change_value();
 		break;
 
@@ -43,12 +43,12 @@ void march::call_option(){
 
 	switch(option)
 	{
-	case 1: change_value(); 
+	case 1: change_value();
 		break;
 
 	case 2: change_value();
 		break;
-	
+
 	case 3: change_value();
 		break;
 
@@ -72,17 +72,17 @@ void before_exam::call_option(){
 
 	switch(option)
 	{
-	case 1: change_value(); 
+	case 1: change_value();
 		break;
 
 	case 2: change_value();
 		break;
-	
-	
+
+
 	}
 }
 void exam::call_option(){
-	
+
 }
 
 void after_exam::call_option(){
@@ -96,16 +96,16 @@ void after_exam::call_option(){
 
 	switch(option)
 	{
-	case 1: change_value(); 
+	case 1: change_value();
 		break;
 
 	case 2: change_value();
 		break;
-	
+
 	case 3: change_value();
 		break;
 
-	
+
 	}
 }
 void festival::call_option(){
@@ -119,16 +119,16 @@ void festival::call_option(){
 
 	switch(option)
 	{
-	case 1: change_value(); 
+	case 1: change_value();
 		break;
 
 	case 2: change_value();
 		break;
-	
+
 	case 3: change_value();
 		break;
 
-	
+
 	}
 }
 
@@ -137,22 +137,22 @@ void dance::call_option(){
 	cout<<"1. 공부하기"<<endl;
 	cout<<"2. 술마시기"<<endl;
 	cout<<"3. 춤 연습하기"<<endl;
-	
+
 
 	cin>>option;
 
 	switch(option)
 	{
-	case 1: change_value(); 
+	case 1: change_value();
 		break;
 
 	case 2: change_value();
 		break;
-	
+
 	case 3: change_value();
 		break;
 
-	
+
 	}
 }
 
@@ -165,13 +165,13 @@ void special::call_option(){
 
 	switch(option)
 	{
-	case 1: change_value(); 
+	case 1: change_value();
 		break;
 
 	case 2: change_value();
 		break;
-	
-	
+
+
 	}
 }
 
@@ -187,4 +187,3 @@ int MoveCharacter(int current, int number, cell* cell_pointer){//board에서 구
 	}
 	return current+number;
 }
-
