@@ -3,15 +3,15 @@
 #include <iostream>
 using namespace std;
 
-class saram;
+//class saram;
 class cell{//한 칸의 정보로 Abstract class이다.
 public:
-   cell(){ stop = false; }
+   virtual ~cell() {};
    virtual void call_option() = 0;//pure virtual method로 derived class에서 구현한다.
    bool stop_cell(){ return stop; }//무조건 멈추는 칸을 나타내기 위함으로, 멈춰야 하는 칸에서는 이 값이 true로 설정된다.
 protected:
-   saram* saram;//character를 가리키는 포인터
-   bool stop;
+   //saram* saram;//character를 가리키는 포인터
+   bool stop = false;
 };
 class normal :public cell{//각각의 칸은 cell class를 상속받아 만들어진다.
 public:
