@@ -8,6 +8,7 @@
 #endif
 
 using namespace emscripten;
+
 hero::hero(float max_love, float max_energy, float max_relationship, float max_selfdevelop, int sex_number, float max_study) :
 //const 변수 초기화
 MAX_LOVE(max_love),MAX_ENERGY(max_energy),MAX_RELATIONSHIP(max_relationship), MAX_SELF_DEVELOP(max_selfdevelop),MAX_STUDY(max_study) {
@@ -139,13 +140,13 @@ float hero::get_MAX_SELF_DEVELOP() const {
 EMSCRIPTEN_BINDINGS(PostechBegins_Hero) {
 	class_<hero>("Hero")
 		.constructor<sexuality>()
-		.property("love", &hero::get_love, &hero::set_love)
-		.property("energy", &hero::get_energy, &hero::set_energy)
-		.property("relationship", &hero::get_relationship, &hero::set_relationship)
-		.property("selfImprovement", &hero::get_self_develop, &hero::set_self_develop)
-		.property("study", &hero::get_study, &hero::set_study)
-		.property("MAX_ENERGY", &hero::get_MAX_ENERGY, &hero::set_MAX_ENERGY)
-		.property("MAX_LOVE", &hero::get_MAX_LOVE, &hero::set_MAX_LOVE)
-		.property("MAX_RELATIONSHIP", &hero::get_MAX_RELATIONSHIP, &hero::set_MAX_RELATIONSHIP)
-		.property("MAX_SELFIMPROVEMENT", &hero::get_MAX_SELF_DEVELOP, &hero::set_MAX_SELF_DEVELOP);
+		.property("love", &hero::get_love)
+		.property("energy", &hero::get_energy)
+		.property("relationship", &hero::get_relationship)
+		.property("selfImprovement", &hero::get_self_develop)
+		.property("study", &hero::get_study)
+		.property("MAX_ENERGY", &hero::get_MAX_ENERGY)
+		.property("MAX_LOVE", &hero::get_MAX_LOVE)
+		.property("MAX_RELATIONSHIP", &hero::get_MAX_RELATIONSHIP)
+		.property("MAX_SELFIMPROVEMENT", &hero::get_MAX_SELF_DEVELOP);
 }
