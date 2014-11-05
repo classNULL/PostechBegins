@@ -1,6 +1,5 @@
 ﻿#include "cell.hpp"
-
-void normal::call_option(){
+int normal::call_option(){
 	int option;
 	cout<<"1. 공부하기"<<endl;
 	cout<<"2. 술마시기"<<endl;
@@ -10,26 +9,22 @@ void normal::call_option(){
 	//칸에 맞는 옵션을 출력하여 사용자로 부터 옵션을 선택하도록 한다.
 	cin>>option;
 
-	switch(option)
-	{
-	case 1: //change_value(); //입력받은 옵션에 따라 캐릭터의 현재 status를 변화시키는 함수 change value를 호출하도록 한다.
-		break;
+	return 10+option;
+}
+int weekend::call_option(){
+	int option;
+	cout<<"1. 공부하기"<<endl;
+	cout<<"2. 술마시기"<<endl;
+	cout<<"3. 동아리 활동하기"<<endl;
+	cout<<"4. 연애하기"<<endl;
+	cout<<"5. 휴식"<<endl;
+	cout<<"6. 집가기"<<endl;
+	cin>>option;
 
-	case 2: //change_value();
-		break;
-
-	case 3: //change_value();
-		break;
-
-	case 4: //change_value();
-		break;
-
-	case 5: //change_value();
-		break;
-	}
+	return 10+option;
 }
 
-void march::call_option(){
+int march::call_option(){
 	int option;
 	cout<<"1. 공부하기"<<endl;
 	cout<<"2. 술마시기"<<endl;
@@ -37,137 +32,78 @@ void march::call_option(){
 	cout<<"4. 연애하기"<<endl;
 	cout<<"5. 휴식"<<endl;
 	cout<<"6. 밥사달라고하기"<<endl;
-
 	cin>>option;
-
-	switch(option)
-	{
-	case 1: //change_value();
-		break;
-
-	case 2: //change_value();
-		break;
-
-	case 3: //change_value();
-		break;
-
-	case 4: //change_value();
-		break;
-
-	case 5: //change_value();
-		break;
-	case 6: //change_value();
-		break;
-	}
+	if(option==6) option++;// option이 6일때 7로 바꿔줌
+	return 10+option;
 }
-void before_exam::call_option(){
+int before_exam::call_option(){
 	int option;
 	cout<<"1. 공부하기"<<endl;
 	cout<<"2. 술마시기"<<endl;
 
-	cin>>option;
-
-	switch(option)
-	{
-	case 1: //change_value();
-		break;
-
-	case 2: //change_value();
-		break;
-
-
-	}
+	return 20+option
 }
-void exam::call_option(){
-
+int exam::call_option(){
+	return 30;
 }
 
-void after_exam::call_option(){
+int after_exam::call_option(){
 	int option;
 	cout<<"1. 공부하기"<<endl;
 	cout<<"2. 술마시기"<<endl;
 	cout<<"3. 연애하기"<<endl;
 
-
-	cin>>option;
-
-	switch(option)
-	{
-	case 1: //change_value();
-		break;
-
-	case 2: //change_value();
-		break;
-
-	case 3: //change_value();
-		break;
-
-
-	}
+	return 40+option;
 }
-void festival::call_option(){
+int festival::call_option(){
 	int option;
 	cout<<"1. 공부하기"<<endl;
 	cout<<"2. 술마시기"<<endl;
 	cout<<"3. 집에 가기"<<endl;
 
 
-	cin>>option;
-
-	switch(option)
-	{
-	case 1: //change_value();
-		break;
-
-	case 2: //change_value();
-		break;
-
-	case 3: //change_value();
-		break;
-
-
-	}
+	return 50+option;
 }
 
-void dance::call_option(){
+int dance::call_option(){
 	int option;
 	cout<<"1. 공부하기"<<endl;
 	cout<<"2. 술마시기"<<endl;
 	cout<<"3. 춤 연습하기"<<endl;
 
 
-	cin>>option;
-
-	switch(option)
-	{
-	case 1: //change_value();
-		break;
-
-	case 2: //change_value();
-		break;
-
-	case 3: //change_value();
-		break;
-
-
-	}
+	return 60+option;
 }
 
-void special::call_option(){
+int special::call_option(){
 	int option;
 	cout<<"1. 참가한다"<<endl;
 	cout<<"2. 참가하지 않는다"<<endl;
 
-	cin>>option;
-
-	switch(option)
-	{
-	case 1: //change_value();
-		break;
-
-	case 2: //change_value();
-		break;
-
-
-	}
+	return 70+option;
 }
+//아래와 같이 사용
+select_option(_character,cell->call_option(),day);
+
+void GameCenter::select_option(hero* _hero,int option,int day){
+	if(option==11)//변화량이 0이라도 적어주는 이유는 칭호를 고려하였기 때문
+		_hero->change_energy(), _hero->change_study(2,day), _hero->change_relationship(-2,day), _hero->change_self_develop(0,day), _hero->change_love(0,day), _hero->change_stress(8,day);
+	else if(option==12)
+		_hero->change_energy(), _hero->change_study(-4,day), _hero->change_relationship(5,day), _hero->change_self_develop(0,day), _hero->change_love(1,day), _hero->change_stress(5,day);
+	else if(option==13)
+		_hero->change_energy(), _hero->change_study(-4,day), _hero->change_relationship(5,day), _hero->change_self_develop(1,day), _hero->change_love(1,day), _hero->change_stress(-3,day);
+	else if(option==14)
+		_hero->change_energy(), _hero->change_study(-4,day), _hero->change_relationship(-2,day), _hero->change_self_develop(0,day), _hero->change_love(5,day), _hero->change_stress(0,day);
+	else if(option==15)
+		_hero->change_energy(), _hero->change_study(0,day), _hero->change_relationship(0,day), _hero->change_self_develop(0,day), _hero->change_love(0,day), _hero->change_stress(-5,day);
+	else if(option==16)
+		_hero->change_energy();
+	else if(option==17)
+		//밥사달라고하기
+	else if(option==21)//시험기간이므로 세부수치 변경 필요
+		_hero->change_energy(), _hero->change_study(2,day), _hero->change_relationship(-2,day), _hero->change_self_develop(0,day), _hero->change_love(0,day), _hero->change_stress(8,day);
+	else if(option==22)
+		_hero->change_energy(), _hero->change_study(2,day), _hero->change_relationship(-2,day), _hero->change_self_develop(0,day), _hero->change_love(0,day), _hero->change_stress(8,day);
+	//이하 구현 필요
+}
+void hero::change_study(int a, int day){study=study+(a+b)*day;}//b는 title로부터 오는 값

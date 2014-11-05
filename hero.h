@@ -1,12 +1,10 @@
-ï»¿#ifndef HERO
+#ifndef HERO
 #define HERO
 
 #include <iostream>
-#include "global.hpp"
-#include "hero.hpp"
 class hero{
 public:
-  hero(float max_love, float max_energy, float max_relationship, float max_selfdevelop, int sex_number, float max_study);
+	hero::hero(float max_love, float max_energy, float max_relationship, float max_selfdevelop, int sex_number, float max_study);
 	void change_love(float);
 	void change_energy(float);
 	void change_relationship(float);
@@ -16,7 +14,7 @@ public:
 	void change_MAX_ENERGY(const float);
 	void change_MAX_LOVE(const float);
 	void change_MAX_RELATIONSHIP(const float);
-	void change_MAX_SELF_DEVELOP(const float); //status ë³€í™”ì‹œí‚¤ëŠ” method
+	void change_MAX_SELF_DEVELOP(const float); //status º¯È­½ÃÅ°´Â method
 	float get_MAX_ENERGY();
 	float get_MAX_LOVE();
 	float get_MAX_RELATIONSHIP();
@@ -25,7 +23,7 @@ public:
 	float get_self_develop();
 	float get_relationship();
 	float get_energy();
-	float get_love(); //status return ë°›ëŠ” method
+	float get_love(); //status return ¹Ş´Â method
 private:
 	const float MAX_ENERGY;
 	const float MAX_LOVE;
@@ -37,8 +35,8 @@ private:
 	float relationship;
 	float self_develop;
 	float study;
-	sexuality sex;
+	enum sexuality sex;
 	float title[5][5];
-	bool energy_is_zero; //ì—ë„ˆì§€ê°€ 0ì¸ì§€ ì•„ë‹Œì§€ êµ¬ë³„í•¨. ë§Œì•½ ì²´ë ¥ì´ 0 ì¼ê²½ìš° ë‹¤ë¥¸ í–‰ë™ì„ í•˜ì§€ ëª»í•¨
+	bool energy_is_zero; //¿¡³ÊÁö°¡ 0ÀÎÁö ¾Æ´ÑÁö ±¸º°ÇÔ. ¸¸¾à Ã¼·ÂÀÌ 0 ÀÏ°æ¿ì ´Ù¸¥ Çàµ¿À» ÇÏÁö ¸øÇÔ
 };
 #endif
