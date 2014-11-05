@@ -1,8 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width" />
 <script src="postechbegins.out.js"></script>
 <script>
+Module.srand(Date.now() & 65535);
 var gameCenter;
 
 function createGameCenter(gender) {
@@ -20,14 +23,28 @@ function createGameCenter(gender) {
     + "\r\nMAX_SELFIMPROVEMENT: " + gamechar.MAX_SELFIMPROVEMENT);
   selectGender.style.display = "none";
   mover.style.display = "";
+
+  characterImage.style.display = "";
+  if (gender == Module.Sexuality.Man)
+    characterImage.src = "UI/캐릭터/남자/남자1.png";
+  else if (gender == Module.Sexuality.Woman)
+    characterImage.src = "UI/캐릭터/여자/여자1.png";
 }
 
 function move() {
   var step = gameCenter.dice();
   alert("주사위 수 " + step + "이(가) 나왔습니다.");
   var position = gameCenter.move(step);
-  alert(position + "번 칸에 멈추었습니다.");
-  currentPositionRepresenter.textContent = position;
+  var posstr = dateIndexToString(position);
+  alert(position + "번 칸에 멈추었습니다. " + posstr + "입니다.");
+  currentPositionRepresenter.textContent = position + ". " + posstr;
+}
+
+function dateIndexToString(index) {
+  var monthday = new Module.MonthDay(index);
+  var result = monthday.month.value + "월 " + monthday.day + "일";
+  monthday.delete();
+  return result;
 }
 </script>
 </head>
@@ -41,5 +58,6 @@ function move() {
     현재위치: <span id="currentPositionRepresenter">0</span><br />
     <input type="button" value="주사위" onclick="move()" />
   </p>
+  <img id="characterImage" style="display: none; max-width: 300px; max-height: 400px;" />
 </body>
 </html>

@@ -5,7 +5,6 @@
 #include "hero.hpp"
 #include "cell.hpp"
 #include <array>
-#include <cstdlib>
 #include <algorithm>
 
 class GameCenter {
@@ -18,9 +17,9 @@ public:
   void set_date(int new_date) { this->date = new_date; }
 
 private:
-  hero _character;
+  hero* _character;
 public:
-  const hero& get_character() const { return this->_character; }
+  const hero& get_character() const { return *this->_character; }
 
 private:
   array<cell*, 365> _map;

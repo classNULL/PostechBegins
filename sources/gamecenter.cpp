@@ -47,7 +47,13 @@ int GameCenter::move(int step){//board에서 구현되어야하는 함수로, �
   return max;
 }
 
-GameCenter::GameCenter(sexuality sex): _character(sex) {
+GameCenter::GameCenter(sexuality sex) {
+  if (sex == sexuality::man)
+    this->_character = new hero(100, 100, 100, 100, 100, sex);
+  else if (sex == sexuality::woman) // woman
+    this->_character = new hero(100, 80, 30, 30, 100, sex);
+
+  // map 설정
   this->_map.at(4) = new festival();
   for (auto& item: this->_map) {
     if (item == NULL)

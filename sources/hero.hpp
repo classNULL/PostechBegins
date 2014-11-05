@@ -6,26 +6,22 @@
 #include "hero.hpp"
 class hero{
 public:
-  hero(float max_love, float max_energy, float max_relationship, float max_selfdevelop, int sex_number, float max_study);
+  hero(float max_love, float max_energy, float max_relationship, float max_selfdevelop, float max_study, sexuality sex);
 	void change_love(float);
 	void change_energy(float);
 	void change_relationship(float);
 	void change_self_develop(float);
 	void change_study(float);
-	void change_title(float*);
-	void change_MAX_ENERGY(const float);
-	void change_MAX_LOVE(const float);
-	void change_MAX_RELATIONSHIP(const float);
-	void change_MAX_SELF_DEVELOP(const float); //status 변화시키는 method
-	float get_MAX_ENERGY();
-	float get_MAX_LOVE();
-	float get_MAX_RELATIONSHIP();
-	float get_MAX_SELF_DEVELOP();
-	float get_study();
-	float get_self_develop();
-	float get_relationship();
-	float get_energy();
-	float get_love(); //status return 받는 method
+	void change_title(float*); //status 변화시키는 method
+	float get_MAX_ENERGY() const;
+	float get_MAX_LOVE() const;
+	float get_MAX_RELATIONSHIP() const;
+	float get_MAX_SELF_DEVELOP() const;
+	float get_study() const;
+	float get_self_develop() const;
+	float get_relationship() const;
+	float get_energy() const;
+	float get_love() const; //status return 받는 method
 private:
 	const float MAX_ENERGY;
 	const float MAX_LOVE;

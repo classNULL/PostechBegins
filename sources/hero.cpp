@@ -9,11 +9,11 @@
 
 using namespace emscripten;
 
-hero::hero(float max_love, float max_energy, float max_relationship, float max_selfdevelop, int sex_number, float max_study) :
+hero::hero(float max_love, float max_energy, float max_relationship, float max_selfdevelop, float max_study, sexuality sex) :
 //const 변수 초기화
 MAX_LOVE(max_love),MAX_ENERGY(max_energy),MAX_RELATIONSHIP(max_relationship), MAX_SELF_DEVELOP(max_selfdevelop),MAX_STUDY(max_study) {
-	if(sex_number ==1){
-		sex = man;
+	if(sex == sexuality::man){
+		this->sex = man;
 		love = 10;
 		relationship = 30;
 		self_develop = 30;
@@ -22,7 +22,7 @@ MAX_LOVE(max_love),MAX_ENERGY(max_energy),MAX_RELATIONSHIP(max_relationship), MA
 		//성별이 남자일 때
 	}
 	else if(sex == sexuality::woman){
-		sex = woman;
+		this->sex = woman;
 		energy = 80;
 		love = 100;
 		relationship = 30;
@@ -40,7 +40,7 @@ MAX_LOVE(max_love),MAX_ENERGY(max_energy),MAX_RELATIONSHIP(max_relationship), MA
 //모든 title 초기화
 //각종 status 변화를 구현함. 이 때, MAX치보다 크면 MAX치로 되고, 0보다 작아지면 0으로 초기화
 void hero::change_love(float love_){ // love status 변화
-	love =+ love_;
+	love += love_;
 	if(love > MAX_LOVE)
 		love = MAX_LOVE;
 	else if(love<0)
@@ -48,7 +48,7 @@ void hero::change_love(float love_){ // love status 변화
 }
 void hero::change_energy(float energy_){ //energy status 변화
 		energy_is_zero = 0; //energy_is_zero가 0 이 아니도록 만들고 method 끝내기 전에 energy가 0보다 작거나 같으면 energy_is_zero 를 1로 변경
-	energy =+ energy_;
+	energy += energy_;
 	if(energy > MAX_ENERGY)
 		energy = MAX_ENERGY;
 	else if(energy<=0){
@@ -57,7 +57,7 @@ void hero::change_energy(float energy_){ //energy status 변화
 	}
 }
 void hero::change_relationship(float relationship_){ //relationship status 변화
-	relationship =+ relationship_;
+	relationship += relationship_;
 	if(relationship > MAX_RELATIONSHIP)
 		relationship = MAX_RELATIONSHIP;
 	else if(relationship<0){
@@ -65,7 +65,7 @@ void hero::change_relationship(float relationship_){ //relationship status 변�
 	}
 }
 void hero::change_self_develop(float self_develop_){
-	self_develop =+ self_develop_;
+	self_develop += self_develop_;
 	if(self_develop > MAX_SELF_DEVELOP)
 		self_develop = MAX_SELF_DEVELOP;
 	else if(self_develop<0){
@@ -73,7 +73,7 @@ void hero::change_self_develop(float self_develop_){
 	}
 }
 void hero::change_study(float study_){
-	study =+ study_;
+	study += study_;
 	if(study>MAX_STUDY)
 		study = MAX_STUDY;
 	else if(study<0){
@@ -110,19 +110,6 @@ float hero::get_love() const {
 	return love;
 }
 
-void hero::set_MAX_ENERGY(float value){
-	MAX_ENERGY = value;
-}
-void hero::set_MAX_LOVE(float value){
-	MAX_LOVE = value;
-}
-void hero::set_MAX_RELATIONSHIP(float value){
-	MAX_RELATIONSHIP = value;
-}
-void hero::set_MAX_SELF_DEVELOP(float value){
-	MAX_SELF_DEVELOP = value;
-}
-
 float hero::get_MAX_ENERGY() const {
 	return MAX_ENERGY;
 }
@@ -139,7 +126,7 @@ float hero::get_MAX_SELF_DEVELOP() const {
 
 EMSCRIPTEN_BINDINGS(PostechBegins_Hero) {
 	class_<hero>("Hero")
-		.constructor<sexuality>()
+		.constructor<float, float, float, float, float, sexuality>()
 		.property("love", &hero::get_love)
 		.property("energy", &hero::get_energy)
 		.property("relationship", &hero::get_relationship)
