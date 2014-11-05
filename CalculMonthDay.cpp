@@ -27,7 +27,7 @@ int cal_date(Month month, int day){
 		break;
 	}
 
-	date=date+day;//ÀÌ ³¯Â¥°¡ Á¤ÇØÁø´Ù.
+	date=date+day;//ì´ ë‚ ì§œê°€ ì •í•´ì§„ë‹¤.
 
 
 	return date;
@@ -44,7 +44,7 @@ int cal_month_day(int date){
 		month_day_info=date-31;
 	}
 
-	else if(date>=22 && date<=92){
+	else if(date>=62 && date<=92){
 
 		month=May;
 		month_day_info=date-61;
@@ -79,8 +79,8 @@ int cal_month_day(int date){
 	}
 
 	month_day_info=(month+3)*100;
-	//Á¤¼öÇüÀ¸·Î µé°í ÀÖÀ» ¼ö ÀÖ°Ô ÇÑ´Ù.
-	//month_day_info¸¦ 100À¸·Î ³ª´« ¸òÀÌ ¿ùÀÇ Á¤º¸, ³ª¸ÓÁö°¡ ÀÏÀÇ Á¤º¸°¡ µÈ´Ù.
+	//ì •ìˆ˜í˜•ìœ¼ë¡œ ë“¤ê³  ìˆì„ ìˆ˜ ìˆê²Œ í•œë‹¤.
+	//month_day_infoë¥¼ 100ìœ¼ë¡œ ë‚˜ëˆˆ ëª«ì´ ì›”ì˜ ì •ë³´, ë‚˜ë¨¸ì§€ê°€ ì¼ì˜ ì •ë³´ê°€ ëœë‹¤.
 	return month_day_info;
 
 
@@ -89,7 +89,7 @@ int cal_month_day(int date){
 
 int main(){
 	Cell date_array[306];
-	//°¢°¢À» ÁöÁ¤ÇÑÈÄ
+	//ê°ê°ì„ ì§€ì •í•œí›„
 
 	
 
