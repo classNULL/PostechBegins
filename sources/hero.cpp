@@ -47,10 +47,12 @@ MAX_LOVE(max_love),MAX_ENERGY(max_energy),MAX_RELATIONSHIP(max_relationship), MA
 		relationship = 30;
 		self_develop = 30;
 		study = 100;
+		energy = 100;
 		//성별이 남자일 때
 	}
 	else if(sex_number == 2){
 		sex = woman;
+		energy = 80;
 		love = 100;
 		relationship = 30;
 		self_develop = 30;
@@ -77,7 +79,7 @@ void hero::change_energy(float energy_){ //energy status 변화
 	energy_is_zero = 0; //energy_is_zero가 0 이 아니도록 만들고 method 끝내기 전에 energy가 0보다 작거나 같으면 energy_is_zero 를 1로 변경
 	energy =+ energy_;
 	if(energy > MAX_ENERGY)
-		energy = MAX_LOVE;
+		energy = MAX_ENERGY;
 	else if(energy<=0){
 		energy = 0;
 		energy_is_zero = 1;
