@@ -2,13 +2,6 @@
 #include "global.hpp"
 #include "hero.hpp"
 
-#ifndef EMBIND_H
-#define EMBIND_H
-#include <emscripten/bind.h>
-#endif
-
-using namespace emscripten;
-
 hero::hero(float max_love, float max_energy, float max_relationship, float max_selfdevelop, float max_study, sexuality sex) :
 //const 변수 초기화
 MAX_LOVE(max_love),MAX_ENERGY(max_energy),MAX_RELATIONSHIP(max_relationship), MAX_SELF_DEVELOP(max_selfdevelop),MAX_STUDY(max_study) {
@@ -121,19 +114,4 @@ float hero::get_MAX_RELATIONSHIP() const {
 }
 float hero::get_MAX_SELF_DEVELOP() const {
 	return MAX_SELF_DEVELOP;
-}
-
-
-EMSCRIPTEN_BINDINGS(PostechBegins_Hero) {
-	class_<hero>("Hero")
-		.constructor<float, float, float, float, float, sexuality>()
-		.property("love", &hero::get_love)
-		.property("energy", &hero::get_energy)
-		.property("relationship", &hero::get_relationship)
-		.property("selfImprovement", &hero::get_self_develop)
-		.property("study", &hero::get_study)
-		.property("MAX_ENERGY", &hero::get_MAX_ENERGY)
-		.property("MAX_LOVE", &hero::get_MAX_LOVE)
-		.property("MAX_RELATIONSHIP", &hero::get_MAX_RELATIONSHIP)
-		.property("MAX_SELFIMPROVEMENT", &hero::get_MAX_SELF_DEVELOP);
 }

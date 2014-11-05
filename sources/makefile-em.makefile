@@ -5,7 +5,7 @@ gamecenter.o:
   emcc -std=c++11 -c gamecenter.cpp
 
 hero.o:
-  emcc --bind -std=c++11 -c hero.cpp
+  emcc -std=c++11 -c hero.cpp
 
 cell.o:
   emcc -std=c++11 -c cell.cpp
