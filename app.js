@@ -1,4 +1,3 @@
-///<reference path="module.d.ts" />
 Module.srand(Date.now() & 65535);
 var gameCenter;
 function createGameCenter(gender) {
@@ -27,3 +26,4 @@ function dateIndexToString(index) {
     monthday.delete();
     return result;
 }
+//# sourceMappingURL=app.js.map

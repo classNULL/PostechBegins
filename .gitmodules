@@ -1,0 +1,3 @@
+[submodule "submodules/domliner"]
+	path = submodules/domliner
+	url = https://github.com/SaschaNaz/DOMLiner.git

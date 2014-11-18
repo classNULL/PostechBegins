@@ -1,6 +1,4 @@
-﻿///<reference path="module.d.ts" />
-
-declare var selectGender: HTMLParagraphElement;
+﻿declare var selectGender: HTMLParagraphElement;
 declare var mover: HTMLParagraphElement;
 declare var characterImage: HTMLImageElement;
 declare var currentPositionRepresenter: HTMLSpanElement;
