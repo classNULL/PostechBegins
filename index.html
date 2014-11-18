@@ -3,6 +3,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width" />
+  <title>PostechBegins 개발중</title>
+  <link rel="stylesheet" href="app.css" />
 
   <!-- native code -->
   <script src="postechbegins.out.js"></script>
@@ -24,5 +26,13 @@
     <input type="button" value="주사위" onclick="move()" />
   </p>
   <img id="characterImage" style="display: none; max-width: 300px; max-height: 400px;" />
+  <progress class="swordbar" value="30" max="100"></progress>
+  <div class="map">
+    <div style="background-color: red;"></div>
+    <div style="background-color: blue; -ms-grid-column: 2; border-top-right-radius: 100%"></div>
+    <div style="background-color: yellow; -ms-grid-row: 2; -ms-grid-column: 2; border-bottom-left-radius: 100%"></div>
+    <div style="background-color: green; -ms-grid-row: 2; -ms-grid-column: 3;"></div>
+  </div>
+  <div class="dice rotate"></div>
 </body>
 </html>
