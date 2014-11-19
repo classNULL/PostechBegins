@@ -4,13 +4,15 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width" />
   <title>PostechBegins 개발중</title>
-  <link rel="stylesheet" href="app.css" />
+  <link rel="stylesheet" href="style/app.css" />
+  <link rel="stylesheet" href="style/map.css" />
 
   <!-- native code -->
   <script src="postechbegins.out.js"></script>
 
   <!-- submodules -->
   <script src="submodules/domliner/domliner.js"></script>
+  <script src="submodules/gridlayout/bin/css-polyfills.js"></script>
   
   <!-- app scripts -->
   <script src="app.js"></script>
@@ -28,10 +30,10 @@
   <img id="characterImage" style="display: none; max-width: 300px; max-height: 400px;" />
   <progress class="swordbar" value="30" max="100"></progress>
   <div class="map">
-    <div style="background-color: red;"></div>
-    <div style="background-color: blue; -ms-grid-column: 2; border-top-right-radius: 100%"></div>
-    <div style="background-color: yellow; -ms-grid-row: 2; -ms-grid-column: 2; border-bottom-left-radius: 100%"></div>
-    <div style="background-color: green; -ms-grid-row: 2; -ms-grid-column: 3;"></div>
+    <div class="cell1"></div>
+    <div class="cell2"></div>
+    <div class="cell3"></div>
+    <div class="cell4"></div>
   </div>
   <div class="dice rotate"></div>
 </body>
