@@ -39,6 +39,10 @@ public:
    festival(){ stop = true; }
    void call_option();
 };
+class poka :public festival{//포카전
+};
+class pop :public festival{//피오피
+};
 class dance :public cell{//학과춤 준비 기간
 public:
    void call_option();
@@ -47,5 +51,15 @@ class special :public cell{//개총, 종총, MT 등 반드시 멈춰야하는 �
 public:
    special(){ stop = true; }
    void call_option();
+};
+class lecstartparty :public special{//개총
+};
+class lecendparty :public special{//종총
+};
+class mt :public special{//엠티
+};
+class faceparty :public special{//대면식
+};
+class vacation :public cell{//방학
 };
 #endif
