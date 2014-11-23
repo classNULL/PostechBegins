@@ -88,7 +88,7 @@ int cal_month_day(int date){
 
 
 int main(){
-	Cell date_array[306];
+	cell* array[306];		//Cell date_array[306]; 이거에서 수정하였음. 
 	//각각을 지정한후
 
 	
