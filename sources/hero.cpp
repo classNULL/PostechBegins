@@ -13,7 +13,7 @@ public:
 	void change_MAX_ENERGY(const float);
 	void change_MAX_LOVE(const float);
 	void change_MAX_RELATIONSHIP(const float);
-	void change_MAX_SELF_DEVELOP(const float); //status º¯È­½ÃÅ°´Â method
+	void change_MAX_SELF_DEVELOP(const float); //status ë³€í™”ì‹œí‚¤ëŠ” method
 	float get_MAX_ENERGY();
 	float get_MAX_LOVE();
 	float get_MAX_RELATIONSHIP();
@@ -22,7 +22,7 @@ public:
 	float get_self_develop();
 	float get_relationship();
 	float get_energy();
-	float get_love(); //status return ¹Ş´Â method
+	float get_love(); //status return ë°›ëŠ” method
 private:
 	const float MAX_ENERGY;
 	const float MAX_LOVE;
@@ -35,11 +35,11 @@ private:
 	float self_develop;
 	float study;
 	enum sexuality sex;
-	float title[5][5];
-	bool energy_is_zero; //¿¡³ÊÁö°¡ 0ÀÎÁö ¾Æ´ÑÁö ±¸º°ÇÔ. ¸¸¾à Ã¼·ÂÀÌ 0 ÀÏ°æ¿ì ´Ù¸¥ Çàµ¿À» ÇÏÁö ¸øÇÔ
+	bool energy_is_zero; //ì—ë„ˆì§€ê°€ 0ì¸ì§€ ì•„ë‹Œì§€ êµ¬ë³„í•¨. ë§Œì•½ ì²´ë ¥ì´ 0 ì¼ê²½ìš° ë‹¤ë¥¸ í–‰ë™ì„ í•˜ì§€ ëª»í•¨
+	float titles[7][6][6];
 };
 hero::hero(float max_love, float max_energy, float max_relationship, float max_selfdevelop, int sex_number, float max_study) : 
-//const º¯¼ö ÃÊ±âÈ­
+//const ë³€ìˆ˜ ì´ˆê¸°í™”
 MAX_LOVE(max_love),MAX_ENERGY(max_energy),MAX_RELATIONSHIP(max_relationship), MAX_SELF_DEVELOP(max_selfdevelop),MAX_STUDY(max_study) { 
 	if(sex_number ==1){
 		sex = man;
@@ -48,7 +48,7 @@ MAX_LOVE(max_love),MAX_ENERGY(max_energy),MAX_RELATIONSHIP(max_relationship), MA
 		self_develop = 30;
 		study = 100;
 		energy = 100;
-		//¼ºº°ÀÌ ³²ÀÚÀÏ ¶§
+		//ì„±ë³„ì´ ë‚¨ìì¼ ë•Œ
 	}
 	else if(sex_number == 2){
 		sex = woman;
@@ -58,25 +58,37 @@ MAX_LOVE(max_love),MAX_ENERGY(max_energy),MAX_RELATIONSHIP(max_relationship), MA
 		self_develop = 30;
 		study = 100;
 		}
-	//¼ºº°ÀÌ ¿©ÀÚÀÏ ¶§
-	for(int i =0; i<5;i++){
-		for(int j = 0;j<5;j++){
-			title[i][j] = 0;
-		}
-	}
+	//ì„±ë³„ì´ ì—¬ìì¼ ë•Œ
 	energy_is_zero = 0;
+	/*
+			ì²´ë ¥	ì¸ê°„ê´€ê³„	ì—°ì• 	ê³µë¶€ì¤‘	ìŠ¤íŠ¸ë ˆìŠ¤	ìê¸°ê°œë°œ
+	ìˆ 
+	ê³µë¶€
+	ë™ì•„ë¦¬
+	ì—°ì• 
+	íœ´ì‹
+	ì§‘
+	
+	*/
+	titles[0] = { { 1, 1.1, 1, 1, 1, 1 }, { 1, 1.1, 1, 1, 1, 1 }, { 1, 1.1, 1, 1, 1, 1 }{1, 1.1, 1, 1, 1, 1}, { 1, 1, 1, 1, 1, 1 }{1, 1, 1, 1, 1, 1} }; //ì•„ì‹¸
+	titles[1] = { { 1, 1.1, 1, 1, -1, 1 }, { 1, 1, 1, 0.9, 1, 1 }, { 1, 1, 1, 1, 1, 1 }, { 1, 1, 1, 1, 1, 1 }, { 1, 1, 1, 1, 1, 1 }, { 1, 1, 1, 1, 1, 1 } }; //ìˆ ìŸì´
+	titles[2] = { { 1, 1, 1, 1, 1, 1 }, { 1, 1, 1, 1, 1, 1 }, { 1, 1.05, 1, 1, 1, 1.05 }, { 1, 1, 1, 1, 1, 1 }, { 1, 1, 1, 1, 1, 1 }, { 1, 1, 1, 1, 1, 1 } }; //ë™ë°©ì¶©
+	titles[3] = { { 1, 0.95, 1, 1.1, 1, 0.95 }, { 1, 0.95, 1, 1.1, 1, 0.95 }, { 1, 0.95, 1, 1.1, 1, 0.95 }, { 1, 0.95, 1, 1.1, 1, 0.95 }, { 1, 0.95, 1, 1.1, 1, 0.95 }, { 1, 0.95, 1, 1.1, 1, 0.95 } }; // ê³µë¶€ë²Œë ˆ
+	titles[4] = { { 1.1, 0.9, 1, 0.9, 0, 0.9 }, { 1.1, 0.9, 1, 0.9, 0, 0.9 }, { 1.1, 0.9, 1, 0.9, 0, 0.9 }, { 1.1, 0.9, 1, 0.9, 0, 0.9 }, { 1.1, 0.9, 1, 0.9, 0, 0.9 }, { 1.1, 0.9, 1, 0.9, 0, 0.9 } }; // ì—°ì• ì¤‘
+	titles[5] = { { 1, 0.9, 1, 1, 1, 1 }, { 1, 0.9, 1, 1, 1, 1 }, { 1, 0.9, 1, 1, 1, 1 }, { 1, 0.9, 1, 1, 1, 1 }, { 1, 0.9, 1, 1, 1, 1 }, { 1, 0.9, 1, 1, 1, 1 } };//ë¬´ë™ì•„ë¦¬
+	titles[6] = { { 1, 1, 1, 1, 1, 1 }, { 1, 1, 1, 1, 1, 1 }, { 1, 1, 1, 1, 1, 1 }, { 1, 1, 1, 1, 1, 1 }, { 1.1, 1.1, 1.1, 1.1, 1.1, 1.1 }, { 1, 1, 1, 1, 1, 1 } };//ì²´ë ¥ë‚®ìŒ
 }
-//¸ğµç title ÃÊ±âÈ­
-//°¢Á¾ status º¯È­¸¦ ±¸ÇöÇÔ. ÀÌ ¶§, MAXÄ¡º¸´Ù Å©¸é MAXÄ¡·Î µÇ°í, 0º¸´Ù ÀÛ¾ÆÁö¸é 0À¸·Î ÃÊ±âÈ­
-void hero::change_love(float love_){ // love status º¯È­
+//ëª¨ë“  title ì´ˆê¸°í™”
+//ê°ì¢… status ë³€í™”ë¥¼ êµ¬í˜„í•¨. ì´ ë•Œ, MAXì¹˜ë³´ë‹¤ í¬ë©´ MAXì¹˜ë¡œ ë˜ê³ , 0ë³´ë‹¤ ì‘ì•„ì§€ë©´ 0ìœ¼ë¡œ ì´ˆê¸°í™”
+void hero::change_love(float love_){ // love status ë³€í™”
 	love =+ love_;
 	if(love > MAX_LOVE) 
 		love = MAX_LOVE;
 	else if(love<0)
 		love = 0;
 }
-void hero::change_energy(float energy_){ //energy status º¯È­
-	energy_is_zero = 0; //energy_is_zero°¡ 0 ÀÌ ¾Æ´Ïµµ·Ï ¸¸µé°í method ³¡³»±â Àü¿¡ energy°¡ 0º¸´Ù ÀÛ°Å³ª °°À¸¸é energy_is_zero ¸¦ 1·Î º¯°æ
+void hero::change_energy(float energy_){ //energy status ë³€í™”
+	energy_is_zero = 0; //energy_is_zeroê°€ 0 ì´ ì•„ë‹ˆë„ë¡ ë§Œë“¤ê³  method ëë‚´ê¸° ì „ì— energyê°€ 0ë³´ë‹¤ ì‘ê±°ë‚˜ ê°™ìœ¼ë©´ energy_is_zero ë¥¼ 1ë¡œ ë³€ê²½
 	energy =+ energy_;
 	if(energy > MAX_ENERGY)
 		energy = MAX_ENERGY;
@@ -85,7 +97,7 @@ void hero::change_energy(float energy_){ //energy status º¯È­
 		energy_is_zero = 1;
 	}
 }
-void hero::change_relationship(float relationship_){ //relationship status º¯È­
+void hero::change_relationship(float relationship_){ //relationship status ë³€í™”
 	relationship =+ relationship_;
 	if(relationship > MAX_RELATIONSHIP)
 		relationship = MAX_RELATIONSHIP;
@@ -151,7 +163,6 @@ float hero::get_MAX_RELATIONSHIP(){
 float hero::get_MAX_SELF_DEVELOP(){
 	return MAX_SELF_DEVELOP;
 }
-
 
 EMSCRIPTEN_BINDINGS(PostechBegins_Hero) {
 	class_<hero>("Hero")
