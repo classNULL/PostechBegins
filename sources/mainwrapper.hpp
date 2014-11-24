@@ -5,6 +5,7 @@
 #include "gamecenter.hpp"
 #include "hero.hpp"
 #include "monthday.hpp"
+#include "maptable.hpp"
 
 #ifndef EMBIND_H
 #define EMBIND_H

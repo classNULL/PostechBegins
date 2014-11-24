@@ -29,7 +29,7 @@ public:
   static MonthDay from_index(int date_index);
   static MonthDay from_calendar(Month month, int day);
 
-  int get_date_index() const { return this->_date_index; }
+  int get_index() const { return this->_date_index; }
   Month get_month() const { return this->_month; }
   int get_day() const { return this->_day; }
 };

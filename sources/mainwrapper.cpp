@@ -3,11 +3,11 @@
 EMSCRIPTEN_BINDINGS(PostechBegins_Main) {
   emscripten::function("srand", &srand);
   class_<MonthDay>("MonthDay")
-    .class_function("fromIndex", &MonthDay::from_index)
-    .class_function("fromCalendar", &MonthDay::from_calendar)
-    .property("dateIndex", &MonthDay::get_date_index)
+    .property("index", &MonthDay::get_index)
     .property("month", &MonthDay::get_month)
-    .property("day", &MonthDay::get_day);
+    .property("day", &MonthDay::get_day)
+    .class_function("fromIndex", &MonthDay::from_index)
+    .class_function("fromCalendar", &MonthDay::from_calendar);
   enum_<Month>("Month")
     .value("March", Month::March)
     .value("April", Month::April)
@@ -30,6 +30,9 @@ EMSCRIPTEN_BINDINGS(PostechBegins_Main) {
     .function("dice", &GameCenter::dice)
     .function("score", &GameCenter::score)
     .function("move", &GameCenter::move);
+  class_<MapTable>("MapTable")
+    .function("generate", &MapTable::generate)
+    .function("at", &MapTable::at);
   class_<hero>("Hero")
     .constructor<float, float, float, float, float, sexuality>()
     .property("love", &hero::get_love)

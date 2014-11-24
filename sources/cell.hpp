@@ -65,5 +65,6 @@ class mt :public special{//엠티
 class faceparty :public special{//대면식
 };
 class vacation :public cell{//방학
+  int call_option() { return 0; }
 };
 #endif
