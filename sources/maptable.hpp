@@ -17,8 +17,11 @@ public:
     maptable._map = map;
     return maptable;
   }
+
   cell* at(int i) { return this->_map.at(i); }
   ~MapTable();
+
+  int check_stop(int reference, int step);
 };
 
 #endif

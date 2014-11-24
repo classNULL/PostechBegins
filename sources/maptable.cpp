@@ -7,6 +7,18 @@ MapTable::~MapTable() {
   }
 }
 
+int MapTable::check_stop(int reference, int step) {
+  int max = reference + step;
+  for(int i = reference + 1; i <= max; i++) {
+    //만약 현재가 3일에 위치해 있는데 주사위를 굴려 5가 나왔다고 가정하자.
+    //이때, 7일이 특수칸일 경우 캐릭터는 8일이 아니라 7일에서 멈추어야 하므로,
+    //그 사이에 stop정보가 true인 값이 있는지를 파악하여야 한다.
+    if(this->at(i)->stop_cell() == true)
+      return i;
+  }
+  return max;
+}
+
 MapTable MapTable::generate_default() {
   MapTable maptable;
   auto& array = maptable._map = vector<cell*>(306);

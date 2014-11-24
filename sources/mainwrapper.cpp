@@ -30,9 +30,6 @@ EMSCRIPTEN_BINDINGS(PostechBegins_Main) {
     .function("dice", &GameCenter::dice)
     .function("score", &GameCenter::score)
     .function("move", &GameCenter::move);
-  class_<MapTable>("MapTable")
-    .function("generate", &MapTable::generate)
-    .function("at", &MapTable::at);
   class_<hero>("Hero")
     .constructor<float, float, float, float, float, sexuality>()
     .property("love", &hero::get_love)
