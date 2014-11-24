@@ -4,6 +4,7 @@
 #include "global.hpp"
 #include "hero.hpp"
 #include "cell.hpp"
+#include "maptable.hpp"
 #include <array>
 #include <algorithm>
 
@@ -22,13 +23,12 @@ public:
   const hero& get_character() const { return *this->_character; }
 
 private:
-  array<cell*, 365> _map;
+  MapTable _map = MapTable::generate_default();
   int _current_position = 0;
 public:
-  cell& map_at(int index) { return *this->_map.at(index); }
+  const MapTable& get_map() const { return this->_map; }
   int get_current_position() const { return this->_current_position; }
   GameCenter(sexuality sex);
-  ~GameCenter();
 
 public:
   /** 1과 6 사이 숫자를 무작위로 리턴한다. */

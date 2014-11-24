@@ -25,11 +25,17 @@ EMSCRIPTEN_BINDINGS(PostechBegins_Main) {
   class_<GameCenter>("GameCenter")
     .constructor<sexuality>()
     .property("date", &GameCenter::get_date, &GameCenter::set_date)
+    .property("map", &GameCenter::get_map)
     .property("currentPosition", &GameCenter::get_current_position)
     .property("character", &GameCenter::get_character)
     .function("dice", &GameCenter::dice)
     .function("score", &GameCenter::score)
     .function("move", &GameCenter::move);
+  class_<MapTable>("MapTable")
+    .class_function("generate", &MapTable::generate)
+    .class_function("generateDefault", &MapTable::generate_default)
+    .function("checkStop", &MapTable::check_stop)
+    .function("at", &MapTable::at, allow_raw_pointers());
   class_<hero>("Hero")
     .constructor<float, float, float, float, float, sexuality>()
     .property("love", &hero::get_love)
