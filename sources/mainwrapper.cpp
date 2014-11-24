@@ -3,8 +3,8 @@
 EMSCRIPTEN_BINDINGS(PostechBegins_Main) {
   emscripten::function("srand", &srand);
   class_<MonthDay>("MonthDay")
-    .constructor<Month, int>()
-    .constructor<int>()
+    .class_function("fromIndex", &MonthDay::from_index)
+    .class_function("fromCalendar", &MonthDay::from_calendar)
     .property("dateIndex", &MonthDay::get_date_index)
     .property("month", &MonthDay::get_month)
     .property("day", &MonthDay::get_day);

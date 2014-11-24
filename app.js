@@ -21,7 +21,7 @@ function move() {
     currentPositionRepresenter.textContent = position + ". " + posstr;
 }
 function dateIndexToString(index) {
-    var monthday = new Module.MonthDay(index);
+    var monthday = Module.MonthDay.fromIndex(index);
     var result = monthday.month.value + "월 " + monthday.day + "일";
     monthday.delete();
     return result;

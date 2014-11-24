@@ -1,8 +1,9 @@
 #include "monthday.hpp"
 
-MonthDay::MonthDay(Month month, int day){
-	this->_month = month;
-	this->_day = day;
+MonthDay MonthDay::from_calendar(Month month, int day){
+	MonthDay monthday;
+	monthday._month = month;
+	monthday._day = day;
 
 	int month_zero;
 	switch(month) {
@@ -28,10 +29,12 @@ MonthDay::MonthDay(Month month, int day){
 			break;
 	}
 
-	this->_date_index = month_zero + day - 1;//이 날짜가 정해진다.
+	monthday._date_index = month_zero + day - 1;//이 날짜가 정해진다.
+	return monthday;
 }
-MonthDay::MonthDay(int date_index){
-	this->_date_index = date_index;
+MonthDay MonthDay::from_index(int date_index){
+	MonthDay monthday;
+	monthday._date_index = date_index;
 
 	int month_day_info;
 	Month month;
@@ -78,8 +81,9 @@ MonthDay::MonthDay(int date_index){
 		month_day_info=date_index-275;
 	}
 
-	this->_month = month;
-	this->_day = month_day_info;
+	monthday._month = month;
+	monthday._day = month_day_info;
+	return monthday;
 }
 
 // int main(){

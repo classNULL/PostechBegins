@@ -10,8 +10,8 @@
 declare module Module {
     function srand(seed: number): void;
     class MonthDay extends EmscriptenClass {
-        constructor(dateIndex: number);
-        constructor(month: Month, day: number);
+        static fromIndex(dateIndex: number): MonthDay;
+        static fromCalendar(month: Month, day: number): MonthDay;
 
         dateIndex: number;
         month: Month;

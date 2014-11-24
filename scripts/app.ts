@@ -39,7 +39,7 @@ function move() {
 }
 
 function dateIndexToString(index: number) {
-    var monthday = new Module.MonthDay(index);
+    var monthday = Module.MonthDay.fromIndex(index);
     var result = monthday.month.value + "월 " + monthday.day + "일";
     monthday.delete();
     return result;
