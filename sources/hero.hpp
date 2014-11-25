@@ -1,4 +1,4 @@
-﻿#ifndef HERO
+#ifndef HERO
 #define HERO
 
 #include <iostream>
@@ -6,12 +6,14 @@
 #include "hero.hpp"
 class hero{
 public:
-  hero(float max_love, float max_energy, float max_relationship, float max_selfdevelop, float max_study, sexuality sex);
+  hero(float max_love, float max_energy, float max_relationship, float max_selfdevelop, float max_study, float max_stress, sexuality sex);
 	void change_love(float, int);
 	void change_energy(float, int);
 	void change_relationship(float, int);
 	void change_self_develop(float, int);
 	void change_study(float, int);//status 변화시키는 method
+	void change_stress(float, int);
+	float get_MAX_STRESS();
 	float get_MAX_ENERGY() const;
 	float get_MAX_LOVE() const;
 	float get_MAX_RELATIONSHIP() const;
@@ -27,6 +29,8 @@ private:
 	const float MAX_RELATIONSHIP;
 	const float MAX_SELF_DEVELOP;
 	const float MAX_STUDY;
+	const float MAX_STRESS;
+	float stress;
 	float energy;
 	float love;
 	float relationship;
