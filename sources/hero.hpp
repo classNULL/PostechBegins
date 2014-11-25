@@ -1,31 +1,26 @@
-#ifndef HERO
+ï»¿#ifndef HERO
 #define HERO
 
 #include <iostream>
-#include "global.h"
-#include "hero.h"
+#include "global.hpp"
+#include "hero.hpp"
 class hero{
 public:
-	hero::hero(float max_love, float max_energy, float max_relationship, float max_selfdevelop, int sex_number, float max_study);
-	void change_love(float);
-	void change_energy(float);
-	void change_relationship(float);
-	void change_self_develop(float);
-	void change_study(float);
-	void change_title(float*);
-	void change_MAX_ENERGY(const float);
-	void change_MAX_LOVE(const float);
-	void change_MAX_RELATIONSHIP(const float);
-	void change_MAX_SELF_DEVELOP(const float); //status º¯È­½ÃÅ°´Â method
-	float get_MAX_ENERGY();
-	float get_MAX_LOVE();
-	float get_MAX_RELATIONSHIP();
-	float get_MAX_SELF_DEVELOP();
-	float get_study();
-	float get_self_develop();
-	float get_relationship();
-	float get_energy();
-	float get_love(); //status return ¹Ş´Â method
+  hero(float max_love, float max_energy, float max_relationship, float max_selfdevelop, float max_study, sexuality sex);
+	void change_love(float, int);
+	void change_energy(float, int);
+	void change_relationship(float, int);
+	void change_self_develop(float, int);
+	void change_study(float, int);//status ë³€í™”ì‹œí‚¤ëŠ” method
+	float get_MAX_ENERGY() const;
+	float get_MAX_LOVE() const;
+	float get_MAX_RELATIONSHIP() const;
+	float get_MAX_SELF_DEVELOP() const;
+	float get_study() const;
+	float get_self_develop() const;
+	float get_relationship() const;
+	float get_energy() const;
+	float get_love() const; //status return ë°›ëŠ” method
 private:
 	const float MAX_ENERGY;
 	const float MAX_LOVE;
@@ -37,8 +32,27 @@ private:
 	float relationship;
 	float self_develop;
 	float study;
-	enum sexuality sex;
-	float title[5][5];
-	bool energy_is_zero; //¿¡³ÊÁö°¡ 0ÀÎÁö ¾Æ´ÑÁö ±¸º°ÇÔ. ¸¸¾à Ã¼·ÂÀÌ 0 ÀÏ°æ¿ì ´Ù¸¥ Çàµ¿À» ÇÏÁö ¸øÇÔ
+	sexuality sex;
+	bool energy_is_zero = false; //ì—ë„ˆì§€ê°€ 0ì¸ì§€ ì•„ë‹Œì§€ êµ¬ë³„í•¨. ë§Œì•½ ì²´ë ¥ì´ 0 ì¼ê²½ìš° ë‹¤ë¥¸ í–‰ë™ì„ í•˜ì§€ ëª»í•¨
+
+  /*
+  ì²´ë ¥	ì¸ê°„ê´€ê³„	ì—°ì• 	ê³µë¶€ì¤‘	ìŠ¤íŠ¸ë ˆìŠ¤	ìê¸°ê°œë°œ
+  ìˆ 
+  ê³µë¶€
+  ë™ì•„ë¦¬
+  ì—°ì• 
+  íœ´ì‹
+  ì§‘
+
+  */
+  float titles[7][6][6] = {
+    { { 1, 1.1, 1, 1, 1, 1 }, { 1, 1.1, 1, 1, 1, 1 }, { 1, 1.1, 1, 1, 1, 1 }, {1, 1.1, 1, 1, 1, 1}, { 1, 1, 1, 1, 1, 1 }, {1, 1, 1, 1, 1, 1} }, //ì•„ì‹¸
+    { { 1, 1.1, 1, 1, -1, 1 }, { 1, 1, 1, 0.9, 1, 1 }, { 1, 1, 1, 1, 1, 1 }, { 1, 1, 1, 1, 1, 1 }, { 1, 1, 1, 1, 1, 1 }, { 1, 1, 1, 1, 1, 1 } }, //ìˆ ìŸì´
+    { { 1, 1, 1, 1, 1, 1 }, { 1, 1, 1, 1, 1, 1 }, { 1, 1.05, 1, 1, 1, 1.05 }, { 1, 1, 1, 1, 1, 1 }, { 1, 1, 1, 1, 1, 1 }, { 1, 1, 1, 1, 1, 1 } }, //ë™ë°©ì¶©
+    { { 1, 0.95, 1, 1.1, 1, 0.95 }, { 1, 0.95, 1, 1.1, 1, 0.95 }, { 1, 0.95, 1, 1.1, 1, 0.95 }, { 1, 0.95, 1, 1.1, 1, 0.95 }, { 1, 0.95, 1, 1.1, 1, 0.95 }, { 1, 0.95, 1, 1.1, 1, 0.95 } }, // ê³µë¶€ë²Œë ˆ
+    { { 1.1, 0.9, 1, 0.9, 0, 0.9 }, { 1.1, 0.9, 1, 0.9, 0, 0.9 }, { 1.1, 0.9, 1, 0.9, 0, 0.9 }, { 1.1, 0.9, 1, 0.9, 0, 0.9 }, { 1.1, 0.9, 1, 0.9, 0, 0.9 }, { 1.1, 0.9, 1, 0.9, 0, 0.9 } }, // ì—°ì• ì¤‘
+    { { 1, 0.9, 1, 1, 1, 1 }, { 1, 0.9, 1, 1, 1, 1 }, { 1, 0.9, 1, 1, 1, 1 }, { 1, 0.9, 1, 1, 1, 1 }, { 1, 0.9, 1, 1, 1, 1 }, { 1, 0.9, 1, 1, 1, 1 } },//ë¬´ë™ì•„ë¦¬
+    { { 1, 1, 1, 1, 1, 1 }, { 1, 1, 1, 1, 1, 1 }, { 1, 1, 1, 1, 1, 1 }, { 1, 1, 1, 1, 1, 1 }, { 1.1, 1.1, 1.1, 1.1, 1.1, 1.1 }, { 1, 1, 1, 1, 1, 1 } }//ì²´ë ¥ë‚®ìŒ
+  };
 };
 #endif
