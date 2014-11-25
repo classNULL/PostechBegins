@@ -34,7 +34,9 @@
   <ItemGroup>
     <TypeScriptCompile Include="scripts\app.ts" />
     <TypeScriptCompile Include="scripts\module.d.ts" />
+    <TypeScriptCompile Include="scripts\screenapi.ts" />
     <TypeScriptCompile Include="submodules\domliner\domliner.d.ts" />
+    <TypeScriptCompile Include="submodules\es6-promise.d.ts" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">12.0</VisualStudioVersion>

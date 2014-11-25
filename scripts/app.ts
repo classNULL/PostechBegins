@@ -1,8 +1,11 @@
-﻿declare var selectGender: HTMLParagraphElement;
+﻿///<reference path="screenapi.ts" />
+
+declare var selectGender: HTMLParagraphElement;
 declare var mover: HTMLParagraphElement;
 declare var characterImage: HTMLImageElement;
 declare var currentPositionRepresenter: HTMLSpanElement;
 
+window.screen.lock("landscape-primary");
 Module.srand(Date.now() & 65535);
 var gameCenter: Module.GameCenter;
 
