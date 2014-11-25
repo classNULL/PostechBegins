@@ -97,3 +97,85 @@ float hero::get_MAX_RELATIONSHIP() const {
 float hero::get_MAX_SELF_DEVELOP() const {
 	return MAX_SELF_DEVELOP;
 }
+float hero::calc_grade_score(float grade) {
+	if (grade < 0)
+		throw runtime_error("0보다 작으면 안됨");
+	else if (grade < 2.0)
+		return (grade) / 2 * 5;
+	else if (grade < 2.3)
+		return 20 + (grade - 2) / 0.3 * 10;
+	else if (grade < 3.0)
+		return 50 + (grade - 2.3) / 0.7 * 50;
+	else if (grade < 3.3)
+		return 200 + (grade - 3.0) / 0.3 * 20;
+	else if (grade < 3.7)
+		return 230 + (grade - 3.3) / 0.4 * 30;
+	else if (grade < 4.0)
+		return 280 + (grade - 3.7) / 0.3 * 30;
+	else if (grade < 4.3)
+		return 350 + (grade - 4.0) / 0.3 * 30;
+	else if (grade == 4.3)
+		return 400;
+	else
+		throw runtime_error("4.3보다 큼");
+}
+
+/*int hero::score() {
+	//grade 400
+	//relationship 300
+	//improvement 300
+	return (calc_grade_score(grade1) + calc_grade_score(grade2))/2 + (relationship * 3) + (self_develop * 3);
+}*/
+float hero::grade(){
+	test++;
+	switch (test){
+	case 1://1학기 중간고사
+		grade1 = generate_grade();
+		return grade1;
+	case 2://1학기 기말고사
+		grade1 = grade1*0.5 + generate_grade()*0.5;
+		return grade1;
+	case 3://2학기 중간고사
+		grade2 = generate_grade();
+		return grade2;
+	case 4://2학기 기말고사
+		grade2 = grade2*0.5 + generate_grade()*0.5;
+		return grade2;
+	default://error
+	}
+}
+void hero::game_exit(){
+	int grade_score = (calc_grade_score(grade1) + calc_grade_score(grade2)) / 2;
+	int relationship_score = relationship * 3;
+	int self_develop_score = self_develop * 3;
+	int score = grade_score + relationship_score + self_develop_score;
+	switch (grade_score / 100){
+	case 4:
+	case 3://300이상
+		break;
+	case 2://200이상
+		break;
+	case 1://100이상
+		break;
+	case 0://100미만
+		break;
+	}
+	switch (relationship_score / 100){
+	case 3:
+	case 2://200이상
+		break;
+	case 1://100이상
+		break;
+	case 0://100미만
+		break;
+	}
+	switch (self_develop_score / 100){
+	case 3:
+	case 2://200이상
+		break;
+	case 1://100이상
+		break;
+	case 0://100미만
+		break;
+	}
+}
