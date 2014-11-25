@@ -20,6 +20,16 @@ int MapTable::check_stop(int reference, int step) {//board에서 구현되어야
   return max;
 }
 
+bool MapTable::check_birth(int refernce, int step) {
+	int max = reference + step;
+	for(int i = reference + 1; i <= max; i++) {
+		if(this->at(i)->birth_cell() == true)
+			return true;
+		else
+			return false;
+	}
+}
+
 MapTable MapTable::generate_default() {
   MapTable maptable;
   auto& array = maptable._map = vector<cell*>(306);
@@ -389,6 +399,7 @@ MapTable MapTable::generate_default() {
 
   int birth;
   birth=rand() % 306;
+  at(birth)->birthfdajfkldajkfld
   array[MonthDay::from_index(birth).get_index()]=new birth;
 
   return maptable;
