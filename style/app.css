@@ -1,4 +1,8 @@
-﻿body {
+﻿@-ms-viewport {
+  width: device-width;
+}
+
+body {
   font-family: 'Segoe UI', sans-serif;
 }
 
