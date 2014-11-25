@@ -1,3 +1,15 @@
+if (!Screen.prototype.lock)
+    Screen.prototype.lock = function (orientation) {
+        return new Promise(function (resolve, reject) {
+            var lockOrientation = screen.lockOrientation || screen.mozLockOrientation || screen.msLockOrientation;
+            if (lockOrientation && lockOrientation.call(screen, orientation))
+                resolve();
+            else
+                reject(new Error("Screen couldn't be locked."));
+        });
+    };
+///<reference path="screenapi.ts" />
+window.screen.lock("landscape-primary");
 Module.srand(Date.now() & 65535);
 var gameCenter;
 function createGameCenter(gender) {
