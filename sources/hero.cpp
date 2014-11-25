@@ -149,33 +149,52 @@ void hero::game_exit(){
 	int relationship_score = relationship * 3;
 	int self_develop_score = self_develop * 3;
 	int score = grade_score + relationship_score + self_develop_score;
+	string grade;//성적에 대한 메시지
+	string relation;//인간관계에 대한 메시지
+	string self_develop;//자기계발에 대한 메시지
 	switch (grade_score / 100){
 	case 4:
+		grade = "와 학점왕! 일 년 동안 후회 없이 공부했네요!";
+		break;
 	case 3://300이상
+		grade = "오 학점, 좋아 좋아. 일 학년이라면 적당히 놀고 적당히 공부하고. 딱 좋네요.";
 		break;
 	case 2://200이상
+		grade = "음...학점이 참...거참.... 일 학년이지만 이건 아닌데...음...아닌데...";
 		break;
 	case 1://100이상
+		grade = "학점이 가관입니다. 혼자 허리케인 같은 일학년 삶을 살았구만요. 계속되면 안됩니다..";
 		break;
 	case 0://100미만
+		grade = "오 학점 0점...대? 당신은 카이스트 생?";
 		break;
 	}
 	switch (relationship_score / 100){
 	case 3:
+		relation = "일학년 동안 만날 사람 다 만났네요. 인간 관계가 아주 훌륭합니다.";
+		break;
 	case 2://200이상
+		relation = "인간 관계 좋아요. 적절히 잘 쌓았군요.";
 		break;
 	case 1://100이상
+		relation = "인간 관계가 약간 부족해요. 일학년 때 놓치면 안될 사람들도 많은데!";
 		break;
 	case 0://100미만
+		relation = "인간관계 점수가... 영...0.... 인생은 혼자 사는 게 아니에요~ 다양한 사람과의 교류를 즐겨봅시다.";
 		break;
 	}
 	switch (self_develop_score / 100){
 	case 3:
+		self_develop = "탄탄한 자기 계발로 보낸 1년. 많이 성장했겠습니다~!";
+		break;
 	case 2://200이상
+		self_develop = "가끔은 자기 계발에도 시간을 투자하는 것도 좋아요.";
 		break;
 	case 1://100이상
+		self_develop = "음... 자기 계발에 더 시간을 투자해야만 해요. 앞으로 신경쓰기!";
 		break;
 	case 0://100미만
+		self_develop = "이건 아닌데.... 진정한 포스테키안이라면 자기 계발은 선택이 아니라 필수입니다. 분발하세요!";
 		break;
 	}
 }
