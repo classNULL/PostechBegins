@@ -339,5 +339,53 @@ MapTable MapTable::generate_default() {
   array[MonthDay::from_calendar(December,30).get_index()]=new vacation;
   array[MonthDay::from_calendar(December,31).get_index()]=new vacation;
 
+  int eve1;
+  Month eve1_month;
+  while(1)
+  {
+  eve1=rand() % 306;
+
+  if(at(eve1)->className()==normal)
+  {
+	  array[MonthDay::from_index(eve1).get_index()]=new eve_1;
+	  eve1_month=from_index(eve1).get_month();
+	  break;
+  }
+  }
+
+  int eve2;
+  Month eve2_month;
+  while(1)
+  {
+  eve2=rand() % 306;
+
+  if(at(eve2)->className()==normal)
+  {
+	  eve2_month=from_index(eve2).get_month();
+	  if(eve2_month != eve1_month)
+	  {
+		array[MonthDay::from_index(eve2).get_index()]=new eve_2;
+		break;
+	  }
+  }
+  }
+
+  int eve3;
+  Month eve3_month;
+  while(1)
+  {
+  eve3=rand() % 306;
+
+  if(at(eve3)->className()==normal)
+  {
+	  eve3_month=from_index(eve3).get_month();
+	  if((eve3_month != eve1_month) && (eve3_month != eve2_month))
+	  {
+		array[MonthDay::from_index(eve3).get_index()]=new eve_3;
+		break;
+	  }
+  }
+  }
+
   return maptable;
 }
