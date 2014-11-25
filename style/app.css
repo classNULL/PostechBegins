@@ -1,0 +1,39 @@
+﻿body {
+  font-family: 'Segoe UI', sans-serif;
+}
+
+span {
+  font-style: italic;
+}
+
+.swordbar {
+  transform: skew(-27deg);
+  color: red;
+}
+
+@keyframes rotate {
+  from { transform: rotate(0deg) }
+  to { transform: rotate(360deg) }
+}
+
+@-webkit-keyframes rotate {
+  from { transform: rotate(0deg) }
+  to { transform: rotate(360deg) }
+}
+
+.dice {
+  background: red;
+  width: 50px;
+  height: 50px;
+}
+
+.rotate {
+  animation-name: rotate;
+  animation-duration: 3s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+  -webkit-animation-name: rotate;
+  -webkit-animation-duration: 3s;
+  -webkit-animation-iteration-count: infinite;
+  -webkit-animation-timing-function: linear;
+}
