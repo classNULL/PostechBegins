@@ -1,9 +1,15 @@
 ﻿///<reference path="screenapi.ts" />
+///<reference path="colorizer.ts" />
+
+interface DOMStringMap {
+    [key: string]: string;
+}
 
 declare var selectGender: HTMLParagraphElement;
 declare var mover: HTMLParagraphElement;
 declare var characterImage: HTMLImageElement;
 declare var currentPositionRepresenter: HTMLSpanElement;
+declare var monthSelector: HTMLSelectElement;
 
 window.screen.lock("landscape-primary");
 Module.srand(Date.now() & 65535);
@@ -30,6 +36,9 @@ function createGameCenter(gender: Module.Sexuality) {
         characterImage.src = "UI/캐릭터/남자/남자1.png";
     else if (gender == Module.Sexuality.Woman)
         characterImage.src = "UI/캐릭터/여자/여자1.png";
+
+    monthSelector.style.display = "";
+    colorize(gameCenter.map, Module.Month.March);
 }
 
 function move() {

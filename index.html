@@ -30,13 +30,23 @@
   <img id="characterImage" style="display: none; max-width: 300px; max-height: 400px;" />
   <progress class="swordbar" value="30" max="100"></progress>
 
+  <select id="monthSelector" onchange="colorize(gameCenter.map, Module.Month[this.item(this.selectedIndex).value])" style="display: none;">
+    <option value="March" selected="selected">3월</option>
+    <option value="April">4월</option>
+    <option value="May">5월</option>
+    <option value="June">6월</option>
+    <option value="July">7월</option>
+    <option value="August">8월</option>
+    <option value="September">9월</option>
+    <option value="October">10월</option>
+    <option value="November">11월</option>
+    <option value="December">12월</option>
+  </select>
   <!-- map -->
   <div class="map">
     <div class="cell1"></div>
     <div class="cell2"></div>
     <div class="cell3"></div>
-    <div class="cell4"></div>
-    <div class="cell4"></div>
     <div class="cell4"></div>
     <div class="cell5"></div>
     <div class="cell6"></div>
