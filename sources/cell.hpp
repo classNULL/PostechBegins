@@ -13,6 +13,7 @@ public:
    virtual void call_option(hero* _hero,int day) = 0;//pure virtual method로 derived class에서 구현한다.
    bool stop_cell(){ return stop; }//무조건 멈추는 칸을 나타내기 위함으로, 멈춰야 하는 칸에서는 이 값이 true로 설정된다.
    bool birth_cell() { return birth; }
+   void put_birth(bool birth_input) {birth = birth_input;}
 protected:
    bool stop = false;
    bool birth = false;
