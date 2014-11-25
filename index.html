@@ -1,35 +1,21 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
-<script src="postechbegins.out.js"></script>
-<script>
-var gameCenter;
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width" />
+  <title>PostechBegins 개발중</title>
+  <link rel="stylesheet" href="style/app.css" />
+  <link rel="stylesheet" href="style/map.css" />
 
-function createGameCenter(gender) {
-  gameCenter = new Module.GameCenter(gender);
-  var gamechar = gameCenter.character;
-  alert(
-    "love: " + gamechar.love
-    + "\r\nenergy: "  + gamechar.energy
-    + "\r\nrelationship: " + gamechar.relationship
-    + "\r\nselfImprovement: " + gamechar.selfImprovement
-    + "\r\nstudy: " + gamechar.study
-    + "\r\nMAX_ENERGY: " + gamechar.MAX_ENERGY
-    + "\r\nMAX_LOVE: " + gamechar.MAX_LOVE
-    + "\r\nMAX_RELATIONSHIP: " + gamechar.MAX_RELATIONSHIP
-    + "\r\nMAX_SELFIMPROVEMENT: " + gamechar.MAX_SELFIMPROVEMENT);
-  selectGender.style.display = "none";
-  mover.style.display = "";
-}
+  <!-- native code -->
+  <script src="postechbegins.out.js"></script>
 
-function move() {
-  var step = gameCenter.dice();
-  alert("주사위 수 " + step + "이(가) 나왔습니다.");
-  var position = gameCenter.move(step);
-  alert(position + "번 칸에 멈추었습니다.");
-  currentPositionRepresenter.textContent = position;
-}
-</script>
+  <!-- submodules -->
+  <script src="submodules/domliner/domliner.js"></script>
+  <script src="submodules/gridlayout/bin/css-polyfills.js"></script>
+  
+  <!-- app scripts -->
+  <script src="app.js"></script>
 </head>
 <body>
   <h1>PostechBegins 개발중</h1>
@@ -41,5 +27,14 @@ function move() {
     현재위치: <span id="currentPositionRepresenter">0</span><br />
     <input type="button" value="주사위" onclick="move()" />
   </p>
+  <img id="characterImage" style="display: none; max-width: 300px; max-height: 400px;" />
+  <progress class="swordbar" value="30" max="100"></progress>
+  <div class="map">
+    <div class="cell1"></div>
+    <div class="cell2"></div>
+    <div class="cell3"></div>
+    <div class="cell4"></div>
+  </div>
+  <div class="dice rotate"></div>
 </body>
 </html>

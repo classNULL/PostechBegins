@@ -30,36 +30,17 @@ int GameCenter::score(float study, float relationship, float improvement) {
   return calc_grade_score(generate_grade(study)) + (relationship * 300) + (improvement * 300);
 }
 
-
-int GameCenter::move(int step){//board에서 구현되어야하는 함수로, 주사위의 굴려진 값에따라 이동해야 하는 칸의 위치를 return한다.
-  //인자로는 현재 캐릭터의 위치(예를 들어 3일), 주사위를 굴려서 나온 숫자, 그리고 현재 달에 해당하는 cell 배열을 가리키는 cell pointer를 받는다(예를들어 march, november등 월에 해당하는 cell array가 될것)
-  int max = this->_current_position + step;
-  for(int i = this->_current_position + 1; i <= max; i++) {
-  	//만약 현재가 3일에 위치해 있는데 주사위를 굴려 5가 나왔다고 가정하자.
-    //이때, 7일이 특수칸일 경우 캐릭터는 8일이 아니라 7일에서 멈추어야 하므로,
-    //그 사이에 stop정보가 true인 값이 있는지를 파악하여야 한다.
-    if(this->_map.at(i)->stop_cell() == true) {
-      this->_current_position = i;
-      return i;
-    }
-  }
-  this->_current_position = max;
-  return max;
+int GameCenter::move(int step){
+  int stop = this->_map.check_stop(this->_current_position, step);
+  this->_current_position = stop;
+  return stop;
 }
 
-GameCenter::GameCenter(sexuality sex): _character(sex) {
-  this->_map.at(4) = new festival();
-  for (auto& item: this->_map) {
-    if (item == NULL)
-      item = new normal();
-  }
-}
-
-GameCenter::~GameCenter() {
-  for (const auto& item: this->_map) {
-    if (item != NULL)
-      delete item;
-  }
+GameCenter::GameCenter(sexuality sex) {
+  if (sex == sexuality::man)
+    this->_character = new hero(100, 100, 100, 100, 100, sex);
+  else if (sex == sexuality::woman) // woman
+    this->_character = new hero(100, 80, 30, 30, 100, sex);
 }
 
 // int main() {
