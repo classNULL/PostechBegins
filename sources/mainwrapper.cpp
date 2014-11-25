@@ -7,7 +7,8 @@ EMSCRIPTEN_BINDINGS(PostechBegins_Main) {
     .property("month", &MonthDay::get_month)
     .property("day", &MonthDay::get_day)
     .class_function("fromIndex", &MonthDay::from_index)
-    .class_function("fromCalendar", &MonthDay::from_calendar);
+    .class_function("fromCalendar", &MonthDay::from_calendar)
+    .class_function("containingDays", &MonthDay::containing_days);
   enum_<Month>("Month")
     .value("March", Month::March)
     .value("April", Month::April)
