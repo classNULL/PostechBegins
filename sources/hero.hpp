@@ -23,6 +23,7 @@ public:
 	float get_relationship() const;
 	float get_energy() const;
 	float get_love() const; //status return 받는 method
+	bool get_energy_is_zero() const;
 private:
 	const float MAX_ENERGY;
 	const float MAX_LOVE;
