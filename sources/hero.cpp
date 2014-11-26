@@ -8,28 +8,18 @@ MAX_LOVE(max_love),MAX_ENERGY(max_energy),MAX_RELATIONSHIP(max_relationship), MA
 	if(sex == sexuality::man){
 		this->sex = man;
 		love = 10;
-		relationship = 30;
-		self_develop = 30;
-		study = 100;
 		energy = 100;
-		stress = 0;
-		energy_is_zero = false;
 		//성별이 남자일 때
 	}
 	else if(sex == sexuality::woman){
 		this->sex = woman;
-		energy = 80;
 		love = 100;
-		relationship = 30;
-		self_develop = 30;
-		study = 100;
-		stress = 0;
-		energy_is_zero = false;
+		energy = 80;
 		//성별이 여자일 때
 	}
 }
 
-bool hero::get_energy_is_zero(){
+bool hero::get_energy_is_zero() const {
 	return energy_is_zero;
 }
 //모든 title 초기화
@@ -40,15 +30,6 @@ void hero::change_love(float love_, int day){ // love status 변화
 		love = MAX_LOVE;
 	else if(love<0)
 		love = 0;
-}
-
-void hero::change_stress(float stress_,int day){
-	stress += (stress_*day);
-	if(stress>MAX_STRESS){
-		stress-MAX_STRESS;
-	}
-	else if(stress<0)
-		stress = 0;
 }
 void hero::change_energy(float energy_, int day){ //energy status 변화
 	//1이 일반 선택지, 2가 휴식, 3이 집
@@ -63,7 +44,7 @@ void hero::change_energy(float energy_, int day){ //energy status 변화
 		}
 		else if(stress>=70 && stress<=MAX_STRESS){
 			change_energy = -5;
-		} 
+		}
 	}
 	else if(energy_ == 2){
 		change_energy = 8; //휴식으을 취하는 경우 8을 회복
@@ -103,8 +84,13 @@ void hero::change_study(float study_, int day){
 		study = 0;
 	}
 }
-float hero::get_study() const{
-	return stress;
+void hero::change_stress(float stress_,int day){
+	stress += (stress_*day);
+	if(stress>MAX_STRESS){
+		stress=MAX_STRESS;
+	}
+	else if(stress<0)
+	stress = 0;
 }
 
 float hero::get_study() const {
@@ -121,6 +107,9 @@ float hero::get_energy() const {
 }
 float hero::get_love() const {
 	return love;
+}
+float hero::get_stress() const{
+	return stress;
 }
 
 float hero::get_MAX_ENERGY() const {

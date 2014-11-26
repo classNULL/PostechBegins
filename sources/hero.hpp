@@ -6,12 +6,13 @@
 #include "hero.hpp"
 class hero{
 public:
-  hero(float max_love, float max_energy, float max_relationship, float max_selfdevelop, float max_study, sexuality sex);
+  hero(float max_love, float max_energy, float max_relationship, float max_selfdevelop, float max_study, float max_stress, sexuality sex);
 	void change_love(float, int);
 	void change_energy(float, int);
 	void change_relationship(float, int);
 	void change_self_develop(float, int);
 	void change_study(float, int);//status 변화시키는 method
+  void change_stress(float, int);
 	float get_MAX_ENERGY() const;
 	float get_MAX_LOVE() const;
 	float get_MAX_RELATIONSHIP() const;
@@ -21,17 +22,21 @@ public:
 	float get_relationship() const;
 	float get_energy() const;
 	float get_love() const; //status return 받는 method
+  float get_stress() const;
+  bool get_energy_is_zero() const;
 private:
 	const float MAX_ENERGY;
 	const float MAX_LOVE;
 	const float MAX_RELATIONSHIP;
 	const float MAX_SELF_DEVELOP;
 	const float MAX_STUDY;
+  const float MAX_STRESS;
 	float energy;
 	float love;
-	float relationship;
-	float self_develop;
-	float study;
+	float relationship = 30;
+	float self_develop = 30;
+	float study = 100;
+  float stress = 0;
 	sexuality sex;
 	bool energy_is_zero = false; //에너지가 0인지 아닌지 구별함. 만약 체력이 0 일경우 다른 행동을 하지 못함
 

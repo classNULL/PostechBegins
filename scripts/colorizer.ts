@@ -9,7 +9,7 @@
     for (var i = 0; i < days; i++) {
         var cell = maptable.at(firstdayIndex + i);
 
-        var type: string;
+        var type = "";
         if (cell instanceof Module.NormalCell)
             type = "normal";
         else if (cell instanceof Module.MarchCell)

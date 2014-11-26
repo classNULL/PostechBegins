@@ -62,12 +62,13 @@ EMSCRIPTEN_BINDINGS(PostechBegins_Main) {
   class_<faceparty, base<special>>("FacePartyCell");
 
   class_<hero>("Hero")
-    .constructor<float, float, float, float, float, sexuality>()
+    .constructor<float, float, float, float, float, float, sexuality>()
     .property("love", &hero::get_love)
     .property("energy", &hero::get_energy)
     .property("relationship", &hero::get_relationship)
     .property("selfImprovement", &hero::get_self_develop)
     .property("study", &hero::get_study)
+    .property("stress", &hero::get_stress)
     .property("MAX_ENERGY", &hero::get_MAX_ENERGY)
     .property("MAX_LOVE", &hero::get_MAX_LOVE)
     .property("MAX_RELATIONSHIP", &hero::get_MAX_RELATIONSHIP)
