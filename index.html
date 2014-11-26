@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width" />
+  <meta name="viewport" content="width=1920,height=1080,initial-scale=1,maximum-scale=1" />
   <title>PostechBegins 개발중</title>
   <link rel="stylesheet" href="style/app.css" />
   <link rel="stylesheet" href="style/map.css" />
@@ -18,64 +18,54 @@
   <script src="app.js"></script>
 </head>
 <body>
-  <h1>PostechBegins 개발중</h1>
-  <p id="selectGender">
-    <input type="button" value="남자" onclick="createGameCenter(Module.Sexuality.Man)" />
-    <input type="button" value="여자" onclick="createGameCenter(Module.Sexuality.Woman)" />
-  </p>
-  <p id="mover" style="display: none;">
-    현재위치: <span id="currentPositionRepresenter">0</span><br />
-    <input type="button" value="주사위" onclick="move()" />
-  </p>
-  <img id="characterImage" style="display: none; max-width: 300px; max-height: 400px;" />
-  <progress class="swordbar" value="30" max="100"></progress>
-
-  <select id="monthSelector" onchange="colorize(gameCenter.map, Module.Month[this.item(this.selectedIndex).value])" style="display: none;">
-    <option value="March" selected="selected">3월</option>
-    <option value="April">4월</option>
-    <option value="May">5월</option>
-    <option value="June">6월</option>
-    <option value="July">7월</option>
-    <option value="August">8월</option>
-    <option value="September">9월</option>
-    <option value="October">10월</option>
-    <option value="November">11월</option>
-    <option value="December">12월</option>
-  </select>
-  <!-- map -->
-  <div class="map">
-    <div class="cell1"></div>
-    <div class="cell2"></div>
-    <div class="cell3"></div>
-    <div class="cell4"></div>
-    <div class="cell5"></div>
-    <div class="cell6"></div>
-    <div class="cell7"></div>
-    <div class="cell8"></div>
-    <div class="cell9"></div>
-    <div class="cell10"></div>
-    <div class="cell11"></div>
-    <div class="cell12"></div>
-    <div class="cell13"></div>
-    <div class="cell14"></div>
-    <div class="cell15"></div>
-    <div class="cell16"></div>
-    <div class="cell17"></div>
-    <div class="cell18"></div>
-    <div class="cell19"></div>
-    <div class="cell20"></div>
-    <div class="cell21"></div>
-    <div class="cell22"></div>
-    <div class="cell23"></div>
-    <div class="cell24"></div>
-    <div class="cell25"></div>
-    <div class="cell26"></div>
-    <div class="cell27"></div>
-    <div class="cell28"></div>
-    <div class="cell29"></div>
-    <div class="cell30"></div>
-    <div class="cell31"></div>
+  <div class="titlearea">3월</div>
+  <div class="facearea">
+    <div class="faceinner">
+      <img id="face" />
+    </div>
   </div>
-  <div class="dice rotate"></div>
+  <div class="statusarea">
+    <progress class="swordbar" value="30" max="100"></progress>
+  </div>
+
+  <!-- map -->
+  <div class="maparea">
+    <div class="map">
+      <div class="cell1"></div>
+      <div class="cell2"></div>
+      <div class="cell3"></div>
+      <div class="cell4"></div>
+      <div class="cell5"></div>
+      <div class="cell6"></div>
+      <div class="cell7"></div>
+      <div class="cell8"></div>
+      <div class="cell9"></div>
+      <div class="cell10"></div>
+      <div class="cell11"></div>
+      <div class="cell12"></div>
+      <div class="cell13"></div>
+      <div class="cell14"></div>
+      <div class="cell15"></div>
+      <div class="cell16"></div>
+      <div class="cell17"></div>
+      <div class="cell18"></div>
+      <div class="cell19"></div>
+      <div class="cell20"></div>
+      <div class="cell21"></div>
+      <div class="cell22"></div>
+      <div class="cell23"></div>
+      <div class="cell24"></div>
+      <div class="cell25"></div>
+      <div class="cell26"></div>
+      <div class="cell27"></div>
+      <div class="cell28"></div>
+      <div class="cell29"></div>
+      <div class="cell30"></div>
+      <div class="cell31"></div>
+    </div>
+  </div>
+  <div class="dicearea">
+    <div class="dice rotate"></div>
+  </div>
 </body>
 </html>
