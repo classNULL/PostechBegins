@@ -157,3 +157,6 @@ void hero::end_the_game(){
 	
 	
 }
+sexuality hero::get_sexuality() const {
+   return sex;
+}
