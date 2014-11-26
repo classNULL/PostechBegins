@@ -71,7 +71,7 @@ void hero::change_energy(float energy_, int day){ //energy status 변화
 	//1이 일반 선택지, 2가 휴식, 3이 집
 	energy_is_zero = false; //energy_is_zero가 0 이 아니도록 만들고 method 끝내기 전에 energy가 0보다 작거나 같으면 energy_is_zero 를 1로 변경
 	float change_energy;
-	if(energy_ == 1){ //일반선택지의 경우 stress에 따라서 stress가 변하는 정도가 다르다.
+	if(energy_ < 2){ //일반선택지의 경우 stress에 따라서 stress가 변하는 정도가 다르다.
 		if(stress>=0 && stress< 30){
 			change_energy = -3;
 		}
@@ -82,10 +82,10 @@ void hero::change_energy(float energy_, int day){ //energy status 변화
 			change_energy = -5;
 		} 
 	}
-	else if(energy_ == 2){
+	else if(energy_ >= 2 && energy_ < 3){
 		change_energy = 8; //휴식으을 취하는 경우 8을 회복
 	}
-	else if(energy_ == 3){ // 집갔다 오는 경우 전체 회복
+	else if(energy_ >= 3){ // 집갔다 오는 경우 전체 회복
 		change_energy = MAX_ENERGY;
 	}
 	energy += (change_energy*day);
