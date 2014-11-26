@@ -6,7 +6,7 @@
 #include "hero.hpp"
 class hero{
 public:
-	hero(float max_love, float max_energy, float max_relationship, float max_selfdevelop, float max_study, float max_stress, sexuality sex);
+  hero(float max_love, float max_energy, float max_relationship, float max_selfdevelop, float max_study, float max_stress, sexuality sex);
 	void change_love(float, int);
 	void change_energy(float, int);
 	void change_relationship(float, int);
@@ -28,7 +28,6 @@ public:
 	bool get_title(int);
 	void set_title(int, bool);
 	sexuality get_sex() const;
-	float*** get_titles() const{ return titles; }
 private:
 	const float MAX_ENERGY;
 	const float MAX_LOVE;
@@ -46,16 +45,16 @@ private:
 	sexuality sex;
 	bool energy_is_zero; //에너지가 0인지 아닌지 구별함. 만약 체력이 0 일경우 다른 행동을 하지 못함
 	bool title_list[7];
-	float titles[7][6][6];
-	/*
-	체력	인간관계	연애	공부중	스트레스	자기개발
-	술
-	공부
-	동아리
-	연애
-	휴식
-	집
-	*/
+	float titles[7][6][6] ;
+  /*
+  체력	인간관계	연애	공부중	스트레스	자기개발
+  술
+  공부
+  동아리
+  연애
+  휴식
+  집
+  */
 
 };
 #endif
