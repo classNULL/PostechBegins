@@ -25,6 +25,8 @@ function colorize(maptable, month) {
             type = "weekend";
         else if (cell instanceof Module.BeforeExamCell)
             type = "before_exam";
+        else if (cell instanceof Module.ExamCell)
+            type = "exam";
         else if (cell instanceof Module.AfterExamCell)
             type = "after_exam";
         else if (cell instanceof Module.FestivalCell)

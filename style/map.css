@@ -7,7 +7,6 @@
   grid-template-columns: repeat(8, 1fr);
 }
   .map div {
-    background-color: green;
     margin: 5px;
   }
     .map div[data-cell-type=normal] {
@@ -21,6 +20,9 @@
     }
     .map div[data-cell-type=before_exam] {
       background-color: #FFEC96;
+    }
+    .map div[data-cell-type=exam] {
+      background-color: #7F7F7F;
     }
     .map div[data-cell-type=after_exam] {
       background-color: #62666E;
