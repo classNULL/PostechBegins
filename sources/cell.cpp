@@ -23,7 +23,7 @@ void set_title(hero* _hero){
 			title[i][j] = 1;
 	float*** titles = _hero->get_titles();
 	for (int a = 0, i < 7; i++){
-		if (get_title(a)){
+		if (_hero->get_title(a)){
 			for (int i = 0; i < 6; i++)
 				for (int j = 0; j < 6; j++)
 					title[i][j] *= titles[a][i][j];
