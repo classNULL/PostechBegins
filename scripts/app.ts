@@ -5,39 +5,34 @@ interface DOMStringMap {
     [key: string]: string;
 }
 
-declare var selectGender: HTMLParagraphElement;
-declare var mover: HTMLParagraphElement;
-declare var characterImage: HTMLImageElement;
-declare var currentPositionRepresenter: HTMLSpanElement;
-declare var monthSelector: HTMLSelectElement;
+declare var face: HTMLImageElement;
 
 window.screen.lock("landscape-primary");
 Module.srand(Date.now() & 65535);
 var gameCenter: Module.GameCenter;
+window.addEventListener("DOMContentLoaded", () => {
+    createGameCenter(Module.Sexuality.Man);
+});
 
 function createGameCenter(gender: Module.Sexuality) {
     gameCenter = new Module.GameCenter(gender);
     var gamechar = gameCenter.character;
-    alert(
-        "love: " + gamechar.love
-        + "\r\nenergy: " + gamechar.energy
-        + "\r\nrelationship: " + gamechar.relationship
-        + "\r\nselfImprovement: " + gamechar.selfImprovement
-        + "\r\nstudy: " + gamechar.study
-        + "\r\nMAX_ENERGY: " + gamechar.MAX_ENERGY
-        + "\r\nMAX_LOVE: " + gamechar.MAX_LOVE
-        + "\r\nMAX_RELATIONSHIP: " + gamechar.MAX_RELATIONSHIP
-        + "\r\nMAX_SELFIMPROVEMENT: " + gamechar.MAX_SELFIMPROVEMENT);
-    selectGender.style.display = "none";
-    mover.style.display = "";
-
-    characterImage.style.display = "";
+    //alert(
+    //    "love: " + gamechar.love
+    //    + "\r\nenergy: " + gamechar.energy
+    //    + "\r\nrelationship: " + gamechar.relationship
+    //    + "\r\nselfImprovement: " + gamechar.selfImprovement
+    //    + "\r\nstudy: " + gamechar.study
+    //    + "\r\nMAX_ENERGY: " + gamechar.MAX_ENERGY
+    //    + "\r\nMAX_LOVE: " + gamechar.MAX_LOVE
+    //    + "\r\nMAX_RELATIONSHIP: " + gamechar.MAX_RELATIONSHIP
+    //    + "\r\nMAX_SELFIMPROVEMENT: " + gamechar.MAX_SELFIMPROVEMENT);
+    
     if (gender == Module.Sexuality.Man)
-        characterImage.src = "UI/캐릭터/남자/남자1.png";
+        face.style.backgroundImage = "url(UI/캐릭터/남자/남자1.png)";
     else if (gender == Module.Sexuality.Woman)
-        characterImage.src = "UI/캐릭터/여자/여자1.png";
+        face.style.backgroundImage = "url(UI/캐릭터/여자/여자1.png)";
 
-    monthSelector.style.display = "";
     colorize(gameCenter.map, Module.Month.March);
 }
 
@@ -47,7 +42,6 @@ function move() {
     var position = gameCenter.move(step);
     var posstr = dateIndexToString(position);
     alert(position + "번 칸에 멈추었습니다. " + posstr + "입니다.");
-    currentPositionRepresenter.textContent = position + ". " + posstr;
 }
 
 function dateIndexToString(index: number) {
