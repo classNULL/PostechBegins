@@ -27,6 +27,7 @@ public:
 	void end_the_game();
 	bool get_title(int);
 	void set_title(int, bool);
+	sexuality get_sex() const;
 private:
 	const float MAX_ENERGY;
 	const float MAX_LOVE;
