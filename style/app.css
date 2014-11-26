@@ -41,8 +41,10 @@ body {
 
 .faceinner {
   margin: 20px;
-  height: 100%;
+  height: calc(100%- 40px);
   background-color: rgba(187, 237, 242, 0.5);
+  background-size: cover;
+  background-position: top;
 }
 
 .statusarea {
