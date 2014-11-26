@@ -17,15 +17,17 @@ void cell::change(hero* _hero, float energy, float study, float relationship, fl
 휴식
 집
 */
-float title[6][6];
-for (int i = 0; i < 6; i++)
-	for (int j = 0; j < 6; j++)
-		title[i][j] = 1;
-for (int a = 0, i < 7; i++){
-	if (get_title(a)){
-		for (int i = 0; i < 6; i++)
-			for (int j = 0; j < 6; j++)
-				title[i][j] *= titles[a][i][j];
+void set_title(hero* _hero){
+	for (int i = 0; i < 6; i++)
+		for (int j = 0; j < 6; j++)
+			title[i][j] = 1;
+	float*** titles = _hero->get_titles();
+	for (int a = 0, i < 7; i++){
+		if (get_title(a)){
+			for (int i = 0; i < 6; i++)
+				for (int j = 0; j < 6; j++)
+					title[i][j] *= titles[a][i][j];
+		}
 	}
 }
 void normal::call_option(hero* _hero,int day) {
@@ -36,6 +38,7 @@ void normal::call_option(hero* _hero,int day) {
 	cout<<"4. 연애하기"<<endl;
 	cout<<"5. 휴식"<<endl;
 	cin >> option;
+	set_title(_hero);
 	if (option == 1)
 		change(_hero, 1 * title[1][0], 2 * title[1][3], -2 * title[1][1], 0 * title[1][5], 0 * title[1][2], 8 * title[1][4], day);
 	else if (option == 2)
@@ -56,6 +59,7 @@ void weekend::call_option(hero* _hero,int day) {
 	cout<<"5. 휴식"<<endl;
 	cout << "6. 집가기" << endl;
 	cin >> option;
+	set_title(_hero);
 	if (option == 1)
 		change(_hero, 1 * title[1][0], 2 * title[1][3], -2 * title[1][1], 0 * title[1][5], 0 * title[1][2], 8 * title[1][4], day);
 	else if (option == 2)
@@ -87,6 +91,7 @@ void before_exam::call_option(hero* _hero,int day) {
 	cout << "4. 연애하기" << endl;
 	cout << "5. 휴식" << endl;
 	cin >> option;
+	set_title(_hero);
 	if (option == 1)
 		change(_hero, 1 * title[1][0], 3 * title[1][3], -1.6 * title[1][1], 0 * title[1][5], 0 * title[1][2], 9.6 * title[1][4], day);
 	else if (option == 2)
@@ -112,6 +117,7 @@ void after_exam::call_option(hero* _hero,int day) {
 	cout << "4. 연애하기" << endl;
 	cout << "5. 휴식" << endl;
 	cin >> option;
+	set_title(_hero);
 	if (option == 1)
 		change(_hero, 1 * title[1][0], 1.4 * title[1][3], -4 * title[1][1], 0 * title[1][5], 0 * title[1][2], 8 * title[1][4], day);
 	else if (option == 2)
@@ -132,6 +138,7 @@ void festival::call_option(hero* _hero, int day) {
 	cout << "4. 휴식" << endl;
 	cout << "5. 집가기" << endl;
 	cin >> option;
+	set_title(_hero);
 	if (option == 1)
 		change(_hero, 1 * title[1][0], 2 * title[1][3], -10 * title[1][1], 0 * title[1][5], 0 * title[1][2], 8 * title[1][4], 1);
 	else if (option == 2)
@@ -154,6 +161,7 @@ void dance::call_option(hero* _hero, int day) {
 	cout << "5. 휴식" << endl;
 	cout << "6. 춤 연습하기" << endl;
 	cin >> option;
+	set_title(_hero);
 	if (option == 1)
 		change(_hero, 1 * title[1][0], 2 * title[1][3], -3 * title[1][1], 0 * title[1][5], 0 * title[1][2], 8 * title[1][4], day);
 	else if (option == 2)

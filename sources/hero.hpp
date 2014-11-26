@@ -28,6 +28,7 @@ public:
 	bool get_title(int);
 	void set_title(int, bool);
 	sexuality get_sex() const;
+	float*** get_titles() const{ return titles; }
 private:
 	const float MAX_ENERGY;
 	const float MAX_LOVE;

@@ -15,6 +15,8 @@ public:
 protected:
    bool stop = false;
    void change(hero* _hero, float energy, float study, float relationship, float self_develop, float love, float stress, int day);
+   void set_title(hero* _hero);
+   float title[6][6];
 };
 class normal :public cell{//각각의 칸은 cell class를 상속받아 만들어진다.
 public:
