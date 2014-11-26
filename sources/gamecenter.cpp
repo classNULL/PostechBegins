@@ -38,9 +38,9 @@ int GameCenter::move(int step){
 
 GameCenter::GameCenter(sexuality sex) {
   if (sex == sexuality::man)
-    this->_character = new hero(100, 100, 100, 100, 100, sex);
+    this->_character = new hero(100, 100, 100, 100, 100, 100, sex);
   else if (sex == sexuality::woman) // woman
-    this->_character = new hero(100, 80, 30, 30, 100, sex);
+    this->_character = new hero(100, 80, 90, 100, 100, 100, sex);
 }
 
 // int main() {
