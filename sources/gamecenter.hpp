@@ -11,6 +11,8 @@
 class GameCenter {
 private:
   int date;
+  void savefile();
+  void loadfile();
 public:
   /** 저장된 날짜를 리턴한다. */
   int get_date() const { return this->date; };
