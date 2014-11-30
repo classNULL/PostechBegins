@@ -38,11 +38,11 @@ GameCenter::GameCenter(sexuality sex) {
 }
 
 int GameCenter::move(int step){
+  if(_map.check_birth(this->_current_position, step)
+    _map.at(_current_position)->change(hero, 2, 0, 0, 0, 0, -5, _current_position);
+  
   int stop = this->_map.check_stop(this->_current_position, step);
   this->_current_position = stop;
-  
-  if(_map.check_birth(this->_current_position, step)
-    _map.at(_current_position)->change(hero, 2, 0, 0, 0, 0, -5, day);
   
   return stop;
 }
