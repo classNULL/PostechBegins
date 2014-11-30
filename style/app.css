@@ -32,6 +32,8 @@ html {
   justify-content: center;
   align-items: center;
   
+  font-size: 30px;
+  
   background-size: cover;
   background-position: center;
   background-image: url("../UI/wallpaper/3.jpg");
@@ -48,7 +50,7 @@ body {
   font-family: 'Segoe UI', sans-serif;
   display: grid;
   grid-template-rows: 100px 3fr 2fr 100px;
-  grid-template-columns: 400px 1fr 200px;
+  grid-template-columns: 400px 1fr 300px;
 }
 
 .titlearea {
@@ -83,9 +85,61 @@ body {
   grid-column: 2;
 }
 
+.dicearea {
+  grid-row: 1 / span 3;
+  grid-column: 3;
+}
+
+.flagarea {
+  grid-row: 4;
+  grid-column: 3;
+  margin-top: -50px;
+
+  background-image: url("../UI/UI/기타/깃발.png");
+  background-position: bottom right;
+  background-size: 150px;
+  background-repeat: no-repeat;
+  background-origin: content-box;
+  padding-right: 30px;
+}
+
+.gameprogressarea {
+  grid-row: 4;
+  grid-column: 1 / span 3;
+  padding: 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+  .gameprogressarea > div {
+    display: flex;
+    align-items: center;
+
+    width: 150px;
+    height: 58px;
+    font-size: 20px;
+    background-size: cover;
+    background-position: left;
+    background-image: url("../UI/UI/진행상황/옅은.png");
+  }
+    .gameprogressarea > div > div {
+      width: 58px;
+      height: 58px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .gameprogressarea > div.progressin {
+      color: white;
+      background-image: url("../UI/UI/진행상황/짙은.png");
+    }
+
 .swordbar {
   transform: skew(27deg);
-  color: red;
+  margin-left: 18px;
+  color: #D94E4E;
+  height: 50px;
+  width: 330px;
 }
 
 @keyframes rotate {
