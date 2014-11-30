@@ -6,6 +6,7 @@ interface DOMStringMap {
 }
 
 declare var face: HTMLImageElement;
+declare var dice: HTMLImageElement;
 
 window.screen.lock("landscape-primary");
 Module.srand(Date.now() & 65535);
@@ -49,4 +50,18 @@ function dateIndexToString(index: number) {
     var result = monthday.month.value + "월 " + monthday.day + "일";
     monthday.delete();
     return result;
+}
+
+function rollDice() {
+    dice.classList.add("rotate");
+    return timeoutPromise(1000).then(() => {
+        dice.classList.remove("rotate");
+        return gameCenter.dice();
+    });
+}
+
+function timeoutPromise(time: number) {
+    return new Promise<void>((resolve, reject) => {
+        setTimeout(() => resolve(), time);
+    });
 }

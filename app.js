@@ -87,4 +87,16 @@ function dateIndexToString(index) {
     monthday.delete();
     return result;
 }
+function rollDice() {
+    dice.classList.add("rotate");
+    return timeoutPromise(1000).then(function () {
+        dice.classList.remove("rotate");
+        return gameCenter.dice();
+    });
+}
+function timeoutPromise(time) {
+    return new Promise(function (resolve, reject) {
+        setTimeout(function () { return resolve(); }, time);
+    });
+}
 //# sourceMappingURL=app.js.map
