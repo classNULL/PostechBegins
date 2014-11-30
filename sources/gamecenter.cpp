@@ -30,21 +30,21 @@ int GameCenter::score(float study, float relationship, float improvement) {
   return calc_grade_score(generate_grade(study)) + (relationship * 300) + (improvement * 300);
 }
 
-int GameCenter::move(int step){
-  int stop = this->_map.check_stop(this->_current_position, step);
-  this->_current_position = stop;
-  
-  if(_map.check_birth(this->_current_position, step)
-    cell::change(_hero, 2, 0, 0, 0, 0, -5, day);
-  
-  return stop;
-}
-
 GameCenter::GameCenter(sexuality sex) {
   if (sex == sexuality::man)
     this->_character = new hero(100, 100, 100, 100, 100, sex);
   else if (sex == sexuality::woman) // woman
     this->_character = new hero(100, 80, 30, 30, 100, sex);
+}
+
+int GameCenter::move(int step){
+  int stop = this->_map.check_stop(this->_current_position, step);
+  this->_current_position = stop;
+  
+  if(_map.check_birth(this->_current_position, step)
+    cell::change(hero, 2, 0, 0, 0, 0, -5, day);
+  
+  return stop;
 }
 
 // int main() {
