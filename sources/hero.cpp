@@ -14,6 +14,7 @@ MAX_LOVE(max_love),MAX_ENERGY(max_energy),MAX_RELATIONSHIP(max_relationship), MA
 		energy = 100;
 		stress = 0;
 		energy_is_zero = false;
+		clear_event = 0;
 		//성별이 남자일 때
 	}
 	else if(sex == sexuality::woman){
@@ -25,6 +26,7 @@ MAX_LOVE(max_love),MAX_ENERGY(max_energy),MAX_RELATIONSHIP(max_relationship), MA
 		study = 100;
 		stress = 0;
 		energy_is_zero = false;
+		clear_event = 0;
 		//성별이 여자일 때
 	}
 	title_list = {false, false,false, false, false, false, false}
@@ -38,7 +40,9 @@ MAX_LOVE(max_love),MAX_ENERGY(max_energy),MAX_RELATIONSHIP(max_relationship), MA
     { { 1, 1, 1, 1, 1, 1 }, { 1, 1, 1, 1, 1, 1 }, { 1, 1, 1, 1, 1, 1 }, { 1, 1, 1, 1, 1, 1 }, { 1.1, 1.1, 1.1, 1.1, 1.1, 1.1 }, { 1, 1, 1, 1, 1, 1 } }//체력낮음
   };
 }
-
+void hero::up_event(){ //event 클리어 할 때마다 1씩 업
+	clear_event++;
+}
 bool hero::get_title(int index){
 	return title_list[index];
 }
@@ -159,4 +163,7 @@ void hero::end_the_game(){
 }
 sexuality hero::get_sexuality() const {
    return sex;
+}
+int hero::get_clear_hero(){
+	return get_clear_event;
 }
