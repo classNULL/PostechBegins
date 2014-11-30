@@ -42,7 +42,7 @@ int GameCenter::move(int step){
   this->_current_position = stop;
   
   if(_map.check_birth(this->_current_position, step)
-    cell::change(hero, 2, 0, 0, 0, 0, -5, day);
+    _map.at(_current_position)->change(hero, 2, 0, 0, 0, 0, -5, day);
   
   return stop;
 }
