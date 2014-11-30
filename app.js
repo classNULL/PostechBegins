@@ -52,8 +52,10 @@ function colorize(maptable, month) {
 window.screen.lock("landscape-primary");
 Module.srand(Date.now() & 65535);
 var gameCenter;
+var charInCell;
 window.addEventListener("DOMContentLoaded", function () {
     createGameCenter(Module.Sexuality.Man);
+    charInCell = document.querySelector(".charInCell");
 });
 function createGameCenter(gender) {
     gameCenter = new Module.GameCenter(gender);
@@ -89,7 +91,7 @@ function dateIndexToString(index) {
 }
 function rollDice() {
     dice.classList.add("rotate");
-    return timeoutPromise(1000).then(function () {
+    return timeoutPromise(500).then(function () {
         dice.classList.remove("rotate");
         return gameCenter.dice();
     });

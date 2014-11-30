@@ -11,8 +11,10 @@ declare var dice: HTMLImageElement;
 window.screen.lock("landscape-primary");
 Module.srand(Date.now() & 65535);
 var gameCenter: Module.GameCenter;
+var charInCell: HTMLDivElement;
 window.addEventListener("DOMContentLoaded", () => {
     createGameCenter(Module.Sexuality.Man);
+    charInCell = <HTMLDivElement>document.querySelector(".charInCell");
 });
 
 function createGameCenter(gender: Module.Sexuality) {
@@ -54,8 +56,10 @@ function dateIndexToString(index: number) {
 
 function rollDice() {
     dice.classList.add("rotate");
-    return timeoutPromise(1000).then(() => {
+    return timeoutPromise(500).then(() => {
         dice.classList.remove("rotate");
+        
+        
         return gameCenter.dice();
     });
 }
