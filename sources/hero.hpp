@@ -13,6 +13,7 @@ public:
 	void change_self_develop(float, int);
 	void change_study(float, int);//status 변화시키는 method
 	void change_stress(float, int);
+	void up_event();
 	float get_MAX_STRESS();
 	float get_MAX_ENERGY() const;
 	float get_MAX_LOVE() const;
@@ -28,6 +29,7 @@ public:
 	bool get_title(int);
 	void set_title(int, bool);
 	sexuality get_sex() const;
+	int get_clear_event();
 private:
 	const float MAX_ENERGY;
 	const float MAX_LOVE;
@@ -46,6 +48,7 @@ private:
 	bool energy_is_zero; //에너지가 0인지 아닌지 구별함. 만약 체력이 0 일경우 다른 행동을 하지 못함
 	bool title_list[7];
 	float titles[7][6][6] ;
+	int clear_event;
   /*
   체력	인간관계	연애	공부중	스트레스	자기개발
   술
@@ -54,6 +57,7 @@ private:
   연애
   휴식
   집
+
   */
 
 };
