@@ -25,9 +25,8 @@ bool MapTable::check_birth(int refernce, int step) {
 	for(int i = reference + 1; i <= max; i++) {
 		if(this->at(i)->birth_cell() == true)
 			return true;
-		else
-			return false;
 	}
+	return false;
 }
 
 MapTable MapTable::generate_default() {
