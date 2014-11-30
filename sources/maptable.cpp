@@ -397,10 +397,9 @@ MapTable MapTable::generate_default() {
   }
   }
 
-  int birth;
-  birth=rand() % 306;
-  at(birth)->birth
-  array[MonthDay::from_index(birth).get_index()]=new birth;
+  int birth_day;
+  birth_day=rand() % 306;
+  at(birth_day)->birth=true;
 
   return maptable;
 }
