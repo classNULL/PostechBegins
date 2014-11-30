@@ -82,6 +82,20 @@ void march::call_option(hero* _hero,int day) {
 	cout<<"4. 연애하기"<<endl;
 	cout<<"5. 휴식"<<endl;
 	cout<<"6. 밥사달라고하기"<<endl;
+	cin << option;
+	if (option == 1)
+		change(_hero, 1, 2, -2, 0, 0, 8, day);
+	else if (option == 2)
+		change(_hero, 1, -4, 5, 0, 1, 5, day);
+	else if (option == 3)
+		change(_hero, 1, -4, 5, 1, 1, -3, day);
+	else if (option == 4)
+		change(_hero, 1, -4, -2, 0, 5, 0, day);
+	else if (option == 5)
+		change(_hero, 2, 0, 0, 0, 0, -5, day);
+	else if (option == 6)
+		change(_hero, 1, -2, 5, 0, 1, -3, day);
+	//3월달은 어차피 칭호가 없음
 }
 void before_exam::call_option(hero* _hero,int day) {
 	int option;
@@ -188,4 +202,68 @@ void special::call_option(hero* _hero, int day) {
 	else if (option == 2)
 		change(_hero, 1, 4, -8, 0, 0, -2, 1);
 
+}
+void eve_1::call_option(hero* _hero, int day) {
+	int option;
+		cout << "학교에 태풍이 몰아닥쳤습니다. " << endl;
+		cout << "1. 수업가기" << endl;
+		cout << "2. 술마시기" << endl;
+		cout << "3. 나들이" << endl;
+		cout << "4. 휴식" << endl;
+		cin >> option;
+		if (option == 1)
+			change(_hero, 1, 4, -2, 0, 0, 10, day);
+		else if (option == 2)
+			change(_hero, 1, -4, 6, 0, 2, 7, day);
+		else if (option == 3)
+			change(_hero, 1, -4, 5, 0, 3, -2, day);
+		else if (option == 5)
+			change(_hero, 2, 0, 0, 0, 0, -5, day);
+	
+}
+
+void eve_2::call_option(hero* _hero, int day) {
+	int option;
+		cout << "과제가 밀려서 밤을 샜습니다. " << endl;
+		cout << "1. 공부하기" << endl;
+		cout << "2. 술마시기" << endl;
+		cout << "3. 동아리 활동하기" << endl;
+		cout << "4. 연애하기" << endl;
+		cout << "5. 휴식" << endl;
+		cin >> option;
+		if (option == 1)
+			change(_hero, 1, 1, -2, 0, 0, 9, day);
+		else if (option == 2)
+			change(_hero, 1, -4, 4, 0, 1, 6, day);
+		else if (option == 3)
+			change(_hero, 1, -4, 4, 1, 1, 1, day);
+		else if (option == 4)
+			change(_hero, 1, -4, -2, 0, 4, 3, day);
+		else if (option == 5)
+			change(_hero, 2, 0, 0, 0, 0, -5, day);
+	
+}
+
+void eve_3::call_option(hero* _hero, int day) {
+	int option;
+		cout << "빨래를 안 해서 입을 옷이 없습니다. " << endl;
+		cout << "1. 수업가기" << endl;
+		cout << "2. 술마시기" << endl;
+		cout << "3. 동아리 활동하기" << endl;
+		cout << "4. 빨래하기" << endl;
+		cout << "5. 옷 빌리기" << endl;
+		cout << "6. 휴식" << endl;
+		cin >> option;
+		if (option == 1)
+			change(_hero, 1, 2, -5, 0, 0, 8, day);
+		else if (option == 2)
+			change(_hero, 1, -4, -3, 0, -1, 5, day);
+		else if (option == 3)
+			change(_hero, 1, -4, -3, 1, -1, -3, day);
+		else if (option == 4)
+			change(_hero, 1, -3, 0, 0, 0, 1, day);
+		else if (option == 5)
+			change(_hero, 2, 0, 1, 0, 0, -3, day);
+		else if (option == 6)
+			change(_hero, 2, 0, 0, 0, 0, -5, day);
 }

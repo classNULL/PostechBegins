@@ -57,4 +57,12 @@ private:
   */
 
 };
+struct information{
+	float stress;
+	float energy;
+	float love;
+	float relationship;
+	float self_develop;
+	float study;
+};
 #endif

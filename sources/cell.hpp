@@ -72,4 +72,16 @@ class faceparty :public special{//대면식
 class vacation :public cell{//방학
   void call_option(hero* _hero,int day) {  }
 };
+class eve_1 :public special{//첫 번째 이벤트
+public:
+	static string const className() { return "eve_1"; };
+};
+class eve_2 :public special{//두 번째 이벤트
+public:
+	static string const className() { return "eve_2"; };
+};
+class eve_3 :public special{//세 번째 이벤트
+public:
+	static string const className() { return "eve_3"; };
+};
 #endif
