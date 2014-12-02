@@ -14,9 +14,13 @@ var gameCenter: Module.GameCenter;
 var month = Module.Month.March;
 var charInCell: HTMLDivElement;
 var gameProgressArea: HTMLDivElement;
+var cover: HTMLDivElement;
+var titleArea: HTMLDivElement;
 window.addEventListener("DOMContentLoaded", () => {
     charInCell = <HTMLDivElement>document.querySelector(".charInCell");
     gameProgressArea = <HTMLDivElement>document.querySelector(".gameprogressarea");
+    titleArea = <HTMLDivElement>document.querySelector(".titlearea");
+    cover = <HTMLDivElement>document.querySelector(".cover");
 
     createGameCenter(Module.Sexuality.Man);
 });
@@ -62,7 +66,7 @@ function move(step: number) {
     moveCharacter(monthday.day);
     if (month !== monthday.month) {
         month = monthday.month;
-        recordMonthProgress(month);
+        changeMonth(month);
         colorize(gameCenter.map, month);
     }
     monthday.delete();
@@ -78,17 +82,20 @@ function dateIndexToString(index: number) {
 
 function rollDice() {
     dice.classList.add("rotate");
+    cover.style.display = "";
     return timeoutPromise(500).then(() => {
         dice.classList.remove("rotate");
+        cover.style.display = "none";
         
         var step = gameCenter.dice();
         move(step);
     });
 }
 
-function recordMonthProgress(month: Module.Month) {
+function changeMonth(month: Module.Month) {
     var monthProgressDiv = <HTMLDivElement>gameProgressArea.children[month.value - 3];
     monthProgressDiv.classList.add("progressin");
+    titleArea.textContent = month.value + "월";
 }
 
 function timeoutPromise(time: number) {

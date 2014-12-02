@@ -146,6 +146,13 @@ body {
       background-image: url("../UI/UI/진행상황/짙은.png");
     }
 
+.cover {
+  grid-row: 1 / span 4;
+  grid-column: 1 / span 3;
+  background-color: rgba(128, 128, 128, 0.3);
+  z-index: 10;
+}
+
 .swordbar {
   transform: skew(27deg);
   margin-left: 18px;

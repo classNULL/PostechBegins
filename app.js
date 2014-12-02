@@ -55,9 +55,13 @@ var gameCenter;
 var month = Module.Month.March;
 var charInCell;
 var gameProgressArea;
+var cover;
+var titleArea;
 window.addEventListener("DOMContentLoaded", function () {
     charInCell = document.querySelector(".charInCell");
     gameProgressArea = document.querySelector(".gameprogressarea");
+    titleArea = document.querySelector(".titlearea");
+    cover = document.querySelector(".cover");
     createGameCenter(Module.Sexuality.Man);
 });
 function createGameCenter(gender) {
@@ -93,7 +97,7 @@ function move(step) {
     moveCharacter(monthday.day);
     if (month !== monthday.month) {
         month = monthday.month;
-        recordMonthProgress(month);
+        changeMonth(month);
         colorize(gameCenter.map, month);
     }
     monthday.delete();
@@ -107,15 +111,18 @@ function dateIndexToString(index) {
 }
 function rollDice() {
     dice.classList.add("rotate");
+    cover.style.display = "";
     return timeoutPromise(500).then(function () {
         dice.classList.remove("rotate");
+        cover.style.display = "none";
         var step = gameCenter.dice();
         move(step);
     });
 }
-function recordMonthProgress(month) {
+function changeMonth(month) {
     var monthProgressDiv = gameProgressArea.children[month.value - 3];
     monthProgressDiv.classList.add("progressin");
+    titleArea.textContent = month.value + "월";
 }
 function timeoutPromise(time) {
     return new Promise(function (resolve, reject) {
