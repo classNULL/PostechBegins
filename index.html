@@ -11,6 +11,7 @@
   <script src="postechbegins.out.js"></script>
 
   <!-- submodules -->
+  <script src="submodules/promise/Promise.js"></script>
   <script src="submodules/domliner/domliner.js"></script>
   <script src="submodules/gridlayout/bin/css-polyfills.js"></script>
   
@@ -67,10 +68,13 @@
       <div class="cell29">29</div>
       <div class="cell30">30</div>
       <div class="cell31">31</div>
+      <div class="charInCell"></div>
     </div>
   </div>
   <div class="dicearea">
-    <div class="dice rotate"></div>
+
+    <img class="dicebutton" src="UI/UI/기타/버튼.png" onclick="rollDice()" />
+    <img id="dice" class="dice" src="UI/UI/기타/주사위.png" />
   </div>
   <div class="gameprogressarea">
     <div class="progressin"><div>3월</div></div>
@@ -84,7 +88,7 @@
     <div><div>11월</div></div>
     <div><div>12월</div></div>
   </div>
-  <div class="flagarea">
-  </div>
+  <div class="flagarea"></div>
+  <div class="cover" style="display: none;"></div>
 </body>
 </html>
