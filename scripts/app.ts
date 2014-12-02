@@ -11,10 +11,14 @@ declare var dice: HTMLImageElement;
 window.screen.lock("landscape-primary");
 Module.srand(Date.now() & 65535);
 var gameCenter: Module.GameCenter;
+var month = Module.Month.March;
 var charInCell: HTMLDivElement;
+var gameProgressArea: HTMLDivElement;
 window.addEventListener("DOMContentLoaded", () => {
-    createGameCenter(Module.Sexuality.Man);
     charInCell = <HTMLDivElement>document.querySelector(".charInCell");
+    gameProgressArea = <HTMLDivElement>document.querySelector(".gameprogressarea");
+
+    createGameCenter(Module.Sexuality.Man);
 });
 
 function createGameCenter(gender: Module.Sexuality) {
@@ -30,21 +34,39 @@ function createGameCenter(gender: Module.Sexuality) {
     //    + "\r\nMAX_LOVE: " + gamechar.MAX_LOVE
     //    + "\r\nMAX_RELATIONSHIP: " + gamechar.MAX_RELATIONSHIP
     //    + "\r\nMAX_SELFIMPROVEMENT: " + gamechar.MAX_SELFIMPROVEMENT);
-    
-    if (gender == Module.Sexuality.Man)
-        face.style.backgroundImage = "url(UI/캐릭터/남자/남자1.png)";
-    else if (gender == Module.Sexuality.Woman)
-        face.style.backgroundImage = "url(UI/캐릭터/여자/여자1.png)";
 
+    if (gender == Module.Sexuality.Man) {
+        face.style.backgroundImage 
+        = charInCell.style.backgroundImage 
+        = "url(UI/캐릭터/남자/남자1.png)";
+    }
+    else if (gender == Module.Sexuality.Woman) {
+        face.style.backgroundImage 
+        = charInCell.style.backgroundImage 
+        = "url(UI/캐릭터/여자/여자1.png)";
+    }
+    moveCharacter(1);
     colorize(gameCenter.map, Module.Month.March);
 }
 
-function move() {
-    var step = gameCenter.dice();
-    alert("주사위 수 " + step + "이(가) 나왔습니다.");
+function moveCharacter(day: number) {
+    charInCell.classList.remove("cell" + charInCell.dataset["day"]);
+    charInCell.classList.add("cell" + day);
+    charInCell.dataset["day"] = day.toString();
+}
+
+function move(step: number) {
     var position = gameCenter.move(step);
-    var posstr = dateIndexToString(position);
-    alert(position + "번 칸에 멈추었습니다. " + posstr + "입니다.");
+
+    var monthday = Module.MonthDay.fromIndex(position);
+    moveCharacter(monthday.day);
+    if (month !== monthday.month) {
+        month = monthday.month;
+        recordMonthProgress(month);
+        colorize(gameCenter.map, month);
+    }
+    monthday.delete();
+    //alert(position + "번 칸에 멈추었습니다. " + posstr + "입니다.");
 }
 
 function dateIndexToString(index: number) {
@@ -59,9 +81,14 @@ function rollDice() {
     return timeoutPromise(500).then(() => {
         dice.classList.remove("rotate");
         
-        
-        return gameCenter.dice();
+        var step = gameCenter.dice();
+        move(step);
     });
+}
+
+function recordMonthProgress(month: Module.Month) {
+    var monthProgressDiv = <HTMLDivElement>gameProgressArea.children[month.value - 3];
+    monthProgressDiv.classList.add("progressin");
 }
 
 function timeoutPromise(time: number) {
