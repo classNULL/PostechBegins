@@ -1,14 +1,16 @@
 ﻿#ifndef HERO
 #define HERO
 
-#include <iostream>
+#include <vector>
 #include "global.hpp"
 #include "hero.hpp"
 class hero{
 public:
   hero(float max_love, float max_energy, float max_relationship, float max_selfdevelop, float max_study, float max_stress, sexuality sex);
+  void consume_energy(int);
+  void rest(int);
+  void recover_energy();
 	void change_love(float, int);
-	void change_energy(float, int);
 	void change_relationship(float, int);
 	void change_self_develop(float, int);
 	void change_study(float, int);//status 변화시키는 method
@@ -17,13 +19,18 @@ public:
 	float get_MAX_LOVE() const;
 	float get_MAX_RELATIONSHIP() const;
 	float get_MAX_SELF_DEVELOP() const;
+  float get_MAX_STRESS();
 	float get_study() const;
 	float get_self_develop() const;
 	float get_relationship() const;
 	float get_energy() const;
 	float get_love() const; //status return 받는 method
   float get_stress() const;
-  bool get_energy_is_zero() const;
+  float get_average_grade() const;
+	bool get_title(int);
+	void set_title(int, bool);
+  void take_exam();
+	sexuality get_sexuality() const;
 private:
 	const float MAX_ENERGY;
 	const float MAX_LOVE;
@@ -31,15 +38,15 @@ private:
 	const float MAX_SELF_DEVELOP;
 	const float MAX_STUDY;
   const float MAX_STRESS;
-	float energy;
+	float energy; // 만약 체력이 0 일경우 다른 행동을 하지 못함
 	float love;
 	float relationship = 30;
 	float self_develop = 30;
 	float study = 100;
   float stress = 0;
+	vector<float> grades; // 시험 기간에 결정
 	sexuality sex;
-	bool energy_is_zero = false; //에너지가 0인지 아닌지 구별함. 만약 체력이 0 일경우 다른 행동을 하지 못함
-
+	bool title_list[7] = {false, false, false, false, false, false, false};
   /*
   체력	인간관계	연애	공부중	스트레스	자기개발
   술
@@ -48,7 +55,6 @@ private:
   연애
   휴식
   집
-
   */
   float titles[7][6][6] = {
     { { 1, 1.1, 1, 1, 1, 1 }, { 1, 1.1, 1, 1, 1, 1 }, { 1, 1.1, 1, 1, 1, 1 }, {1, 1.1, 1, 1, 1, 1}, { 1, 1, 1, 1, 1, 1 }, {1, 1, 1, 1, 1, 1} }, //아싸
@@ -59,5 +65,13 @@ private:
     { { 1, 0.9, 1, 1, 1, 1 }, { 1, 0.9, 1, 1, 1, 1 }, { 1, 0.9, 1, 1, 1, 1 }, { 1, 0.9, 1, 1, 1, 1 }, { 1, 0.9, 1, 1, 1, 1 }, { 1, 0.9, 1, 1, 1, 1 } },//무동아리
     { { 1, 1, 1, 1, 1, 1 }, { 1, 1, 1, 1, 1, 1 }, { 1, 1, 1, 1, 1, 1 }, { 1, 1, 1, 1, 1, 1 }, { 1.1, 1.1, 1.1, 1.1, 1.1, 1.1 }, { 1, 1, 1, 1, 1, 1 } }//체력낮음
   };
+};
+struct HeroStatus {
+	float stress;
+	float energy;
+	float love;
+	float relationship;
+	float self_develop;
+	float study;
 };
 #endif
