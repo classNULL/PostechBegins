@@ -31,7 +31,7 @@ float hero::get_average_grade() const {
 }
 
 void hero::up_event(){ //event 클리어 할 때마다 1씩 업
-	this->clear_event++;
+	this->cleared_event++;
 }
 //모든 title 초기화
 //각종 status 변화를 구현함. 이 때, MAX치보다 크면 MAX치로 되고, 0보다 작아지면 0으로 초기화

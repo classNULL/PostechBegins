@@ -10,16 +10,16 @@
 
 class GameCenter {
 private:
-  int date;
-  int check_num(char *);
-  void savefile();
-  void loadfile();
-  void put_ranking();
+  // int date;
+  // int check_num(char *);
+  // void savefile();
+  // void loadfile();
+  // void put_ranking();
 public:
-  /** 저장된 날짜를 리턴한다. */
-  int get_date() const { return this->date; };
-  /** 새 날짜를 저장한다. */
-  void set_date(int new_date) { this->date = new_date; }
+  // /** 저장된 날짜를 리턴한다. */
+  // int get_date() const { return this->date; };
+  // /** 새 날짜를 저장한다. */
+  // void set_date(int new_date) { this->date = new_date; }
 
 private:
   hero* _character;

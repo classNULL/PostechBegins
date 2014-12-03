@@ -26,7 +26,6 @@ EMSCRIPTEN_BINDINGS(PostechBegins_Main) {
 
   class_<GameCenter>("GameCenter")
     .constructor<sexuality>()
-    .property("date", &GameCenter::get_date, &GameCenter::set_date)
     .property("map", &GameCenter::get_map)
     .property("currentPosition", &GameCenter::get_current_position)
     .property("character", &GameCenter::get_character)
@@ -40,8 +39,7 @@ EMSCRIPTEN_BINDINGS(PostechBegins_Main) {
     .function("at", &MapTable::at, allow_raw_pointers());
 
   class_<cell>("Cell")
-    .property("isStop", &cell::stop_cell)
-    .function("callOptions", &cell::call_option);
+    .property("isStop", &cell::stop_cell);
   class_<normal, base<cell>>("NormalCell");
   class_<weekend, base<cell>>("WeekendCell");
   class_<march, base<cell>>("MarchCell");

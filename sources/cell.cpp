@@ -8,7 +8,7 @@ void cell::change(hero* _hero, PersonalStatus status_change, int day) {
 	_hero->change_love(status_change.love, day);
 	_hero->change_stress(status_change.stress, day);
 }
-void cell::change_with_title(hero* _hero, PersonalStatus status_change, PersonalStatus title_effect, int day) {
+void cell::change(hero* _hero, PersonalStatus status_change, PersonalStatus title_effect, int day) {
 	if (status_change.energy > 0)
 		_hero->change_energy(status_change.energy * title_effect.energy,day);
 	else

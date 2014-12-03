@@ -16,7 +16,7 @@ protected:
    bool stop = false;
    //float energy, float study, float relationship, float self_develop, float love, float stress, int day
    void change(hero* _hero, const PersonalStatus status_change, int day);
-   void change_with_title(hero* _hero, const PersonalStatus status_change, const PersonalStatus title_effect, int day);
+   void change(hero* _hero, const PersonalStatus status_change, const PersonalStatus title_effect, int day);
 };
 class normal :public cell{//각각의 칸은 cell class를 상속받아 만들어진다.
 public:
