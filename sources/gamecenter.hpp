@@ -11,8 +11,10 @@
 class GameCenter {
 private:
   int date;
+  int check_num(char *);
   void savefile();
   void loadfile();
+  void put_ranking();
 public:
   /** 저장된 날짜를 리턴한다. */
   int get_date() const { return this->date; };
