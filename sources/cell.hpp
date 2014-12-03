@@ -14,9 +14,9 @@ public:
    bool stop_cell() const { return stop; }//무조건 멈추는 칸을 나타내기 위함으로, 멈춰야 하는 칸에서는 이 값이 true로 설정된다.
 protected:
    bool stop = false;
-   void change(hero* _hero, float energy, float study, float relationship, float self_develop, float love, float stress, int day);
-   void set_title(hero* _hero);
-   float title[6][6];
+   //float energy, float study, float relationship, float self_develop, float love, float stress, int day
+   void change(hero* _hero, const PersonalStatus status_change, int day);
+   void change(hero* _hero, const PersonalStatus status_change, const PersonalStatus title_effect, int day);
 };
 class normal :public cell{//각각의 칸은 cell class를 상속받아 만들어진다.
 public:
@@ -74,14 +74,17 @@ class vacation :public cell{//방학
 };
 class eve_1 :public special{//첫 번째 이벤트
 public:
-	static string const className() { return "eve_1"; };
+	static string className() { return "eve_1"; };
+  void call_option(hero* _hero,int day);
 };
 class eve_2 :public special{//두 번째 이벤트
 public:
-	static string const className() { return "eve_2"; };
+	static string className() { return "eve_2"; };
+  void call_option(hero* _hero,int day);
 };
 class eve_3 :public special{//세 번째 이벤트
 public:
-	static string const className() { return "eve_3"; };
+	static string className() { return "eve_3"; };
+  void call_option(hero* _hero,int day);
 };
 #endif

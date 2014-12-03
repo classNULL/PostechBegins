@@ -31,7 +31,6 @@ EMSCRIPTEN_BINDINGS(PostechBegins_Main) {
     .property("currentPosition", &GameCenter::get_current_position)
     .property("character", &GameCenter::get_character)
     .function("dice", &GameCenter::dice)
-    .function("score", &GameCenter::score)
     .function("move", &GameCenter::move);
 
   class_<MapTable>("MapTable")

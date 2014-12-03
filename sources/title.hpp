@@ -2,76 +2,69 @@
 #define POSTECHBEGINS_TITLE_H
 
 #include "global.hpp"
+#include <map>
 
 struct TitleEffect {
+public:
   PersonalStatus alcohol;
   PersonalStatus study;
   PersonalStatus circle;
   PersonalStatus love;
   PersonalStatus rest;
   PersonalStatus home;
-}
+
+  static TitleEffect get_base() {
+    return {
+      .alcohol = PersonalStatus::get_ones(),
+      .study = PersonalStatus::get_ones(),
+      .circle = PersonalStatus::get_ones(),
+      .love = PersonalStatus::get_ones(),
+      .rest = PersonalStatus::get_ones(),
+      .home = PersonalStatus::get_ones()
+    };
+  }
+
+  TitleEffect multiply(const TitleEffect& effect) {
+    auto result = *this;
+
+    result.alcohol = result.alcohol.multiply(effect.alcohol);
+    result.study  = result.study.multiply(effect.study);
+    result.circle = result.circle.multiply(effect.circle);
+    result.love = result.love.multiply(effect.love);
+    result.rest = result.rest.multiply(effect.rest);
+    result.home = result.home.multiply(effect.home);
+
+    return result;
+  }
+};
+
+class TitleBook {
+private:
+  map<string, TitleEffect> titles;
+  TitleEffect total_title_effect;
+  void calc_total_title_effect();
+public:
+  bool has_title(string) const;
+  void add_title(string);
+  void remove_title(string);
+  TitleEffect get_total_title_effect() {
+    return this->total_title_effect;
+  };
+};
 
 class Titles {
-public:
+private:
   Titles() = delete;
 
-  static const TitleEffect outsider = { // 아싸
-    .alcohol = { .energy = 1, .relationship = 1.1, .love = 1, .study = 1, .self_develop = 1, .stress = 1 },
-    .study = { .energy = 1, .relationship = 1.1, .love = 1, .study = 1, .self_develop = 1, .stress = 1 },
-    .circle = { .energy = 1, .relationship = 1.1, .love = 1, .study = 1, .self_develop = 1, .stress = 1 },
-    .love = { .energy = 1, .relationship = 1.1, .love = 1, .study = 1, .self_develop = 1, .stress = 1 },
-    .rest = { .energy = 1, .relationship = 1, .love = 1, .study = 1, .self_develop = 1, .stress = 1 },
-    .home = { .energy = 1, .relationship = 1, .love = 1, .study = 1, .self_develop = 1, .stress = 1 }
-  };
-  static const TitleEffect alcoholic = { // 술쟁이
-    .alcohol = { .energy = 1, .relationship = 1.1, .love = 1, .study = 1, .self_develop = -1, .stress = 1 },
-    .study = { .energy = 1, .relationship = 1, .love = 1, .study = 0.9, .self_develop = 1, .stress = 1 },
-    .circle = { .energy = 1, .relationship = 1, .love = 1, .study = 1, .self_develop = 1, .stress = 1 },
-    .love = { .energy = 1, .relationship = 1, .love = 1, .study = 1, .self_develop = 1, .stress = 1 },
-    .rest = { .energy = 1, .relationship = 1, .love = 1, .study = 1, .self_develop = 1, .stress = 1 },
-    .home = { .energy = 1, .relationship = 1, .love = 1, .study = 1, .self_develop = 1, .stress = 1 }
-  };
-  static const TitleEffect circle_resident = { // 동방충
-    .alcohol = { .energy = 1, .relationship = 1, .love = 1, .study = 1, .self_develop = 1, .stress = 1 },
-    .study = { .energy = 1, .relationship = 1, .love = 1, .study = 1, .self_develop = 1, .stress = 1 },
-    .circle = { .energy = 1, .relationship = 1.05, .love = 1, .study = 1, .self_develop = 1, .stress = 1.05 },
-    .love = { .energy = 1, .relationship = 1, .love = 1, .study = 1, .self_develop = 1, .stress = 1 },
-    .rest = { .energy = 1, .relationship = 1, .love = 1, .study = 1, .self_develop = 1, .stress = 1 },
-    .home = { .energy = 1, .relationship = 1, .love = 1, .study = 1, .self_develop = 1, .stress = 1 }
-  };
-  static const TitleEffect nerd = { // 공부벌레
-    .alcohol = { .energy = 1, .relationship = 0.95, .love = 1, .study = 1.1, .self_develop = 1, .stress = 0.95 },
-    .study = { .energy = 1, .relationship = 0.95, .love = 1, .study = 1.1, .self_develop = 1, .stress = 0.95 },
-    .circle = { .energy = 1, .relationship = 0.95, .love = 1, .study = 1.1, .self_develop = 1, .stress = 0.95 },
-    .love = { .energy = 1, .relationship = 0.95, .love = 1, .study = 1.1, .self_develop = 1, .stress = 0.95 },
-    .rest = { .energy = 1, .relationship = 0.95, .love = 1, .study = 1.1, .self_develop = 1, .stress = 0.95 },
-    .home = { .energy = 1, .relationship = 0.95, .love = 1, .study = 1.1, .self_develop = 1, .stress = 0.95 }
-  };
-  static const TitleEffect couple = { // 연애중
-    .alcohol = { .energy = 1.1, .relationship = 0.9, .love = 1, .study = 0.9, .self_develop = 0, .stress = 0.9 },
-    .study = { .energy = 1.1, .relationship = 0.9, .love = 1, .study = 0.9, .self_develop = 0, .stress = 0.9 },
-    .circle = { .energy = 1.1, .relationship = 0.9, .love = 1, .study = 0.9, .self_develop = 0, .stress = 0.9 },
-    .love = { .energy = 1.1, .relationship = 0.9, .love = 1, .study = 0.9, .self_develop = 0, .stress = 0.9 },
-    .rest = { .energy = 1.1, .relationship = 0.9, .love = 1, .study = 0.9, .self_develop = 0, .stress = 0.9 },
-    .home = { .energy = 1.1, .relationship = 0.9, .love = 1, .study = 0.9, .self_develop = 0, .stress = 0.9 }
-  };
-  static const TitleEffect circle_independent = { // 무동아리
-    .alcohol = { .energy = 1, .relationship = 0.9, .love = 1, .study = 1, .self_develop = 1, .stress = 1 },
-    .study = { .energy = 1, .relationship = 0.9, .love = 1, .study = 1, .self_develop = 1, .stress = 1 },
-    .circle = { .energy = 1, .relationship = 0.9, .love = 1, .study = 1, .self_develop = 1, .stress = 1 },
-    .love = { .energy = 1, .relationship = 0.9, .love = 1, .study = 1, .self_develop = 1, .stress = 1 },
-    .rest = { .energy = 1, .relationship = 0.9, .love = 1, .study = 1, .self_develop = 1, .stress = 1 },
-    .home = { .energy = 1, .relationship = 0.9, .love = 1, .study = 1, .self_develop = 1, .stress = 1 }
-  };
-  static const TitleEffect weak = { // 체력낮음
-    .alcohol = { .energy = 1, .relationship = 1, .love = 1, .study = 1, .self_develop = 1, .stress = 1 },
-    .study = { .energy = 1, .relationship = 1, .love = 1, .study = 1, .self_develop = 1, .stress = 1 },
-    .circle = { .energy = 1, .relationship = 1, .love = 1, .study = 1, .self_develop = 1, .stress = 1 },
-    .love = { .energy = 1, .relationship = 1, .love = 1, .study = 1, .self_develop = 1, .stress = 1 },
-    .rest = { .energy = 1.1, .relationship = 1.1, .love = 1.1, .study = 1.1, .self_develop = 1.1, .stress = 1.1 },
-    .home = { .energy = 1, .relationship = 1, .love = 1, .study = 1, .self_develop = 1, .stress = 1 }
-  };
-}
+  static TitleEffect outsider; // 아싸
+  static TitleEffect alcoholic; // 술쟁이
+  static TitleEffect circle_resident; // 동방충
+  static TitleEffect nerd; // 공부벌레
+  static TitleEffect couple; // 연애중
+  static TitleEffect circle_independent; // 무동아리
+  static TitleEffect weak; // 체력낮음
+public:
+  static const map<string, const TitleEffect&> map;
+};
 
 #endif

@@ -32,13 +32,13 @@ Score Score::score(const hero& _hero) {
   //relationship 300
   //improvement 300
   return {
-    .grade_score = calc_grade_score(_hero->get_average_grade()),
-    .relationship = (_hero->get_relationship() * 3),
-    .self_develop = (_hero->get_self_develop() * 3)
+    .grade_score = static_cast<int>(calc_grade_score(_hero.get_average_grade())),
+    .relationship = static_cast<int>(_hero.get_relationship() * 3),
+    .self_develop = static_cast<int>(_hero.get_self_develop() * 3)
   };
 }
 
-string evaluate_grade_score() {
+string Score::evaluate_grade_score() {
   switch (this->grade_score / 100) {
     case 4:
       return "와 학점왕! 일 년 동안 후회 없이 공부했네요!";
@@ -51,9 +51,10 @@ string evaluate_grade_score() {
     case 0://100미만
       return "오 학점 0점...대? 당신은 카이스트 생?";
   }
+  throw runtime_error("학점 점수가 이상합니다.");
 }
-string evaluate_relationship() {
-  switch (this->relationship_score / 100){
+string Score::evaluate_relationship() {
+  switch (this->relationship / 100){
     case 3:
       return "일학년 동안 만날 사람 다 만났네요. 인간 관계가 아주 훌륭합니다.";
     case 2://200이상
@@ -63,9 +64,10 @@ string evaluate_relationship() {
     case 0://100미만
       return "인간관계 점수가... 영...0.... 인생은 혼자 사는 게 아니에요~ 다양한 사람과의 교류를 즐겨봅시다.";
   }
+  throw runtime_error("인간관계 점수가 이상합니다.");
 }
-string evaluate_self_develop() {
-  switch (this->self_develop_score / 100){
+string Score::evaluate_self_develop() {
+  switch (this->self_develop / 100){
     case 3:
       return "탄탄한 자기 계발로 보낸 1년. 많이 성장했겠습니다~!";
     case 2://200이상
@@ -75,4 +77,5 @@ string evaluate_self_develop() {
     case 0://100미만
       return "이건 아닌데.... 진정한 포스테키안이라면 자기 계발은 선택이 아니라 필수입니다. 분발하세요!";
   }
+  throw runtime_error("자기계발 점수가 이상합니다.");
 }

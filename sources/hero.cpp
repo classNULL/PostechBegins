@@ -1,5 +1,3 @@
-#include <iostream>
-#include "global.hpp"
 #include "hero.hpp"
 
 hero::hero(float max_love, float max_energy, float max_relationship, float max_selfdevelop, float max_study, float max_stress, sexuality sex) :
@@ -32,34 +30,25 @@ float hero::get_average_grade() const {
 	return result / 2;
 }
 
-bool hero::get_title(int index) const {
-	return title_list[index];
-}
-void hero::set_title(int index, bool data){
-	title_list[index] = data;
-}
 //모든 title 초기화
 //각종 status 변화를 구현함. 이 때, MAX치보다 크면 MAX치로 되고, 0보다 작아지면 0으로 초기화
-void hero::consume_energy(int day) {
-	int change_energy;
+float hero::get_energy_consuming_rate() {
 	if(stress < 30)
-		change_energy = -3;
-		else if(stress >= 30 && stress < 70)
-		change_energy = -4;
-		else if(stress >= 70)
-		change_energy = -5;
-
-		auto result = energy + (change_energy * day);
-		energy = max(0.0f, min(MAX_ENERGY, result));
-	}
-void hero::rest(int day) {
-	auto result = energy + (8 * day);
-	energy = max(0.0f, min(MAX_ENERGY, result));
+		return -3;
+	else if(stress >= 30 && stress < 70)
+		return -4;
+	else if(stress >= 70)
+		return -5;
+	else
+		throw runtime_error("스트레스 지수에 이상이 있습니다.");
 }
 void hero::recover_energy() {
-	energy = MAX_ENERGY;
+	this->energy = MAX_ENERGY;
 }
 
+void hero::change_energy(float energy, int day){ // love status 변화
+	this->energy = max(0.0f, min(MAX_ENERGY, energy * day));
+}
 void hero::change_love(float love_, int day){ // love status 변화
 	love += (love_*day);
 	if(love > MAX_LOVE)
@@ -115,7 +104,7 @@ float hero::get_energy() const {
 float hero::get_love() const {
 	return love;
 }
-float hero::get_stress() const{
+float hero::get_stress() const {
 	return stress;
 }
 
@@ -133,4 +122,10 @@ float hero::get_MAX_SELF_DEVELOP() const {
 }
 sexuality hero::get_sexuality() const {
    return sex;
+}
+const TitleBook& hero::get_title_book() const {
+	return this->title_book;
+}
+TitleBook& hero::get_title_book() {
+	return this->title_book;
 }
