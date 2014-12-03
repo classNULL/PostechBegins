@@ -11,6 +11,8 @@
 class GameCenter {
 private:
   int date;
+  void savefile();
+  void loadfile();
 public:
   /** 저장된 날짜를 리턴한다. */
   int get_date() const { return this->date; };
@@ -34,6 +36,25 @@ public:
   /** 1과 6 사이 숫자를 무작위로 리턴한다. */
   int dice() { return rand() % 6 + 1; }
   int move(int step);
+
+public:
+	void set_start_status();
+	float get_temp_energy();
+	float get_temp_love();
+	float get_temp_relationship();
+	float get_temp_self_develop();
+	float get_temp_study();
+private:
+	float start_energy;
+	float start_love;
+	float start_relationship;
+	float start_self_develop;
+	float start_study;
+	float temp_energy;
+	float temp_love;
+	float temp_relationship;
+	float temp_self_develop;
+	float _study;
 };
 
 #endif

@@ -5,7 +5,7 @@
 using namespace std;
 
 enum sexuality{
-	man,woman
+	man=1,woman
 };
 
 struct PersonalStatus {

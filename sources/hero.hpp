@@ -1,4 +1,4 @@
-﻿#ifndef HERO
+#ifndef HERO
 #define HERO
 
 #include <vector>
@@ -19,6 +19,7 @@ public:
 	void change_self_develop(float, int);
 	void change_study(float, int);//status 변화시키는 method
   void change_stress(float, int);
+	void up_event();
 	float get_MAX_ENERGY() const;
 	float get_MAX_LOVE() const;
 	float get_MAX_RELATIONSHIP() const;
@@ -35,6 +36,7 @@ public:
 	sexuality get_sexuality() const;
   const TitleBook& get_title_book() const;
   TitleBook& get_title_book();
+  int get_cleared_event();
 private:
 	const float MAX_ENERGY;
 	const float MAX_LOVE;
@@ -51,5 +53,6 @@ private:
 	vector<float> grades; // 시험 기간에 결정
 	sexuality sex;
   TitleBook title_book;
+  int cleared_event = 0;
 };
 #endif
