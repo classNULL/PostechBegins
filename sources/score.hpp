@@ -2,7 +2,10 @@
 #define POSTECHBEGINS_SCORE_H
 
 #include "global.hpp"
+#include "hero.hpp"
 #include <algorithm>
+
+class hero;
 
 struct Score {
 private:

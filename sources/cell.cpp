@@ -1,7 +1,7 @@
 ﻿#include "cell.hpp"
 
 void cell::change(hero* _hero, float energy, float study, float relationship, float self_develop, float love, float stress, int day){
-	_hero->change_energy(energy,day);
+	//_hero->change_energy(energy,day);
 	_hero->change_study(study, day);
 	_hero->change_relationship(relationship, day);
 	_hero->change_self_develop(self_develop, day);
@@ -241,7 +241,7 @@ void eve_2::call_option(hero* _hero, int day) {
 			change(_hero, 1, -4, -2, 0, 4, 3, day);
 		else if (option == 5)
 			change(_hero, 2, 0, 0, 0, 0, -5, day);
-	
+
 }
 
 void eve_3::call_option(hero* _hero, int day) {

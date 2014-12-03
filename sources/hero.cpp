@@ -20,7 +20,7 @@ MAX_LOVE(max_love),MAX_ENERGY(max_energy),MAX_RELATIONSHIP(max_relationship), MA
 }
 
 void hero::take_exam() {
-	if (this->size() < 2)
+	if (this->grades.size() < 2)
 		this->grades.push_back(Score::generate_grade(this->study));
 	else
 		throw runtime_error("시험은 두 번만 봅니다.");
@@ -28,14 +28,14 @@ void hero::take_exam() {
 float hero::get_average_grade() const {
 	float result;
 	for (const auto& grade: this->grades)
-		result += grade
+		result += grade;
 	return result / 2;
 }
 
 bool hero::get_title(int index) const {
 	return title_list[index];
 }
-void hero::set_title(int, index, bool data){
+void hero::set_title(int index, bool data){
 	title_list[index] = data;
 }
 //모든 title 초기화
@@ -50,11 +50,11 @@ void hero::consume_energy(int day) {
 		change_energy = -5;
 
 		auto result = energy + (change_energy * day);
-		energy = max(0, min(MAX_ENERGY, result));
+		energy = max(0.0f, min(MAX_ENERGY, result));
 	}
 void hero::rest(int day) {
 	auto result = energy + (8 * day);
-	energy = max(0, min(MAX_ENERGY, result));
+	energy = max(0.0f, min(MAX_ENERGY, result));
 }
 void hero::recover_energy() {
 	energy = MAX_ENERGY;

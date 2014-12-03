@@ -2,8 +2,12 @@
 #define HERO
 
 #include <vector>
+#include <map>
+#include <algorithm>
 #include "global.hpp"
 #include "hero.hpp"
+#include "score.hpp"
+#include "title.hpp"
 class hero{
 public:
   hero(float max_love, float max_energy, float max_relationship, float max_selfdevelop, float max_study, float max_stress, sexuality sex);
@@ -27,8 +31,9 @@ public:
 	float get_love() const; //status return 받는 method
   float get_stress() const;
   float get_average_grade() const;
-	bool get_title(int);
-	void set_title(int, bool);
+	bool has_title(string) const;
+	void add_title(string);
+  void remove_title(string);
   void take_exam();
 	sexuality get_sexuality() const;
 private:
@@ -46,32 +51,6 @@ private:
   float stress = 0;
 	vector<float> grades; // 시험 기간에 결정
 	sexuality sex;
-	bool title_list[7] = {false, false, false, false, false, false, false};
-  /*
-  체력	인간관계	연애	공부중	스트레스	자기개발
-  술
-  공부
-  동아리
-  연애
-  휴식
-  집
-  */
-  float titles[7][6][6] = {
-    { { 1, 1.1, 1, 1, 1, 1 }, { 1, 1.1, 1, 1, 1, 1 }, { 1, 1.1, 1, 1, 1, 1 }, {1, 1.1, 1, 1, 1, 1}, { 1, 1, 1, 1, 1, 1 }, {1, 1, 1, 1, 1, 1} }, //아싸
-    { { 1, 1.1, 1, 1, -1, 1 }, { 1, 1, 1, 0.9, 1, 1 }, { 1, 1, 1, 1, 1, 1 }, { 1, 1, 1, 1, 1, 1 }, { 1, 1, 1, 1, 1, 1 }, { 1, 1, 1, 1, 1, 1 } }, //술쟁이
-    { { 1, 1, 1, 1, 1, 1 }, { 1, 1, 1, 1, 1, 1 }, { 1, 1.05, 1, 1, 1, 1.05 }, { 1, 1, 1, 1, 1, 1 }, { 1, 1, 1, 1, 1, 1 }, { 1, 1, 1, 1, 1, 1 } }, //동방충
-    { { 1, 0.95, 1, 1.1, 1, 0.95 }, { 1, 0.95, 1, 1.1, 1, 0.95 }, { 1, 0.95, 1, 1.1, 1, 0.95 }, { 1, 0.95, 1, 1.1, 1, 0.95 }, { 1, 0.95, 1, 1.1, 1, 0.95 }, { 1, 0.95, 1, 1.1, 1, 0.95 } }, // 공부벌레
-    { { 1.1, 0.9, 1, 0.9, 0, 0.9 }, { 1.1, 0.9, 1, 0.9, 0, 0.9 }, { 1.1, 0.9, 1, 0.9, 0, 0.9 }, { 1.1, 0.9, 1, 0.9, 0, 0.9 }, { 1.1, 0.9, 1, 0.9, 0, 0.9 }, { 1.1, 0.9, 1, 0.9, 0, 0.9 } }, // 연애중
-    { { 1, 0.9, 1, 1, 1, 1 }, { 1, 0.9, 1, 1, 1, 1 }, { 1, 0.9, 1, 1, 1, 1 }, { 1, 0.9, 1, 1, 1, 1 }, { 1, 0.9, 1, 1, 1, 1 }, { 1, 0.9, 1, 1, 1, 1 } },//무동아리
-    { { 1, 1, 1, 1, 1, 1 }, { 1, 1, 1, 1, 1, 1 }, { 1, 1, 1, 1, 1, 1 }, { 1, 1, 1, 1, 1, 1 }, { 1.1, 1.1, 1.1, 1.1, 1.1, 1.1 }, { 1, 1, 1, 1, 1, 1 } }//체력낮음
-  };
-};
-struct HeroStatus {
-	float stress;
-	float energy;
-	float love;
-	float relationship;
-	float self_develop;
-	float study;
+  map<string, TitleEffect> titles;
 };
 #endif
