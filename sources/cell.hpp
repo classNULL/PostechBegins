@@ -18,9 +18,6 @@ public:
 protected:
    bool stop = false;
    bool birth = false;
-   //float energy, float study, float relationship, float self_develop, float love, float stress, int day
-   void change(hero* _hero, const PersonalStatus status_change, int day);
-   void change(hero* _hero, const PersonalStatus status_change, const PersonalStatus title_effect, int day);
    virtual void call_option_zero(hero* _hero, int day) = 0;
    virtual void call_option_special(hero* _hero, int day) = 0;
 };

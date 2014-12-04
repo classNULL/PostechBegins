@@ -79,6 +79,25 @@ void hero::change_study(float study, int day){
 void hero::change_stress(float stress,int day){
 	this->current_status.stress = max(0.0f, min(MAX_STATUS.stress, stress * day));
 }
+void hero::change_status(PersonalStatus status_change, int day) {
+	this->change_energy(status_change.energy, day);
+	this->change_study(status_change.study, day);
+	this->change_relationship(status_change.relationship, day);
+	this->change_self_develop(status_change.self_develop, day);
+	this->change_love(status_change.love, day);
+	this->change_stress(status_change.stress, day);
+}
+void hero::change_status_with_title(PersonalStatus status_change, PersonalStatus title_effect, int day) {
+	if (status_change.energy > 0)
+		this->change_energy(status_change.energy * title_effect.energy,day);
+	else
+		this->change_energy(status_change.energy, day);
+	this->change_study(status_change.study * title_effect.study, day);
+	this->change_relationship(status_change.relationship * title_effect.relationship, day);
+	this->change_self_develop(status_change.self_develop * title_effect.self_develop, day);
+	this->change_love(status_change.love * title_effect.love, day);
+	this->change_stress(status_change.stress * title_effect.stress, day);
+}
 
 const hero::max_status() const {
 	return this->MAX_STATUS;
