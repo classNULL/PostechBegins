@@ -380,12 +380,9 @@ GameCenter::GameCenter(sexuality sex) {
 }
 
 int GameCenter::move(int step){
-  if(this->_map.check_birth(this->_current_position, step) {
-    this->_map.at(_current_position)
-      ->change(_character,
-        { .energy = 8, .study = 0, .relationship = 0, .self_develop = 0, .love = 0, .stress = -5 },
-        //2, 0, 0, 0, 0, -5,
-        1);
+  if(this->_map.check_birth(this->_current_position, step)) {
+    _character->change_energy(8, 1);
+    _character->change_stress(-5, 1);
   }
 
   int stop = this->_map.check_stop(this->_current_position, step);

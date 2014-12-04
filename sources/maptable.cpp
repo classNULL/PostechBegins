@@ -29,7 +29,7 @@ bool MapTable::check_birth(int reference, int step) {
 	return false;
 }
 
-bool MapTable::is_new_month(Month month; vector<Month> previous_list) {
+bool MapTable::is_new_month(Month month, vector<Month> previous_list) {
   for (const auto& previous: previous_list) {
     if (month == previous)
       return false;
@@ -40,7 +40,7 @@ bool MapTable::is_new_month(Month month; vector<Month> previous_list) {
 
 bool MapTable::is_proper_new_event_day(MonthDay monthday, vector<Month> previous_monthes) {
   auto* cell = this->at(monthday.get_index());
-  if (cell->className() != "normal")
+  if (cell->get_cell_name() != "normal")
     return false;
 
   return MapTable::is_new_month(monthday.get_month(), previous_monthes);
@@ -50,10 +50,10 @@ void MapTable::install_events() {
   vector<int> indices;
   vector<Month> monthes;
 
-  for (var i = 0; i < 3; i++) {
+  for (int i = 0; i < 3; i++) {
     auto index = rand() % this->_map.size();
     auto monthday = MonthDay::from_index(index);
-    if (this->is_proper_new_event_index(monthday, monthes)) {
+    if (this->is_proper_new_event_day(monthday, monthes)) {
       indices.push_back(index);
       monthes.push_back(monthday.get_month());
 

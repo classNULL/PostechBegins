@@ -61,7 +61,7 @@ void normal::call_option(hero* _hero,int day) {
 		cin>>option;
 		if(option == 1)
 			change(_hero,
-				{ .energy = 2, .study = 0, .relationship = 0, self_develop = 0, love = 0, stress = -5 },
+				{ .energy = 2, .study = 0, .relationship = 0, .self_develop = 0, .love = 0, .stress = -5 },
 				day);
 	}
 }
@@ -115,11 +115,11 @@ void weekend::call_option(hero* _hero,int day) {
 		cin>>option;
 		if(option == 1)
 			change(_hero,
-				{ .energy = 2, .study = 0, .relationship = 0, self_develop = 0, love = 0, stress = -5 },
+				{ .energy = 2, .study = 0, .relationship = 0, .self_develop = 0, .love = 0, .stress = -5 },
 				day);
 		else if(option == 2)
 			change(_hero,
-				{ .energy = 3, .study = 0, .relationship = 0, self_develop = 0, love = 0, stress = 0 },
+				{ .energy = 3, .study = 0, .relationship = 0, .self_develop = 0, .love = 0, .stress = 0 },
 				day);
 	}
 }
@@ -165,7 +165,7 @@ void march::call_option(hero* _hero,int day) {
 		cin>>option;
 		if (option == 1)
 			change(_hero,
-				{ .energy = 2, .study = 0, .relationship = 0, self_develop = 0, love = 0, stress = -5 },
+				{ .energy = 2, .study = 0, .relationship = 0, .self_develop = 0, .love = 0, .stress = -5 },
 				day);
 	}
 }
@@ -211,7 +211,7 @@ void before_exam::call_option(hero* _hero,int day) {
 		cin>>option;
 		if (option == 1)
 			change(_hero,
-				{ .energy = 2, .study = -3, .relationship = 0, self_develop = 0, love = 0, stress = -2.5 },
+				{ .energy = 2, .study = -3, .relationship = 0, .self_develop = 0, .love = 0, .stress = -2.5 },
 				day);
 	}
 }
@@ -226,23 +226,23 @@ void exam::call_option(hero* _hero,int day) {
 		cin >> option;
 		if (option == 1)//변화량이 0이라도 적어주는 이유는 칭호를 고려하였기 때문
 			change(_hero,
-				{ .energy = 1, .study = 3, .relationship = -1.6, self_develop = 0, love = 0, stress = 9.6 },
+				{ .energy = 1, .study = 3, .relationship = -1.6, .self_develop = 0, .love = 0, .stress = 9.6 },
 				day);
 		else if (option == 2)
 			change(_hero,
-				{ .energy = 1, .study = -8, .relationship = 6, self_develop = 0, love = 1, stress = 7.5 },
+				{ .energy = 1, .study = -8, .relationship = 6, .self_develop = 0, .love = 1, .stress = 7.5 },
 				day);
 		else if (option == 3)
 			change(_hero,
-				{ .energy = 1, .study = -6, .relationship = 6, self_develop = 0.8, love = 1, stress = -3.6 },
+				{ .energy = 1, .study = -6, .relationship = 6, .self_develop = 0.8, .love = 1, .stress = -3.6 },
 				day);
 		else if (option == 4)
 			change(_hero,
-				{ .energy = 1, .study = -4, .relationship = -2, self_develop = 0, love = 5, stress = 0 },
+				{ .energy = 1, .study = -4, .relationship = -2, .self_develop = 0, .love = 5, .stress = 0 },
 				day);
 		else if (option == 5)
 			change(_hero,
-				{ .energy = 2, .study = -3, .relationship = 0, self_develop = 0, love = 0, stress = -2.5 },
+				{ .energy = 2, .study = -3, .relationship = 0, .self_develop = 0, .love = 0, .stress = -2.5 },
 				day);
 	}
 	else {
@@ -251,7 +251,7 @@ void exam::call_option(hero* _hero,int day) {
 		cin>>option;
 		if(option==1)
 			change(_hero,
-				{ .energy = 2, .study = -6, .relationship = 0, self_develop = 0, love = 0, stress = -1 },
+				{ .energy = 2, .study = -6, .relationship = 0, .self_develop = 0, .love = 0, .stress = -1 },
 				day);
 	}
 }
@@ -297,7 +297,7 @@ void after_exam::call_option(hero* _hero,int day) {
 		cin>>option;
 		if (option == 1)
 			change(_hero,
-				{ .energy = 2, .study = 0, .relationship = 0, self_develop = 0, love = 0, stress = -5 },
+				{ .energy = 2, .study = 0, .relationship = 0, .self_develop = 0, .love = 0, .stress = -5 },
 				day);
 	}
 }
@@ -346,11 +346,11 @@ void festival::call_option(hero* _hero, int day) {
 		cin>>option;
 		if (option == 1)
 			change(_hero,
-				{ .energy = 2, .study = 0, .relationship = -10, self_develop = 0, love = 0, stress = -4 },
+				{ .energy = 2, .study = 0, .relationship = -10, .self_develop = 0, .love = 0, .stress = -4 },
 				day);
 		else if(option==2)
 			change(_hero,
-				{ .energy = 3, .study = 0, .relationship = -12, self_develop = 0, love = 0, stress = 0 },
+				{ .energy = 3, .study = 0, .relationship = -12, .self_develop = 0, .love = 0, .stress = 0 },
 				day);
 	}
 }
@@ -401,7 +401,7 @@ void dance::call_option(hero* _hero, int day) {
 		cin>>option;
 		if (option == 1)
 			change(_hero,
-				{ .energy = 2, .study = 0, .relationship = -3, self_develop = 0, love = 0, stress = -5 },
+				{ .energy = 2, .study = 0, .relationship = -3, .self_develop = 0, .love = 0, .stress = -5 },
 				day);
 	}
 }
@@ -427,7 +427,7 @@ void special::call_option(hero* _hero, int day) {
 		cin>>option;
 		if(option==1)
 			change(_hero,
-				{ .energy = 2, .study = 0, .relationship = -8, self_develop = 0, love = 0, stress = -5 },
+				{ .energy = 2, .study = 0, .relationship = -8, .self_develop = 0, .love = 0, .stress = -5 },
 				day);
 	}
 }
@@ -463,7 +463,7 @@ void eve_1::call_option(hero* _hero, int day) {
 		cin>>option;
 		if(option==1)
 			change(_hero,
-				{ .energy = 2, .study = 0, .relationship = 0, self_develop = 0, love = 0, stress = -5 },
+				{ .energy = 2, .study = 0, .relationship = 0, .self_develop = 0, .love = 0, .stress = -5 },
 				day);
 	}
 }
@@ -505,7 +505,7 @@ void eve_2::call_option(hero* _hero, int day) {
 		cin>>option;
 		if(option==1)
 			change(_hero,
-				{ .energy = 2, .study = 0, .relationship = 0, self_develop = 0, love = 0, stress = -5 },
+				{ .energy = 2, .study = 0, .relationship = 0, .self_develop = 0, .love = 0, .stress = -5 },
 				day);
 	}
 }
@@ -552,7 +552,7 @@ void eve_3::call_option(hero* _hero, int day) {
 		cin>>option;
 		if(option==1)
 			change(_hero,
-				{ .energy = 2, .study = 0, .relationship = 0, self_develop = 0, love = 0, stress = -5 },
+				{ .energy = 2, .study = 0, .relationship = 0, .self_develop = 0, .love = 0, .stress = -5 },
 				day);
 	}
 }
