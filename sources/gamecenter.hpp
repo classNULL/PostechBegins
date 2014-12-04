@@ -41,22 +41,17 @@ public:
 
 public:
 	void set_start_status();
-	float get_temp_energy();
-	float get_temp_love();
-	float get_temp_relationship();
-	float get_temp_self_develop();
-	float get_temp_study();
+	float get_energy_increase();
+	float get_love_increase();
+	float get_relationship_increase();
+	float get_self_develop_increase();
+	float get_study_increase();
 private:
 	float start_energy;
 	float start_love;
 	float start_relationship;
 	float start_self_develop;
 	float start_study;
-	float temp_energy;
-	float temp_love;
-	float temp_relationship;
-	float temp_self_develop;
-	float _study;
 };
 
 #endif

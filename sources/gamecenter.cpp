@@ -413,18 +413,18 @@ void GameCenter::set_start_status(){ //매 달 첫 날의 status 저장
 	start_study=_character->get_study();
 }
 //현재의 status - 과거의 status
-float GameCenter::get_temp_energy(){
+float GameCenter::get_energy_increase(){
 	return _character->get_energy()-start_energy;
 }
-float GameCenter::get_temp_love(){
+float GameCenter::get_love_increase(){
 	return _character->get_love()-start_love;
 }
-float GameCenter::get_temp_relationship(){
+float GameCenter::get_relationship_increase(){
 	return _character->get_relationship()-start_relationship;
 }
-float GameCenter::get_temp_self_develop(){
+float GameCenter::get_self_develop_increase(){
 	return _character->get_self_develop()-start_self_develop;
 }
-float GameCenter::get_temp_study(){
+float GameCenter::get_study_increase(){
 	return _character->get_study()-start_study;
 }
