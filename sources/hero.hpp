@@ -10,7 +10,7 @@
 #include "title.hpp"
 class hero{
 public:
-  hero(PersonalStatus status_max, sexuality sex);
+  hero(const PersonalStatus& status_max, sexuality sex);
   float get_energy_consuming_rate();
   void recover_energy();
   void change_energy(float, int);
@@ -23,7 +23,8 @@ public:
 	void up_event();
   const PersonalStatus& max_status() const;
   const PersonalStatus& status() const;
-  void take_exam();
+  void take_exam(bool is_spring);
+  float hero::get_average_grade(bool is_spring) const;
 	sexuality get_sexuality() const;
   const TitleBook& get_title_book() const;
   TitleBook& get_title_book();
@@ -39,7 +40,8 @@ private:
     .study = 100,
     .stress = 0
   };
-	vector<float> grades; // 시험 기간에 결정
+	vector<float> spring_grades; // 시험 기간에 결정
+  vector<float> autumn_grades; // 시험 기간에 결정
 	sexuality sex;
   TitleBook title_book;
   int cleared_event = 0;

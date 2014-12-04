@@ -1,6 +1,6 @@
 #include "hero.hpp"
 
-hero::hero(PersonalStatus status_max, sexuality sex) : MAX_STATUS(status_max) {
+hero::hero(const PersonalStatus& status_max, sexuality sex) : MAX_STATUS(status_max) {
 	if(sex == sexuality::man){
 		this->sex = man;
 		current_status.love = 10;
@@ -15,16 +15,30 @@ hero::hero(PersonalStatus status_max, sexuality sex) : MAX_STATUS(status_max) {
 	}
 }
 
-void hero::take_exam() {
-	if (this->grades.size() < 2)
-		this->grades.push_back(Score::generate_grade(this->study));
-	else
-		throw runtime_error("시험은 두 번만 봅니다.");
+void hero::take_exam(bool is_spring) {
+	if (is_spring) {
+		if (this->spring_grades.size() < 2)
+			this->spring_grades.push_back(Score::generate_grade(this->study));
+		else
+			throw runtime_error("시험은 두 번만 봅니다.");
+	}
+	else {
+		if (this->autumn_grades.size() < 2)
+			this->autumn_grades.push_back(Score::generate_grade(this->study));
+		else
+			throw runtime_error("시험은 두 번만 봅니다.");
+	}
 }
-float hero::get_average_grade() const {
+float hero::get_average_grade(bool is_spring) const {
 	float result;
-	for (const auto& grade: this->grades)
-		result += grade;
+	if (is_spring) {
+		for (const auto& grade: this->spring_grades)
+			result += grade;
+	}
+	else {
+		for (const auto& grade: this->autumn_grades)
+			result += grade;
+	}
 	return result / 2;
 }
 
