@@ -28,6 +28,7 @@ private:
 public:
   static MonthDay from_index(int date_index);
   static MonthDay from_calendar(Month month, int day);
+  static int containing_days(Month month);
 
   int get_index() const { return this->_date_index; }
   Month get_month() const { return this->_month; }

@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width" />
+  <meta name="viewport" content="width=1920,height=1080" />
   <title>PostechBegins 개발중</title>
   <link rel="stylesheet" href="style/app.css" />
   <link rel="stylesheet" href="style/map.css" />
@@ -11,6 +11,7 @@
   <script src="postechbegins.out.js"></script>
 
   <!-- submodules -->
+  <script src="submodules/promise/Promise.js"></script>
   <script src="submodules/domliner/domliner.js"></script>
   <script src="submodules/gridlayout/bin/css-polyfills.js"></script>
   
@@ -18,23 +19,76 @@
   <script src="app.js"></script>
 </head>
 <body>
-  <h1>PostechBegins 개발중</h1>
-  <p id="selectGender">
-    <input type="button" value="남자" onclick="createGameCenter(Module.Sexuality.Man)" />
-    <input type="button" value="여자" onclick="createGameCenter(Module.Sexuality.Woman)" />
-  </p>
-  <p id="mover" style="display: none;">
-    현재위치: <span id="currentPositionRepresenter">0</span><br />
-    <input type="button" value="주사위" onclick="move()" />
-  </p>
-  <img id="characterImage" style="display: none; max-width: 300px; max-height: 400px;" />
-  <progress class="swordbar" value="30" max="100"></progress>
-  <div class="map">
-    <div class="cell1"></div>
-    <div class="cell2"></div>
-    <div class="cell3"></div>
-    <div class="cell4"></div>
+  <div class="titlearea">3월</div>
+  <div class="facearea">
+    <div class="inner faceinner" id="face">
+    </div>
   </div>
-  <div class="dice rotate"></div>
+  <div class="statusarea">
+    <div class="inner">
+      학점: <br /><br />
+      스트레스: <br />
+      <progress class="swordbar" value="30" max="100"></progress><br />
+      체력: <br />
+      <progress class="swordbar" value="30" max="100"></progress>
+    </div>
+  </div>
+
+  <!-- map -->
+  <div class="maparea">
+    <div class="map">
+      <div class="cell1">1</div>
+      <div class="cell2">2</div>
+      <div class="cell3">3</div>
+      <div class="cell4">4</div>
+      <div class="cell5">5</div>
+      <div class="cell6">6</div>
+      <div class="cell7">7</div>
+      <div class="cell8">8</div>
+      <div class="cell9">9</div>
+      <div class="cell10">10</div>
+      <div class="cell11">11</div>
+      <div class="cell12">12</div>
+      <div class="cell13">13</div>
+      <div class="cell14">14</div>
+      <div class="cell15">15</div>
+      <div class="cell16">16</div>
+      <div class="cell17">17</div>
+      <div class="cell18">18</div>
+      <div class="cell19">19</div>
+      <div class="cell20">20</div>
+      <div class="cell21">21</div>
+      <div class="cell22">22</div>
+      <div class="cell23">23</div>
+      <div class="cell24">24</div>
+      <div class="cell25">25</div>
+      <div class="cell26">26</div>
+      <div class="cell27">27</div>
+      <div class="cell28">28</div>
+      <div class="cell29">29</div>
+      <div class="cell30">30</div>
+      <div class="cell31">31</div>
+      <div class="charInCell"></div>
+    </div>
+  </div>
+  <div class="dicearea">
+
+    <img class="dicebutton" src="UI/UI/기타/버튼.png" onclick="rollDice()" />
+    <img id="dice" class="dice" src="UI/UI/기타/주사위.png" />
+  </div>
+  <div class="gameprogressarea">
+    <div class="progressin"><div>3월</div></div>
+    <div><div>4월</div></div>
+    <div><div>5월</div></div>
+    <div><div>6월</div></div>
+    <div><div>7월</div></div>
+    <div><div>8월</div></div>
+    <div><div>9월</div></div>
+    <div><div>10월</div></div>
+    <div><div>11월</div></div>
+    <div><div>12월</div></div>
+  </div>
+  <div class="flagarea"></div>
+  <div class="cover" style="display: none;"></div>
 </body>
 </html>
