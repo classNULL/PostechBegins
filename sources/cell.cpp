@@ -1,4 +1,4 @@
-﻿﻿#include "cell.hpp"
+#include "cell.hpp"
 
 void cell::change(hero* _hero, PersonalStatus status_change, int day) {
 	_hero->change_energy(status_change.energy, day);
@@ -29,8 +29,8 @@ void normal::call_option(hero* _hero,int day) {
 		cin>>option;
 		if(option == 1)
 			change(_hero,
-			{ .energy = 2, .study = 0, .relationship = 0, .self_develop = 0, .love = 0, .stress = -5 },
-			day);
+				{ .energy = 2, .study = 0, .relationship = 0, .self_develop = 0, .love = 0, .stress = -5 },
+				day);
 
 		return;
 	}
@@ -39,32 +39,41 @@ void normal::call_option(hero* _hero,int day) {
 		if(option==1){
 			cout<<"날씨가 너무 화창한 바람에 공부가 되지 않는다...괜히 시간만 날렸다."<<endl;
 			//히어로, 에너지, 스터디, 릴레이션십,자기계발,러브,스트레스,day
-			change(_hero, 1 * title[1][0], -2 * title[1][3], -2 * title[1][1], 0 * title[1][5], 0 * title[1][2], 9 * title[1][4], day);
+			change(_hero,
+				{ .energy = 1, .study = -2, .relationship = -2, .self_develop = 0, .love = 0, .stress = 9 },
+				 day);
 		}
 		else if(option==2){
 			cout<<"....실연당한 친구의 이야기를 들어주며 술을 마셨다..같은 이야기만 38번들었다..괜히 시간만 날렸다.."<<endl;
 			//히어로, 에너지, 스터디, 릴레이션십,자기계발,러브,스트레스,day
-			change(_hero, 1 * title[0][0], -4 * title[0][3], 5 * title[0][1], 0 * title[0][5], 1 * title[0][2], 6 * title[0][4], day);
+			change(_hero,
+				{ .energy = 1, .study = -4, .relationship = 5, .self_develop = 0, .love = 1, .stress = 6 },
+				 day);
 		}
 		else if(option==4){
-			bool is_inLove=get_title(4);
+			bool is_inLove = _hero->get_title_book().has_title("couple");
 			if(is_inLove){
 				cout<<"........오늘 헤어졌다.아..스트레스 받아....."<<endl;
-				_hero->set_title(4,false);
+				_hero->get_title_book().remove_title("couple");
 				//히어로,       에너지,              스터디,          릴레이션십,       자기계발,       러브,           스트레스,day
-				change(_hero, 1 * title[3][0], -4 * title[3][3], -2 * title[3][1], 0 * title[3][5], -15 * title[3][2], 15 * title[3][4], day);
+				change(_hero,
+					{ .energy = 1, .study = -4, .relationship = -2, .self_develop = 0, .love = -15, .stress = 15 },
+					 day);
 			}
 			else{
 				cout<<"....어장관리 당했다....괜히 시간만 날렸다.."<<endl;
 				//히어로,       에너지,              스터디,          릴레이션십,       자기계발,       러브,           스트레스,day
-				change(_hero, 1 * title[3][0], -4 * title[3][3], -2 * title[3][1], 0 * title[3][5], -8 * title[3][2], 6 * title[3][4], day);
+				change(_hero,
+					{ .energy = 1, .study = -4, .relationship = -2, .self_develop = 0, .love = -8, .stress = 6 },
+					 day);
 			}
 		}
-
 		else if(option==5){
 			cout<<"..퀴즈 점수가 나왔다..나는 먼지같은 인간이다..이 상황에 쉴 생각을 하다니.. 쉬어도 쉰 것 같지 않다..."<<endl;
 			//히어로,       에너지,              스터디,          릴레이션십,       자기계발,       러브,           스트레스,day
-			change(_hero, 2 * title[4][0], 0 * title[4][3], 0 * title[4][1], 0 * title[4][5], 0 * title[4][2], -2 * title[4][4], day);
+			change(_hero,
+				{ .energy = 2, .study = 0, .relationship = 0, .self_develop = 0, .love = 0, .stress = -2 },
+				 day);
 		}
 
 		return;
@@ -125,37 +134,48 @@ void weekend::call_option(hero* _hero,int day) {
 		if(option==1){
 			cout<<"날씨가 너무 화창한 바람에 공부가 되지 않는다...괜히 시간만 날렸다."<<endl;
 			//히어로, 에너지, 스터디, 릴레이션십,자기계발,러브,스트레스,day
-			change(_hero, 1 * title[1][0], -2 * title[1][3], -2 * title[1][1], 0 * title[1][5], 0 * title[1][2], 9 * title[1][4], day);
+			change(_hero,
+				{ .energy = 1, .study = -2, .relationship = -2, .self_develop = 0, .love = 0, .stress = 9 },
+				 day);
 		}
 		else if(option==2){
 			cout<<"....실연당한 친구의 이야기를 들어주며 술을 마셨다..같은 이야기만 38번들었다..괜히 시간만 날렸다.."<<endl;
 			//히어로, 에너지, 스터디, 릴레이션십,자기계발,러브,스트레스,day
-			change(_hero, 1 * title[0][0], -4 * title[0][3], 5 * title[0][1], 0 * title[0][5], 1 * title[0][2], 6 * title[0][4], day);
+			change(_hero,
+				{ .energy = 1, .study = -4, .relationship = 5, .self_develop = 0, .love = 1, .stress = 6 },
+				 day);
 		}
 		else if(option==4){
-			bool is_inLove=get_title(4);
+			bool is_inLove = _hero->get_title_book().has_title("couple");
 			if(is_inLove){
 				cout<<"........오늘 헤어졌다.아..스트레스 받아....."<<endl;
-				_hero->set_title(4,false);
+				_hero->get_title_book().remove_title("couple");
 				//히어로,       에너지,              스터디,          릴레이션십,       자기계발,       러브,           스트레스,day
-				change(_hero, 1 * title[3][0], -4 * title[3][3], -2 * title[3][1], 0 * title[3][5], -15 * title[3][2], 15 * title[3][4], day);
+				change(_hero,
+					{ .energy = 1, .study = -4, .relationship = -2, .self_develop = 0, .love = -15, .stress = 15 },
+					 day);
 			}
 			else{
 				cout<<"....어장관리 당했다....괜히 시간만 날렸다.."<<endl;
 				//히어로,       에너지,              스터디,          릴레이션십,       자기계발,       러브,           스트레스,day
-				change(_hero, 1 * title[3][0], -4 * title[3][3], -2 * title[3][1], 0 * title[3][5], -8 * title[3][2], 6 * title[3][4], day);
+				change(_hero,
+					{ .energy = 1, .study = -4, .relationship = -2, .self_develop = 0, .love = -8, .stress = 6 },
+					 day);
 			}
 		}
-
 		else if(option==5){
 			cout<<"..퀴즈 점수가 나왔다..나는 먼지같은 인간이다..이 상황에 쉴 생각을 하다니.. 쉬어도 쉰 것 같지 않다..."<<endl;
 			//히어로,       에너지,              스터디,          릴레이션십,       자기계발,       러브,           스트레스,day
-			change(_hero, 2 * title[4][0], 0 * title[4][3], 0 * title[4][1], 0 * title[4][5], 0 * title[4][2], -2 * title[4][4], day);
+			change(_hero,
+				{ .energy = 2, .study = 0, .relationship = 0, .self_develop = 0, .love = 0, .stress = -2 },
+				 day);
 		}
 		else if(option==6){
 			cout<<"..알고보니 나는 제주도 사람이었다... 비행기가 결항되어 집에 갈 수 없다...."<<endl;
 			//히어로,       에너지,              스터디,          릴레이션십,       자기계발,       러브,           스트레스,day
-			change(_hero, 3 * title[5][0], 0 * title[5][3], 0 * title[5][1], 0 * title[5][5], 0 * title[5][2], 3 * title[5][4], day);
+			change(_hero,
+				{ .energy = 3, .study = 0, .relationship = 0, .self_develop = 0, .love = 0, .stress = 3 },
+				 day);
 		}
 
 		return;
@@ -218,32 +238,41 @@ void march::call_option(hero* _hero,int day) {
 		if(option==1){
 			cout<<"날씨가 너무 화창한 바람에 공부가 되지 않는다...괜히 시간만 날렸다."<<endl;
 			//히어로, 에너지, 스터디, 릴레이션십,자기계발,러브,스트레스,day
-			change(_hero, 1 * title[1][0], -2 * title[1][3], -2 * title[1][1], 0 * title[1][5], 0 * title[1][2], 9 * title[1][4], day);
+			change(_hero,
+				{ .energy = 1, .study = -2, .relationship = -2, .self_develop = 0, .love = 0, .stress = 9 },
+				 day);
 		}
 		else if(option==2){
 			cout<<"....실연당한 친구의 이야기를 들어주며 술을 마셨다..같은 이야기만 38번들었다..괜히 시간만 날렸다.."<<endl;
 			//히어로, 에너지, 스터디, 릴레이션십,자기계발,러브,스트레스,day
-			change(_hero, 1 * title[0][0], -4 * title[0][3], 5 * title[0][1], 0 * title[0][5], 1 * title[0][2], 6 * title[0][4], day);
+			change(_hero,
+				{ .energy = 1, .study = -4, .relationship = 5, .self_develop = 0, .love = 1, .stress = 6 },
+				 day);
 		}
 		else if(option==4){
-			bool is_inLove=get_title(4);
+			bool is_inLove = _hero->get_title_book().has_title("couple");
 			if(is_inLove){
 				cout<<"........오늘 헤어졌다.아..스트레스 받아....."<<endl;
-				_hero->set_title(4,false);
+				_hero->get_title_book().remove_title("couple");
 				//히어로,       에너지,              스터디,          릴레이션십,       자기계발,       러브,           스트레스,day
-				change(_hero, 1 * title[3][0], -4 * title[3][3], -2 * title[3][1], 0 * title[3][5], -15 * title[3][2], 15 * title[3][4], day);
+				change(_hero,
+					{ .energy = 1, .study = -4, .relationship = -2, .self_develop = 0, .love = -15, .stress = 15 },
+					 day);
 			}
 			else{
 				cout<<"....어장관리 당했다....괜히 시간만 날렸다.."<<endl;
 				//히어로,       에너지,              스터디,          릴레이션십,       자기계발,       러브,           스트레스,day
-				change(_hero, 1 * title[3][0], -4 * title[3][3], -2 * title[3][1], 0 * title[3][5], -8 * title[3][2], 6 * title[3][4], day);
+				change(_hero,
+					{ .energy = 1, .study = -4, .relationship = -2, .self_develop = 0, .love = -8, .stress = 6 },
+					 day);
 			}
 		}
-
 		else if(option==5){
 			cout<<"..퀴즈 점수가 나왔다..나는 먼지같은 인간이다..이 상황에 쉴 생각을 하다니.. 쉬어도 쉰 것 같지 않다..."<<endl;
 			//히어로,       에너지,              스터디,          릴레이션십,       자기계발,       러브,           스트레스,day
-			change(_hero, 2 * title[4][0], 0 * title[4][3], 0 * title[4][1], 0 * title[4][5], 0 * title[4][2], -2 * title[4][4], day);
+			change(_hero,
+				{ .energy = 2, .study = 0, .relationship = 0, .self_develop = 0, .love = 0, .stress = -2 },
+				 day);
 		}
 
 		return;
@@ -300,31 +329,41 @@ void before_exam::call_option(hero* _hero,int day) {
 		if(option==1){
 			cout<<"날씨가 너무 화창한 바람에 공부가 되지 않는다...괜히 시간만 날렸다."<<endl;
 			//히어로, 에너지, 스터디, 릴레이션십,자기계발,러브,스트레스,day
-			change(_hero, 1 * title[1][0], -2 * title[1][3], -2 * title[1][1], 0 * title[1][5], 0 * title[1][2], 9 * title[1][4], day);
+			change(_hero,
+				{ .energy = 1, .study = -2, .relationship = -2, .self_develop = 0, .love = 0, .stress = 9 },
+				 day);
 		}
 		else if(option==2){
 			cout<<"....실연당한 친구의 이야기를 들어주며 술을 마셨다..같은 이야기만 38번들었다..괜히 시간만 날렸다.."<<endl;
 			//히어로, 에너지, 스터디, 릴레이션십,자기계발,러브,스트레스,day
-			change(_hero, 1 * title[0][0], -4 * title[0][3], 5 * title[0][1], 0 * title[0][5], 1 * title[0][2], 6 * title[0][4], day);
+			change(_hero,
+				{ .energy = 1, .study = -4, .relationship = 5, .self_develop = 0, .love = 1, .stress = 6 },
+				 day);
 		}
 		else if(option==4){
-			bool is_inLove=get_title(4);
+			bool is_inLove = _hero->get_title_book().has_title("couple");
 			if(is_inLove){
 				cout<<"........오늘 헤어졌다.아..스트레스 받아....."<<endl;
-				_hero->set_title(4,false);
+				_hero->get_title_book().remove_title("couple");
 				//히어로,       에너지,              스터디,          릴레이션십,       자기계발,       러브,           스트레스,day
-				change(_hero, 1 * title[3][0], -4 * title[3][3], -2 * title[3][1], 0 * title[3][5], -15 * title[3][2], 15 * title[3][4], day);
+				change(_hero,
+					{ .energy = 1, .study = -4, .relationship = -2, .self_develop = 0, .love = -15, .stress = 15 },
+					 day);
 			}
 			else{
 				cout<<"....어장관리 당했다....괜히 시간만 날렸다.."<<endl;
 				//히어로,       에너지,              스터디,          릴레이션십,       자기계발,       러브,           스트레스,day
-				change(_hero, 1 * title[3][0], -4 * title[3][3], -2 * title[3][1], 0 * title[3][5], -8 * title[3][2], 6 * title[3][4], day);
+				change(_hero,
+					{ .energy = 1, .study = -4, .relationship = -2, .self_develop = 0, .love = -8, .stress = 6 },
+					 day);
 			}
 		}
 		else if(option==5){
 			cout<<"..퀴즈 점수가 나왔다..나는 먼지같은 인간이다..이 상황에 쉴 생각을 하다니.. 쉬어도 쉰 것 같지 않다..."<<endl;
 			//히어로,       에너지,              스터디,          릴레이션십,       자기계발,       러브,           스트레스,day
-			change(_hero, 2 * title[4][0], 0 * title[4][3], 0 * title[4][1], 0 * title[4][5], 0 * title[4][2], -2 * title[4][4], day);
+			change(_hero,
+				{ .energy = 2, .study = 0, .relationship = 0, .self_develop = 0, .love = 0, .stress = -2 },
+				 day);
 		}
 
 		return;
@@ -421,31 +460,41 @@ void after_exam::call_option(hero* _hero,int day) {
 		if(option==1){
 			cout<<"날씨가 너무 화창한 바람에 공부가 되지 않는다...괜히 시간만 날렸다."<<endl;
 			//히어로, 에너지, 스터디, 릴레이션십,자기계발,러브,스트레스,day
-			change(_hero, 1 * title[1][0], -2 * title[1][3], -2 * title[1][1], 0 * title[1][5], 0 * title[1][2], 9 * title[1][4], day);
+			change(_hero,
+				{ .energy = 1, .study = -2, .relationship = -2, .self_develop = 0, .love = 0, .stress = 9 },
+				 day);
 		}
 		else if(option==2){
 			cout<<"....실연당한 친구의 이야기를 들어주며 술을 마셨다..같은 이야기만 38번들었다..괜히 시간만 날렸다.."<<endl;
 			//히어로, 에너지, 스터디, 릴레이션십,자기계발,러브,스트레스,day
-			change(_hero, 1 * title[0][0], -4 * title[0][3], 5 * title[0][1], 0 * title[0][5], 1 * title[0][2], 6 * title[0][4], day);
+			change(_hero,
+				{ .energy = 1, .study = -4, .relationship = 5, .self_develop = 0, .love = 1, .stress = 6 },
+				 day);
 		}
 		else if(option==4){
-			bool is_inLove=get_title(4);
+			bool is_inLove = _hero->get_title_book().has_title("couple");
 			if(is_inLove){
 				cout<<"........오늘 헤어졌다.아..스트레스 받아....."<<endl;
-				_hero->set_title(4,false);
+				_hero->get_title_book().remove_title("couple");
 				//히어로,       에너지,              스터디,          릴레이션십,       자기계발,       러브,           스트레스,day
-				change(_hero, 1 * title[3][0], -4 * title[3][3], -2 * title[3][1], 0 * title[3][5], -15 * title[3][2], 15 * title[3][4], day);
+				change(_hero,
+					{ .energy = 1, .study = -4, .relationship = -2, .self_develop = 0, .love = -15, .stress = 15 },
+					 day);
 			}
 			else{
 				cout<<"....어장관리 당했다....괜히 시간만 날렸다.."<<endl;
 				//히어로,       에너지,              스터디,          릴레이션십,       자기계발,       러브,           스트레스,day
-				change(_hero, 1 * title[3][0], -4 * title[3][3], -2 * title[3][1], 0 * title[3][5], -8 * title[3][2], 6 * title[3][4], day);
+				change(_hero,
+					{ .energy = 1, .study = -4, .relationship = -2, .self_develop = 0, .love = -8, .stress = 6 },
+					 day);
 			}
 		}
 		else if(option==5){
 			cout<<"..퀴즈 점수가 나왔다..나는 먼지같은 인간이다..이 상황에 쉴 생각을 하다니.. 쉬어도 쉰 것 같지 않다..."<<endl;
 			//히어로,       에너지,              스터디,          릴레이션십,       자기계발,       러브,           스트레스,day
-			change(_hero, 2 * title[4][0], 0 * title[4][3], 0 * title[4][1], 0 * title[4][5], 0 * title[4][2], -2 * title[4][4], day);
+			change(_hero,
+				{ .energy = 2, .study = 0, .relationship = 0, .self_develop = 0, .love = 0, .stress = -2 },
+				 day);
 		}
 
 		return;
@@ -506,36 +555,48 @@ void festival::call_option(hero* _hero, int day) {
 		if(option==1){
 			cout<<"날씨가 너무 화창한 바람에 공부가 되지 않는다...괜히 시간만 날렸다."<<endl;
 			//히어로, 에너지, 스터디, 릴레이션십,자기계발,러브,스트레스,day
-			change(_hero, 1 * title[1][0], -2 * title[1][3], -2 * title[1][1], 0 * title[1][5], 0 * title[1][2], 9 * title[1][4], day);
+			change(_hero,
+				{ .energy = 1, .study = -2, .relationship = -2, .self_develop = 0, .love = 0, .stress = 9 },
+				 day);
 		}
 		else if(option==2){
 			cout<<"....실연당한 친구의 이야기를 들어주며 술을 마셨다..같은 이야기만 38번들었다..괜히 시간만 날렸다.."<<endl;
 			//히어로, 에너지, 스터디, 릴레이션십,자기계발,러브,스트레스,day
-			change(_hero, 1 * title[0][0], -4 * title[0][3], 5 * title[0][1], 0 * title[0][5], 1 * title[0][2], 6 * title[0][4], day);
+			change(_hero,
+				{ .energy = 1, .study = -4, .relationship = 5, .self_develop = 0, .love = 1, .stress = 6 },
+				 day);
 		}
 		else if(option==3){
-			bool is_inLove=get_title(4);
+			bool is_inLove = _hero->get_title_book().has_title("couple");
 			if(is_inLove){
 				cout<<"........오늘 헤어졌다.아..스트레스 받아....."<<endl;
-				_hero->set_title(4,false);
+				_hero->get_title_book().remove_title("couple");
 				//히어로,       에너지,              스터디,          릴레이션십,       자기계발,       러브,           스트레스,day
-				change(_hero, 1 * title[3][0], -4 * title[3][3], -2 * title[3][1], 0 * title[3][5], -15 * title[3][2], 15 * title[3][4], day);
+				change(_hero,
+					{ .energy = 1, .study = -4, .relationship = -2, .self_develop = 0, .love = -15, .stress = 15 },
+					 day);
 			}
 			else{
 				cout<<"....어장관리 당했다....괜히 시간만 날렸다.."<<endl;
 				//히어로,       에너지,              스터디,          릴레이션십,       자기계발,       러브,           스트레스,day
-				change(_hero, 1 * title[3][0], -4 * title[3][3], -2 * title[3][1], 0 * title[3][5], -8 * title[3][2], 6 * title[3][4], day);
+				change(_hero,
+					{ .energy = 1, .study = -4, .relationship = -2, .self_develop = 0, .love = -8, .stress = 6 },
+					 day);
 			}
 		}
 		else if(option==4){
 			cout<<"..퀴즈 점수가 나왔다..나는 먼지같은 인간이다..이 상황에 쉴 생각을 하다니.. 쉬어도 쉰 것 같지 않다..."<<endl;
 			//히어로,       에너지,              스터디,          릴레이션십,       자기계발,       러브,           스트레스,day
-			change(_hero, 2 * title[4][0], 0 * title[4][3], 0 * title[4][1], 0 * title[4][5], 0 * title[4][2], -2 * title[4][4], day);
+			change(_hero,
+				{ .energy = 2, .study = 0, .relationship = 0, .self_develop = 0, .love = 0, .stress = -2 },
+				 day);
 		}
 		else if(option==5){
 			cout<<"..알고보니 나는 제주도 사람이었다... 비행기가 결항되어 집에 갈 수 없다...."<<endl;
 			//히어로,       에너지,              스터디,          릴레이션십,       자기계발,       러브,           스트레스,day
-			change(_hero, 3 * title[5][0], 0 * title[5][3], 0 * title[5][1], 0 * title[5][5], 0 * title[5][2], 3 * title[5][4], day);
+			change(_hero,
+				{ .energy = 3, .study = 0, .relationship = 0, .self_develop = 0, .love = 0, .stress = 3 },
+				 day);
 		}
 
 		return;
@@ -593,37 +654,49 @@ void dance::call_option(hero* _hero, int day) {
 		if(option==1){
 			cout<<"날씨가 너무 화창한 바람에 공부가 되지 않는다...괜히 시간만 날렸다."<<endl;
 			//히어로, 에너지, 스터디, 릴레이션십,자기계발,러브,스트레스,day
-			change(_hero, 1 * title[1][0], -2 * title[1][3], -2 * title[1][1], 0 * title[1][5], 0 * title[1][2], 9 * title[1][4], day);
+			change(_hero,
+				{ .energy = 1, .study = -2, .relationship = -2, .self_develop = 0, .love = 0, .stress = 9 },
+				 day);
 		}
 		else if(option==2){
 			cout<<"....실연당한 친구의 이야기를 들어주며 술을 마셨다..같은 이야기만 38번들었다..괜히 시간만 날렸다.."<<endl;
 			//히어로, 에너지, 스터디, 릴레이션십,자기계발,러브,스트레스,day
-			change(_hero, 1 * title[0][0], -4 * title[0][3], 5 * title[0][1], 0 * title[0][5], 1 * title[0][2], 6 * title[0][4], day);
+			change(_hero,
+				{ .energy = 1, .study = -4, .relationship = 5, .self_develop = 0, .love = 1, .stress = 6 },
+				 day);
 		}
 		else if(option==4){
-			bool is_inLove=get_title(4);
+			bool is_inLove = _hero->get_title_book().has_title("couple");
 			if(is_inLove){
 				cout<<"........오늘 헤어졌다.아..스트레스 받아....."<<endl;
-				_hero->set_title(4,false);
+				_hero->get_title_book().remove_title("couple");
 				//히어로,       에너지,              스터디,          릴레이션십,       자기계발,       러브,           스트레스,day
-				change(_hero, 1 * title[3][0], -4 * title[3][3], -2 * title[3][1], 0 * title[3][5], -15 * title[3][2], 15 * title[3][4], day);
+				change(_hero,
+					{ .energy = 1, .study = -4, .relationship = -2, .self_develop = 0, .love = -15, .stress = 15 },
+					 day);
 			}
 			else{
 				cout<<"....어장관리 당했다....괜히 시간만 날렸다.."<<endl;
 				//히어로,       에너지,              스터디,          릴레이션십,       자기계발,       러브,           스트레스,day
-				change(_hero, 1 * title[3][0], -4 * title[3][3], -2 * title[3][1], 0 * title[3][5], -8 * title[3][2], 6 * title[3][4], day);
+				change(_hero,
+					{ .energy = 1, .study = -4, .relationship = -2, .self_develop = 0, .love = -8, .stress = 6 },
+					 day);
 			}
 		}
 
 		else if(option==5){
 			cout<<"..헉 몰래 쉰 것을 선배들한테 들켰다 ㅜㅜㅜ 망했다..."<<endl;
 			//히어로,       에너지,              스터디,          릴레이션십,       자기계발,       러브,           스트레스,day
-			change(_hero, 2 * title[4][0], 0 * title[4][3], -3 * title[4][1], 0 * title[4][5], 0 * title[4][2], 5 * title[4][4], day);
+			change(_hero,
+				{ .energy = 2, .study = 0, .relationship = -3, .self_develop = 0, .love = 0, .stress = 5 },
+				 day);
 		}
 		else if(option==6){
 			cout<<"..다리를 삐어서 춤연습을 제대로 할 수 없다 ㅜㅜ..."<<endl;
 			//히어로,       에너지,              스터디,          릴레이션십,       자기계발,       러브,           스트레스,day
-			change(_hero, 2 * title[5][0], 0 * title[5][3], 2 * title[5][1], 0 * title[5][5], 0 * title[5][2], 5 * title[5][4], day);
+			change(_hero,
+				{ .energy = 2, .study = 0, .relationship = 2, .self_develop = 0, .love = 0, .stress = 5 },
+				 day);
 		}
 
 		return;
