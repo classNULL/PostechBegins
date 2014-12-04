@@ -86,6 +86,31 @@ MonthDay MonthDay::from_index(int date_index){
 	return monthday;
 }
 
+int MonthDay::containing_days(Month month) {
+	switch(month) {
+		case March:
+			return 31;
+		case April:
+			return 30;
+		case May:
+			return 31;
+		case June:
+			return 30;
+		case July:
+			return 31;
+		case August:
+			return 31;
+		case September:
+			return 30;
+		case October:
+			return 31;
+		case November:
+			return 30;
+		case December:
+			return 31;
+	}
+}
+
 // int main(){
 // 	Cell date_array[306];
 // 	//각각을 지정한후

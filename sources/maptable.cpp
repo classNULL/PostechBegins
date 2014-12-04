@@ -20,13 +20,55 @@ int MapTable::check_stop(int reference, int step) {//board에서 구현되어야
   return max;
 }
 
-bool MapTable::check_birth(int refernce, int step) {
+bool MapTable::check_birth(int reference, int step) {
 	int max = reference + step;
 	for(int i = reference + 1; i <= max; i++) {
 		if(this->at(i)->birth_cell() == true)
 			return true;
 	}
 	return false;
+}
+
+bool MapTable::is_new_month(Month month, vector<Month> previous_list) {
+  for (const auto& previous: previous_list) {
+    if (month == previous)
+      return false;
+  }
+
+  return true;
+}
+
+bool MapTable::is_proper_new_event_day(MonthDay monthday, vector<Month> previous_monthes) {
+  auto* cell = this->at(monthday.get_index());
+  if (cell->get_cell_name() != "normal")
+    return false;
+
+  return MapTable::is_new_month(monthday.get_month(), previous_monthes);
+}
+
+void MapTable::install_events() {
+  vector<int> indices;
+  vector<Month> monthes;
+
+  for (int i = 0; i < 3; i++) {
+    auto index = rand() % this->_map.size();
+    auto monthday = MonthDay::from_index(index);
+    if (this->is_proper_new_event_day(monthday, monthes)) {
+      indices.push_back(index);
+      monthes.push_back(monthday.get_month());
+
+      delete this->at(index);
+    }
+  }
+
+  this->_map.at(indices.at(0)) = new eve_1;
+  this->_map.at(indices.at(1)) = new eve_2;
+  this->_map.at(indices.at(2)) = new eve_3;
+}
+
+void MapTable::set_birthday() {
+  int birthday = rand() % this->_map.size();
+  this->_map.at(birthday)->set_birth(true);
 }
 
 MapTable MapTable::generate_default() {
@@ -348,57 +390,7 @@ MapTable MapTable::generate_default() {
   array[MonthDay::from_calendar(December,30).get_index()]=new vacation;
   array[MonthDay::from_calendar(December,31).get_index()]=new vacation;
 
-  int eve1;
-  Month eve1_month;
-  while(1)
-  {
-  eve1=rand() % 306;
-
-  if(at(eve1)->className()==normal)
-  {
-	  array[MonthDay::from_index(eve1).get_index()]=new eve_1;
-	  eve1_month=from_index(eve1).get_month();
-	  break;
-  }
-  }
-
-  int eve2;
-  Month eve2_month;
-  while(1)
-  {
-  eve2=rand() % 306;
-
-  if(at(eve2)->className()==normal)
-  {
-	  eve2_month=from_index(eve2).get_month();
-	  if(eve2_month != eve1_month)
-	  {
-		array[MonthDay::from_index(eve2).get_index()]=new eve_2;
-		break;
-	  }
-  }
-  }
-
-  int eve3;
-  Month eve3_month;
-  while(1)
-  {
-  eve3=rand() % 306;
-
-  if(at(eve3)->className()==normal)
-  {
-	  eve3_month=from_index(eve3).get_month();
-	  if((eve3_month != eve1_month) && (eve3_month != eve2_month))
-	  {
-		array[MonthDay::from_index(eve3).get_index()]=new eve_3;
-		break;
-	  }
-  }
-  }
-
-  int birth_day;
-  birth_day=rand() % 306;
-  at(birth_day)->birth=true;
-
+  maptable.install_events();
+  maptable.set_birthday();
   return maptable;
 }
