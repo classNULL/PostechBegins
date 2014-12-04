@@ -1,18 +1,16 @@
 #include "hero.hpp"
 
-hero::hero(float max_love, float max_energy, float max_relationship, float max_selfdevelop, float max_study, float max_stress, sexuality sex) :
-//const 변수 초기화
-MAX_LOVE(max_love),MAX_ENERGY(max_energy),MAX_RELATIONSHIP(max_relationship), MAX_SELF_DEVELOP(max_selfdevelop),MAX_STUDY(max_study),MAX_STRESS(max_stress) {
+hero::hero(PersonalStatus status_max, sexuality sex) : MAX_STATUS(status_max) {
 	if(sex == sexuality::man){
 		this->sex = man;
-		love = 10;
-		energy = 100;
+		current_status.love = 10;
+		current_status.energy = 100;
 		//성별이 남자일 때
 	}
 	else if(sex == sexuality::woman){
 		this->sex = woman;
-		love = 100;
-		energy = 80;
+		current_status.love = 100;
+		current_status.energy = 80;
 		//성별이 여자일 때
 	}
 }
@@ -46,83 +44,35 @@ float hero::get_energy_consuming_rate() {
 		throw runtime_error("스트레스 지수에 이상이 있습니다.");
 }
 void hero::recover_energy() {
-	this->energy = MAX_ENERGY;
+	this->current_status.energy = MAX_STATUS.energy;
 }
 
-void hero::change_energy(float energy, int day){ // love status 변화
-	this->energy = max(0.0f, min(MAX_ENERGY, energy * day));
+void hero::change_energy(float energy, int day){ // energy status 변화
+	this->current_status.energy = max(0.0f, min(MAX_STATUS.energy, energy * day));
 }
-void hero::change_love(float love_, int day){ // love status 변화
-	love += (love_*day);
-	if(love > MAX_LOVE)
-		love = MAX_LOVE;
-	else if(love<0)
-		love = 0;
+void hero::change_love(float love, int day){ // love status 변화
+	this->current_status.love = max(0.0f, min(MAX_STATUS.love, love * day));
 }
-void hero::change_relationship(float relationship_, int day){ //relationship status 변화
-	relationship += (relationship_*day);
-	if(relationship > MAX_RELATIONSHIP)
-		relationship = MAX_RELATIONSHIP;
-	else if(relationship<0){
-		relationship = 0;
-	}
+void hero::change_relationship(float relationship, int day){ //relationship status 변화
+	this->current_status.relationship = max(0.0f, min(MAX_STATUS.relationship, relationship * day));
 }
-void hero::change_self_develop(float self_develop_, int day){
-	self_develop += (self_develop_*day);
-	if(self_develop > MAX_SELF_DEVELOP)
-		self_develop = MAX_SELF_DEVELOP;
-	else if(self_develop<0){
-		self_develop = 0;
-	}
+void hero::change_self_develop(float self_develop, int day){
+	this->current_status.self_develop = max(0.0f, min(MAX_STATUS.self_develop, self_develop * day));
 }
-void hero::change_study(float study_, int day){
-	study += (study_*day);
-	if(study>MAX_STUDY)
-		study = MAX_STUDY;
-	else if(study<0){
-		study = 0;
-	}
+void hero::change_study(float study, int day){
+	this->current_status.study = max(0.0f, min(MAX_STATUS.study, study * day));
 }
-void hero::change_stress(float stress_,int day){
-	stress += (stress_*day);
-	if(stress>MAX_STRESS){
-		stress=MAX_STRESS;
-	}
-	else if(stress<0)
-		stress = 0;
+void hero::change_stress(float stress,int day){
+	this->current_status.stress = max(0.0f, min(MAX_STATUS.stress, stress * day));
 }
 
-float hero::get_study() const {
-	return study;
+const hero::max_status() const {
+	return this->MAX_STATUS;
 }
-float hero::get_self_develop() const {
-	return self_develop;
-}
-float hero::get_relationship() const {
-	return relationship;
-}
-float hero::get_energy() const {
-	return energy;
-}
-float hero::get_love() const {
-	return love;
-}
-float hero::get_stress() const {
-	return stress;
+const hero::status() const {
+	return this->current_status;
 }
 
-float hero::get_MAX_ENERGY() const {
-	return MAX_ENERGY;
-}
-float hero::get_MAX_LOVE() const {
-	return MAX_LOVE;
-}
-float hero::get_MAX_RELATIONSHIP() const {
-	return MAX_RELATIONSHIP;
-}
-float hero::get_MAX_SELF_DEVELOP() const {
-	return MAX_SELF_DEVELOP;
-}
 sexuality hero::get_sexuality() const {
    return sex;
 }
