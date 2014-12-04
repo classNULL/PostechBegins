@@ -29,7 +29,7 @@ struct PersonalStatus {
 
 	PersonalStatus multiply(PersonalStatus status) {
 		auto result = *this;
-		
+
 		result.energy *= status.energy;
 		result.relationship *= status.relationship;
 		result.love *= status.love;

@@ -29,7 +29,7 @@ bool MapTable::check_birth(int reference, int step) {
 	return false;
 }
 
-bool MapTable::is_new_month(Month month, vector<Month> previous_list) {
+bool MapTable::is_new_month(Month month, const vector<Month>& previous_list) {
   for (const auto& previous: previous_list) {
     if (month == previous)
       return false;
@@ -38,7 +38,7 @@ bool MapTable::is_new_month(Month month, vector<Month> previous_list) {
   return true;
 }
 
-bool MapTable::is_proper_new_event_day(MonthDay monthday, vector<Month> previous_monthes) {
+bool MapTable::is_proper_new_event_day(MonthDay monthday, const vector<Month>& previous_monthes) {
   auto* cell = this->at(monthday.get_index());
   if (cell->get_cell_name() != "normal")
     return false;
@@ -51,14 +51,17 @@ void MapTable::install_events() {
   vector<Month> monthes;
 
   for (int i = 0; i < 3; i++) {
-    auto index = rand() % this->_map.size();
-    auto monthday = MonthDay::from_index(index);
-    if (this->is_proper_new_event_day(monthday, monthes)) {
-      indices.push_back(index);
-      monthes.push_back(monthday.get_month());
+    int index;
+    MonthDay monthday;
+    do {
+      index = rand() % this->_map.size();
+      monthday = MonthDay::from_index(index);
 
-      delete this->at(index);
-    }
+    } while (!this->is_proper_new_event_day(monthday, monthes));
+
+    indices.push_back(index);
+    monthes.push_back(monthday.get_month());
+    delete this->at(index);
   }
 
   this->_map.at(indices.at(0)) = new eve_1;

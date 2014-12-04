@@ -17,15 +17,14 @@ enum Month {
   December = 12
 };
 
-//New 말고 static 메소드로 재작성
 class MonthDay {
 private:
-  MonthDay() = default;
   int _date_index;
   Month _month;
   int _day;
 
 public:
+  MonthDay() = default;
   static MonthDay from_index(int date_index);
   static MonthDay from_calendar(Month month, int day);
   static int containing_days(Month month);
