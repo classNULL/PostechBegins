@@ -372,17 +372,26 @@
 
 
 
-int GameCenter::move(int step){
-  int stop = this->_map.check_stop(this->_current_position, step);
-  this->_current_position = stop;
-  return stop;
-}
-
 GameCenter::GameCenter(sexuality sex) {
   if (sex == sexuality::man)
     this->_character = new hero(100, 100, 100, 100, 100, 100, sex);
   else if (sex == sexuality::woman) // woman
     this->_character = new hero(100, 80, 90, 100, 100, 100, sex);
+}
+
+int GameCenter::move(int step){
+  if(this->_map.check_birth(this->_current_position, step) {
+    this->_map.at(_current_position)
+      ->change(_character,
+        { .energy = 8, .study = 0, .relationship = 0, .self_develop = 0, .love = 0, .stress = -5 },
+        //2, 0, 0, 0, 0, -5,
+        1);
+  }
+
+  int stop = this->_map.check_stop(this->_current_position, step);
+  this->_current_position = stop;
+
+  return stop;
 }
 
 // int main() {
