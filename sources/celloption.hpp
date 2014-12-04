@@ -7,10 +7,14 @@
 class cell_option {
 private:
   string _title; // "휴식" 등
-  function<string()> _changer; // 스탯 바꾸는 부분
-  bool _applied;
+
+  function<void()> _silent_changer;
+  function<string()> _tweeting_changer; // 스탯 바꾸는 부분
+  bool _applied = false;
+  bool _has_result_message = false;
 public:
-  cell_option(string title, function<string()> changer); // 생성자
+  cell_option(string title, function<void()> changer);
+  cell_option(string title, function<string()> changer);
   string apply();
 
   string title() { return this->_title; }
@@ -22,6 +26,7 @@ private:
   string _book_title; // "에너지가 부족합니다" 하나에밖에 쓰이지 않네요
   vector<cell_option> _options;
 public:
+  cell_option_book(const vector<cell_option>& options);
   cell_option_book(string title, const vector<cell_option>& options);
   cell_option* at(int index); // 선택지 객체 주는 함수
 
