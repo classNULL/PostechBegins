@@ -1,70 +1,80 @@
-#include "monthday.h"
+#include "monthday.hpp"
 #include <iostream>
+
 using namespace std;
-class event_{
+
+class month_event{
 protected:
-	Month month; 
-	bool successed;
+	Month month;
+	bool successed = 0;
 public:
 	virtual bool check_success()=0;
 	Month get_month();
 	virtual void reward()=0;
 	virtual void introduction_message()=0;
 };
-class march_event : public event_{
 
+class march_event : public month_event{
+protected:
+	Month month = Month::March;
 public:
-	march_event();
 	void introduction_message();
 	bool success();
 	void check_success();
-
 };
-class april_event : public event_{
 
+class april_event : public month_event{
+protected:
+	Month month = Month::April;
 public:
-	april_event();
 	void introduction_message();
 	bool success();
 };
-class may_event : public event_{
 
+class may_event : public month_event{
+protected:
+	Month month = Month::May;
 public:
-	may_event();
 	void introduction_message();
 	bool success();
 };
-class june_event : public event_{
 
+class june_event : public month_event{
+protected:
+	Month month = Month::June;
 public:
-	june_event();
 	void introduction_message();
 	bool success();
 };
-class september_event : public event_{
 
+class september_event : public month_event{
+protected:
+	Month month = Month::September;
 public:
-	september_event();
 	void introduction_message();
 	bool success();
 };
-class october_event : public event_{
 
+class october_event : public month_event{
+protected:
+	Month month = Month::October;
 public:
-	october_event();
 	void introduction_message();
 	bool success();
 };
-class november_event : public event_{
 
+class november_event : public month_event{
+protected:
+	Month month = Month::November;
 public:
-	november_event();
 	void introduction_message();
 	bool success();
 };
-class december_event : public event_{
+
+class december_event : public month_event{
+protected:
+	Month month = Month::December;
 public:
-	december_event();
 	void introduction_message();
 	bool success();
 };
