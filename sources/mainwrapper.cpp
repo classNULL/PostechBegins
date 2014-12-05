@@ -24,14 +24,21 @@ EMSCRIPTEN_BINDINGS(PostechBegins_Main) {
     .value("Man", sexuality::man)
     .value("Woman", sexuality::woman);
 
+  value_object<PersonalStatus>("PersonalStatus")
+    .field("energy", &PersonalStatus::energy)
+    .field("relationship", &PersonalStatus::relationship)
+    .field("love", &PersonalStatus::love)
+    .field("study", &PersonalStatus::study)
+    .field("selfImprovement", &PersonalStatus::self_develop)
+    .field("stress", &PersonalStatus::stress);
+
   class_<GameCenter>("GameCenter")
     .constructor<sexuality>()
-    .property("date", &GameCenter::get_date, &GameCenter::set_date)
     .property("map", &GameCenter::get_map)
     .property("currentPosition", &GameCenter::get_current_position)
     .property("character", &GameCenter::get_character)
+    .function("mutableCharacter", &GameCenter::get_character_pointer, allow_raw_pointers())
     .function("dice", &GameCenter::dice)
-    .function("score", &GameCenter::score)
     .function("move", &GameCenter::move);
 
   class_<MapTable>("MapTable")
@@ -41,7 +48,9 @@ EMSCRIPTEN_BINDINGS(PostechBegins_Main) {
     .function("at", &MapTable::at, allow_raw_pointers());
 
   class_<cell>("Cell")
-    .property("isStop", &cell::stop_cell);
+    .property("isStop", &cell::stop_cell)
+    .property("cellName", &cell::get_cell_name)
+    .function("callOption", &cell::call_option, allow_raw_pointers());
   class_<normal, base<cell>>("NormalCell");
   class_<weekend, base<cell>>("WeekendCell");
   class_<march, base<cell>>("MarchCell");
@@ -60,17 +69,38 @@ EMSCRIPTEN_BINDINGS(PostechBegins_Main) {
   class_<lecendparty, base<special>>("LectureEndPartyCell");
   class_<mt, base<special>>("MTCell");
   class_<faceparty, base<special>>("FacePartyCell");
+  class_<eve_1, base<special>>("Event1Cell");
+  class_<eve_2, base<special>>("Event2Cell");
+  class_<eve_3, base<special>>("Event3Cell");
+
+  class_<cell_option>("CellOption")
+    .property("title", &cell_option::title)
+    .property("applied", &cell_option::applied)
+    .function("apply", &cell_option::apply);
+
+  class_<cell_option_book>("CellOptionBook")
+    .property("bookTitle", &cell_option_book::book_title)
+    .property("size", &cell_option_book::size)
+    .function("at", &cell_option_book::at, allow_raw_pointers());
 
   class_<hero>("Hero")
-    .constructor<float, float, float, float, float, float, sexuality>()
-    .property("love", &hero::get_love)
-    .property("energy", &hero::get_energy)
-    .property("relationship", &hero::get_relationship)
-    .property("selfImprovement", &hero::get_self_develop)
-    .property("study", &hero::get_study)
-    .property("stress", &hero::get_stress)
-    .property("MAX_ENERGY", &hero::get_MAX_ENERGY)
-    .property("MAX_LOVE", &hero::get_MAX_LOVE)
-    .property("MAX_RELATIONSHIP", &hero::get_MAX_RELATIONSHIP)
-    .property("MAX_SELFIMPROVEMENT", &hero::get_MAX_SELF_DEVELOP);
+    .constructor<PersonalStatus, sexuality>()
+    .property("status", &hero::status)
+    .property("maxStatus", &hero::max_status)
+    .property("titleBook", &hero::get_title_book)
+    .function("mutableTitleBook", &hero::get_title_book_pointer, allow_raw_pointers());
+
+  value_object<TitleEffect>("TitleEffect")
+    .field("alcohol", &TitleEffect::alcohol)
+    .field("study", &TitleEffect::study)
+    .field("circle", &TitleEffect::circle)
+    .field("love", &TitleEffect::love)
+    .field("rest", &TitleEffect::rest)
+    .field("home", &TitleEffect::home);
+
+  class_<TitleBook>("TitleBook")
+    .property("totalTitleEffect", &TitleBook::get_total_title_effect)
+    .function("hasTitle", &TitleBook::has_title)
+    .function("addTitle", &TitleBook::add_title)
+    .function("removeTitle", &TitleBook::remove_title);
 }

@@ -1,63 +1,54 @@
-﻿#ifndef HERO
+#ifndef HERO
 #define HERO
 
-#include <iostream>
+#include <vector>
+#include <map>
+#include <algorithm>
 #include "global.hpp"
 #include "hero.hpp"
+#include "score.hpp"
+#include "title.hpp"
 class hero{
 public:
-  hero(float max_love, float max_energy, float max_relationship, float max_selfdevelop, float max_study, float max_stress, sexuality sex);
+  hero(const PersonalStatus& status_max, sexuality sex);
+  float get_energy_consuming_rate();
+  void recover_energy();
+  void change_energy(float, int);
 	void change_love(float, int);
-	void change_energy(float, int);
 	void change_relationship(float, int);
 	void change_self_develop(float, int);
 	void change_study(float, int);//status 변화시키는 method
   void change_stress(float, int);
-	float get_MAX_ENERGY() const;
-	float get_MAX_LOVE() const;
-	float get_MAX_RELATIONSHIP() const;
-	float get_MAX_SELF_DEVELOP() const;
-	float get_study() const;
-	float get_self_develop() const;
-	float get_relationship() const;
-	float get_energy() const;
-	float get_love() const; //status return 받는 method
-  float get_stress() const;
-  bool get_energy_is_zero() const;
+  void change_status(PersonalStatus status_change, int day);
+  void change_status(PersonalStatus status_change, PersonalStatus title_effect, int day);
+	void up_event();
+  const PersonalStatus& max_status() const { return this->MAX_STATUS; }
+  const PersonalStatus& status() const { return this->current_status; }
+  bool exhausted() const;
+
+  void take_exam(bool is_spring);
+  float get_semester_grade(bool is_spring) const;
+  float get_average_grade() const;
+
+	sexuality get_sexuality() const { return this->sex; };
+  const TitleBook& get_title_book() const { return this->title_book; };
+  TitleBook* get_title_book_pointer() { return &(this->title_book); };
+  int get_cleared_event() { return this->cleared_event; }
 private:
-	const float MAX_ENERGY;
-	const float MAX_LOVE;
-	const float MAX_RELATIONSHIP;
-	const float MAX_SELF_DEVELOP;
-	const float MAX_STUDY;
-  const float MAX_STRESS;
-	float energy;
-	float love;
-	float relationship = 30;
-	float self_develop = 30;
-	float study = 100;
-  float stress = 0;
-	sexuality sex;
-	bool energy_is_zero = false; //에너지가 0인지 아닌지 구별함. 만약 체력이 0 일경우 다른 행동을 하지 못함
+  const PersonalStatus MAX_STATUS;
+  PersonalStatus current_status = {
+    .energy = 0,
+    .love = 0,
 
-  /*
-  체력	인간관계	연애	공부중	스트레스	자기개발
-  술
-  공부
-  동아리
-  연애
-  휴식
-  집
-
-  */
-  float titles[7][6][6] = {
-    { { 1, 1.1, 1, 1, 1, 1 }, { 1, 1.1, 1, 1, 1, 1 }, { 1, 1.1, 1, 1, 1, 1 }, {1, 1.1, 1, 1, 1, 1}, { 1, 1, 1, 1, 1, 1 }, {1, 1, 1, 1, 1, 1} }, //아싸
-    { { 1, 1.1, 1, 1, -1, 1 }, { 1, 1, 1, 0.9, 1, 1 }, { 1, 1, 1, 1, 1, 1 }, { 1, 1, 1, 1, 1, 1 }, { 1, 1, 1, 1, 1, 1 }, { 1, 1, 1, 1, 1, 1 } }, //술쟁이
-    { { 1, 1, 1, 1, 1, 1 }, { 1, 1, 1, 1, 1, 1 }, { 1, 1.05, 1, 1, 1, 1.05 }, { 1, 1, 1, 1, 1, 1 }, { 1, 1, 1, 1, 1, 1 }, { 1, 1, 1, 1, 1, 1 } }, //동방충
-    { { 1, 0.95, 1, 1.1, 1, 0.95 }, { 1, 0.95, 1, 1.1, 1, 0.95 }, { 1, 0.95, 1, 1.1, 1, 0.95 }, { 1, 0.95, 1, 1.1, 1, 0.95 }, { 1, 0.95, 1, 1.1, 1, 0.95 }, { 1, 0.95, 1, 1.1, 1, 0.95 } }, // 공부벌레
-    { { 1.1, 0.9, 1, 0.9, 0, 0.9 }, { 1.1, 0.9, 1, 0.9, 0, 0.9 }, { 1.1, 0.9, 1, 0.9, 0, 0.9 }, { 1.1, 0.9, 1, 0.9, 0, 0.9 }, { 1.1, 0.9, 1, 0.9, 0, 0.9 }, { 1.1, 0.9, 1, 0.9, 0, 0.9 } }, // 연애중
-    { { 1, 0.9, 1, 1, 1, 1 }, { 1, 0.9, 1, 1, 1, 1 }, { 1, 0.9, 1, 1, 1, 1 }, { 1, 0.9, 1, 1, 1, 1 }, { 1, 0.9, 1, 1, 1, 1 }, { 1, 0.9, 1, 1, 1, 1 } },//무동아리
-    { { 1, 1, 1, 1, 1, 1 }, { 1, 1, 1, 1, 1, 1 }, { 1, 1, 1, 1, 1, 1 }, { 1, 1, 1, 1, 1, 1 }, { 1.1, 1.1, 1.1, 1.1, 1.1, 1.1 }, { 1, 1, 1, 1, 1, 1 } }//체력낮음
+    .relationship = 30,
+    .self_develop = 30,
+    .study = 100,
+    .stress = 0
   };
+	vector<float> spring_grades; // 시험 기간에 결정
+  vector<float> autumn_grades; // 시험 기간에 결정
+	sexuality sex;
+  TitleBook title_book;
+  int cleared_event = 0;
 };
 #endif

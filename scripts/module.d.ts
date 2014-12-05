@@ -38,6 +38,15 @@ declare module Module {
         var Man: Sexuality;
         var Woman: Sexuality;
     }
+    interface PersonalStatus {
+        energy: number;
+        relationship: number;
+        love: number;
+        study: number;
+        selfImprovement: number;
+        stress: number;
+    }
+
     class GameCenter extends EmscriptenClass {
         constructor(sex: Sexuality);
 
@@ -46,8 +55,8 @@ declare module Module {
         character: Hero;
         map: MapTable;
 
+        mutableCharacter(): Hero;
         dice(): number;
-        score(study: number, relationship: number, improvement: number): number;
         move(step: number): number;
     }
 
@@ -57,6 +66,7 @@ declare module Module {
 
     class Cell extends EmscriptenClass {
         isStop: boolean;
+        callOption(hero: Hero, day: number): CellOptionBook;
     }
     class NormalCell extends Cell { }
     class WeekendCell extends Cell { }
@@ -75,17 +85,24 @@ declare module Module {
     class LectureEndPartyCell extends SpecialCell { }
     class MTCell extends SpecialCell { }
     class FacePartyCell extends SpecialCell { }
+    class Event1Cell extends SpecialCell { }
+    class Event2Cell extends SpecialCell { }
+    class Event3Cell extends SpecialCell { }
+
+    class CellOption extends EmscriptenClass {
+        title: string;
+        applied: boolean;
+        apply(): string;
+    }
+    class CellOptionBook extends EmscriptenClass {
+        bookTitle: string;
+        size: number;
+        at(index: number): CellOption;
+    }
 
     class Hero extends EmscriptenClass {
-        constructor(maxLove: number, maxEnergy: number, maxRelationship: number, maxSelfImprovement: number, maxStudy: number, sex: Sexuality);
-        love: number;
-        energy: number;
-        relationship: number;
-        selfImprovement: number;
-        study: number;
-        MAX_ENERGY: number;
-        MAX_LOVE: number;
-        MAX_RELATIONSHIP: number;
-        MAX_SELFIMPROVEMENT: number;
+        constructor(maxStatus: PersonalStatus, sex: Sexuality);
+        status: PersonalStatus;
+        maxStatus: PersonalStatus;
     }
 }

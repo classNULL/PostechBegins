@@ -47,44 +47,19 @@ function colorize(maptable, month) {
         cellElement.style.display = "none";
     }
 }
-///<reference path="screenapi.ts" />
 ///<reference path="colorizer.ts" />
-window.screen.lock("landscape-primary");
-Module.srand(Date.now() & 65535);
-var gameCenter;
-var month = Module.Month.March;
-var charInCell;
-var gameProgressArea;
-var cover;
-var titleArea;
-window.addEventListener("DOMContentLoaded", function () {
-    charInCell = document.querySelector(".charInCell");
-    gameProgressArea = document.querySelector(".gameprogressarea");
-    titleArea = document.querySelector(".titlearea");
-    cover = document.querySelector(".cover");
-    createGameCenter(Module.Sexuality.Man);
-});
 function createGameCenter(gender) {
     gameCenter = new Module.GameCenter(gender);
-    var gamechar = gameCenter.character;
-    //alert(
-    //    "love: " + gamechar.love
-    //    + "\r\nenergy: " + gamechar.energy
-    //    + "\r\nrelationship: " + gamechar.relationship
-    //    + "\r\nselfImprovement: " + gamechar.selfImprovement
-    //    + "\r\nstudy: " + gamechar.study
-    //    + "\r\nMAX_ENERGY: " + gamechar.MAX_ENERGY
-    //    + "\r\nMAX_LOVE: " + gamechar.MAX_LOVE
-    //    + "\r\nMAX_RELATIONSHIP: " + gamechar.MAX_RELATIONSHIP
-    //    + "\r\nMAX_SELFIMPROVEMENT: " + gamechar.MAX_SELFIMPROVEMENT);
     if (gender == Module.Sexuality.Man) {
-        face.style.backgroundImage = charInCell.style.backgroundImage = "url(UI/캐릭터/남자/남자1.png)";
+        faceArea.style.backgroundImage = charInCell.style.backgroundImage = "url(UI/캐릭터/남자/남자1.png)";
     }
     else if (gender == Module.Sexuality.Woman) {
-        face.style.backgroundImage = charInCell.style.backgroundImage = "url(UI/캐릭터/여자/여자1.png)";
+        faceArea.style.backgroundImage = charInCell.style.backgroundImage = "url(UI/캐릭터/여자/여자1.png)";
     }
     moveCharacter(1);
     colorize(gameCenter.map, Module.Month.March);
+    reflectMaxStatus(gameCenter.mutableCharacter());
+    reflectStatus(gameCenter.mutableCharacter());
 }
 function moveCharacter(day) {
     charInCell.classList.remove("cell" + charInCell.dataset["day"]);
@@ -101,6 +76,7 @@ function move(step) {
         colorize(gameCenter.map, month);
     }
     monthday.delete();
+    return position;
     //alert(position + "번 칸에 멈추었습니다. " + posstr + "입니다.");
 }
 function dateIndexToString(index) {
@@ -111,19 +87,102 @@ function dateIndexToString(index) {
 }
 function rollDice() {
     dice.classList.add("rotate");
-    cover.style.display = "";
+    coverScreen();
+    var optionBook;
     return timeoutPromise(500).then(function () {
         dice.classList.remove("rotate");
-        cover.style.display = "none";
         var step = gameCenter.dice();
-        move(step);
+        var position = move(step);
+        optionBook = gameCenter.map.at(position).callOption(gameCenter.mutableCharacter(), 1);
+        setOptions(optionBook);
+        showOptions();
+        return waitOptionSelection();
+    }).then(function (index) {
+        var result = optionBook.at(index).apply();
+        optionResultDisplay.textContent = result;
+        optionBook.delete();
+        reflectStatus(gameCenter.mutableCharacter());
+        hideOptions();
+        clearOptions();
+        uncoverScreen();
     });
 }
 function changeMonth(month) {
     var monthProgressDiv = gameProgressArea.children[month.value - 3];
     monthProgressDiv.classList.add("progressin");
     titleArea.textContent = month.value + "월";
+    document.documentElement.style.backgroundImage = 'url("UI/wallpaper/' + month.value + '.jpg")';
 }
+/* cover */
+function coverScreen() {
+    cover.style.display = "";
+}
+function uncoverScreen() {
+    cover.style.display = "none";
+}
+/* status */
+function reflectStatus(character) {
+    stressDisplayBar.value = character.status.stress;
+    energyDisplayBar.value = character.status.energy;
+}
+function reflectMaxStatus(character) {
+    stressDisplayBar.max = character.maxStatus.stress;
+    energyDisplayBar.max = character.maxStatus.energy;
+}
+/* options */
+function setOptions(options) {
+    for (var i = 0; i < options.size; i++) {
+        optionDisplay.appendChild(createOptionItemBlock(options.at(i), i));
+    }
+}
+function createOptionItemBlock(option, index) {
+    return DOMLiner.element("div", { class: "option-item", "data-option-index": index.toString() }, option.title);
+}
+function waitOptionSelection() {
+    var optionItemBlocks = optionDisplay.children;
+    return new Promise(function (resolve, reject) {
+        var waiter = function (ev) {
+            for (var i = 0; i < optionItemBlocks.length; i++)
+                optionItemBlocks[i].removeEventListener("click", waiter);
+            resolve(parseInt(ev.target.dataset["optionIndex"]));
+        };
+        for (var i = 0; i < optionItemBlocks.length; i++)
+            optionItemBlocks[i].addEventListener("click", waiter);
+    });
+}
+function clearOptions() {
+    while (optionDisplay.firstChild)
+        optionDisplay.removeChild(optionDisplay.firstChild);
+}
+function showOptions() {
+    optionDisplay.style.display = "";
+}
+function hideOptions() {
+    optionDisplay.style.display = "none";
+}
+///<reference path="screenapi.ts" />
+///<reference path="gamefunctions.ts" />
+window.screen.lock("landscape-primary");
+Module.srand(Date.now() & 65535);
+var gameCenter;
+var month = Module.Month.March;
+var charInCell;
+var gameProgressArea;
+var cover;
+var titleArea;
+var faceArea;
+var optionDisplay;
+var optionResultDisplay;
+window.addEventListener("DOMContentLoaded", function () {
+    charInCell = document.querySelector(".charInCell");
+    gameProgressArea = document.querySelector(".gameprogressarea");
+    titleArea = document.querySelector(".titlearea");
+    faceArea = document.querySelector(".facearea");
+    cover = document.querySelector(".cover");
+    optionDisplay = document.querySelector(".option-display");
+    optionResultDisplay = document.querySelector(".option-result-display");
+    createGameCenter(Module.Sexuality.Man);
+});
 function timeoutPromise(time) {
     return new Promise(function (resolve, reject) {
         setTimeout(function () { return resolve(); }, time);

@@ -20,6 +20,55 @@ int MapTable::check_stop(int reference, int step) {//board에서 구현되어야
   return max;
 }
 
+bool MapTable::check_birth(int reference, int step) {
+	int max = reference + step;
+	for(int i = reference + 1; i <= max; i++) {
+		if(this->at(i)->birth_cell() == true)
+			return true;
+	}
+	return false;
+}
+
+bool MapTable::is_proper_new_event_day(MonthDay monthday, const vector<Month>& previous_monthes, const vector<int>& previous_indices) {
+  clog << "Checking: " << monthday.get_index() << endl;
+  auto* cell = this->at(monthday.get_index());
+  if (cell == NULL || cell->get_cell_name() != "normal")
+    return false;
+
+  clog << "Passing: " << monthday.get_index() << endl;
+  return MapTable::is_new(monthday.get_month(), previous_monthes) && MapTable::is_new(monthday.get_index(), previous_indices);
+}
+
+void MapTable::install_events() {
+  vector<int> indices;
+  vector<Month> monthes;
+
+  for (int i = 0; i < 3; i++) {
+    int index;
+    MonthDay monthday;
+    do {
+      index = rand() % this->_map.size();
+      monthday = MonthDay::from_index(index);
+
+    } while (!this->is_proper_new_event_day(monthday, monthes, indices));
+
+    indices.push_back(index);
+    monthes.push_back(monthday.get_month());
+
+    delete this->at(index);
+    this->_map.at(index) = NULL;
+  }
+
+  this->_map.at(indices.at(0)) = new eve_1;
+  this->_map.at(indices.at(1)) = new eve_2;
+  this->_map.at(indices.at(2)) = new eve_3;
+}
+
+void MapTable::set_birthday() {
+  int birthday = rand() % this->_map.size();
+  this->_map.at(birthday)->set_birth(true);
+}
+
 MapTable MapTable::generate_default() {
   MapTable maptable;
   auto& array = maptable._map = vector<cell*>(306);
@@ -339,5 +388,7 @@ MapTable MapTable::generate_default() {
   array[MonthDay::from_calendar(December,30).get_index()]=new vacation;
   array[MonthDay::from_calendar(December,31).get_index()]=new vacation;
 
+  maptable.install_events();
+  maptable.set_birthday();
   return maptable;
 }
