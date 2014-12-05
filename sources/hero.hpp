@@ -20,12 +20,16 @@ public:
 	void change_study(float, int);//status 변화시키는 method
   void change_stress(float, int);
   void change_status(PersonalStatus status_change, int day);
-  void change_status_with_title(PersonalStatus status_change, int day);
+  void change_status(PersonalStatus status_change, PersonalStatus title_effect, int day);
 	void up_event();
   const PersonalStatus& max_status() const;
   const PersonalStatus& status() const;
+  bool exhausted() const;
+
   void take_exam(bool is_spring);
-  float hero::get_average_grade(bool is_spring) const;
+  float get_semester_grade(bool is_spring) const;
+  float get_average_grade() const;
+
 	sexuality get_sexuality() const;
   const TitleBook& get_title_book() const;
   TitleBook& get_title_book();

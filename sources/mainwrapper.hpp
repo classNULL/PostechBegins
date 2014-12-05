@@ -6,6 +6,8 @@
 #include "hero.hpp"
 #include "monthday.hpp"
 #include "maptable.hpp"
+#include "cell.hpp"
+#include "celloption.hpp"
 
 #ifndef EMBIND_H
 #define EMBIND_H

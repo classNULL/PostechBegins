@@ -59,16 +59,18 @@ EMSCRIPTEN_BINDINGS(PostechBegins_Main) {
   class_<mt, base<special>>("MTCell");
   class_<faceparty, base<special>>("FacePartyCell");
 
+  class_<cell_option>("CellOption")
+    //.property("title", &cell_option::title)
+    //.property("applied", &cell_option::applied)
+    .function("apply", &cell_option::apply);
+
+  class_<cell_option_book>("CellOptionBook")
+    //.property("bookTitle", &cell_option_book::book_title)
+    .property("size", &cell_option_book::size)
+    .function("at", &cell_option_book::at, allow_raw_pointers());
+
   class_<hero>("Hero")
-    .constructor<float, float, float, float, float, float, sexuality>()
-    .property("love", &hero::get_love)
-    .property("energy", &hero::get_energy)
-    .property("relationship", &hero::get_relationship)
-    .property("selfImprovement", &hero::get_self_develop)
-    .property("study", &hero::get_study)
-    .property("stress", &hero::get_stress)
-    .property("MAX_ENERGY", &hero::get_MAX_ENERGY)
-    .property("MAX_LOVE", &hero::get_MAX_LOVE)
-    .property("MAX_RELATIONSHIP", &hero::get_MAX_RELATIONSHIP)
-    .property("MAX_SELFIMPROVEMENT", &hero::get_MAX_SELF_DEVELOP);
+    .constructor<PersonalStatus, sexuality>()
+    .property("status", &hero::status)
+    .property("max_status", &hero::max_status);
 }

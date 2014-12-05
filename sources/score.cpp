@@ -33,8 +33,8 @@ Score Score::score(const hero& _hero) {
   //improvement 300
   return {
     .grade_score = static_cast<int>(calc_grade_score(_hero.get_average_grade())),
-    .relationship = static_cast<int>(_hero.get_relationship() * 3),
-    .self_develop = static_cast<int>(_hero.get_self_develop() * 3)
+    .relationship = static_cast<int>(_hero.status().relationship * 3),
+    .self_develop = static_cast<int>(_hero.status().self_develop * 3)
   };
 }
 
