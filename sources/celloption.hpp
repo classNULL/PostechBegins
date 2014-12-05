@@ -6,32 +6,32 @@
 
 class cell_option {
 private:
-  string _title; // "휴식" 등
+  wstring _title; // "휴식" 등
 
   function<void()> _silent_changer;
-  function<string()> _tweeting_changer; // 스탯 바꾸는 부분
+  function<wstring()> _tweeting_changer; // 스탯 바꾸는 부분
   bool _applied = false;
   bool _has_result_message = false;
 public:
-  cell_option(string title, function<void()> changer);
-  cell_option(string title, function<string()> changer);
-  string apply();
+  cell_option(wstring title, function<void()> changer);
+  cell_option(wstring title, function<wstring()> changer);
+  wstring apply();
 
-  string title() const { return this->_title; }
+  wstring title() const { return this->_title; }
   bool applied() const { return this->_applied; }
 };
 
 class cell_option_book {
 private:
-  string _book_title; // "에너지가 부족합니다" 하나에밖에 쓰이지 않네요
+  wstring _book_title; // "에너지가 부족합니다" 하나에밖에 쓰이지 않네요
   vector<cell_option> _options;
 public:
   cell_option_book() = default;
   cell_option_book(const vector<cell_option>& options);
-  cell_option_book(string title, const vector<cell_option>& options);
+  cell_option_book(wstring title, const vector<cell_option>& options);
   cell_option* at(int index); // 선택지 객체 주는 함수
 
-  string book_title() const { return this->_book_title; }
+  wstring book_title() const { return this->_book_title; }
   int size() const { return this->_options.size(); };
 };
 

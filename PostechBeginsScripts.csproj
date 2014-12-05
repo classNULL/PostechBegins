@@ -34,6 +34,7 @@
   <ItemGroup>
     <TypeScriptCompile Include="scripts\app.ts" />
     <TypeScriptCompile Include="scripts\colorizer.ts" />
+    <TypeScriptCompile Include="scripts\gamefunctions.ts" />
     <TypeScriptCompile Include="scripts\module.d.ts" />
     <TypeScriptCompile Include="scripts\screenapi.ts" />
     <TypeScriptCompile Include="submodules\domliner\domliner.d.ts" />

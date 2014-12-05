@@ -47,23 +47,7 @@ function colorize(maptable, month) {
         cellElement.style.display = "none";
     }
 }
-///<reference path="screenapi.ts" />
 ///<reference path="colorizer.ts" />
-window.screen.lock("landscape-primary");
-Module.srand(Date.now() & 65535);
-var gameCenter;
-var month = Module.Month.March;
-var charInCell;
-var gameProgressArea;
-var cover;
-var titleArea;
-window.addEventListener("DOMContentLoaded", function () {
-    charInCell = document.querySelector(".charInCell");
-    gameProgressArea = document.querySelector(".gameprogressarea");
-    titleArea = document.querySelector(".titlearea");
-    cover = document.querySelector(".cover");
-    createGameCenter(Module.Sexuality.Man);
-});
 function createGameCenter(gender) {
     gameCenter = new Module.GameCenter(gender);
     var gamechar = gameCenter.character;
@@ -101,6 +85,7 @@ function move(step) {
         colorize(gameCenter.map, month);
     }
     monthday.delete();
+    return position;
     //alert(position + "번 칸에 멈추었습니다. " + posstr + "입니다.");
 }
 function dateIndexToString(index) {
@@ -111,12 +96,22 @@ function dateIndexToString(index) {
 }
 function rollDice() {
     dice.classList.add("rotate");
-    cover.style.display = "";
+    coverScreen();
+    var optionBook;
     return timeoutPromise(500).then(function () {
         dice.classList.remove("rotate");
-        cover.style.display = "none";
         var step = gameCenter.dice();
-        move(step);
+        var position = move(step);
+        optionBook = gameCenter.map.at(position).callOption(gameCenter.character, 1);
+        setOptions(optionBook);
+        showOptions();
+        return waitOptionSelection();
+    }).then(function (index) {
+        optionBook.at(index).apply();
+        optionBook.delete();
+        hideOptions();
+        clearOptions();
+        uncoverScreen();
     });
 }
 function changeMonth(month) {
@@ -124,6 +119,63 @@ function changeMonth(month) {
     monthProgressDiv.classList.add("progressin");
     titleArea.textContent = month.value + "월";
 }
+/* cover */
+function coverScreen() {
+    cover.style.display = "";
+}
+function uncoverScreen() {
+    cover.style.display = "none";
+}
+/* options */
+function setOptions(options) {
+    for (var i = 0; i < options.size; i++) {
+        optionDisplay.appendChild(createOptionItemBlock(options.at(i), i));
+    }
+}
+function createOptionItemBlock(option, index) {
+    return DOMLiner.element("div", { class: "option-item", "data-option-index": index.toString() }, option.title);
+}
+function waitOptionSelection() {
+    var optionItemBlocks = optionDisplay.children;
+    return new Promise(function (resolve, reject) {
+        var waiter = function (ev) {
+            for (var i = 0; i < optionItemBlocks.length; i++)
+                optionItemBlocks[i].removeEventListener("click", waiter);
+            resolve(parseInt(ev.target.dataset["dataOptionIndex"]));
+        };
+        for (var i = 0; i < optionItemBlocks.length; i++)
+            optionItemBlocks[i].addEventListener("click", waiter);
+    });
+}
+function clearOptions() {
+    while (optionDisplay.firstChild)
+        optionDisplay.removeChild(optionDisplay.firstChild);
+}
+function showOptions() {
+    optionDisplay.style.display = "";
+}
+function hideOptions() {
+    optionDisplay.style.display = "none";
+}
+///<reference path="screenapi.ts" />
+///<reference path="gamefunctions.ts" />
+window.screen.lock("landscape-primary");
+Module.srand(Date.now() & 65535);
+var gameCenter;
+var month = Module.Month.March;
+var charInCell;
+var gameProgressArea;
+var cover;
+var titleArea;
+var optionDisplay;
+window.addEventListener("DOMContentLoaded", function () {
+    charInCell = document.querySelector(".charInCell");
+    gameProgressArea = document.querySelector(".gameprogressarea");
+    titleArea = document.querySelector(".titlearea");
+    cover = document.querySelector(".cover");
+    optionDisplay = document.querySelector(".option-display");
+    createGameCenter(Module.Sexuality.Man);
+});
 function timeoutPromise(time) {
     return new Promise(function (resolve, reject) {
         setTimeout(function () { return resolve(); }, time);
