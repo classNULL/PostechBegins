@@ -60,12 +60,12 @@ EMSCRIPTEN_BINDINGS(PostechBegins_Main) {
   class_<faceparty, base<special>>("FacePartyCell");
 
   class_<cell_option>("CellOption")
-    //.property("title", &cell_option::title)
-    //.property("applied", &cell_option::applied)
+    .property("title", &cell_option::title)
+    .property("applied", &cell_option::applied)
     .function("apply", &cell_option::apply);
 
   class_<cell_option_book>("CellOptionBook")
-    //.property("bookTitle", &cell_option_book::book_title)
+    .property("bookTitle", &cell_option_book::book_title)
     .property("size", &cell_option_book::size)
     .function("at", &cell_option_book::at, allow_raw_pointers());
 
