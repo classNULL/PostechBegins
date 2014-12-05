@@ -10,8 +10,9 @@ class MapTable {
 private:
   MapTable() = default;
   vector<cell*> _map;
-  static bool is_new_month(Month month, const vector<Month>& previous_list);
-  bool is_proper_new_event_day(MonthDay monthday, const vector<Month>& previous_monthes);
+  template<typename T>
+  static bool is_new(T month, const vector<T>& previous_list);
+  bool is_proper_new_event_day(MonthDay monthday, const vector<Month>& previous_monthes, const vector<int>& previous_indices);
   void install_events();
   void set_birthday();
 public:
@@ -30,5 +31,15 @@ public:
   int check_stop(int reference, int step);
   bool check_birth(int reference, int step);
 };
+
+template<typename T>
+bool MapTable::is_new(T item, const vector<T>& previous_list) {
+  for (const auto& previous: previous_list) {
+    if (item == previous)
+      return false;
+  }
+
+  return true;
+}
 
 #endif

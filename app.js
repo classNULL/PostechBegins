@@ -107,7 +107,8 @@ function rollDice() {
         showOptions();
         return waitOptionSelection();
     }).then(function (index) {
-        optionBook.at(index).apply();
+        var result = optionBook.at(index).apply();
+        optionResultDisplay.textContent = result;
         optionBook.delete();
         hideOptions();
         clearOptions();
@@ -118,6 +119,7 @@ function changeMonth(month) {
     var monthProgressDiv = gameProgressArea.children[month.value - 3];
     monthProgressDiv.classList.add("progressin");
     titleArea.textContent = month.value + "월";
+    document.documentElement.style.backgroundImage = 'url("UI/wallpaper/' + month.value + '.jpg")';
 }
 /* cover */
 function coverScreen() {
@@ -168,12 +170,14 @@ var gameProgressArea;
 var cover;
 var titleArea;
 var optionDisplay;
+var optionResultDisplay;
 window.addEventListener("DOMContentLoaded", function () {
     charInCell = document.querySelector(".charInCell");
     gameProgressArea = document.querySelector(".gameprogressarea");
     titleArea = document.querySelector(".titlearea");
     cover = document.querySelector(".cover");
     optionDisplay = document.querySelector(".option-display");
+    optionResultDisplay = document.querySelector(".option-result-display");
     createGameCenter(Module.Sexuality.Man);
 });
 function timeoutPromise(time) {

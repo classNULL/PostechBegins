@@ -84,11 +84,14 @@ declare module Module {
     class LectureEndPartyCell extends SpecialCell { }
     class MTCell extends SpecialCell { }
     class FacePartyCell extends SpecialCell { }
+    class Event1Cell extends SpecialCell { }
+    class Event2Cell extends SpecialCell { }
+    class Event3Cell extends SpecialCell { }
 
     class CellOption extends EmscriptenClass {
         title: string;
         applied: boolean;
-        apply(): void;
+        apply(): string;
     }
     class CellOptionBook extends EmscriptenClass {
         bookTitle: string;

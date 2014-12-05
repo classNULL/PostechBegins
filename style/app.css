@@ -23,6 +23,11 @@
   box-sizing: border-box;
 }
 
+@font-face {
+  font-family: OldBathhouse;
+  src: url(../UI/글꼴/a옛날목욕탕L.woff);
+}
+
 html {
   margin: 0;
   padding: 50px;
@@ -46,7 +51,7 @@ body {
   width: 1820px;
   height: 980px;
 
-  font-family: 'Segoe UI', sans-serif;
+  font-family: OldBathhouse, 'Malgun Gothic', 'Segoe UI', sans-serif;
   display: grid;
   grid-template-rows: 100px 3fr 2fr 100px;
   grid-template-columns: 400px 1fr 300px;
@@ -167,14 +172,17 @@ body {
 }
 
 .option-item {
-  width: 300px;
-  height: 300px;
+  width: 200px;
+  height: 200px;
   background-color: #FF937E;
   margin: 20px;
   
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.option-item:hover {
+  background-color: #ef7a63;
 }
 
 .swordbar {

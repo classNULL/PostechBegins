@@ -17,13 +17,14 @@ var gameProgressArea: HTMLDivElement;
 var cover: HTMLDivElement;
 var titleArea: HTMLDivElement;
 var optionDisplay: HTMLDivElement;
+var optionResultDisplay: HTMLDivElement;
 window.addEventListener("DOMContentLoaded", () => {
     charInCell = <HTMLDivElement>document.querySelector(".charInCell");
     gameProgressArea = <HTMLDivElement>document.querySelector(".gameprogressarea");
     titleArea = <HTMLDivElement>document.querySelector(".titlearea");
     cover = <HTMLDivElement>document.querySelector(".cover");
     optionDisplay = <HTMLDivElement>document.querySelector(".option-display");
-
+    optionResultDisplay = <HTMLDivElement>document.querySelector(".option-result-display");
 
     createGameCenter(Module.Sexuality.Man);
 });

@@ -42,6 +42,11 @@
     .map > div[data-cell-type=special] {
       background-color: #34CC93;
     }
+    .map > div.option-result-display { 
+      grid-row: 4; grid-column: 1 / span 7; /* grid-area: 7 / 8; */
+      font-size: 35px;
+      color: black;
+    }
 
   .map .charInCell {
     background-size: contain;

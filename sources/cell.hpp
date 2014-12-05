@@ -81,7 +81,6 @@ class special :public cell{//개총, 종총, MT 등 반드시 멈춰야하는 �
 public:
    special(){ stop = true; }
    cell_option_book call_option(hero* _hero,int day);
-   virtual string get_cell_name() const { return "special"; };
 };
 class lecstartparty :public special{//개총
 public:

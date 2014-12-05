@@ -74,7 +74,8 @@ function rollDice() {
             return waitOptionSelection();
         })
         .then((index) => {
-            optionBook.at(index).apply();
+            var result = optionBook.at(index).apply();
+            optionResultDisplay.textContent = result;
             optionBook.delete();
 
             hideOptions();
@@ -87,6 +88,7 @@ function changeMonth(month: Module.Month) {
     var monthProgressDiv = <HTMLDivElement>gameProgressArea.children[month.value - 3];
     monthProgressDiv.classList.add("progressin");
     titleArea.textContent = month.value + "월";
+    document.documentElement.style.backgroundImage = 'url("UI/wallpaper/' + month.value + '.jpg")';
 }
 
 /* cover */

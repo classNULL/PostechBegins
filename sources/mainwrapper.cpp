@@ -48,6 +48,7 @@ EMSCRIPTEN_BINDINGS(PostechBegins_Main) {
 
   class_<cell>("Cell")
     .property("isStop", &cell::stop_cell)
+    .property("cellName", &cell::get_cell_name)
     .function("callOption", &cell::call_option, allow_raw_pointers());
   class_<normal, base<cell>>("NormalCell");
   class_<weekend, base<cell>>("WeekendCell");
@@ -67,6 +68,9 @@ EMSCRIPTEN_BINDINGS(PostechBegins_Main) {
   class_<lecendparty, base<special>>("LectureEndPartyCell");
   class_<mt, base<special>>("MTCell");
   class_<faceparty, base<special>>("FacePartyCell");
+  class_<eve_1, base<special>>("Event1Cell");
+  class_<eve_2, base<special>>("Event2Cell");
+  class_<eve_3, base<special>>("Event3Cell");
 
   class_<cell_option>("CellOption")
     .property("title", &cell_option::title)
