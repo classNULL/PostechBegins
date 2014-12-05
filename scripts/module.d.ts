@@ -38,6 +38,15 @@ declare module Module {
         var Man: Sexuality;
         var Woman: Sexuality;
     }
+    interface PersonalStatus {
+        energy: number;
+        relationship: number;
+        love: number;
+        study: number;
+        selfImprovement: number;
+        stress: number;
+    }
+
     class GameCenter extends EmscriptenClass {
         constructor(sex: Sexuality);
 
@@ -47,7 +56,6 @@ declare module Module {
         map: MapTable;
 
         dice(): number;
-        score(study: number, relationship: number, improvement: number): number;
         move(step: number): number;
     }
 
@@ -76,16 +84,20 @@ declare module Module {
     class MTCell extends SpecialCell { }
     class FacePartyCell extends SpecialCell { }
 
+    class CellOption extends EmscriptenClass {
+        title: string;
+        applied: boolean;
+        apply(): void;
+    }
+    class CellOptionBook extends EmscriptenClass {
+        bookTitle: string;
+        size: number;
+        at(index: number): CellOption;
+    }
+
     class Hero extends EmscriptenClass {
-        constructor(maxLove: number, maxEnergy: number, maxRelationship: number, maxSelfImprovement: number, maxStudy: number, sex: Sexuality);
-        love: number;
-        energy: number;
-        relationship: number;
-        selfImprovement: number;
-        study: number;
-        MAX_ENERGY: number;
-        MAX_LOVE: number;
-        MAX_RELATIONSHIP: number;
-        MAX_SELFIMPROVEMENT: number;
+        constructor(maxStatus: PersonalStatus, sex: Sexuality);
+        status: PersonalStatus;
+        maxStatus: PersonalStatus;
     }
 }

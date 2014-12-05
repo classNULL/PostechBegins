@@ -24,6 +24,14 @@ EMSCRIPTEN_BINDINGS(PostechBegins_Main) {
     .value("Man", sexuality::man)
     .value("Woman", sexuality::woman);
 
+  value_object<PersonalStatus>("PersonalStatus")
+    .field("energy", &PersonalStatus::energy)
+    .field("relationship", &PersonalStatus::relationship)
+    .field("love", &PersonalStatus::love)
+    .field("study", &PersonalStatus::study)
+    .field("selfImprovement", &PersonalStatus::self_develop)
+    .field("stress", &PersonalStatus::stress);
+
   class_<GameCenter>("GameCenter")
     .constructor<sexuality>()
     .property("map", &GameCenter::get_map)
