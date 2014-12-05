@@ -22,18 +22,18 @@ public:
   void change_status(PersonalStatus status_change, int day);
   void change_status(PersonalStatus status_change, PersonalStatus title_effect, int day);
 	void up_event();
-  const PersonalStatus& max_status() const;
-  const PersonalStatus& status() const;
+  const PersonalStatus& max_status() const { return this->MAX_STATUS; }
+  const PersonalStatus& status() const { return this->current_status; }
   bool exhausted() const;
 
   void take_exam(bool is_spring);
   float get_semester_grade(bool is_spring) const;
   float get_average_grade() const;
 
-	sexuality get_sexuality() const;
-  const TitleBook& get_title_book() const;
-  TitleBook& get_title_book();
-  int get_cleared_event();
+	sexuality get_sexuality() const { return this->sex; };
+  const TitleBook& get_title_book() const { return this->title_book; };
+  TitleBook* get_title_book_pointer() { return &(this->title_book); };
+  int get_cleared_event() { return this->cleared_event; }
 private:
   const PersonalStatus MAX_STATUS;
   PersonalStatus current_status = {

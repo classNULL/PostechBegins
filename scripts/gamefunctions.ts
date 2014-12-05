@@ -120,7 +120,7 @@ function waitOptionSelection() {
         var waiter = (ev: PointerEvent) => {
             for (var i = 0; i < optionItemBlocks.length; i++)
                 optionItemBlocks[i].removeEventListener("click", waiter);
-            resolve(parseInt((<HTMLElement>ev.target).dataset["dataOptionIndex"]));
+            resolve(parseInt((<HTMLElement>ev.target).dataset["optionIndex"]));
         };
         for (var i = 0; i < optionItemBlocks.length; i++)
             optionItemBlocks[i].addEventListener("click", waiter);

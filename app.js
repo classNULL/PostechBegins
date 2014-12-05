@@ -144,7 +144,7 @@ function waitOptionSelection() {
         var waiter = function (ev) {
             for (var i = 0; i < optionItemBlocks.length; i++)
                 optionItemBlocks[i].removeEventListener("click", waiter);
-            resolve(parseInt(ev.target.dataset["dataOptionIndex"]));
+            resolve(parseInt(ev.target.dataset["optionIndex"]));
         };
         for (var i = 0; i < optionItemBlocks.length; i++)
             optionItemBlocks[i].addEventListener("click", waiter);

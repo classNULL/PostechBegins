@@ -36,7 +36,7 @@ cell_option_book cell::call_option_special(hero* _hero, int day) {
     options.push_back(cell_option(L"연애하기", [_hero, day]() {
         bool is_inLove = _hero->get_title_book().has_title("couple");
         if (is_inLove){
-            _hero->get_title_book().remove_title("couple");
+            _hero->get_title_book_pointer()->remove_title("couple");
             _hero->change_status(
             { .energy = _hero->get_energy_consuming_rate(), .study = -4, .relationship = -2, .self_develop = 0, .love = -15, .stress = 15 },
             day);
@@ -138,7 +138,7 @@ cell_option_book weekend::call_option_special(hero* _hero, int day){
     options.push_back(cell_option(L"연애하기", [_hero, day](){
         bool is_inLove = _hero->get_title_book().has_title("couple");
         if (is_inLove){
-            _hero->get_title_book().remove_title("couple");
+            _hero->get_title_book_pointer()->remove_title("couple");
             _hero->change_status(
             { .energy = _hero->get_energy_consuming_rate(), .study = -4, .relationship = -2, .self_develop = 0, .love = -15, .stress = 15 },
             day);
@@ -544,7 +544,7 @@ cell_option_book festival::call_option_special(hero* _hero, int day){
     options.push_back(cell_option(L"연애하기", [_hero, day](){
         bool is_inLove = _hero->get_title_book().has_title("couple");
         if (is_inLove){
-            _hero->get_title_book().remove_title("couple");
+            _hero->get_title_book_pointer()->remove_title("couple");
             _hero->change_status(
             { .energy = _hero->get_energy_consuming_rate(), .study = -4, .relationship = -2, .self_develop = 0, .love = -15, .stress = 15 },
             day);
@@ -647,7 +647,7 @@ cell_option_book dance::call_option_special(hero* _hero, int day) {
     options.push_back(cell_option(L"연애하기", [_hero, day]() {
         bool is_inLove = _hero->get_title_book().has_title("couple");
         if (is_inLove){
-            _hero->get_title_book().remove_title("couple");
+            _hero->get_title_book_pointer()->remove_title("couple");
             _hero->change_status(
             { .energy = _hero->get_energy_consuming_rate(), .study = -4, .relationship = -2, .self_develop = 0, .love = -15, .stress = 15 },
             day);

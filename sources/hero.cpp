@@ -66,32 +66,38 @@ void hero::recover_energy() {
 }
 
 void hero::change_energy(float energy, int day){ // energy status 변화
-	this->current_status.energy = max(0.0f, min(MAX_STATUS.energy, energy * day));
+	auto result = this->current_status.energy + energy * day;
+	this->current_status.energy = max(0.0f, min(MAX_STATUS.energy, result));
 }
 void hero::change_love(float love, int day){ // love status 변화
-	this->current_status.love = max(0.0f, min(MAX_STATUS.love, love * day));
+	auto result = this->current_status.love + love * day;
+	this->current_status.love = max(0.0f, min(MAX_STATUS.love, result));
 }
 void hero::change_relationship(float relationship, int day){ //relationship status 변화
-	this->current_status.relationship = max(0.0f, min(MAX_STATUS.relationship, relationship * day));
+	auto result = this->current_status.relationship + relationship * day;
+	this->current_status.relationship = max(0.0f, min(MAX_STATUS.relationship, result));
 }
 void hero::change_self_develop(float self_develop, int day){
-	this->current_status.self_develop = max(0.0f, min(MAX_STATUS.self_develop, self_develop * day));
+	auto result = this->current_status.self_develop + self_develop * day;
+	this->current_status.self_develop = max(0.0f, min(MAX_STATUS.self_develop, result));
 }
 void hero::change_study(float study, int day){
-	this->current_status.study = max(0.0f, min(MAX_STATUS.study, study * day));
+	auto result = this->current_status.study + study * day;
+	this->current_status.study = max(0.0f, min(MAX_STATUS.study, result));
 }
 void hero::change_stress(float stress,int day){
-	this->current_status.stress = max(0.0f, min(MAX_STATUS.stress, stress * day));
+	auto result = this->current_status.stress + stress * day;
+	this->current_status.stress = max(0.0f, min(MAX_STATUS.stress, result));
 }
 void hero::change_status(PersonalStatus status_change, int day) {
-	clog << "'this' pointer:" << this << endl;
-	clog << "Applying change... Energy: " << this->status().energy << endl;
-	this->current_status = this->current_status.plus(status_change.multiply(day));
-	clog << "Applied. Energy: " << this->status().energy << endl;
+	this->change_energy(status_change.energy, day);
+	this->change_study(status_change.study, day);
+	this->change_relationship(status_change.relationship, day);
+	this->change_self_develop(status_change.self_develop, day);
+	this->change_love(status_change.love, day);
+	this->change_stress(status_change.stress, day);
 }
 void hero::change_status(PersonalStatus status_change, PersonalStatus title_effect, int day) {
-	clog << "'this' pointer:" << this << endl;
-	clog << "Applying change with title... Energy: " << this->status().energy << endl;
 	if (status_change.energy > 0)
 		this->change_energy(status_change.energy * title_effect.energy,day);
 	else
@@ -101,28 +107,8 @@ void hero::change_status(PersonalStatus status_change, PersonalStatus title_effe
 	this->change_self_develop(status_change.self_develop * title_effect.self_develop, day);
 	this->change_love(status_change.love * title_effect.love, day);
 	this->change_stress(status_change.stress * title_effect.stress, day);
-	clog << "Applied. Energy: " << this->status().energy << endl;
 }
 
-const PersonalStatus& hero::max_status() const {
-	return this->MAX_STATUS;
-}
-const PersonalStatus& hero::status() const {
-	return this->current_status;
-}
 bool hero::exhausted() const {
 	return (this->current_status.energy == 0);
-}
-
-sexuality hero::get_sexuality() const {
-   return sex;
-}
-const TitleBook& hero::get_title_book() const {
-	return this->title_book;
-}
-TitleBook& hero::get_title_book() {
-	return this->title_book;
-}
-int hero::get_cleared_event(){
-	return this->cleared_event;
 }

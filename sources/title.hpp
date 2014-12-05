@@ -41,13 +41,13 @@ public:
 class TitleBook {
 private:
   map<string, TitleEffect> titles;
-  TitleEffect total_title_effect;
+  TitleEffect total_title_effect = TitleEffect::get_base();
   void calc_total_title_effect();
 public:
   bool has_title(string) const;
   void add_title(string);
   void remove_title(string);
-  TitleEffect get_total_title_effect() {
+  const TitleEffect get_total_title_effect() const {
     return this->total_title_effect;
   };
 };

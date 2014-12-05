@@ -86,5 +86,21 @@ EMSCRIPTEN_BINDINGS(PostechBegins_Main) {
   class_<hero>("Hero")
     .constructor<PersonalStatus, sexuality>()
     .property("status", &hero::status)
-    .property("maxStatus", &hero::max_status);
+    .property("maxStatus", &hero::max_status)
+    .property("titleBook", &hero::get_title_book)
+    .function("mutableTitleBook", &hero::get_title_book_pointer, allow_raw_pointers());
+
+  value_object<TitleEffect>("TitleEffect")
+    .field("alcohol", &TitleEffect::alcohol)
+    .field("study", &TitleEffect::study)
+    .field("circle", &TitleEffect::circle)
+    .field("love", &TitleEffect::love)
+    .field("rest", &TitleEffect::rest)
+    .field("home", &TitleEffect::home);
+
+  class_<TitleBook>("TitleBook")
+    .property("totalTitleEffect", &TitleBook::get_total_title_effect)
+    .function("hasTitle", &TitleBook::has_title)
+    .function("addTitle", &TitleBook::add_title)
+    .function("removeTitle", &TitleBook::remove_title);
 }
