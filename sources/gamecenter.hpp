@@ -41,17 +41,9 @@ public:
 
 public:
 	void set_start_status();
-	float get_energy_increase();
-	float get_love_increase();
-	float get_relationship_increase();
-	float get_self_develop_increase();
-	float get_study_increase();
+	PersonalStatus get_status_increase();
 private:
-	float start_energy;
-	float start_love;
-	float start_relationship;
-	float start_self_develop;
-	float start_study;
+  PersonalStatus start_status;
 };
 
 #endif

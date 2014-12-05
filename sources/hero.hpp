@@ -10,7 +10,7 @@
 #include "title.hpp"
 class hero{
 public:
-  hero(float max_love, float max_energy, float max_relationship, float max_selfdevelop, float max_study, float max_stress, sexuality sex);
+  hero(const PersonalStatus& status_max, sexuality sex);
   float get_energy_consuming_rate();
   void recover_energy();
   void change_energy(float, int);
@@ -19,38 +19,34 @@ public:
 	void change_self_develop(float, int);
 	void change_study(float, int);//status 변화시키는 method
   void change_stress(float, int);
+  void change_status(PersonalStatus status_change, int day);
+  void change_status(PersonalStatus status_change, PersonalStatus title_effect, int day);
 	void up_event();
-	float get_MAX_ENERGY() const;
-	float get_MAX_LOVE() const;
-	float get_MAX_RELATIONSHIP() const;
-	float get_MAX_SELF_DEVELOP() const;
-  float get_MAX_STRESS();
-	float get_study() const;
-	float get_self_develop() const;
-	float get_relationship() const;
-	float get_energy() const;
-	float get_love() const; //status return 받는 method
-  float get_stress() const;
+  const PersonalStatus& max_status() const;
+  const PersonalStatus& status() const;
+  bool exhausted() const;
+
+  void take_exam(bool is_spring);
+  float get_semester_grade(bool is_spring) const;
   float get_average_grade() const;
-  void take_exam();
+
 	sexuality get_sexuality() const;
   const TitleBook& get_title_book() const;
   TitleBook& get_title_book();
   int get_cleared_event();
 private:
-	const float MAX_ENERGY;
-	const float MAX_LOVE;
-	const float MAX_RELATIONSHIP;
-	const float MAX_SELF_DEVELOP;
-	const float MAX_STUDY;
-  const float MAX_STRESS;
-	float energy; // 만약 체력이 0 일경우 다른 행동을 하지 못함
-	float love;
-	float relationship = 30;
-	float self_develop = 30;
-	float study = 100;
-  float stress = 0;
-	vector<float> grades; // 시험 기간에 결정
+  const PersonalStatus MAX_STATUS;
+  PersonalStatus current_status = {
+    .energy = 0,
+    .love = 0,
+
+    .relationship = 30,
+    .self_develop = 30,
+    .study = 100,
+    .stress = 0
+  };
+	vector<float> spring_grades; // 시험 기간에 결정
+  vector<float> autumn_grades; // 시험 기간에 결정
 	sexuality sex;
   TitleBook title_book;
   int cleared_event = 0;

@@ -14,8 +14,10 @@ string cell_option::apply() {
     throw runtime_error("이미 적용한 옵션을 다시 적용하면 안 됩니다.");
   this->_applied = true;
 
-  if (!this->_has_result_message)
-    return this->_silent_changer();
+  if (!this->_has_result_message) {
+    this->_silent_changer();
+    return "";
+  }
   else
     return this->_tweeting_changer();
 }

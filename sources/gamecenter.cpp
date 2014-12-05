@@ -374,9 +374,9 @@
 
 GameCenter::GameCenter(sexuality sex) {
   if (sex == sexuality::man)
-    this->_character = new hero(100, 100, 100, 100, 100, 100, sex);
+    this->_character = new hero({ .energy = 100, .study = 100, .relationship = 100, .self_develop = 100, .love = 100, .stress = 100 }, sex);
   else if (sex == sexuality::woman) // woman
-    this->_character = new hero(100, 80, 90, 100, 100, 100, sex);
+    this->_character = new hero({ .energy = 80, .study = 100, .relationship = 90, .self_develop = 100, .love = 100, .stress = 100 }, sex);
 }
 
 int GameCenter::move(int step){
@@ -406,25 +406,9 @@ int GameCenter::move(int step){
 // }
 
 void GameCenter::set_start_status(){ //매 달 첫 날의 status 저장
-	start_energy=_character->get_energy();
-	start_love=_character->get_love();
-	start_relationship=_character->get_relationship();
-	start_self_develop=_character->get_self_develop();
-	start_study=_character->get_study();
+  start_status=_character->status();
 }
 //현재의 status - 과거의 status
-float GameCenter::get_energy_increase(){
-	return _character->get_energy()-start_energy;
-}
-float GameCenter::get_love_increase(){
-	return _character->get_love()-start_love;
-}
-float GameCenter::get_relationship_increase(){
-	return _character->get_relationship()-start_relationship;
-}
-float GameCenter::get_self_develop_increase(){
-	return _character->get_self_develop()-start_self_develop;
-}
-float GameCenter::get_study_increase(){
-	return _character->get_study()-start_study;
+PersonalStatus GameCenter::get_status_increase() {
+  return _character->status().minus(start_status);
 }
