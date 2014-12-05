@@ -65,6 +65,7 @@ declare module Module {
 
     class Cell extends EmscriptenClass {
         isStop: boolean;
+        callOption(hero: Hero, day: number): CellOptionBook;
     }
     class NormalCell extends Cell { }
     class WeekendCell extends Cell { }

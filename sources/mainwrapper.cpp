@@ -47,7 +47,8 @@ EMSCRIPTEN_BINDINGS(PostechBegins_Main) {
     .function("at", &MapTable::at, allow_raw_pointers());
 
   class_<cell>("Cell")
-    .property("isStop", &cell::stop_cell);
+    .property("isStop", &cell::stop_cell)
+    .function("callOption", &cell::call_option, allow_raw_pointers());
   class_<normal, base<cell>>("NormalCell");
   class_<weekend, base<cell>>("WeekendCell");
   class_<march, base<cell>>("MarchCell");
