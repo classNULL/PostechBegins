@@ -84,9 +84,14 @@ void hero::change_stress(float stress,int day){
 	this->current_status.stress = max(0.0f, min(MAX_STATUS.stress, stress * day));
 }
 void hero::change_status(PersonalStatus status_change, int day) {
+	clog << "'this' pointer:" << this << endl;
+	clog << "Applying change... Energy: " << this->status().energy << endl;
 	this->current_status = this->current_status.plus(status_change.multiply(day));
+	clog << "Applied. Energy: " << this->status().energy << endl;
 }
 void hero::change_status(PersonalStatus status_change, PersonalStatus title_effect, int day) {
+	clog << "'this' pointer:" << this << endl;
+	clog << "Applying change with title... Energy: " << this->status().energy << endl;
 	if (status_change.energy > 0)
 		this->change_energy(status_change.energy * title_effect.energy,day);
 	else
@@ -96,6 +101,7 @@ void hero::change_status(PersonalStatus status_change, PersonalStatus title_effe
 	this->change_self_develop(status_change.self_develop * title_effect.self_develop, day);
 	this->change_love(status_change.love * title_effect.love, day);
 	this->change_stress(status_change.stress * title_effect.stress, day);
+	clog << "Applied. Energy: " << this->status().energy << endl;
 }
 
 const PersonalStatus& hero::max_status() const {

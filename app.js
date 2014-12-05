@@ -50,25 +50,16 @@ function colorize(maptable, month) {
 ///<reference path="colorizer.ts" />
 function createGameCenter(gender) {
     gameCenter = new Module.GameCenter(gender);
-    var gamechar = gameCenter.character;
-    //alert(
-    //    "love: " + gamechar.love
-    //    + "\r\nenergy: " + gamechar.energy
-    //    + "\r\nrelationship: " + gamechar.relationship
-    //    + "\r\nselfImprovement: " + gamechar.selfImprovement
-    //    + "\r\nstudy: " + gamechar.study
-    //    + "\r\nMAX_ENERGY: " + gamechar.MAX_ENERGY
-    //    + "\r\nMAX_LOVE: " + gamechar.MAX_LOVE
-    //    + "\r\nMAX_RELATIONSHIP: " + gamechar.MAX_RELATIONSHIP
-    //    + "\r\nMAX_SELFIMPROVEMENT: " + gamechar.MAX_SELFIMPROVEMENT);
     if (gender == Module.Sexuality.Man) {
-        face.style.backgroundImage = charInCell.style.backgroundImage = "url(UI/캐릭터/남자/남자1.png)";
+        faceArea.style.backgroundImage = charInCell.style.backgroundImage = "url(UI/캐릭터/남자/남자1.png)";
     }
     else if (gender == Module.Sexuality.Woman) {
-        face.style.backgroundImage = charInCell.style.backgroundImage = "url(UI/캐릭터/여자/여자1.png)";
+        faceArea.style.backgroundImage = charInCell.style.backgroundImage = "url(UI/캐릭터/여자/여자1.png)";
     }
     moveCharacter(1);
     colorize(gameCenter.map, Module.Month.March);
+    reflectMaxStatus(gameCenter.mutableCharacter());
+    reflectStatus(gameCenter.mutableCharacter());
 }
 function moveCharacter(day) {
     charInCell.classList.remove("cell" + charInCell.dataset["day"]);
@@ -102,7 +93,7 @@ function rollDice() {
         dice.classList.remove("rotate");
         var step = gameCenter.dice();
         var position = move(step);
-        optionBook = gameCenter.map.at(position).callOption(gameCenter.character, 1);
+        optionBook = gameCenter.map.at(position).callOption(gameCenter.mutableCharacter(), 1);
         setOptions(optionBook);
         showOptions();
         return waitOptionSelection();
@@ -110,6 +101,7 @@ function rollDice() {
         var result = optionBook.at(index).apply();
         optionResultDisplay.textContent = result;
         optionBook.delete();
+        reflectStatus(gameCenter.mutableCharacter());
         hideOptions();
         clearOptions();
         uncoverScreen();
@@ -127,6 +119,15 @@ function coverScreen() {
 }
 function uncoverScreen() {
     cover.style.display = "none";
+}
+/* status */
+function reflectStatus(character) {
+    stressDisplayBar.value = character.status.stress;
+    energyDisplayBar.value = character.status.energy;
+}
+function reflectMaxStatus(character) {
+    stressDisplayBar.max = character.maxStatus.stress;
+    energyDisplayBar.max = character.maxStatus.energy;
 }
 /* options */
 function setOptions(options) {
@@ -169,12 +170,14 @@ var charInCell;
 var gameProgressArea;
 var cover;
 var titleArea;
+var faceArea;
 var optionDisplay;
 var optionResultDisplay;
 window.addEventListener("DOMContentLoaded", function () {
     charInCell = document.querySelector(".charInCell");
     gameProgressArea = document.querySelector(".gameprogressarea");
     titleArea = document.querySelector(".titlearea");
+    faceArea = document.querySelector(".facearea");
     cover = document.querySelector(".cover");
     optionDisplay = document.querySelector(".option-display");
     optionResultDisplay = document.querySelector(".option-result-display");

@@ -66,6 +66,14 @@ body {
 .facearea {
   grid-row: 2;
   grid-column: 1;
+
+  padding: 20px;
+  background-origin: content-box;
+  background-clip: content-box;
+  background-repeat: no-repeat;
+  background-color: rgba(187, 237, 242, 0.5);
+  background-size: cover;
+  background-position: top;
 }
 
 .inner {

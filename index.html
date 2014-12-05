@@ -13,24 +13,25 @@
   <!-- submodules -->
   <script src="submodules/promise/Promise.js"></script>
   <script src="submodules/domliner/domliner.js"></script>
-  <script src="submodules/gridlayout/bin/css-polyfills.js"></script>
+  <script>
+    if (!("grid" in document.documentElement.style))
+      document.head.appendChild(DOMLiner.element("script", { src: "submodules/gridlayout/bin/css-polyfills.js" }));
+  </script>
   
   <!-- app scripts -->
   <script src="app.js"></script>
 </head>
 <body>
   <div class="titlearea">3월</div>
-  <div class="facearea">
-    <div class="inner faceinner" id="face">
-    </div>
+  <div class="facearea" id="face">
   </div>
   <div class="statusarea">
     <div class="inner">
       학점: <br /><br />
       스트레스: <br />
-      <progress class="swordbar" value="30" max="100"></progress><br />
+      <progress id="stressDisplayBar" class="swordbar" value="30" max="100"></progress><br />
       체력: <br />
-      <progress class="swordbar" value="30" max="100"></progress>
+      <progress id="energyDisplayBar" class="swordbar" value="30" max="100"></progress>
     </div>
   </div>
 

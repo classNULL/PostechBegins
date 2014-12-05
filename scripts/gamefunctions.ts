@@ -2,30 +2,21 @@
 
 function createGameCenter(gender: Module.Sexuality) {
     gameCenter = new Module.GameCenter(gender);
-    var gamechar = gameCenter.character;
-    //alert(
-    //    "love: " + gamechar.love
-    //    + "\r\nenergy: " + gamechar.energy
-    //    + "\r\nrelationship: " + gamechar.relationship
-    //    + "\r\nselfImprovement: " + gamechar.selfImprovement
-    //    + "\r\nstudy: " + gamechar.study
-    //    + "\r\nMAX_ENERGY: " + gamechar.MAX_ENERGY
-    //    + "\r\nMAX_LOVE: " + gamechar.MAX_LOVE
-    //    + "\r\nMAX_RELATIONSHIP: " + gamechar.MAX_RELATIONSHIP
-    //    + "\r\nMAX_SELFIMPROVEMENT: " + gamechar.MAX_SELFIMPROVEMENT);
 
     if (gender == Module.Sexuality.Man) {
-        face.style.backgroundImage
+        faceArea.style.backgroundImage
         = charInCell.style.backgroundImage
         = "url(UI/캐릭터/남자/남자1.png)";
     }
     else if (gender == Module.Sexuality.Woman) {
-        face.style.backgroundImage
+        faceArea.style.backgroundImage
         = charInCell.style.backgroundImage
         = "url(UI/캐릭터/여자/여자1.png)";
     }
     moveCharacter(1);
     colorize(gameCenter.map, Module.Month.March);
+    reflectMaxStatus(gameCenter.mutableCharacter());
+    reflectStatus(gameCenter.mutableCharacter());
 }
 
 function moveCharacter(day: number) {
@@ -68,7 +59,7 @@ function rollDice() {
             var step = gameCenter.dice();
             var position = move(step);
 
-            optionBook = gameCenter.map.at(position).callOption(gameCenter.character, 1);
+            optionBook = gameCenter.map.at(position).callOption(gameCenter.mutableCharacter(), 1);
             setOptions(optionBook);
             showOptions();
             return waitOptionSelection();
@@ -77,6 +68,7 @@ function rollDice() {
             var result = optionBook.at(index).apply();
             optionResultDisplay.textContent = result;
             optionBook.delete();
+            reflectStatus(gameCenter.mutableCharacter());
 
             hideOptions();
             clearOptions();
@@ -98,6 +90,18 @@ function coverScreen() {
 }
 function uncoverScreen() {
     cover.style.display = "none";
+}
+
+/* status */
+
+function reflectStatus(character: Module.Hero) {
+    stressDisplayBar.value = character.status.stress;
+    energyDisplayBar.value = character.status.energy;
+}
+
+function reflectMaxStatus(character: Module.Hero) {
+    stressDisplayBar.max = character.maxStatus.stress;
+    energyDisplayBar.max = character.maxStatus.energy;
 }
 
 /* options */

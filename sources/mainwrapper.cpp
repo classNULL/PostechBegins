@@ -37,6 +37,7 @@ EMSCRIPTEN_BINDINGS(PostechBegins_Main) {
     .property("map", &GameCenter::get_map)
     .property("currentPosition", &GameCenter::get_current_position)
     .property("character", &GameCenter::get_character)
+    .function("mutableCharacter", &GameCenter::get_character_pointer, allow_raw_pointers())
     .function("dice", &GameCenter::dice)
     .function("move", &GameCenter::move);
 
@@ -85,5 +86,5 @@ EMSCRIPTEN_BINDINGS(PostechBegins_Main) {
   class_<hero>("Hero")
     .constructor<PersonalStatus, sexuality>()
     .property("status", &hero::status)
-    .property("max_status", &hero::max_status);
+    .property("maxStatus", &hero::max_status);
 }

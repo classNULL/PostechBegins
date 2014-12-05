@@ -55,6 +55,7 @@ declare module Module {
         character: Hero;
         map: MapTable;
 
+        mutableCharacter(): Hero;
         dice(): number;
         move(step: number): number;
     }

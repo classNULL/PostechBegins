@@ -25,6 +25,7 @@ private:
   hero* _character;
 public:
   const hero& get_character() const { return *this->_character; }
+  hero* get_character_pointer() { return this->_character; }
 
 private:
   MapTable _map = MapTable::generate_default();
