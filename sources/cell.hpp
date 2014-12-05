@@ -65,7 +65,7 @@ public:
    cell_option_book call_option(hero* _hero,int day);
    cell_option_book call_option_special(hero* _hero, int day);
    cell_option_book call_option_zero(hero* _hero, int day);
-   string get_cell_name() const { return "festival"; };
+   virtual string get_cell_name() const { return "festival"; };
 };
 class poka :public festival{//포카전
 public:
@@ -85,7 +85,7 @@ class special :public cell{//개총, 종총, MT 등 반드시 멈춰야하는 �
 public:
    special(){ stop = true; }
    cell_option_book call_option(hero* _hero,int day);
-   string get_cell_name() const { return "special"; };
+   virtual string get_cell_name() const { return "special"; };
 };
 class lecstartparty :public special{//개총
 public:
