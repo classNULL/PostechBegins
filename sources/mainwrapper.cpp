@@ -73,6 +73,10 @@ EMSCRIPTEN_BINDINGS(PostechBegins_Main) {
   class_<bunban_lecend, base<special>>("BunbanLectureEndPartyCell");
   class_<bunban_mt, base<special>>("BunbanMTCell");
   class_<bunban_face, base<special>>("BunbanFacePartyCell");
+  class_<dept_lecstart, base<special>>("DeptLectureStartPartyCell");
+  class_<dept_lecend, base<special>>("DeptLectureEndPartyCell");
+  class_<dept_mt, base<special>>("DeptMtCell");
+  class_<dept_face, base<special>>("DeptFacePartyCell");
   class_<eve_1, base<special>>("Event1Cell");
   class_<eve_2, base<special>>("Event2Cell");
   class_<eve_3, base<special>>("Event3Cell");
