@@ -105,15 +105,18 @@ body {
   flex-direction: column-reverse;
   align-items: center;
 }
+  .dicearea .dice {
+    width: 150px;
+    height: 174px;
+  }
   .dicearea .dicebutton {
     margin-left: 20px;
     width: 250px;
     height: 290px;
   }
-  .dicearea .dice {
-    width: 150px;
-    height: 174px;
-  }
+    .dicearea .dicebutton:hover {
+      background-image: url(../UI/UI/기타/버튼.png);
+    }
 
 .flagarea {
   grid-row: 4;

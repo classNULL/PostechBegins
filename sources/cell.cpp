@@ -683,3 +683,14 @@ cell_option_book dance::call_option_special(hero* _hero, int day) {
 
     return cell_option_book(options);
 }
+
+cell_option_book vacation::call_option(hero* _hero, int day){
+  vector<cell_option> options;
+  options.push_back(cell_option(L"놀기", [_hero, day]() {
+    _hero->change_status(
+    { .energy = 0, .study = 0, .relationship = 0, .self_develop = 0, .love = 0, .stress = -100 },
+    day);
+    _hero->recover_energy();
+  }));
+  return cell_option_book(options);
+}

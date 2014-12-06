@@ -134,7 +134,7 @@ public:
 class vacation :public cell{//방학
 public:
    vacation(){skip=true;}
-   cell_option_book call_option(hero* _hero, int day) { return cell_option_book(); }
+   cell_option_book call_option(hero* _hero, int day);
    string get_cell_name() const { return "vacation"; };
    wstring get_cell_message() const { return L"야 방학이다!"; }
 };

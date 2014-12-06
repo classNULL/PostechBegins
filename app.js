@@ -108,9 +108,11 @@ function rollDice() {
     });
 }
 function changeMonth(month) {
+    for (var i = currentMonth.value + 1; i <= month.value; i++) {
+        var monthProgressDiv = gameProgressArea.children[i - 3];
+        monthProgressDiv.classList.add("progressin");
+    }
     currentMonth = month;
-    var monthProgressDiv = gameProgressArea.children[month.value - 3];
-    monthProgressDiv.classList.add("progressin");
     titleArea.textContent = month.value + "월";
     document.documentElement.style.backgroundImage = 'url("UI/wallpaper/' + month.value + '.jpg")';
     colorize(gameCenter.map, month);
@@ -185,6 +187,7 @@ window.addEventListener("DOMContentLoaded", function () {
     cover = document.querySelector(".cover");
     optionResultDisplay = document.querySelector(".option-result-display");
     createGameCenter(Module.Sexuality.Man);
+    reflectDate(gameCenter.currentPosition);
 });
 function timeoutPromise(time) {
     return new Promise(function (resolve, reject) {

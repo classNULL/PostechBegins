@@ -32,6 +32,7 @@ window.addEventListener("DOMContentLoaded", () => {
     optionResultDisplay = <HTMLDivElement>document.querySelector(".option-result-display");
 
     createGameCenter(Module.Sexuality.Man);
+    reflectDate(gameCenter.currentPosition);
 });
 
 function timeoutPromise(time: number) {
