@@ -8,12 +8,9 @@ class cell_option {
 private:
   wstring _title; // "휴식" 등
 
-  function<void()> _silent_changer;
-  function<wstring()> _tweeting_changer; // 스탯 바꾸는 부분
+  function<wstring()> _changer; // 스탯 바꾸는 부분
   bool _applied = false;
-  bool _has_result_message = false;
 public:
-  cell_option(wstring title, function<void()> changer);
   cell_option(wstring title, function<wstring()> changer);
   wstring apply();
 

@@ -1,25 +1,15 @@
 #include "celloption.hpp"
 
-cell_option::cell_option(wstring title, function<void()> changer) {
-  this->_title = title;
-  this->_silent_changer = changer;
-}
 cell_option::cell_option(wstring title, function<wstring()> changer) {
   this->_title = title;
-  this->_tweeting_changer = changer;
-  this->_has_result_message = true;
+  this->_changer = changer;
 }
 wstring cell_option::apply() {
   if (this->_applied)
     throw runtime_error("이미 적용한 옵션을 다시 적용하면 안 됩니다.");
   this->_applied = true;
 
-  if (!this->_has_result_message) {
-    this->_silent_changer();
-    return L"";
-  }
-  else
-    return this->_tweeting_changer();
+  return this->_changer();
 }
 
 cell_option_book::cell_option_book(const vector<cell_option>& options) {

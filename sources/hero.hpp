@@ -34,6 +34,8 @@ public:
   const TitleBook& get_title_book() const { return this->title_book; };
   TitleBook* get_title_book_pointer() { return &(this->title_book); };
   int get_cleared_event() { return this->cleared_event; }
+  bool is_spring() { return this->_is_spring; }
+  void finish_semester();
 private:
   const PersonalStatus MAX_STATUS;
   PersonalStatus current_status = {

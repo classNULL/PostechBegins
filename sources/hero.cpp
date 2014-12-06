@@ -114,3 +114,7 @@ void hero::change_status(PersonalStatus status_change, PersonalStatus title_effe
 bool hero::exhausted() const {
 	return (this->current_status.energy == 0);
 }
+
+void hero::finish_semester() {
+	this->_is_spring = !this->_is_spring;
+}
