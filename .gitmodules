@@ -7,3 +7,6 @@
 [submodule "submodules/promise"]
 	path = submodules/promise
 	url = https://github.com/taylorhakes/promise-polyfill.git
+[submodule "submodules/eventpromise"]
+	path = submodules/eventpromise
+	url = https://github.com/SaschaNaz/EventPromise.git
