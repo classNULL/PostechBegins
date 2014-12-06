@@ -46,7 +46,9 @@ bool MapTable::is_proper_new_event_day(MonthDay monthday, vector<Month> previous
   return MapTable::is_new_month(monthday.get_month(), previous_monthes);
 }
 
-void MapTable::install_events() {
+void MapTable::install_events(bool check) {
+	
+if(check){
   vector<int> indices;
   vector<Month> monthes;
 
@@ -66,10 +68,12 @@ void MapTable::install_events() {
   this->_map.at(indices.at(1)) = new eve_2;
   this->_map.at(indices.at(2)) = new eve_3;
 }
+}
+
 int MapTable::get_event(int i){
 	return event_arr[i];
 }
-}
+
 
 void MapTable::set_birthday() {
   int birthday = rand() % this->_map.size();
