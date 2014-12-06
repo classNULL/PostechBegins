@@ -18,7 +18,7 @@ int MapTable::check_stop(int reference, int step) {//board에서 구현되어야
       return i;
   }
   return max;
-}
+}//
 
 bool MapTable::check_birth(int reference, int step) {
 	int max = reference + step;
