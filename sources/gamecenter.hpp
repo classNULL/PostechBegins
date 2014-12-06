@@ -30,6 +30,10 @@ private:
   MapTable _map = MapTable::generate_default();
   int _current_position = 0;
 public:
+	GameCenter(bool check){
+		_map.set_check(check);//맵테이블의 check값을 설정 
+	}
+
   const MapTable& get_map() const { return this->_map; }
   int get_current_position() const { return this->_current_position; }
   GameCenter(sexuality sex);
