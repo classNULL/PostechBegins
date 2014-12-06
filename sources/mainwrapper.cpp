@@ -89,6 +89,7 @@ EMSCRIPTEN_BINDINGS(PostechBegins_Main) {
 
   class_<hero>("Hero")
     .constructor<PersonalStatus, sexuality>()
+    .property("sexuality", &hero::get_sexuality)
     .property("status", &hero::status)
     .property("maxStatus", &hero::max_status)
     .property("titleBook", &hero::get_title_book)

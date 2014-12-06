@@ -11,6 +11,7 @@ declare var introPanel: HTMLDivElement;
 declare var gamearea: HTMLDivElement;
 
 declare var gameTitleArea: HTMLDivElement;
+declare var faceArea: HTMLDivElement;
 declare var dice: HTMLImageElement;
 declare var dicebutton: HTMLDivElement;
 declare var stressDisplayBar: HTMLProgressElement;
@@ -32,12 +33,10 @@ var currentMonth = Module.Month.March;
 var charInCell: HTMLDivElement;
 var gameProgressArea: HTMLDivElement;
 var cover: HTMLDivElement;
-var faceArea: HTMLDivElement;
 var optionResultDisplay: HTMLDivElement;
 window.addEventListener("DOMContentLoaded", () => {
     charInCell = <HTMLDivElement>document.querySelector(".charInCell");
     gameProgressArea = <HTMLDivElement>document.querySelector(".gameprogressarea");
-    faceArea = <HTMLDivElement>document.querySelector(".facearea");
     cover = <HTMLDivElement>document.querySelector(".cover");
     optionResultDisplay = <HTMLDivElement>document.querySelector(".option-result-display");
 

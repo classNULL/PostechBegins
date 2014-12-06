@@ -104,6 +104,7 @@ function rollDice() {
         optionBook.delete();
         reflectStatus(gameCenter.mutableCharacter());
         reflectDate(gameCenter.passSkips());
+        reflectFace(gameCenter.character);
         dicebutton.classList.remove("pushed");
         dice.src = "UI/UI/기타/dice.png";
         hideOptions();
@@ -136,6 +137,22 @@ function reflectStatus(character) {
 function reflectMaxStatus(character) {
     stressDisplayBar.max = character.maxStatus.stress;
     energyDisplayBar.max = character.maxStatus.energy;
+}
+function reflectFace(character) {
+    var sex = character.sexuality == Module.Sexuality.Woman ? "여자" : "남자";
+    var stress = character.status.stress;
+    if (stress < 25) {
+        faceArea.style.backgroundImage = "url(UI/캐릭터/" + sex + "/" + sex + "1.png)";
+    }
+    else if (stress < 50) {
+        faceArea.style.backgroundImage = "url(UI/캐릭터/" + sex + "/" + sex + "2.png)";
+    }
+    else if (stress < 75) {
+        faceArea.style.backgroundImage = "url(UI/캐릭터/" + sex + "/" + sex + "3.png)";
+    }
+    else {
+        faceArea.style.backgroundImage = "url(UI/캐릭터/" + sex + "/" + sex + "4.png)";
+    }
 }
 /* options */
 function setOptions(options) {
@@ -180,12 +197,10 @@ var currentMonth = Module.Month.March;
 var charInCell;
 var gameProgressArea;
 var cover;
-var faceArea;
 var optionResultDisplay;
 window.addEventListener("DOMContentLoaded", function () {
     charInCell = document.querySelector(".charInCell");
     gameProgressArea = document.querySelector(".gameprogressarea");
-    faceArea = document.querySelector(".facearea");
     cover = document.querySelector(".cover");
     optionResultDisplay = document.querySelector(".option-result-display");
     /*

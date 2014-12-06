@@ -71,9 +71,10 @@ function rollDice() {
             var result = optionBook.at(index).apply();
             optionResultDisplay.textContent = result;
             optionBook.delete();
-            reflectStatus(gameCenter.mutableCharacter());
 
+            reflectStatus(gameCenter.mutableCharacter());
             reflectDate(gameCenter.passSkips());
+            reflectFace(gameCenter.character);
 
             dicebutton.classList.remove("pushed");
             dice.src = "UI/UI/기타/dice.png";
@@ -114,6 +115,23 @@ function reflectStatus(character: Module.Hero) {
 function reflectMaxStatus(character: Module.Hero) {
     stressDisplayBar.max = character.maxStatus.stress;
     energyDisplayBar.max = character.maxStatus.energy;
+}
+
+function reflectFace(character: Module.Hero) {
+    var sex = character.sexuality == Module.Sexuality.Woman ? "여자" : "남자";
+    var stress = character.status.stress;
+    if (stress < 25) {
+        faceArea.style.backgroundImage = "url(UI/캐릭터/" + sex + "/" + sex + "1.png)";
+    }
+    else if (stress < 50) {
+        faceArea.style.backgroundImage = "url(UI/캐릭터/" + sex + "/" + sex + "2.png)";
+    }
+    else if (stress < 75) {
+        faceArea.style.backgroundImage = "url(UI/캐릭터/" + sex + "/" + sex + "3.png)";
+    }
+    else {
+        faceArea.style.backgroundImage = "url(UI/캐릭터/" + sex + "/" + sex + "4.png)";
+    }
 }
 
 /* options */

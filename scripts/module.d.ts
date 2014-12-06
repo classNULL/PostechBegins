@@ -107,6 +107,7 @@ declare module Module {
 
     class Hero extends EmscriptenClass {
         constructor(maxStatus: PersonalStatus, sex: Sexuality);
+        sexuality: Sexuality;
         status: PersonalStatus;
         maxStatus: PersonalStatus;
         titleBook: TitleBook;
