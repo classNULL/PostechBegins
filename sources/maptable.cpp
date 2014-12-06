@@ -54,6 +54,7 @@ void MapTable::install_events() {
     auto index = rand() % this->_map.size();
     auto monthday = MonthDay::from_index(index);
     if (this->is_proper_new_event_day(monthday, monthes)) {
+    	event_arr[i]=index;//store index of each event
       indices.push_back(index);
       monthes.push_back(monthday.get_month());
 
@@ -64,6 +65,10 @@ void MapTable::install_events() {
   this->_map.at(indices.at(0)) = new eve_1;
   this->_map.at(indices.at(1)) = new eve_2;
   this->_map.at(indices.at(2)) = new eve_3;
+}
+int MapTable::get_event(int i){
+	return event_arr[i];
+}
 }
 
 void MapTable::set_birthday() {
