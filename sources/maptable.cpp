@@ -69,6 +69,18 @@ void MapTable::install_events() {
   this->_map.at(indices.at(2)) = new eve_3;
 }
 
+void MaptTable::set_event(int order, int day){
+	if(order==1){
+		this->_map.at(day)=new eve_1;
+	}
+	else if(order==2){
+		this->_map.at(day)=new eve_2;
+	}
+	else if(order==3){
+		this->_map.at(day)=new eve_3;
+	}
+}
+
 void MapTable::set_birthday() {
   int birthday = rand() % this->_map.size();
   this->_map.at(birthday)->set_birth(true);
