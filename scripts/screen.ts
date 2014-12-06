@@ -29,6 +29,7 @@ class IntroScreen {
     static show() { introPanel.style.display = "" }
     static hide() { introPanel.style.cssText += "display: none !important"; }
     static returnToStartScreen() {
+        IntroScreen.hide();
         StartScreen.show();
     }
 }

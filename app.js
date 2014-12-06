@@ -246,6 +246,7 @@ var IntroScreen = (function () {
         introPanel.style.cssText += "display: none !important";
     };
     IntroScreen.returnToStartScreen = function () {
+        IntroScreen.hide();
         StartScreen.show();
     };
     return IntroScreen;
