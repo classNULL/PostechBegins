@@ -239,17 +239,52 @@ var CharacterSelectionScreen = (function () {
     }
     CharacterSelectionScreen.show = function () {
         selectorPanel.style.display = "";
+        document.documentElement.style.backgroundImage = 'url("UI/게임 설명화면/선택화면배경.jpg")';
     };
     CharacterSelectionScreen.hide = function () {
         selectorPanel.style.cssText += "display: none !important";
     };
     CharacterSelectionScreen.select = function (sexuality) {
         CharacterSelectionScreen.hide();
-        GameScreen.show();
-        createGameCenter(sexuality);
-        reflectDate(gameCenter.currentPosition);
+        ComicScreen.show();
+        ComicScreen.play().then(function () {
+            ComicScreen.hide();
+            GameScreen.show();
+            createGameCenter(sexuality);
+            reflectDate(gameCenter.currentPosition);
+        });
     };
     return CharacterSelectionScreen;
+})();
+var ComicScreen = (function () {
+    function ComicScreen() {
+    }
+    ComicScreen.show = function () {
+        comicPanel.style.display = "";
+        document.documentElement.style.backgroundImage = 'url("UI/로딩화면/배경.png")';
+    };
+    ComicScreen.hide = function () {
+        comicPanel.style.cssText += "display: none !important";
+    };
+    ComicScreen.play = function () {
+        var parent = comicPanel;
+        var sequence = Promise.resolve();
+        for (var i = 2; i <= 6; i++) {
+            (function (index) {
+                sequence = sequence.then(function () { return timeoutPromise(2000); }).then(function () {
+                    var child = DOMLiner.element("div", { style: 'background-image: url("UI/로딩화면/' + index + '.png")' });
+                    parent.appendChild(child);
+                    parent = child;
+                });
+            })(i);
+        }
+        return sequence.then(function () { return timeoutPromise(2000); });
+    };
+    ComicScreen.clear = function () {
+        while (comicPanel.firstChild)
+            comicPanel.removeChild(comicPanel.firstChild);
+    };
+    return ComicScreen;
 })();
 var IntroScreen = (function () {
     function IntroScreen() {

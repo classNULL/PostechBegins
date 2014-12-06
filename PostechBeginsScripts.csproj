@@ -20,6 +20,7 @@
   <ItemGroup>
     <Content Include="style\app.css" />
     <Content Include="index.html" />
+    <Content Include="style\comic.css" />
     <Content Include="style\intro.css" />
     <Content Include="style\start.css" />
     <Content Include="style\map.css" />

@@ -8,6 +8,7 @@ interface DOMStringMap {
 declare var startarea: HTMLDivElement;
 declare var selectorPanel: HTMLDivElement;
 declare var introPanel: HTMLDivElement;
+declare var comicPanel: HTMLDivElement;
 declare var gamearea: HTMLDivElement;
 
 declare var gameTitleArea: HTMLDivElement;

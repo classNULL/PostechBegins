@@ -73,10 +73,10 @@ EMSCRIPTEN_BINDINGS(PostechBegins_Main) {
   class_<bunban_lecend, base<special>>("BunbanLectureEndPartyCell");
   class_<bunban_mt, base<special>>("BunbanMTCell");
   class_<bunban_face, base<special>>("BunbanFacePartyCell");
-  class_<dept_lecstart, base<special>>("DeptLectureStartPartyCell");
-  class_<dept_lecend, base<special>>("DeptLectureEndPartyCell");
-  class_<dept_mt, base<special>>("DeptMtCell");
-  class_<dept_face, base<special>>("DeptFacePartyCell");
+  class_<dept_lecstart, base<special>>("DepartmentLectureStartPartyCell");
+  class_<dept_lecend, base<special>>("DepartmentLectureEndPartyCell");
+  class_<dept_mt, base<special>>("DepartmentMtCell");
+  class_<dept_face, base<special>>("DepartmentFacePartyCell");
   class_<eve_1, base<special>>("Event1Cell");
   class_<eve_2, base<special>>("Event2Cell");
   class_<eve_3, base<special>>("Event3Cell");
@@ -112,4 +112,13 @@ EMSCRIPTEN_BINDINGS(PostechBegins_Main) {
     .function("hasTitle", &TitleBook::has_title)
     .function("addTitle", &TitleBook::add_title)
     .function("removeTitle", &TitleBook::remove_title);
+
+  class_<Score>("Score")
+    .class_function("score", &Score::score)
+    .property("gradeScore", &Score::get_grade_score)
+    .property("relationship", &Score::get_relationship)
+    .property("selfImprovement", &Score::get_self_develop)
+    .function("evaluateGradeScore", &Score::evaluate_grade_score)
+    .function("evaluateRelationship", &Score::evaluate_relationship)
+    .function("evaluateSelfImprovement", &Score::evaluate_self_develop);
 }

@@ -125,4 +125,14 @@ declare module Module {
         addTitle(name: string): void;
         removeTitle(name: string): void;
     }
+
+    class Score extends EmscriptenClass {
+        static score(hero: Hero): Score;
+        gradeScore: number;
+        relationship: number;
+        selfImprovement: number;
+        evaluateGradeScore(): string;
+        evaluateRelationship(): string;
+        evaluateSelfImprovement(): string;
+    }
 }
