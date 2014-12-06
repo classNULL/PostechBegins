@@ -46,8 +46,11 @@ bool MapTable::is_proper_new_event_day(MonthDay monthday, vector<Month> previous
   return MapTable::is_new_month(monthday.get_month(), previous_monthes);
 }
 
-void MapTable::install_events(bool check) {
-	
+void set_check(bool t){
+	check=t;
+}
+void MapTable::install_events() {
+//check값에 따라 움직인다
 if(check){
   vector<int> indices;
   vector<Month> monthes;
