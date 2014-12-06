@@ -1,5 +1,11 @@
 ﻿.intro-panel {
   display: flex;
+  flex-direction: column;
 }
   .intro-panel .title {
+    height: 300px;
   }
+  .intro-panel .content {
+
+  }
+  .intro-panel 

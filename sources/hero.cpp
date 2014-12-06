@@ -3,13 +3,15 @@
 hero::hero(const PersonalStatus& status_max, sexuality sex) : MAX_STATUS(status_max) {
 	if(sex == sexuality::man){
 		this->sex = man;
+		current_status.relationship = 20;
 		current_status.love = 10;
 		current_status.energy = 100;
 		//성별이 남자일 때
 	}
 	else if(sex == sexuality::woman){
 		this->sex = woman;
-		current_status.love = 100;
+		current_status.relationship = 40;
+		current_status.love = 80;
 		current_status.energy = 80;
 		//성별이 여자일 때
 	}
