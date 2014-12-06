@@ -59,6 +59,8 @@ declare module Module {
         dice(): number;
         move(step: number): number;
         passSkips(): number;
+        recordCurrentStatus(): PersonalStatus;
+        getStatusIncrease(): PersonalStatus;
     }
 
     class MapTable extends EmscriptenClass {
@@ -107,5 +109,23 @@ declare module Module {
         constructor(maxStatus: PersonalStatus, sex: Sexuality);
         status: PersonalStatus;
         maxStatus: PersonalStatus;
+        titleBook: TitleBook;
+        mutableTitleBook: TitleBook;
+    }
+
+    interface TitleEffect {
+        alcohol: PersonalStatus;
+        study: PersonalStatus;
+        circle: PersonalStatus;
+        love: PersonalStatus;
+        rest: PersonalStatus;
+        home: PersonalStatus;
+    }
+
+    class TitleBook extends EmscriptenClass {
+        totalTitleEffect: TitleEffect;
+        hasTitle(name: string): boolean;
+        addTitle(name: string): void;
+        removeTitle(name: string): void;
     }
 }

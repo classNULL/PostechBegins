@@ -42,6 +42,7 @@ function dateIndexToString(index: number) {
 
 function rollDice() {
     dice.classList.add("rotate");
+    dicebutton.classList.add("pushed");
     coverScreen();
 
     var optionBook: Module.CellOptionBook;
@@ -50,7 +51,8 @@ function rollDice() {
             dice.classList.remove("rotate");
 
             var step = gameCenter.dice();
-            optionResultDisplay.textContent = "주사위를 던져서 " + step + "이 나왔다."; 
+            optionResultDisplay.textContent = "주사위를 던져서 " + step + "이 나왔다.";
+            dice.src = "UI/UI/기타/dice" + step + ".png";
 
             var currentPosition = gameCenter.currentPosition;
             var newPosition = gameCenter.move(step);
@@ -73,6 +75,8 @@ function rollDice() {
 
             reflectDate(gameCenter.passSkips());
 
+            dicebutton.classList.remove("pushed");
+            dice.src = "UI/UI/기타/dice.png";
             hideOptions();
             clearOptions();
             uncoverScreen();

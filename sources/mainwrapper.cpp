@@ -40,7 +40,9 @@ EMSCRIPTEN_BINDINGS(PostechBegins_Main) {
     .function("mutableCharacter", &GameCenter::get_character_pointer, allow_raw_pointers())
     .function("dice", &GameCenter::dice)
     .function("move", &GameCenter::move)
-    .function("passSkips", &GameCenter::pass_skips);
+    .function("passSkips", &GameCenter::pass_skips)
+    .function("recordCurrentStatus", &GameCenter::record_current_status)
+    .function("getStatusIncrease", &GameCenter::get_status_increase);
 
   class_<MapTable>("MapTable")
     .class_function("generate", &MapTable::generate)

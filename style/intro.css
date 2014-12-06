@@ -1,0 +1,32 @@
+﻿.introarea {
+  display: flex;
+  flex-direction: column;
+}
+  .introarea .intro-titlearea {
+    flex: 2;
+    background-image: url(../UI/시작화면/학교로고.png);
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .introarea .intro-buttonarea {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-size: 80px;
+    color: white;
+  }
+    .introarea .intro-buttonarea > div {
+      background-color: #4A579F;
+      padding: 20px 50px 20px 50px;
+      margin: 20px;
+    }
+    .introarea .intro-buttonarea > div.disabled {
+      background-color: gray;
+    }

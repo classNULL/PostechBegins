@@ -42,10 +42,10 @@ public:
   int pass_skips();
 
 public:
-	void set_start_status();
+	void record_current_status();
 	PersonalStatus get_status_increase();
 private:
-  PersonalStatus start_status;
+  PersonalStatus recorded_status;
 };
 
 #endif

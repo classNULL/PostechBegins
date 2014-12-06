@@ -412,10 +412,10 @@ int GameCenter::pass_skips() {
 //
 // }
 
-void GameCenter::set_start_status(){ //매 달 첫 날의 status 저장
-  start_status=_character->status();
+void GameCenter::record_current_status(){ //매 달 첫 날의 status 저장
+  recorded_status=_character->status();
 }
 //현재의 status - 과거의 status
 PersonalStatus GameCenter::get_status_increase() {
-  return _character->status().minus(start_status);
+  return _character->status().minus(recorded_status);
 }

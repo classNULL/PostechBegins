@@ -6,6 +6,7 @@ interface DOMStringMap {
 }
 
 declare var dice: HTMLImageElement;
+declare var dicebutton: HTMLDivElement;
 declare var stressDisplayBar: HTMLProgressElement;
 declare var energyDisplayBar: HTMLProgressElement;
 declare var cellPanel: HTMLDivElement;
@@ -31,8 +32,10 @@ window.addEventListener("DOMContentLoaded", () => {
     cover = <HTMLDivElement>document.querySelector(".cover");
     optionResultDisplay = <HTMLDivElement>document.querySelector(".option-result-display");
 
+    /*
     createGameCenter(Module.Sexuality.Man);
     reflectDate(gameCenter.currentPosition);
+    */
 });
 
 function timeoutPromise(time: number) {

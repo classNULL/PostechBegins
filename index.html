@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=1920,height=1080" />
   <title>PostechBegins 개발중</title>
   <link rel="stylesheet" href="style/app.css" />
+  <link rel="stylesheet" href="style/intro.css" />
   <link rel="stylesheet" href="style/map.css" />
 
   <!-- native code -->
@@ -22,78 +23,90 @@
   <script src="app.js"></script>
 </head>
 <body>
-  <div class="titlearea">3월</div>
-  <div class="facearea" id="face">
-  </div>
-  <div class="statusarea">
-    <div class="inner">
-      학점: <br /><br />
-      스트레스: <br />
-      <progress id="stressDisplayBar" class="swordbar" value="30" max="100"></progress><br />
-      체력: <br />
-      <progress id="energyDisplayBar" class="swordbar" value="30" max="100"></progress>
+  <div id="introarea" class="introarea full">
+    <div class="intro-titlearea">
+      <img src="UI/시작화면/포스텍 비긴즈.png" />
+    </div>
+    <div class="intro-buttonarea">
+      <div>게임 시작</div>
+      <div class="disabled">이어하기</div>
+      <div>게임 설명</div>
     </div>
   </div>
+  <div id="gamearea" class="gamearea full" style="display: none !important" >
+    <div class="titlearea">3월</div>
+    <div class="facearea" id="face">
+    </div>
+    <div class="statusarea">
+      <div class="inner">
+        학점: <br /><br />
+        스트레스: <br />
+        <progress id="stressDisplayBar" class="swordbar" value="30" max="100"></progress><br />
+        체력: <br />
+        <progress id="energyDisplayBar" class="swordbar" value="30" max="100"></progress>
+      </div>
+    </div>
 
-  <!-- map -->
-  <div class="maparea">
-    <div class="map">
-      <div class="cell1">1</div>
-      <div class="cell2">2</div>
-      <div class="cell3">3</div>
-      <div class="cell4">4</div>
-      <div class="cell5">5</div>
-      <div class="cell6">6</div>
-      <div class="cell7">7</div>
-      <div class="cell8">8</div>
-      <div class="cell9">9</div>
-      <div class="cell10">10</div>
-      <div class="cell11">11</div>
-      <div class="cell12">12</div>
-      <div class="cell13">13</div>
-      <div class="cell14">14</div>
-      <div class="cell15">15</div>
-      <div class="cell16">16</div>
-      <div class="cell17">17</div>
-      <div class="cell18">18</div>
-      <div class="cell19">19</div>
-      <div class="cell20">20</div>
-      <div class="cell21">21</div>
-      <div class="cell22">22</div>
-      <div class="cell23">23</div>
-      <div class="cell24">24</div>
-      <div class="cell25">25</div>
-      <div class="cell26">26</div>
-      <div class="cell27">27</div>
-      <div class="cell28">28</div>
-      <div class="cell29">29</div>
-      <div class="cell30">30</div>
-      <div class="cell31">31</div>
-      <div class="charInCell"></div>
-      <div class="option-result-display">학기를 시작했다!</div>
+    <!-- map -->
+    <div class="maparea">
+      <div class="map">
+        <div class="cell1">1</div>
+        <div class="cell2">2</div>
+        <div class="cell3">3</div>
+        <div class="cell4">4</div>
+        <div class="cell5">5</div>
+        <div class="cell6">6</div>
+        <div class="cell7">7</div>
+        <div class="cell8">8</div>
+        <div class="cell9">9</div>
+        <div class="cell10">10</div>
+        <div class="cell11">11</div>
+        <div class="cell12">12</div>
+        <div class="cell13">13</div>
+        <div class="cell14">14</div>
+        <div class="cell15">15</div>
+        <div class="cell16">16</div>
+        <div class="cell17">17</div>
+        <div class="cell18">18</div>
+        <div class="cell19">19</div>
+        <div class="cell20">20</div>
+        <div class="cell21">21</div>
+        <div class="cell22">22</div>
+        <div class="cell23">23</div>
+        <div class="cell24">24</div>
+        <div class="cell25">25</div>
+        <div class="cell26">26</div>
+        <div class="cell27">27</div>
+        <div class="cell28">28</div>
+        <div class="cell29">29</div>
+        <div class="cell30">30</div>
+        <div class="cell31">31</div>
+        <div class="charInCell"></div>
+        <div class="option-result-display">학기를 시작했다!</div>
+      </div>
     </div>
-  </div>
-  <div class="dicearea">
-    <div class="dicebutton" onclick="rollDice()"></div>
-    <img id="dice" class="dice" src="UI/UI/기타/주사위.png" />
-  </div>
-  <div class="gameprogressarea">
-    <div class="progressin"><div>3월</div></div>
-    <div><div>4월</div></div>
-    <div><div>5월</div></div>
-    <div><div>6월</div></div>
-    <div><div>7월</div></div>
-    <div><div>8월</div></div>
-    <div><div>9월</div></div>
-    <div><div>10월</div></div>
-    <div><div>11월</div></div>
-    <div><div>12월</div></div>
-  </div>
-  <div class="flagarea"></div>
-  <div class="cover" style="display: none;">
-    <div id="cellPanel" class="cell-panel" style="display: none;">
-      <div id="cellMessage" class="cell-message"></div>
-      <div id="optionDisplay" class="option-display"></div>
+    <div class="dicearea">
+      <div id="dicebutton" class="dicebutton" onclick="rollDice()"></div>
+      <img id="dice" class="dice" src="UI/UI/기타/dice.png" />
+    </div>
+    <div class="gameprogressarea">
+      <div class="progressin"><div>3월</div></div>
+      <div><div>4월</div></div>
+      <div><div>5월</div></div>
+      <div><div>6월</div></div>
+      <div><div>7월</div></div>
+      <div><div>8월</div></div>
+      <div><div>9월</div></div>
+      <div><div>10월</div></div>
+      <div><div>11월</div></div>
+      <div><div>12월</div></div>
+    </div>
+    <div class="flagarea"></div>
+    <div class="cover" style="display: none;">
+      <div id="cellPanel" class="cell-panel" style="display: none;">
+        <div id="cellMessage" class="cell-message"></div>
+        <div id="optionDisplay" class="option-display"></div>
+      </div>
     </div>
   </div>
 </body>

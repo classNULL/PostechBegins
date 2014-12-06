@@ -81,12 +81,14 @@ function dateIndexToString(index) {
 }
 function rollDice() {
     dice.classList.add("rotate");
+    dicebutton.classList.add("pushed");
     coverScreen();
     var optionBook;
     return timeoutPromise(500).then(function () {
         dice.classList.remove("rotate");
         var step = gameCenter.dice();
         optionResultDisplay.textContent = "주사위를 던져서 " + step + "이 나왔다.";
+        dice.src = "UI/UI/기타/dice" + step + ".png";
         var currentPosition = gameCenter.currentPosition;
         var newPosition = gameCenter.move(step);
         reflectDate(newPosition);
@@ -102,6 +104,8 @@ function rollDice() {
         optionBook.delete();
         reflectStatus(gameCenter.mutableCharacter());
         reflectDate(gameCenter.passSkips());
+        dicebutton.classList.remove("pushed");
+        dice.src = "UI/UI/기타/dice.png";
         hideOptions();
         clearOptions();
         uncoverScreen();
@@ -186,8 +190,10 @@ window.addEventListener("DOMContentLoaded", function () {
     faceArea = document.querySelector(".facearea");
     cover = document.querySelector(".cover");
     optionResultDisplay = document.querySelector(".option-result-display");
+    /*
     createGameCenter(Module.Sexuality.Man);
     reflectDate(gameCenter.currentPosition);
+    */
 });
 function timeoutPromise(time) {
     return new Promise(function (resolve, reject) {
