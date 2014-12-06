@@ -20,7 +20,7 @@ public:
   static MapTable generate(const std::vector<cell*>& map) {
     MapTable maptable;
     maptable._map = map;
-    maptable.install_events();
+    maptable.install_events(bool);
     maptable.set_birthday();
     int get_event(int i);
     return maptable;
