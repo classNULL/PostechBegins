@@ -14,6 +14,7 @@ private:
   bool is_proper_new_event_day(MonthDay monthday, vector<Month> previous_monthes);
   void install_events();
   void set_birthday();
+  int event_arr[3];//save information of each event
 public:
   static MapTable generate_default();
   static MapTable generate(const std::vector<cell*>& map) {
@@ -21,6 +22,7 @@ public:
     maptable._map = map;
     maptable.install_events();
     maptable.set_birthday();
+    int get_event(int i);
     return maptable;
   }
 
