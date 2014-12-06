@@ -29,6 +29,7 @@ public:
   ~MapTable();
 
   int check_stop(int reference, int step);
+  int check_skip(int reference);
   bool check_birth(int reference, int step);
 };
 

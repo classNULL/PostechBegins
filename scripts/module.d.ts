@@ -58,6 +58,7 @@ declare module Module {
         mutableCharacter(): Hero;
         dice(): number;
         move(step: number): number;
+        passSkips(): number;
     }
 
     class MapTable extends EmscriptenClass {
@@ -66,7 +67,9 @@ declare module Module {
 
     class Cell extends EmscriptenClass {
         isStop: boolean;
-        callOption(hero: Hero, day: number): CellOptionBook;
+        cellName: string;
+        cellMessage: string;
+        callOption(hero: Hero, day: number): CellOptionBook;        
     }
     class NormalCell extends Cell { }
     class WeekendCell extends Cell { }

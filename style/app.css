@@ -170,6 +170,23 @@ body {
   align-items: center;
 }
 
+.cell-panel {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-flow: column;
+
+  background-color: #089C87;
+  padding: 30px 80px 30px 80px;
+}
+.cell-message {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+
 .option-display {
   display: flex;
   justify-content: center;
@@ -200,6 +217,16 @@ body {
   height: 50px;
   width: 330px;
 }
+.swordbar {
+  -webkit-appearance: none;
+}
+  .swordbar::-webkit-progress-bar {
+    background-color: #D5D5D5;
+  }
+  .swordbar::-webkit-progress-value {
+    background-color: #D94E4E;
+    border: none;
+  }
 
 @keyframes rotate {
   from { transform: rotate(0deg) }

@@ -54,6 +54,7 @@
     background-position: top center;
     background-origin: content-box;
     padding: 5px;
+    z-index: 5;
 }
 
 .cell1 { grid-row: 1; grid-column: 4; /* grid-area: 1 / 4; */ }

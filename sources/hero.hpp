@@ -26,7 +26,7 @@ public:
   const PersonalStatus& status() const { return this->current_status; }
   bool exhausted() const;
 
-  void take_exam(bool is_spring);
+  void take_exam();
   float get_semester_grade(bool is_spring) const;
   float get_average_grade() const;
 
@@ -50,5 +50,6 @@ private:
 	sexuality sex;
   TitleBook title_book;
   int cleared_event = 0;
+  bool _is_spring = true;
 };
 #endif

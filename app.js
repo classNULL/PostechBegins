@@ -66,18 +66,12 @@ function moveCharacter(day) {
     charInCell.classList.add("cell" + day);
     charInCell.dataset["day"] = day.toString();
 }
-function move(step) {
-    var position = gameCenter.move(step);
-    var monthday = Module.MonthDay.fromIndex(position);
+function reflectDate(dateIndex) {
+    var monthday = Module.MonthDay.fromIndex(dateIndex);
+    if (currentMonth !== monthday.month)
+        changeMonth(monthday.month);
     moveCharacter(monthday.day);
-    if (month !== monthday.month) {
-        month = monthday.month;
-        changeMonth(month);
-        colorize(gameCenter.map, month);
-    }
     monthday.delete();
-    return position;
-    //alert(position + "번 칸에 멈추었습니다. " + posstr + "입니다.");
 }
 function dateIndexToString(index) {
     var monthday = Module.MonthDay.fromIndex(index);
@@ -92,8 +86,13 @@ function rollDice() {
     return timeoutPromise(500).then(function () {
         dice.classList.remove("rotate");
         var step = gameCenter.dice();
-        var position = move(step);
-        optionBook = gameCenter.map.at(position).callOption(gameCenter.mutableCharacter(), 1);
+        optionResultDisplay.textContent = "주사위를 던져서 " + step + "이 나왔다.";
+        var currentPosition = gameCenter.currentPosition;
+        var newPosition = gameCenter.move(step);
+        reflectDate(newPosition);
+        optionBook = gameCenter.map.at(newPosition).callOption(gameCenter.mutableCharacter(), newPosition - currentPosition);
+        setCellMessage(gameCenter.map.at(gameCenter.currentPosition).cellMessage);
+    }).then(function () { return timeoutPromise(500); }).then(function () {
         setOptions(optionBook);
         showOptions();
         return waitOptionSelection();
@@ -102,16 +101,19 @@ function rollDice() {
         optionResultDisplay.textContent = result;
         optionBook.delete();
         reflectStatus(gameCenter.mutableCharacter());
+        reflectDate(gameCenter.passSkips());
         hideOptions();
         clearOptions();
         uncoverScreen();
     });
 }
 function changeMonth(month) {
+    currentMonth = month;
     var monthProgressDiv = gameProgressArea.children[month.value - 3];
     monthProgressDiv.classList.add("progressin");
     titleArea.textContent = month.value + "월";
     document.documentElement.style.backgroundImage = 'url("UI/wallpaper/' + month.value + '.jpg")';
+    colorize(gameCenter.map, month);
 }
 /* cover */
 function coverScreen() {
@@ -155,23 +157,25 @@ function clearOptions() {
         optionDisplay.removeChild(optionDisplay.firstChild);
 }
 function showOptions() {
-    optionDisplay.style.display = "";
+    cellPanel.style.display = "";
 }
 function hideOptions() {
-    optionDisplay.style.display = "none";
+    cellPanel.style.display = "none";
+}
+function setCellMessage(message) {
+    cellMessage.textContent = message;
 }
 ///<reference path="screenapi.ts" />
 ///<reference path="gamefunctions.ts" />
 window.screen.lock("landscape-primary");
 Module.srand(Date.now() & 65535);
 var gameCenter;
-var month = Module.Month.March;
+var currentMonth = Module.Month.March;
 var charInCell;
 var gameProgressArea;
 var cover;
 var titleArea;
 var faceArea;
-var optionDisplay;
 var optionResultDisplay;
 window.addEventListener("DOMContentLoaded", function () {
     charInCell = document.querySelector(".charInCell");
@@ -179,7 +183,6 @@ window.addEventListener("DOMContentLoaded", function () {
     titleArea = document.querySelector(".titlearea");
     faceArea = document.querySelector(".facearea");
     cover = document.querySelector(".cover");
-    optionDisplay = document.querySelector(".option-display");
     optionResultDisplay = document.querySelector(".option-result-display");
     createGameCenter(Module.Sexuality.Man);
 });

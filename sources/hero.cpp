@@ -15,8 +15,8 @@ hero::hero(const PersonalStatus& status_max, sexuality sex) : MAX_STATUS(status_
 	}
 }
 
-void hero::take_exam(bool is_spring) {
-	if (is_spring) {
+void hero::take_exam() {
+	if (this->_is_spring) {
 		if (this->spring_grades.size() < 2)
 			this->spring_grades.push_back(Score::generate_grade(this->status().study));
 		else

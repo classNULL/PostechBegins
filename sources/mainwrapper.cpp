@@ -39,7 +39,8 @@ EMSCRIPTEN_BINDINGS(PostechBegins_Main) {
     .property("character", &GameCenter::get_character)
     .function("mutableCharacter", &GameCenter::get_character_pointer, allow_raw_pointers())
     .function("dice", &GameCenter::dice)
-    .function("move", &GameCenter::move);
+    .function("move", &GameCenter::move)
+    .function("passSkips", &GameCenter::pass_skips);
 
   class_<MapTable>("MapTable")
     .class_function("generate", &MapTable::generate)
@@ -50,6 +51,7 @@ EMSCRIPTEN_BINDINGS(PostechBegins_Main) {
   class_<cell>("Cell")
     .property("isStop", &cell::stop_cell)
     .property("cellName", &cell::get_cell_name)
+    .property("cellMessage", &cell::get_cell_message)
     .function("callOption", &cell::call_option, allow_raw_pointers());
   class_<normal, base<cell>>("NormalCell");
   class_<weekend, base<cell>>("WeekendCell");
