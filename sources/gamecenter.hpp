@@ -39,6 +39,7 @@ public:
   /** 1과 6 사이 숫자를 무작위로 리턴한다. */
   int dice() { return rand() % 6 + 1; }
   int move(int step);
+  int pass_skips();
 
 public:
 	void set_start_status();

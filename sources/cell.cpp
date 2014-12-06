@@ -440,6 +440,14 @@ cell_option_book before_exam::call_option(hero* _hero, int day) {
     return cell_option_book(options);
 }
 
+cell_option_book exam::call_option(hero* _hero, int day) {
+  vector<cell_option> options;
+  options.push_back(cell_option(L"시험치기", [_hero, day]() {
+    _hero->take_exam();
+  }));
+  return cell_option_book(options);
+}
+
 cell_option_book after_exam::call_option(hero* _hero, int day) {
     if (_hero->exhausted())
         return this->call_option_zero(_hero, day);

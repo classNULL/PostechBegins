@@ -20,6 +20,14 @@ int MapTable::check_stop(int reference, int step) {//board에서 구현되어야
   return max;
 }
 
+int MapTable::check_skip(int reference){
+  int next = reference;
+  while(this->at(next)->skip_cell() == true && !this->at(reference)->get_cell_name().compare(this->at(next)->get_cell_name())){
+    next += 1;
+  }
+  return next;
+}
+
 bool MapTable::check_birth(int reference, int step) {
 	int max = reference + step;
 	for(int i = reference + 1; i <= max; i++) {

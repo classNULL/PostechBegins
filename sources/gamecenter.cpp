@@ -391,6 +391,13 @@ int GameCenter::move(int step){
   return stop;
 }
 
+int GameCenter::pass_skips() {
+  int next = this->_map.check_skip(this->_current_position);
+  this->_current_position = next;
+
+  return next;
+}
+
 // int main() {
 //   srand(time(NULL));
 //   Manager manager;

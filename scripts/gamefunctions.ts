@@ -25,19 +25,12 @@ function moveCharacter(day: number) {
     charInCell.dataset["day"] = day.toString();
 }
 
-function move(step: number) {
-    var position = gameCenter.move(step);
-
-    var monthday = Module.MonthDay.fromIndex(position);
-    moveCharacter(monthday.day);
-    if (month !== monthday.month) {
-        month = monthday.month;
-        changeMonth(month);
-        colorize(gameCenter.map, month);
-    }
+function reflectDate(dateIndex: number) {
+    var monthday = Module.MonthDay.fromIndex(dateIndex);
+    if (currentMonth !== monthday.month)
+        changeMonth(monthday.month);
+    moveCharacter(monthday.day)
     monthday.delete();
-    return position;
-    //alert(position + "번 칸에 멈추었습니다. " + posstr + "입니다.");
 }
 
 function dateIndexToString(index: number) {
@@ -57,9 +50,17 @@ function rollDice() {
             dice.classList.remove("rotate");
 
             var step = gameCenter.dice();
-            var position = move(step);
+            optionResultDisplay.textContent = "주사위를 던져서 " + step + "이 나왔다."; 
 
-            optionBook = gameCenter.map.at(position).callOption(gameCenter.mutableCharacter(), 1);
+            var currentPosition = gameCenter.currentPosition;
+            var newPosition = gameCenter.move(step);
+            reflectDate(newPosition);
+
+            optionBook = gameCenter.map.at(newPosition).callOption(gameCenter.mutableCharacter(), newPosition - currentPosition);
+            setCellMessage(gameCenter.map.at(gameCenter.currentPosition).cellMessage);
+        })
+        .then(() => timeoutPromise(500))
+        .then(() => {
             setOptions(optionBook);
             showOptions();
             return waitOptionSelection();
@@ -70,6 +71,8 @@ function rollDice() {
             optionBook.delete();
             reflectStatus(gameCenter.mutableCharacter());
 
+            reflectDate(gameCenter.passSkips());
+
             hideOptions();
             clearOptions();
             uncoverScreen();
@@ -77,10 +80,13 @@ function rollDice() {
 }
 
 function changeMonth(month: Module.Month) {
+    currentMonth = month;
+
     var monthProgressDiv = <HTMLDivElement>gameProgressArea.children[month.value - 3];
     monthProgressDiv.classList.add("progressin");
     titleArea.textContent = month.value + "월";
     document.documentElement.style.backgroundImage = 'url("UI/wallpaper/' + month.value + '.jpg")';
+    colorize(gameCenter.map, month);
 }
 
 /* cover */
@@ -131,8 +137,11 @@ function clearOptions() {
         optionDisplay.removeChild(optionDisplay.firstChild);
 }
 function showOptions() {
-    optionDisplay.style.display = "";
+    cellPanel.style.display = "";
 }
 function hideOptions() {
-    optionDisplay.style.display = "none";
+    cellPanel.style.display = "none";
+}
+function setCellMessage(message: string) {
+    cellMessage.textContent = message;
 }
