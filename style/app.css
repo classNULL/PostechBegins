@@ -69,9 +69,11 @@ body {
   display: none;
 }
 
-.titlearea {
+.game-titlearea {
   grid-row: 1;
   grid-column: 1;
+}
+.title {
   font-size: 70px;
 }
 

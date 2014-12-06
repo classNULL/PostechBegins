@@ -20,6 +20,7 @@
   <ItemGroup>
     <Content Include="style\app.css" />
     <Content Include="index.html" />
+    <Content Include="style\intro.css" />
     <Content Include="style\map.css" />
     <Content Include="web.config" />
   </ItemGroup>
@@ -37,8 +38,10 @@
     <TypeScriptCompile Include="scripts\gamefunctions.ts" />
     <TypeScriptCompile Include="scripts\module.d.ts" />
     <TypeScriptCompile Include="scripts\screenapi.ts" />
+    <TypeScriptCompile Include="scripts\screeninit.ts" />
     <TypeScriptCompile Include="submodules\domliner\domliner.d.ts" />
     <TypeScriptCompile Include="submodules\es6-promise.d.ts" />
+    <TypeScriptCompile Include="submodules\eventpromise\eventpromise.d.ts" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">12.0</VisualStudioVersion>

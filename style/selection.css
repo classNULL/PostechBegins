@@ -1,0 +1,27 @@
+﻿.selector-panel {
+  display: flex;
+  flex-direction: column;
+}
+  .selector-panel .selection {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .selector-panel .character {
+    font-size: 50px;
+    margin: 80px;
+    padding: 20px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+    .selector-panel .character:hover {
+      background-color: rgba(241, 106, 131, 0.8);
+    }
+    .selector-panel .character img {
+      height: 700px;
+      margin-top: 30px;
+    }

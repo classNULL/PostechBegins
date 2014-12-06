@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=1920,height=1080" />
   <title>PostechBegins 개발중</title>
   <link rel="stylesheet" href="style/app.css" />
+  <link rel="stylesheet" href="style/start.css" />
+  <link rel="stylesheet" href="style/selection.css" />
   <link rel="stylesheet" href="style/intro.css" />
   <link rel="stylesheet" href="style/map.css" />
 
@@ -23,18 +25,45 @@
   <script src="app.js"></script>
 </head>
 <body>
-  <div id="introarea" class="introarea full">
-    <div class="intro-titlearea">
+  <!-- 시작 화면 -->
+  <div id="startarea" class="startarea full">
+    <div class="start-titlearea">
       <img src="UI/시작화면/포스텍 비긴즈.png" />
     </div>
-    <div class="intro-buttonarea">
-      <div>게임 시작</div>
-      <div class="disabled">이어하기</div>
-      <div>게임 설명</div>
+    <div class="start-buttonarea">
+      <div id="gameStartButton" onclick="StartScreen.startGame()">게임 시작</div>
+      <div id="gameResumeButton" class="disabled" onclick="StartScreen.resumeGame()">이어하기</div>
+      <div id="gameIntroButton" onclick="StartScreen.introduce()">게임 설명</div>
     </div>
   </div>
-  <div id="gamearea" class="gamearea full" style="display: none !important" >
-    <div class="titlearea">3월</div>
+  <!-- 캐릭터 선택 화면 -->
+  <div id="selectorPanel" class="selector-panel full" style="display: none !important">
+    <div class="title">캐릭터 선택</div>
+    <div class="selection">
+      <div class="character" onclick="CharacterSelectionScreen.select(Module.Sexuality.Man)" >
+        공대라면 남자
+        <img src="UI/캐릭터/남자/남자1.png" />
+      </div>
+      <div class="character" onclick="CharacterSelectionScreen.select(Module.Sexuality.Woman)" >
+        공대니까 여자
+        <img src="UI/캐릭터/여자/여자1.png" />
+      </div>
+    </div>
+  </div>
+  <!-- 게임 설명 화면 -->
+  <div id="introPanel" class="intro-panel full" style="display: none !important">
+    <div class="title">게임 설명</div>
+    <div class="content">
+      <div class="text">blah blah</div>
+      <div class="back">
+        <img src="UI/게임 설명화면/메인화면 버튼.png" />
+      </div>
+    </div>
+    <div class="footer"></div>
+  </div>
+  <!-- 본 게임 화면 -->
+  <div id="gamearea" class="gamearea full" style="display: none !important">
+    <div id="gameTitleArea" class="game-titlearea title">3월</div>
     <div class="facearea" id="face">
     </div>
     <div class="statusarea">
@@ -108,6 +137,9 @@
         <div id="optionDisplay" class="option-display"></div>
       </div>
     </div>
+  </div>
+  <!-- 게임 결과 화면 -->
+  <div id="resultPanel" class="result-panel full" style="display: none !important">
   </div>
 </body>
 </html>

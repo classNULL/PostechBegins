@@ -117,7 +117,7 @@ function changeMonth(month) {
         monthProgressDiv.classList.add("progressin");
     }
     currentMonth = month;
-    titleArea.textContent = month.value + "월";
+    gameTitleArea.textContent = month.value + "월";
     document.documentElement.style.backgroundImage = 'url("UI/wallpaper/' + month.value + '.jpg")';
     colorize(gameCenter.map, month);
 }
@@ -180,13 +180,11 @@ var currentMonth = Module.Month.March;
 var charInCell;
 var gameProgressArea;
 var cover;
-var titleArea;
 var faceArea;
 var optionResultDisplay;
 window.addEventListener("DOMContentLoaded", function () {
     charInCell = document.querySelector(".charInCell");
     gameProgressArea = document.querySelector(".gameprogressarea");
-    titleArea = document.querySelector(".titlearea");
     faceArea = document.querySelector(".facearea");
     cover = document.querySelector(".cover");
     optionResultDisplay = document.querySelector(".option-result-display");
@@ -200,4 +198,67 @@ function timeoutPromise(time) {
         setTimeout(function () { return resolve(); }, time);
     });
 }
+var StartScreen = (function () {
+    function StartScreen() {
+    }
+    StartScreen.show = function () {
+        startarea.style.display = "";
+    };
+    StartScreen.hide = function () {
+        startarea.style.cssText += "display: none !important";
+    };
+    StartScreen.startGame = function () {
+        StartScreen.hide();
+        CharacterSelectionScreen.show();
+    };
+    StartScreen.resumeGame = function () {
+    };
+    StartScreen.introduce = function () {
+        StartScreen.hide();
+        IntroScreen.show();
+    };
+    return StartScreen;
+})();
+var CharacterSelectionScreen = (function () {
+    function CharacterSelectionScreen() {
+    }
+    CharacterSelectionScreen.show = function () {
+        selectorPanel.style.display = "";
+    };
+    CharacterSelectionScreen.hide = function () {
+        selectorPanel.style.cssText += "display: none !important";
+    };
+    CharacterSelectionScreen.select = function (sexuality) {
+        CharacterSelectionScreen.hide();
+        GameScreen.show();
+        createGameCenter(sexuality);
+        reflectDate(gameCenter.currentPosition);
+    };
+    return CharacterSelectionScreen;
+})();
+var IntroScreen = (function () {
+    function IntroScreen() {
+    }
+    IntroScreen.show = function () {
+        introPanel.style.display = "";
+    };
+    IntroScreen.hide = function () {
+        introPanel.style.cssText += "display: none !important";
+    };
+    IntroScreen.returnToStartScreen = function () {
+        StartScreen.show();
+    };
+    return IntroScreen;
+})();
+var GameScreen = (function () {
+    function GameScreen() {
+    }
+    GameScreen.show = function () {
+        gamearea.style.display = "";
+    };
+    GameScreen.hide = function () {
+        gamearea.style.cssText += "display: none !important";
+    };
+    return GameScreen;
+})();
 //# sourceMappingURL=app.js.map

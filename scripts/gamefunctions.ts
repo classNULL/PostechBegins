@@ -90,7 +90,7 @@ function changeMonth(month: Module.Month) {
     }
     currentMonth = month;
 
-    titleArea.textContent = month.value + "월";
+    gameTitleArea.textContent = month.value + "월";
     document.documentElement.style.backgroundImage = 'url("UI/wallpaper/' + month.value + '.jpg")';
     colorize(gameCenter.map, month);
 }
