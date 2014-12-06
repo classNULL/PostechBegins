@@ -10,7 +10,7 @@
         var cell = maptable.at(firstdayIndex + i);
 
         var type = "";
-        if (cell instanceof Module.NormalCell)
+        if (cell instanceof Module.NormalCell || cell instanceof Module.NormalCell || cell instanceof Module.NormalCell || cell instanceof Module.NormalCell)
             type = "normal";
         else if (cell instanceof Module.MarchCell)
             type = "march";

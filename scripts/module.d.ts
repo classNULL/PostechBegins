@@ -80,16 +80,12 @@ declare module Module {
     class ExamCell extends Cell { }
     class AfterExamCell extends Cell { }
     class DanceCell extends Cell { }
-
     class FestivalCell extends Cell { }
-    class PokaCell extends FestivalCell { }
-    class POPCell extends FestivalCell { }
-
     class SpecialCell extends Cell { }
-    class LectureStartPartyCell extends SpecialCell { }
-    class LectureEndPartyCell extends SpecialCell { }
-    class MTCell extends SpecialCell { }
-    class FacePartyCell extends SpecialCell { }
+
+    class VacationCell extends Cell { }
+    class WinterVacationCell extends Cell { }
+
     class Event1Cell extends SpecialCell { }
     class Event2Cell extends SpecialCell { }
     class Event3Cell extends SpecialCell { }

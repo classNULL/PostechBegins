@@ -644,7 +644,7 @@ cell_option_book festival::call_option_special(hero* _hero, int day){
 }
 cell_option_book festival::call_option_zero(hero* _hero, int day){
     clog << "'this' pointer" << _hero << endl; vector<cell_option> options;
-    options.push_back(cell_option(L"휴식", [_hero, day](){
+    options.push_back(cell_option(L"휴식", [_hero, day]() {
         _hero->change_status(
           { .energy = 8, .study = 0, .relationship = 0, .self_develop = 0, .love = 0, .stress = -5 },
           day);
@@ -761,6 +761,13 @@ cell_option_book vacation::call_option(hero* _hero, int day){
         day);
         _hero->recover_energy();
         return L"방학 동안 푹 쉬었다! 다음 학기가 시작되었다.";
+    }));
+    return cell_option_book(options);
+}
+cell_option_book win_vac::call_option(hero* _hero, int day){
+    vector<cell_option> options;
+    options.push_back(cell_option(L"결과 보기", [_hero, day]() {
+      return L"";
     }));
     return cell_option_book(options);
 }

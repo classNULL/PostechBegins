@@ -88,14 +88,14 @@ MapTable MapTable::generate_default() {
   array[MonthDay::from_calendar(March, 6).get_index()] = new march;
   array[MonthDay::from_calendar(March, 7).get_index()] = new dept_lecstart;
   array[MonthDay::from_calendar(March, 8).get_index()] = new march;
-  array[MonthDay::from_calendar(March, 9).get_index()] = new mt;       //mt 엠티, special을 상속.
+  array[MonthDay::from_calendar(March, 9).get_index()] = new bunban_mt;       //mt 엠티, special을 상속.
   array[MonthDay::from_calendar(March, 10).get_index()] = new weekend;
   array[MonthDay::from_calendar(March, 11).get_index()] = new bunban_face;   //faceparty 대면식, special을 상속.
   array[MonthDay::from_calendar(March, 12).get_index()] = new march;
   array[MonthDay::from_calendar(March, 13).get_index()] = new march;
   array[MonthDay::from_calendar(March, 14).get_index()] = new dept_face;
   array[MonthDay::from_calendar(March, 15).get_index()] = new march;
-  array[MonthDay::from_calendar(March, 16).get_index()] = new mt;
+  array[MonthDay::from_calendar(March, 16).get_index()] = new dept_mt;
   array[MonthDay::from_calendar(March, 17).get_index()] = new weekend;
   array[MonthDay::from_calendar(March, 18).get_index()] = new march;
   array[MonthDay::from_calendar(March, 19).get_index()] = new bunban_face;

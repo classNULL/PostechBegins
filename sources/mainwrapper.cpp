@@ -52,7 +52,6 @@ EMSCRIPTEN_BINDINGS(PostechBegins_Main) {
 
   class_<cell>("Cell")
     .property("isStop", &cell::stop_cell)
-    .property("cellName", &cell::get_cell_name)
     .property("cellMessage", &cell::get_cell_message)
     .function("callOption", &cell::call_option, allow_raw_pointers());
   class_<normal, base<cell>>("NormalCell");
@@ -63,16 +62,17 @@ EMSCRIPTEN_BINDINGS(PostechBegins_Main) {
   class_<after_exam, base<cell>>("AfterExamCell");
   class_<dance, base<cell>>("DanceCell");
   class_<vacation, base<cell>>("VacationCell");
+  class_<win_vac, base<cell>>("WinterVacationCell");
 
   class_<festival, base<cell>>("FestivalCell");
   class_<poka, base<festival>>("PokaCell");
   class_<pop, base<festival>>("POPCell");
 
   class_<special, base<cell>>("SpecialCell");
-  class_<lecstartparty, base<special>>("LectureStartPartyCell");
-  class_<lecendparty, base<special>>("LectureEndPartyCell");
-  class_<mt, base<special>>("MTCell");
-  class_<faceparty, base<special>>("FacePartyCell");
+  class_<bunban_lecstart, base<special>>("BunbanLectureStartPartyCell");
+  class_<bunban_lecend, base<special>>("BunbanLectureEndPartyCell");
+  class_<bunban_mt, base<special>>("BunbanMTCell");
+  class_<bunban_face, base<special>>("BunbanFacePartyCell");
   class_<eve_1, base<special>>("Event1Cell");
   class_<eve_2, base<special>>("Event2Cell");
   class_<eve_3, base<special>>("Event3Cell");
