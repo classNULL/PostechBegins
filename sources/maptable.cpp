@@ -79,28 +79,28 @@ void MapTable::set_birthday() {
 
 MapTable MapTable::generate_default() {
   MapTable maptable;
-  auto& array = maptable._map = vector<cell*>(306);
+  auto& array=maptable._map=vector<cell*>(306);
   array[MonthDay::from_calendar(March,1).get_index()]=new weekend;
   array[MonthDay::from_calendar(March,2).get_index()]=new weekend;
   array[MonthDay::from_calendar(March,3).get_index()]=new weekend;
   array[MonthDay::from_calendar(March,4).get_index()]=new march;
-  array[MonthDay::from_calendar(March,5).get_index()]=new lecstartparty;        //lecstartparty 개총. 후에 special을 상속.
+  array[MonthDay::from_calendar(March,5).get_index()]=new bunban_lecstart;    //lecstartparty 개총. 후에 special을 상속.
   array[MonthDay::from_calendar(March,6).get_index()]=new march;
-  array[MonthDay::from_calendar(March,7).get_index()]=new lecstartparty;
+  array[MonthDay::from_calendar(March,7).get_index()]=new dept_lecstart;
   array[MonthDay::from_calendar(March,8).get_index()]=new march;
-  array[MonthDay::from_calendar(March,9).get_index()]=new mt;           //mt 엠티, special을 상속.
+  array[MonthDay::from_calendar(March,9).get_index()]=new mt;       //mt 엠티, special을 상속.
   array[MonthDay::from_calendar(March,10).get_index()]=new weekend;
-  array[MonthDay::from_calendar(March,11).get_index()]=new faceparty;   //faceparty 대면식, special을 상속.
+  array[MonthDay::from_calendar(March,11).get_index()]=new bunban_face;   //faceparty 대면식, special을 상속.
   array[MonthDay::from_calendar(March,12).get_index()]=new march;
   array[MonthDay::from_calendar(March,13).get_index()]=new march;
-  array[MonthDay::from_calendar(March,14).get_index()]=new faceparty;
+  array[MonthDay::from_calendar(March,14).get_index()]=new dept_face;
   array[MonthDay::from_calendar(March,15).get_index()]=new march;
   array[MonthDay::from_calendar(March,16).get_index()]=new mt;
   array[MonthDay::from_calendar(March,17).get_index()]=new weekend;
   array[MonthDay::from_calendar(March,18).get_index()]=new march;
-  array[MonthDay::from_calendar(March,19).get_index()]=new faceparty;
+  array[MonthDay::from_calendar(March,19).get_index()]=new bunban_face;
   array[MonthDay::from_calendar(March,20).get_index()]=new march;
-  array[MonthDay::from_calendar(March,21).get_index()]=new faceparty;
+  array[MonthDay::from_calendar(March,21).get_index()]=new dept_face;
   array[MonthDay::from_calendar(March,22).get_index()]=new march;
   array[MonthDay::from_calendar(March,23).get_index()]=new weekend;
   array[MonthDay::from_calendar(March,24).get_index()]=new weekend;
@@ -177,9 +177,9 @@ MapTable MapTable::generate_default() {
 
   array[MonthDay::from_calendar(June,1).get_index()]=new weekend;
   array[MonthDay::from_calendar(June,2).get_index()]=new weekend;
-  array[MonthDay::from_calendar(June,3).get_index()]=new lecendparty;       //lecendparty 종강
+  array[MonthDay::from_calendar(June,3).get_index()]=new bunban_lecend;     //lecendparty 종강
   array[MonthDay::from_calendar(June,4).get_index()]=new normal;
-  array[MonthDay::from_calendar(June,5).get_index()]=new lecendparty;
+  array[MonthDay::from_calendar(June,5).get_index()]=new dept_lecend;
   array[MonthDay::from_calendar(June,6).get_index()]=new weekend;
   array[MonthDay::from_calendar(June,7).get_index()]=new normal;
   array[MonthDay::from_calendar(June,8).get_index()]=new weekend;
@@ -196,9 +196,9 @@ MapTable MapTable::generate_default() {
   array[MonthDay::from_calendar(June,19).get_index()]=new exam;
   array[MonthDay::from_calendar(June,20).get_index()]=new exam;
   array[MonthDay::from_calendar(June,21).get_index()]=new exam;
-  array[MonthDay::from_calendar(June,22).get_index()]=new vacation; 
-  array[MonthDay::from_calendar(June,23).get_index()]=new vacation; 
-  array[MonthDay::from_calendar(June,24).get_index()]=new vacation;     //방학 vacation, 한꺼번에 다 넘기기.
+  array[MonthDay::from_calendar(June,22).get_index()]=new vacation;
+  array[MonthDay::from_calendar(June,23).get_index()]=new vacation;
+  array[MonthDay::from_calendar(June,24).get_index()]=new vacation;   //방학 vacation, 한꺼번에 다 넘기기.
   array[MonthDay::from_calendar(June,25).get_index()]=new vacation;
   array[MonthDay::from_calendar(June,26).get_index()]=new vacation;
   array[MonthDay::from_calendar(June,27).get_index()]=new vacation;
@@ -272,18 +272,18 @@ MapTable MapTable::generate_default() {
 
   array[MonthDay::from_calendar(September,1).get_index()]=new vacation;
   array[MonthDay::from_calendar(September,2).get_index()]=new normal;
-  array[MonthDay::from_calendar(September,3).get_index()]=new lecstartparty;
-  array[MonthDay::from_calendar(September,4).get_index()]=new lecstartparty;
+  array[MonthDay::from_calendar(September,3).get_index()]=new bunban_lecstart;
+  array[MonthDay::from_calendar(September,4).get_index()]=new dept_lecstart;
   array[MonthDay::from_calendar(September,5).get_index()]=new normal;
   array[MonthDay::from_calendar(September,6).get_index()]=new normal;
-  array[MonthDay::from_calendar(September,7).get_index()]=new mt;
+  array[MonthDay::from_calendar(September,7).get_index()]=new bunban_mt;
   array[MonthDay::from_calendar(September,8).get_index()]=new weekend;
   array[MonthDay::from_calendar(September,9).get_index()]=new normal;
   array[MonthDay::from_calendar(September,10).get_index()]=new normal;
   array[MonthDay::from_calendar(September,11).get_index()]=new normal;
   array[MonthDay::from_calendar(September,12).get_index()]=new normal;
   array[MonthDay::from_calendar(September,13).get_index()]=new normal;
-  array[MonthDay::from_calendar(September,14).get_index()]=new mt;
+  array[MonthDay::from_calendar(September,14).get_index()]=new dept_mt;
   array[MonthDay::from_calendar(September,15).get_index()]=new weekend;
   array[MonthDay::from_calendar(September,16).get_index()]=new normal;
   array[MonthDay::from_calendar(September,17).get_index()]=new normal;
@@ -296,7 +296,7 @@ MapTable MapTable::generate_default() {
   array[MonthDay::from_calendar(September,24).get_index()]=new normal;
   array[MonthDay::from_calendar(September,25).get_index()]=new normal;
   array[MonthDay::from_calendar(September,26).get_index()]=new normal;
-  array[MonthDay::from_calendar(September,27).get_index()]=new poka;        //poka 포카전, festival을 상속.
+  array[MonthDay::from_calendar(September,27).get_index()]=new poka;    //poka 포카전, festival을 상속.
   array[MonthDay::from_calendar(September,28).get_index()]=new poka;
   array[MonthDay::from_calendar(September,29).get_index()]=new weekend;
   array[MonthDay::from_calendar(September,30).get_index()]=new normal;
@@ -312,15 +312,15 @@ MapTable MapTable::generate_default() {
   array[MonthDay::from_calendar(October,9).get_index()]=new normal;
   array[MonthDay::from_calendar(October,10).get_index()]=new normal;
   array[MonthDay::from_calendar(October,11).get_index()]=new normal;
-  array[MonthDay::from_calendar(October,12).get_index()]=new before_exam;
-  array[MonthDay::from_calendar(October,13).get_index()]=new before_exam;
+  array[MonthDay::from_calendar(October,12).get_index()]=new weekend;
+  array[MonthDay::from_calendar(October,13).get_index()]=new weekend;
   array[MonthDay::from_calendar(October,14).get_index()]=new before_exam;
   array[MonthDay::from_calendar(October,15).get_index()]=new before_exam;
   array[MonthDay::from_calendar(October,16).get_index()]=new before_exam;
   array[MonthDay::from_calendar(October,17).get_index()]=new before_exam;
   array[MonthDay::from_calendar(October,18).get_index()]=new before_exam;
-  array[MonthDay::from_calendar(October,19).get_index()]=new weekend;
-  array[MonthDay::from_calendar(October,20).get_index()]=new weekend;
+  array[MonthDay::from_calendar(October,19).get_index()]=new before_exam;
+  array[MonthDay::from_calendar(October,20).get_index()]=new before_exam;
   array[MonthDay::from_calendar(October,21).get_index()]=new exam;
   array[MonthDay::from_calendar(October,22).get_index()]=new exam;
   array[MonthDay::from_calendar(October,23).get_index()]=new exam;
@@ -340,7 +340,7 @@ MapTable MapTable::generate_default() {
   array[MonthDay::from_calendar(November,5).get_index()]=new normal;
   array[MonthDay::from_calendar(November,6).get_index()]=new normal;
   array[MonthDay::from_calendar(November,7).get_index()]=new normal;
-  array[MonthDay::from_calendar(November,8).get_index()]=new pop;       //pop 피오피, special을 상속.
+  array[MonthDay::from_calendar(November,8).get_index()]=new pop;     //pop 피오피, special을 상속.
   array[MonthDay::from_calendar(November,9).get_index()]=new weekend;
   array[MonthDay::from_calendar(November,10).get_index()]=new weekend;
   array[MonthDay::from_calendar(November,11).get_index()]=new normal;
@@ -365,10 +365,10 @@ MapTable MapTable::generate_default() {
   array[MonthDay::from_calendar(November,30).get_index()]=new weekend;
 
   array[MonthDay::from_calendar(December,1).get_index()]=new weekend;
-  array[MonthDay::from_calendar(December,2).get_index()]=new lecendparty;
+  array[MonthDay::from_calendar(December,2).get_index()]=new bunban_lecend;
   array[MonthDay::from_calendar(December,3).get_index()]=new weekend;
   array[MonthDay::from_calendar(December,4).get_index()]=new normal;
-  array[MonthDay::from_calendar(December,5).get_index()]=new lecendparty;
+  array[MonthDay::from_calendar(December,5).get_index()]=new dept_lecend;
   array[MonthDay::from_calendar(December,6).get_index()]=new normal;
   array[MonthDay::from_calendar(December,7).get_index()]=new weekend;
   array[MonthDay::from_calendar(December,8).get_index()]=new weekend;
@@ -384,17 +384,17 @@ MapTable MapTable::generate_default() {
   array[MonthDay::from_calendar(December,18).get_index()]=new exam;
   array[MonthDay::from_calendar(December,19).get_index()]=new exam;
   array[MonthDay::from_calendar(December,20).get_index()]=new exam;
-  array[MonthDay::from_calendar(December,21).get_index()]=new vacation;
-  array[MonthDay::from_calendar(December,22).get_index()]=new vacation;
-  array[MonthDay::from_calendar(December,23).get_index()]=new vacation;
-  array[MonthDay::from_calendar(December,24).get_index()]=new vacation;
-  array[MonthDay::from_calendar(December,25).get_index()]=new vacation;
-  array[MonthDay::from_calendar(December,26).get_index()]=new vacation;
-  array[MonthDay::from_calendar(December,27).get_index()]=new vacation;
-  array[MonthDay::from_calendar(December,28).get_index()]=new vacation;
-  array[MonthDay::from_calendar(December,29).get_index()]=new vacation;
-  array[MonthDay::from_calendar(December,30).get_index()]=new vacation;
-  array[MonthDay::from_calendar(December,31).get_index()]=new vacation;
+  array[MonthDay::from_calendar(December,21).get_index()]=new win_vac;
+  array[MonthDay::from_calendar(December,22).get_index()]=new win_vac;
+  array[MonthDay::from_calendar(December,23).get_index()]=new win_vac;
+  array[MonthDay::from_calendar(December,24).get_index()]=new win_vac;
+  array[MonthDay::from_calendar(December,25).get_index()]=new win_vac;
+  array[MonthDay::from_calendar(December,26).get_index()]=new win_vac;
+  array[MonthDay::from_calendar(December,27).get_index()]=new win_vac;
+  array[MonthDay::from_calendar(December,28).get_index()]=new win_vac;
+  array[MonthDay::from_calendar(December,29).get_index()]=new win_vac;
+  array[MonthDay::from_calendar(December,30).get_index()]=new win_vac;
+  array[MonthDay::from_calendar(December,31).get_index()]=new win_vac;
 
   maptable.install_events();
   maptable.set_birthday();
