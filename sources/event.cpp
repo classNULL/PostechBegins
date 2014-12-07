@@ -4,23 +4,25 @@
 using namespace std;
 
 wstring march_event::check_success(hero* hero, gamecenter* _gamecenter){
+	//월 별 이벤트의 조건을 검사하고, 성공했을 시에는 성공 메시지를,
+	//그렇지 않을 때는 실패 메시지를 전달한다.
 	if(_gamecenter->get_temp_relationship()>60){ //식별자 정의 필요
-		
 		hero->up_event();
 		return L"Mission Clear! 사람을 많이 사귀었나봐요?";
 	}
 	return L"흐잉 3월인데 사람도 만나고 하지 그랬어요ㅠ";
 }
 wstring march_event::introduction_message(){
+	//이 method에서는 이벤트를 소개하는 메시지를 전달한다.
 	return L"대학을 처음왔으면! 일단 친해져보자!";
 }
+//이하 모든 class는 march_event와 동일하나, 내부 메시지와 성공 조건만 다르다.
 
 wstring april_event::introduction_message(){
 	return L"중간고사 기간이네! 노는거도 이때해야 재밌지!";
 }
 wstring april_event::check_success(hero* hero, gamecenter* _gamecenter){
 	if(_gamecenger->get_temp_study()>0){ //식별자 정의 필요
-		
 		hero->up_event();
 		return L"Mission Clear! 시험기간엔 공부해야죠! 무슨소리를!";
 	}
@@ -32,7 +34,6 @@ wstring may_event::introduction_message(){
 }
 wstring may_event::check_success(hero* hero, gamecenter* _gamecenter){
 	if(_gamecenter->get_temp_self_develop()>15){ //식별자 정의 필요
-		
 		hero->up_event();
 		return L"Mission Clear! 동아리 활동도 열심히 해야죠!";
 	}
@@ -44,7 +45,6 @@ wstring june_event::introduction_message(){
 }
 wstring june_event::check_success(hero* hero, gamecenter* _gamecenter){
 	if(_gamecenter->get_temp_relationship()>60){ //식별자 정의 필요
-		
 		hero->up_event();
 		return L"Mission Clear! 기말고사는 던져야 제맛!";
 	}
@@ -56,7 +56,6 @@ wstring september_event::introduction_message(){
 }
 wstring september_event::check_success(hero* hero, gamecenter* _gamecenter){
 	if(_gamecenter->get_temp_relationship()>60){ //식별자 정의 필요
-		
 		hero->up_event();
 		return L"술은 많이 드셨나요?!";
 	}
@@ -83,7 +82,6 @@ bool november_event::success(hero* hero, gamecenter* _gamecenter){
 		return L"시험끝나곤 쉬어야죠! 축제는 무슨!";
 	}
 	return L"지금 안 쉬면 나중에 힘들텐데..";
-	
 }
 
 void december_event::introduction_message(){
@@ -95,5 +93,4 @@ bool december_event::success(hero* hero, gamecenter* _gamecenter){
 		return L"신입생 카페에서 많이 노셨나봐요?";
 	}
 	return L"2학년 되자마자 아싸가 될 것 같아요. 인간관계에 더 신경써야해요!";
-	
 }
