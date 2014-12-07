@@ -10,6 +10,7 @@
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
+    pointer-events: none;
   }
   .comic-panel .fade-in {
     -webkit-animation-name: fade-in;

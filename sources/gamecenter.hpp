@@ -29,7 +29,7 @@ public:
 
 private:
   MapTable _map = MapTable::generate_default();
-  int _current_position = 40;
+  int _current_position = 2;
 public:
   const MapTable& get_map() const { return this->_map; }
   int get_current_position() const { return this->_current_position; }

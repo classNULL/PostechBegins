@@ -13,6 +13,7 @@ declare var gamearea: HTMLDivElement;
 declare var resultPanel: HTMLDivElement;
 
 declare var gameTitleArea: HTMLDivElement;
+declare var gameCharacterTitlesArea: HTMLDivElement;
 declare var faceArea: HTMLDivElement;
 declare var dice: HTMLImageElement;
 declare var dicebutton: HTMLDivElement;

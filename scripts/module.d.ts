@@ -108,7 +108,7 @@ declare module Module {
         status: PersonalStatus;
         maxStatus: PersonalStatus;
         titleBook: TitleBook;
-        mutableTitleBook: TitleBook;
+        mutableTitleBook(): TitleBook;
 
         getSemesterGrade(spring: boolean): number;
         getAverageGrade(): number;

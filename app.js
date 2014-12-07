@@ -57,9 +57,10 @@ function createGameCenter(gender) {
         faceArea.style.backgroundImage = charInCell.style.backgroundImage = "url(UI/캐릭터/여자/여자1.png)";
     }
     moveCharacter(1);
-    colorize(gameCenter.map, Module.Month.March);
+    reflectMonth(Module.Month.March);
     reflectMaxStatus(gameCenter.mutableCharacter());
     reflectStatus(gameCenter.mutableCharacter());
+    gameCenter.recordCurrentStatus();
 }
 function moveCharacter(day) {
     charInCell.classList.remove("cell" + charInCell.dataset["day"]);
@@ -68,10 +69,46 @@ function moveCharacter(day) {
 }
 function reflectDate(dateIndex) {
     var monthday = Module.MonthDay.fromIndex(dateIndex);
-    if (currentMonth !== monthday.month)
-        changeMonth(monthday.month);
+    if (currentMonth !== monthday.month) {
+        reflectMonth(monthday.month);
+        reflectTitles(assignTitles());
+        gameCenter.recordCurrentStatus();
+    }
     moveCharacter(monthday.day);
     monthday.delete();
+}
+function reflectTitles(titles) {
+    while (gameCharacterTitlesArea.firstChild)
+        gameCharacterTitlesArea.removeChild(gameCharacterTitlesArea.firstChild);
+    titles.forEach(function (title) {
+        var displayName;
+        switch (title) {
+            case "outsider":
+                displayName = "아싸";
+                break;
+            case "alcoholic":
+                displayName = "술쟁이";
+                break;
+            case "circle_resident":
+                displayName = "동방충";
+                break;
+            case "nerd":
+                displayName = "공부벌레";
+                break;
+            case "couple":
+                displayName = "연애중";
+                break;
+            case "circle_independent":
+                displayName = "무동아리";
+                break;
+            case "weak":
+                displayName = "체력낮음";
+                break;
+            default:
+                throw new Error("알 수 없는 칭호");
+        }
+        gameCharacterTitlesArea.appendChild(DOMLiner.element("div", null, displayName));
+    });
 }
 function dateIndexToString(index) {
     var monthday = Module.MonthDay.fromIndex(index);
@@ -124,7 +161,7 @@ function rollDice() {
         uncoverScreen();
     });
 }
-function changeMonth(month) {
+function reflectMonth(month) {
     for (var i = currentMonth.value + 1; i <= month.value; i++) {
         var monthProgressDiv = gameProgressArea.children[i - 3];
         monthProgressDiv.classList.add("progressin");
@@ -199,6 +236,25 @@ function hideOptions() {
 }
 function setCellMessage(message) {
     cellMessage.textContent = message;
+}
+function assignTitles() {
+    var increase = gameCenter.getStatusIncrease();
+    var titleBook = gameCenter.mutableCharacter().mutableTitleBook();
+    var titles = [];
+    var assign = function (title, enable) {
+        if (enable) {
+            titleBook.addTitle(title);
+            titles.push(title);
+        }
+        else
+            titleBook.removeTitle(title);
+    };
+    assign("outsider", increase.relationship < 10);
+    assign("alcoholic", increase.relationship > 50 && increase.selfImprovement <= 8);
+    assign("circle_resident", increase.selfImprovement > 16);
+    assign("nerd", increase.study > -10);
+    assign("circle_independent", increase.selfImprovement == 0);
+    return titles;
 }
 ///<reference path="screenapi.ts" />
 ///<reference path="gamefunctions.ts" />
