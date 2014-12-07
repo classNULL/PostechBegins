@@ -15,6 +15,7 @@ function createGameCenter(gender: Module.Sexuality) {
     }
     moveCharacter(1);
     reflectMonth(Module.Month.March);
+    reflectMonthEvent(Module.Month.March);
     reflectMaxStatus(gameCenter.mutableCharacter());
     reflectStatus(gameCenter.mutableCharacter());
     gameCenter.recordCurrentStatus();
@@ -31,9 +32,14 @@ function reflectDate(dateIndex: number) {
     if (currentMonth !== monthday.month) {
         reflectMonth(monthday.month);
         reflectTitles(assignTitles());
+        passMonthEvent();
+        reflectMonthEvent(monthday.month);
         gameCenter.recordCurrentStatus();
     }
-    moveCharacter(monthday.day)
+    else {
+        gameMonthEventResultDisplay.textContent = "";
+    }
+    moveCharacter(monthday.day);
     monthday.delete();
 }
 
@@ -55,6 +61,15 @@ function reflectTitles(titles: string[]) {
         }
         gameCharacterTitlesArea.appendChild(DOMLiner.element("div", null, displayName));
     });
+}
+
+function reflectMonthEvent(month: Module.Month) {
+    currentMonthEvent = getMonthEvent(month);
+    gameMonthEventDisplay.textContent = currentMonthEvent.introduction;
+}
+function passMonthEvent() {
+    var eventResultMessage = currentMonthEvent.checkSuccess(gameCenter.character, gameCenter.getStatusIncrease());
+    gameMonthEventResultDisplay.textContent = eventResultMessage;
 }
 
 function dateIndexToString(index: number) {
@@ -133,6 +148,21 @@ function reflectMonth(month: Module.Month) {
     gameTitleArea.textContent = month.value + "월";
     document.documentElement.style.backgroundImage = 'url("UI/wallpaper/' + month.value + '.jpg")';
     colorize(gameCenter.map, month);
+}
+
+function getMonthEvent(month: Module.Month) {
+    switch (month) {
+        case Module.Month.March: return new Module.MarchEvent();
+        case Module.Month.April: return new Module.AprilEvent();
+        case Module.Month.May: return new Module.MayEvent();
+        case Module.Month.June: return new Module.JuneEvent();
+        case Module.Month.September: return new Module.SeptemberEvent();
+        case Module.Month.October: return new Module.OctoberEvent();
+        case Module.Month.November: return new Module.NovemberEvent();
+        case Module.Month.December: return new Module.DecemberEvent();
+        
+        default: throw new Error("이 달에는 이벤트가 발생할 수 없습니다");
+    }
 }
 
 /* cover */

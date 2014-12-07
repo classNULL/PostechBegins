@@ -8,6 +8,7 @@
 #include "maptable.hpp"
 #include "cell.hpp"
 #include "celloption.hpp"
+#include "event.hpp"
 
 #ifndef EMBIND_H
 #define EMBIND_H

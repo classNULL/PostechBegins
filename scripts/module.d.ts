@@ -143,4 +143,19 @@ declare module Module {
         evaluateRelationship(): string;
         evaluateSelfImprovement(): string;
     }
+
+    class MonthEvent extends EmscriptenClass {
+        month: Month;
+        introduction: string;
+        checkSuccess(hero: Hero, status: PersonalStatus): string;
+        constructor();
+    }
+    class MarchEvent extends MonthEvent { }
+    class AprilEvent extends MonthEvent { }
+    class MayEvent extends MonthEvent { }
+    class JuneEvent extends MonthEvent { }
+    class SeptemberEvent extends MonthEvent { }
+    class OctoberEvent extends MonthEvent { }
+    class NovemberEvent extends MonthEvent { }
+    class DecemberEvent extends MonthEvent { }
 }

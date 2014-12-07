@@ -1,5 +1,5 @@
-postechbegins: gamecenter.o hero.o cell.o monthday.o maptable.o score.o title.o celloption.o mainwrapper.o
-  emcc --bind gamecenter.o hero.o cell.o monthday.o maptable.o score.o title.o celloption.o mainwrapper.o -o ../postechbegins.out.js
+postechbegins: gamecenter.o hero.o cell.o monthday.o maptable.o score.o title.o celloption.o event.o mainwrapper.o
+  emcc --bind gamecenter.o hero.o cell.o monthday.o maptable.o score.o title.o celloption.o event.o mainwrapper.o -o ../postechbegins.out.js
 
 gamecenter.o:
   emcc -std=c++11 -c gamecenter.cpp
@@ -25,11 +25,14 @@ title.o:
 celloption.o:
 	emcc -std=c++11 -c celloption.cpp
 
+event.o:
+	emcc -std=c++11 -c event.cpp
+
 mainwrapper.o:
   emcc --bind -std=c++11 -c mainwrapper.cpp
 
 clean:
-  rm gamecenter.o hero.o cell.o monthday.o maptable.o score.o title.o celloption.o mainwrapper.o ../postechbegins.out.js ../postechbegins.out.js.map
+  rm gamecenter.o hero.o cell.o monthday.o maptable.o score.o title.o celloption.o event.o mainwrapper.o ../postechbegins.out.js ../postechbegins.out.js.map
 
 cleano:
-  rm gamecenter.o hero.o cell.o monthday.o maptable.o score.o title.o celloption.o mainwrapper.o
+  rm gamecenter.o hero.o cell.o monthday.o maptable.o score.o title.o celloption.o event.o mainwrapper.o

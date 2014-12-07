@@ -20,6 +20,8 @@ declare var dicebutton: HTMLDivElement;
 declare var stressDisplayBar: HTMLProgressElement;
 declare var energyDisplayBar: HTMLProgressElement;
 declare var gameGradeSpan: HTMLSpanElement;
+declare var gameMonthEventDisplay: HTMLDivElement;
+declare var gameMonthEventResultDisplay: HTMLDivElement;
 
 declare var cellPanel: HTMLDivElement;
 declare var cellMessage: HTMLDivElement;
@@ -44,6 +46,7 @@ window.screen.lock("landscape-primary");
 Module.srand(Date.now() & 65535);
 var gameCenter: Module.GameCenter;
 var currentMonth = Module.Month.March;
+var currentMonthEvent: Module.MonthEvent;
 
 var charInCell: HTMLDivElement;
 var gameProgressArea: HTMLDivElement;

@@ -58,6 +58,7 @@ function createGameCenter(gender) {
     }
     moveCharacter(1);
     reflectMonth(Module.Month.March);
+    reflectMonthEvent(Module.Month.March);
     reflectMaxStatus(gameCenter.mutableCharacter());
     reflectStatus(gameCenter.mutableCharacter());
     gameCenter.recordCurrentStatus();
@@ -72,7 +73,12 @@ function reflectDate(dateIndex) {
     if (currentMonth !== monthday.month) {
         reflectMonth(monthday.month);
         reflectTitles(assignTitles());
+        passMonthEvent();
+        reflectMonthEvent(monthday.month);
         gameCenter.recordCurrentStatus();
+    }
+    else {
+        gameMonthEventResultDisplay.textContent = "";
     }
     moveCharacter(monthday.day);
     monthday.delete();
@@ -109,6 +115,14 @@ function reflectTitles(titles) {
         }
         gameCharacterTitlesArea.appendChild(DOMLiner.element("div", null, displayName));
     });
+}
+function reflectMonthEvent(month) {
+    currentMonthEvent = getMonthEvent(month);
+    gameMonthEventDisplay.textContent = currentMonthEvent.introduction;
+}
+function passMonthEvent() {
+    var eventResultMessage = currentMonthEvent.checkSuccess(gameCenter.character, gameCenter.getStatusIncrease());
+    gameMonthEventResultDisplay.textContent = eventResultMessage;
 }
 function dateIndexToString(index) {
     var monthday = Module.MonthDay.fromIndex(index);
@@ -170,6 +184,28 @@ function reflectMonth(month) {
     gameTitleArea.textContent = month.value + "월";
     document.documentElement.style.backgroundImage = 'url("UI/wallpaper/' + month.value + '.jpg")';
     colorize(gameCenter.map, month);
+}
+function getMonthEvent(month) {
+    switch (month) {
+        case Module.Month.March:
+            return new Module.MarchEvent();
+        case Module.Month.April:
+            return new Module.AprilEvent();
+        case Module.Month.May:
+            return new Module.MayEvent();
+        case Module.Month.June:
+            return new Module.JuneEvent();
+        case Module.Month.September:
+            return new Module.SeptemberEvent();
+        case Module.Month.October:
+            return new Module.OctoberEvent();
+        case Module.Month.November:
+            return new Module.NovemberEvent();
+        case Module.Month.December:
+            return new Module.DecemberEvent();
+        default:
+            throw new Error("이 달에는 이벤트가 발생할 수 없습니다");
+    }
 }
 /* cover */
 function coverScreen() {
@@ -262,6 +298,7 @@ window.screen.lock("landscape-primary");
 Module.srand(Date.now() & 65535);
 var gameCenter;
 var currentMonth = Module.Month.March;
+var currentMonthEvent;
 var charInCell;
 var gameProgressArea;
 var cover;

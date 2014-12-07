@@ -128,4 +128,17 @@ EMSCRIPTEN_BINDINGS(PostechBegins_Main) {
     .function("evaluateGradeScore", &Score::evaluate_grade_score)
     .function("evaluateRelationship", &Score::evaluate_relationship)
     .function("evaluateSelfImprovement", &Score::evaluate_self_develop);
+
+  class_<month_event>("MonthEvent")
+    .property("month", &month_event::get_month)
+    .property("introduction", &month_event::introduction_message)
+    .function("checkSuccess", &month_event::check_success, allow_raw_pointers());
+  class_<march_event, base<month_event>>("MarchEvent").constructor();
+  class_<april_event, base<month_event>>("AprilEvent").constructor();
+  class_<may_event, base<month_event>>("MayEvent").constructor();
+  class_<june_event, base<month_event>>("JuneEvent").constructor();
+  class_<september_event, base<month_event>>("SeptemberEvent").constructor();
+  class_<october_event, base<month_event>>("OctoberEvent").constructor();
+  class_<november_event, base<month_event>>("NovemberEvent").constructor();
+  class_<december_event, base<month_event>>("DecemberEvent").constructor();
 }
