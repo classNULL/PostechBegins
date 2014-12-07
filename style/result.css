@@ -39,6 +39,13 @@
     background-repeat: no-repeat;
     background-size: contain;
     background-image: url(../UI/캐릭터/남자/남자1.png);
+
+    display: flex;
+    flex-direction: column-reverse;
+  }
+  .result-panel .back {
+    margin-right: -40px;
+    margin-bottom: -40px;
   }
   .result-panel .content-footer {
     background-color: rgba(256, 256, 256, 0.58);

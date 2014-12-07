@@ -17,10 +17,8 @@ float Score::calc_grade_score(float grade) {//게임을 진행하여 받은 학�
     return 280 + (grade - 3.7) / 0.3 * 30;
   else if (grade < 4.3)
     return 350 + (grade - 4.0) / 0.3 * 30;
-  else if (grade == 4.3)
-    return 400;
   else
-    throw runtime_error("4.3보다 큼");
+    return 400;
 }
 
 float Score::generate_grade(float study) {//게임 진행 결과 학점을 정해주는 함수이다. 게임에서 얻은 공부점수 만큼 학점을 부여하는데, 학점은 어느 정도의 운이 따르기 때문에 rand()를 이용하여 약간의 오차가 발생하도록 설정하였다.

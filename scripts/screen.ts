@@ -81,6 +81,10 @@ module GameScreen {
 module ResultScreen {
     export function show() { resultPanel.style.display = "" }
     export function hide() { resultPanel.style.cssText += "display: none !important"; }
+    export function returnToStartScreen() {
+        ResultScreen.hide();
+        StartScreen.show();
+    }
 
     export function reflectResult(character: Module.Hero) {
         var score = Module.Score.score(character);

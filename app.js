@@ -450,6 +450,11 @@ var ResultScreen;
         resultPanel.style.cssText += "display: none !important";
     }
     ResultScreen.hide = hide;
+    function returnToStartScreen() {
+        ResultScreen.hide();
+        StartScreen.show();
+    }
+    ResultScreen.returnToStartScreen = returnToStartScreen;
     function reflectResult(character) {
         var score = Module.Score.score(character);
         var sex = character.sexuality == Module.Sexuality.Woman ? "여자" : "남자";
