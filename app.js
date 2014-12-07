@@ -88,14 +88,14 @@ function reflectDate(dateIndex) {
 function reflectLove() {
     var love = gameCenter.character.status.love;
     var mutableCharacter = gameCenter.mutableCharacter();
+    currentTitles = currentTitles.filter(function (title) { return title !== "couple"; });
     if (love == 100) {
         mutableCharacter.mutableTitleBook().addTitle("couple");
         mutableCharacter.couple();
-        currentTitles.push("연애중");
+        currentTitles.push("couple");
     }
     else if (love < 50) {
         mutableCharacter.mutableTitleBook().removeTitle("couple");
-        currentTitles = currentTitles.filter(function (title) { return title !== "couple"; });
     }
     reflectTitles(currentTitles);
 }
