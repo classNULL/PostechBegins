@@ -100,7 +100,9 @@ EMSCRIPTEN_BINDINGS(PostechBegins_Main) {
     .property("titleBook", &hero::get_title_book)
     .function("mutableTitleBook", &hero::get_title_book_pointer, allow_raw_pointers())
     .function("getSemesterGrade", &hero::get_semester_grade)
-    .function("getAverageGrade", &hero::get_average_grade);
+    .function("getAverageGrade", &hero::get_average_grade)
+    .function("takeExam", &hero::take_exam)
+    .function("finishSemester", &hero::finish_semester);
 
   value_object<TitleEffect>("TitleEffect")
     .field("alcohol", &TitleEffect::alcohol)

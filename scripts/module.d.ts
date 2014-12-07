@@ -105,12 +105,15 @@ declare module Module {
         constructor(maxStatus: PersonalStatus, sex: Sexuality);
         sexuality: Sexuality;
         spring: boolean;
-        getSemesterGrade(spring: boolean): number;
-        getAverageGrade(): number;
         status: PersonalStatus;
         maxStatus: PersonalStatus;
         titleBook: TitleBook;
         mutableTitleBook: TitleBook;
+
+        getSemesterGrade(spring: boolean): number;
+        getAverageGrade(): number;
+        takeExam(): void;
+        finishSemester(): void;
     }
 
     interface TitleEffect {

@@ -3,7 +3,7 @@
   flex-direction: column;
 }
   .result-panel .title {
-    height: 150px;
+    height: 120px;
   }
   .result-panel .content-row {
     flex: 1;
@@ -31,7 +31,7 @@
     width: 600px;
   }
   .result-panel .character {
-    flex: 1;
+    flex: 0.3;
     padding: 40px;
     margin-top: -80px;
     background-origin: content-box;
@@ -49,3 +49,12 @@
   .result-panel .result-total-grade {
     color: red;
   }
+  .result-panel .result-progress-flow {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+  }
+  .result-panel .result-progress-flow > div {
+    margin-top: 30px;
+  }
+

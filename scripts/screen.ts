@@ -51,7 +51,12 @@ module ComicScreen {
                 });
             })(i);
         }
-        return sequence.then(() => timeoutPromise(2000));
+        return sequence
+            .then(() => timeoutPromise(2000))
+            .then(() => {
+                parent.appendChild(DOMLiner.element("div", { class: "fade-in", style: 'background-image: url("UI/로딩화면/logo.jpg")' }));
+            })
+            .then(() => timeoutPromise(4000));
     }
     function clear() {
         while (comicPanel.firstChild)

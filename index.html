@@ -173,14 +173,22 @@
       <div class="content">
         <div class="result">
           <div class="progress">
-            <span id="resultTotalEvaluation"></span><br />
-            평균 학점: <span id="resultGradeSpan"></span><br /><br />
-            학점 점수: <br />
-            <progress id="resultGradeScoreProgress" class="swordbar" value="30" max="400"></progress><br />
-            인간관계 점수: <br />
-            <progress id="resultRelationshipProgress" class="swordbar" value="30" max="300"></progress><br />
-            자기계발 점수: <br />
-            <progress id="resultSelfImprovementProgress" class="swordbar" value="30" max="300"></progress>
+            <span id="resultTotalEvaluation"></span><br /><br />
+            평균 학점: <span id="resultGradeSpan"></span><br />
+            <div class="result-progress-flow">
+              <div>
+                학점 점수:
+                <progress id="resultGradeScoreProgress" class="swordbar" value="30" max="400"></progress>
+              </div>
+              <div>
+                인간관계 점수:
+                <progress id="resultRelationshipProgress" class="swordbar" value="30" max="300"></progress>
+              </div>
+              <div>
+                자기계발 점수:
+                <progress id="resultSelfImprovementProgress" class="swordbar" value="30" max="300"></progress>
+              </div>
+            </div>
           </div>
           <div id="resultPanelCharacter" class="character">
 
@@ -188,7 +196,7 @@
         </div>
         <div class="content-footer">
           학점: <span id="resultGradeEvaluation"></span><br />
-          인간관계: <span id="resultRelatioshipEvaluation"></span><br />
+          인간관계: <span id="resultRelationshipEvaluation"></span><br />
           자기계발: <span id="resultSelfImprovementEvaluation"></span>
         </div>
       </div>

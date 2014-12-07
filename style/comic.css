@@ -11,3 +11,21 @@
     background-repeat: no-repeat;
     background-position: center;
   }
+  .comic-panel .fade-in {
+    -webkit-animation-name: fade-in;
+    -webkit-animation-duration: 2s;
+    -webkit-animation-timing-function: linear;
+    animation-name: fade-in;
+    animation-duration: 2s;
+    animation-timing-function: linear;
+  }
+
+@keyframes fade-in {
+  from { opacity: 0 }
+  to { opacity: 1 }
+}
+
+@-webkit-keyframes fade-in {
+  from { opacity: 0 }
+  to { opacity: 1 }
+}

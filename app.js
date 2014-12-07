@@ -299,7 +299,9 @@ var ComicScreen;
                 });
             })(i);
         }
-        return sequence.then(function () { return timeoutPromise(2000); });
+        return sequence.then(function () { return timeoutPromise(2000); }).then(function () {
+            parent.appendChild(DOMLiner.element("div", { class: "fade-in", style: 'background-image: url("UI/로딩화면/logo.jpg")' }));
+        }).then(function () { return timeoutPromise(4000); });
     }
     ComicScreen.play = play;
     function clear() {
