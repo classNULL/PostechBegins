@@ -33,15 +33,11 @@ void hero::take_exam() {
 }
 float hero::get_semester_grade(bool is_spring) const {
 	float result;
-	if (is_spring) {
-		for (const auto& grade: this->spring_grades)
-			result += grade;
+	auto& semester_grades = is_spring ? this->spring_grades : this->autumn_grades;
+	for (const auto& grade: semester_grades) {
+		result += grade;
 	}
-	else {
-		for (const auto& grade: this->autumn_grades)
-			result += grade;
-	}
-	return result / 2;
+	return result / semester_grades.size();
 }
 float hero::get_average_grade() const {
 	return (this->get_semester_grade(true) + this->get_semester_grade(false)) / 2;
