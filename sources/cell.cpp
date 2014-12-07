@@ -1,7 +1,7 @@
 #include "cell.hpp"
 
 cell_option_book cell::call_option_zero(hero* _hero, int day) {
-    clog << "'this' pointer" << _hero << endl; vector<cell_option> options;
+    vector<cell_option> options;
 
     options.push_back(cell_option(L"휴식", [_hero, day]() {
         _hero->change_status(
@@ -13,7 +13,7 @@ cell_option_book cell::call_option_zero(hero* _hero, int day) {
     return cell_option_book(L"에너지가 부족합니다.", options);
 }
 cell_option_book cell::call_option_special(hero* _hero, int day) {
-    clog << "'this' pointer" << _hero << endl; vector<cell_option> options;
+    vector<cell_option> options;
 
     options.push_back(cell_option(L"공부하기", [_hero, day]() {
         _hero->change_status(
