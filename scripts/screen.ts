@@ -1,26 +1,26 @@
-﻿class StartScreen {
-    static show() { startarea.style.display = ""; }
-    static hide() { startarea.style.cssText += "display: none !important"; }
+﻿module StartScreen {
+    export function show() { startarea.style.display = ""; }
+    export function hide() { startarea.style.cssText += "display: none !important"; }
 
-    static startGame() {
+    export function startGame() {
         StartScreen.hide();
         CharacterSelectionScreen.show();
     }
-    static resumeGame() { }
-    static introduce() {
+    export function resumeGame() { }
+    export function introduce() {
         StartScreen.hide();
         IntroScreen.show();
     }
 }
 
-class CharacterSelectionScreen {
-    static show() { 
+module CharacterSelectionScreen {
+    export function show() { 
         selectorPanel.style.display = "";
         document.documentElement.style.backgroundImage = 'url("UI/게임 설명화면/선택화면배경.jpg")';
     }
-    static hide() { selectorPanel.style.cssText += "display: none !important"; }
+    export function hide() { selectorPanel.style.cssText += "display: none !important"; }
 
-    static select(sexuality: Module.Sexuality) {
+    export function select(sexuality: Module.Sexuality) {
         CharacterSelectionScreen.hide();
         ComicScreen.show();
         ComicScreen.play()
@@ -33,13 +33,13 @@ class CharacterSelectionScreen {
     }
 }
 
-class ComicScreen {
-    static show() {
+module ComicScreen {
+    export function show() {
         comicPanel.style.display = "";
         document.documentElement.style.backgroundImage = 'url("UI/로딩화면/배경.png")';
     }
-    static hide() { comicPanel.style.cssText += "display: none !important"; }
-    static play() { 
+    export function hide() { comicPanel.style.cssText += "display: none !important"; }
+    export function play() { 
         var parent = comicPanel;
         var sequence = Promise.resolve<void>();
         for (var i = 2; i <= 6; i++) {
@@ -53,22 +53,37 @@ class ComicScreen {
         }
         return sequence.then(() => timeoutPromise(2000));
     }
-    private static clear() {
+    function clear() {
         while (comicPanel.firstChild)
             comicPanel.removeChild(comicPanel.firstChild);
     }
 }
 
-class IntroScreen {
-    static show() { introPanel.style.display = "" }
-    static hide() { introPanel.style.cssText += "display: none !important"; }
-    static returnToStartScreen() {
+module IntroScreen {
+    export function show() { introPanel.style.display = "" }
+    export function hide() { introPanel.style.cssText += "display: none !important"; }
+    export function returnToStartScreen() {
         IntroScreen.hide();
         StartScreen.show();
     }
 }
 
-class GameScreen {
-    static show() { gamearea.style.display = "" }
-    static hide() { gamearea.style.cssText += "display: none !important"; }
+module GameScreen {
+    export function show() { gamearea.style.display = "" }
+    export function hide() { gamearea.style.cssText += "display: none !important"; }
+}
+
+module ResultScreen {
+    export function show() { resultPanel.style.display = "" }
+    export function hide() { resultPanel.style.cssText += "display: none !important"; }
+
+    export function reflectResult(character: Module.Hero) {
+        var score = Module.Score.score(character);
+        var sex = character.sexuality == Module.Sexuality.Woman ? "여자" : "남자";
+        resultPanelCharacter.style.backgroundImage = "url(UI/캐릭터/" + sex + "/" + sex + "1.png)";
+
+        resultGradeScoreProgress.value = score.gradeScore;
+        resultRelationshipProgress.value = score.relationship;
+        resultSelfImprovementProgress.value = score.selfImprovement;
+    }
 }

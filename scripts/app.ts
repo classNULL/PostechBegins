@@ -10,6 +10,7 @@ declare var selectorPanel: HTMLDivElement;
 declare var introPanel: HTMLDivElement;
 declare var comicPanel: HTMLDivElement;
 declare var gamearea: HTMLDivElement;
+declare var resultPanel: HTMLDivElement;
 
 declare var gameTitleArea: HTMLDivElement;
 declare var faceArea: HTMLDivElement;
@@ -26,6 +27,11 @@ declare var gameStartButton: HTMLDivElement;
 declare var gameResumeButton: HTMLDivElement;
 declare var gameIntroButton: HTMLDivElement;
 
+declare var resultPanelCharacter: HTMLDivElement;
+declare var resultGradeScoreProgress: HTMLProgressElement;
+declare var resultRelationshipProgress: HTMLProgressElement;
+declare var resultSelfImprovementProgress: HTMLProgressElement;
+
 window.screen.lock("landscape-primary");
 Module.srand(Date.now() & 65535);
 var gameCenter: Module.GameCenter;
@@ -41,7 +47,10 @@ window.addEventListener("DOMContentLoaded", () => {
     cover = <HTMLDivElement>document.querySelector(".cover");
     optionResultDisplay = <HTMLDivElement>document.querySelector(".option-result-display");
 
-    
+
+    StartScreen.hide();
+    ResultScreen.show();
+
     /*
     createGameCenter(Module.Sexuality.Man);
     reflectDate(gameCenter.currentPosition);

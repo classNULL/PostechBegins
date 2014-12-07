@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="style/intro.css" />
   <link rel="stylesheet" href="style/comic.css" />
   <link rel="stylesheet" href="style/map.css" />
+  <link rel="stylesheet" href="style/result.css" />
 
   <!-- native code -->
   <script src="postechbegins.out.js"></script>
@@ -167,6 +168,29 @@
   </div>
   <!-- 게임 결과 화면 -->
   <div id="resultPanel" class="result-panel full" style="display: none !important">
+    <div class="title">1년 생활 끝!</div>
+    <div class="content-row">
+      <div class="content">
+        <div class="result">
+          <div class="progress">
+            학점: <br /><br />
+            학점 점수: <br />
+            <progress id="stressDisplayBar" class="swordbar" value="30" max="400"></progress><br />
+            인간관계 점수: <br />
+            <progress id="energyDisplayBar" class="swordbar" value="30" max="300"></progress><br />
+            자기계발 점수: <br />
+            <progress id="energyDisplayBar" class="swordbar" value="30" max="300"></progress>
+          </div>
+          <div id="resultPanelCharacter" class="character">
+
+          </div>
+        </div>
+        <div class="content-footer">
+          POSTECH Begins는 POSTECH의 신입생을 위한 1인용 육성 시뮬레이션 게임 입니다.<br />
+          게임이 진행되는 동안 POSTECH 신입생의 1년을 경험하게 되고, 생활 기간 동안 높은 점수를 받는 것을 목표로 합니다.
+        </div>
+      </div>
+    </div>
   </div>
 </body>
 </html>

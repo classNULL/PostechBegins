@@ -203,6 +203,8 @@ window.addEventListener("DOMContentLoaded", function () {
     gameProgressArea = document.querySelector(".gameprogressarea");
     cover = document.querySelector(".cover");
     optionResultDisplay = document.querySelector(".option-result-display");
+    StartScreen.hide();
+    ResultScreen.show();
     /*
     createGameCenter(Module.Sexuality.Man);
     reflectDate(gameCenter.currentPosition);
@@ -213,38 +215,42 @@ function timeoutPromise(time) {
         setTimeout(function () { return resolve(); }, time);
     });
 }
-var StartScreen = (function () {
-    function StartScreen() {
-    }
-    StartScreen.show = function () {
+var StartScreen;
+(function (StartScreen) {
+    function show() {
         startarea.style.display = "";
-    };
-    StartScreen.hide = function () {
+    }
+    StartScreen.show = show;
+    function hide() {
         startarea.style.cssText += "display: none !important";
-    };
-    StartScreen.startGame = function () {
+    }
+    StartScreen.hide = hide;
+    function startGame() {
         StartScreen.hide();
         CharacterSelectionScreen.show();
-    };
-    StartScreen.resumeGame = function () {
-    };
-    StartScreen.introduce = function () {
+    }
+    StartScreen.startGame = startGame;
+    function resumeGame() {
+    }
+    StartScreen.resumeGame = resumeGame;
+    function introduce() {
         StartScreen.hide();
         IntroScreen.show();
-    };
-    return StartScreen;
-})();
-var CharacterSelectionScreen = (function () {
-    function CharacterSelectionScreen() {
     }
-    CharacterSelectionScreen.show = function () {
+    StartScreen.introduce = introduce;
+})(StartScreen || (StartScreen = {}));
+var CharacterSelectionScreen;
+(function (CharacterSelectionScreen) {
+    function show() {
         selectorPanel.style.display = "";
         document.documentElement.style.backgroundImage = 'url("UI/게임 설명화면/선택화면배경.jpg")';
-    };
-    CharacterSelectionScreen.hide = function () {
+    }
+    CharacterSelectionScreen.show = show;
+    function hide() {
         selectorPanel.style.cssText += "display: none !important";
-    };
-    CharacterSelectionScreen.select = function (sexuality) {
+    }
+    CharacterSelectionScreen.hide = hide;
+    function select(sexuality) {
         CharacterSelectionScreen.hide();
         ComicScreen.show();
         ComicScreen.play().then(function () {
@@ -253,20 +259,21 @@ var CharacterSelectionScreen = (function () {
             createGameCenter(sexuality);
             reflectDate(gameCenter.currentPosition);
         });
-    };
-    return CharacterSelectionScreen;
-})();
-var ComicScreen = (function () {
-    function ComicScreen() {
     }
-    ComicScreen.show = function () {
+    CharacterSelectionScreen.select = select;
+})(CharacterSelectionScreen || (CharacterSelectionScreen = {}));
+var ComicScreen;
+(function (ComicScreen) {
+    function show() {
         comicPanel.style.display = "";
         document.documentElement.style.backgroundImage = 'url("UI/로딩화면/배경.png")';
-    };
-    ComicScreen.hide = function () {
+    }
+    ComicScreen.show = show;
+    function hide() {
         comicPanel.style.cssText += "display: none !important";
-    };
-    ComicScreen.play = function () {
+    }
+    ComicScreen.hide = hide;
+    function play() {
         var parent = comicPanel;
         var sequence = Promise.resolve();
         for (var i = 2; i <= 6; i++) {
@@ -279,37 +286,58 @@ var ComicScreen = (function () {
             })(i);
         }
         return sequence.then(function () { return timeoutPromise(2000); });
-    };
-    ComicScreen.clear = function () {
+    }
+    ComicScreen.play = play;
+    function clear() {
         while (comicPanel.firstChild)
             comicPanel.removeChild(comicPanel.firstChild);
-    };
-    return ComicScreen;
-})();
-var IntroScreen = (function () {
-    function IntroScreen() {
     }
-    IntroScreen.show = function () {
+})(ComicScreen || (ComicScreen = {}));
+var IntroScreen;
+(function (IntroScreen) {
+    function show() {
         introPanel.style.display = "";
-    };
-    IntroScreen.hide = function () {
+    }
+    IntroScreen.show = show;
+    function hide() {
         introPanel.style.cssText += "display: none !important";
-    };
-    IntroScreen.returnToStartScreen = function () {
+    }
+    IntroScreen.hide = hide;
+    function returnToStartScreen() {
         IntroScreen.hide();
         StartScreen.show();
-    };
-    return IntroScreen;
-})();
-var GameScreen = (function () {
-    function GameScreen() {
     }
-    GameScreen.show = function () {
+    IntroScreen.returnToStartScreen = returnToStartScreen;
+})(IntroScreen || (IntroScreen = {}));
+var GameScreen;
+(function (GameScreen) {
+    function show() {
         gamearea.style.display = "";
-    };
-    GameScreen.hide = function () {
+    }
+    GameScreen.show = show;
+    function hide() {
         gamearea.style.cssText += "display: none !important";
-    };
-    return GameScreen;
-})();
+    }
+    GameScreen.hide = hide;
+})(GameScreen || (GameScreen = {}));
+var ResultScreen;
+(function (ResultScreen) {
+    function show() {
+        resultPanel.style.display = "";
+    }
+    ResultScreen.show = show;
+    function hide() {
+        resultPanel.style.cssText += "display: none !important";
+    }
+    ResultScreen.hide = hide;
+    function reflectResult(character) {
+        var score = Module.Score.score(character);
+        var sex = character.sexuality == Module.Sexuality.Woman ? "여자" : "남자";
+        resultPanelCharacter.style.backgroundImage = "url(UI/캐릭터/" + sex + "/" + sex + "1.png)";
+        resultGradeScoreProgress.value = score.gradeScore;
+        resultRelationshipProgress.value = score.relationship;
+        resultSelfImprovementProgress.value = score.selfImprovement;
+    }
+    ResultScreen.reflectResult = reflectResult;
+})(ResultScreen || (ResultScreen = {}));
 //# sourceMappingURL=app.js.map

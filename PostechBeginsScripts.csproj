@@ -22,6 +22,7 @@
     <Content Include="index.html" />
     <Content Include="style\comic.css" />
     <Content Include="style\intro.css" />
+    <Content Include="style\result.css" />
     <Content Include="style\start.css" />
     <Content Include="style\map.css" />
     <Content Include="style\selection.css" />
