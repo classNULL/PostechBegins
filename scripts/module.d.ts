@@ -109,6 +109,8 @@ declare module Module {
         maxStatus: PersonalStatus;
         titleBook: TitleBook;
         mutableTitleBook(): TitleBook;
+        mosol: boolean;
+        couple(): void;
 
         getSemesterGrade(spring: boolean): number;
         getAverageGrade(): number;

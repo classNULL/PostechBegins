@@ -72,16 +72,31 @@ function reflectDate(dateIndex) {
     var monthday = Module.MonthDay.fromIndex(dateIndex);
     if (currentMonth !== monthday.month) {
         reflectMonth(monthday.month);
-        reflectTitles(assignTitles());
+        currentTitles = assignTitles();
+        reflectTitles(currentTitles);
         passMonthEvent();
         reflectMonthEvent(monthday.month);
         gameCenter.recordCurrentStatus();
     }
-    else {
+    else if (monthday.day > 15) {
         gameMonthEventResultDisplay.textContent = "";
     }
     moveCharacter(monthday.day);
     monthday.delete();
+}
+function reflectLove() {
+    var love = gameCenter.character.status.love;
+    var mutableCharacter = gameCenter.mutableCharacter();
+    if (love == 100) {
+        mutableCharacter.mutableTitleBook().addTitle("couple");
+        mutableCharacter.couple();
+        currentTitles.push("연애중");
+    }
+    else if (love < 50) {
+        mutableCharacter.mutableTitleBook().removeTitle("couple");
+        currentTitles = currentTitles.filter(function (title) { return title !== "couple"; });
+    }
+    reflectTitles(currentTitles);
 }
 function reflectTitles(titles) {
     while (gameCharacterTitlesArea.firstChild)
@@ -299,6 +314,7 @@ Module.srand(Date.now() & 65535);
 var gameCenter;
 var currentMonth = Module.Month.March;
 var currentMonthEvent;
+var currentTitles = [];
 var charInCell;
 var gameProgressArea;
 var cover;

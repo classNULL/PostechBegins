@@ -47,6 +47,7 @@ Module.srand(Date.now() & 65535);
 var gameCenter: Module.GameCenter;
 var currentMonth = Module.Month.March;
 var currentMonthEvent: Module.MonthEvent;
+var currentTitles: string[] = [];
 
 var charInCell: HTMLDivElement;
 var gameProgressArea: HTMLDivElement;

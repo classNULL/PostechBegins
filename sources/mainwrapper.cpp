@@ -98,6 +98,8 @@ EMSCRIPTEN_BINDINGS(PostechBegins_Main) {
     .property("status", &hero::status)
     .property("maxStatus", &hero::max_status)
     .property("titleBook", &hero::get_title_book)
+    .property("mosol", &hero::is_mosol)
+    .function("couple", &hero::couple)
     .function("mutableTitleBook", &hero::get_title_book_pointer, allow_raw_pointers())
     .function("getSemesterGrade", &hero::get_semester_grade)
     .function("getAverageGrade", &hero::get_average_grade)
