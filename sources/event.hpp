@@ -1,3 +1,6 @@
+#ifndef EVENT_H
+#define EVENT_H
+
 #include "monthday.hpp"
 #include <iostream>
 
@@ -78,3 +81,5 @@ public:
 	wstring introduction_message();
 	wstring check_success();
 };
+
+#endif
