@@ -72,8 +72,8 @@ function reflectDate(dateIndex) {
     var monthday = Module.MonthDay.fromIndex(dateIndex);
     if (currentMonth !== monthday.month) {
         reflectMonth(monthday.month);
-        currentTitles = assignTitles();
-        reflectTitles(currentTitles);
+        assignTitles();
+        reflectTitles();
         passMonthEvent();
         reflectMonthEvent(monthday.month);
         gameCenter.recordCurrentStatus();
@@ -88,23 +88,22 @@ function reflectDate(dateIndex) {
 function reflectLove() {
     var love = gameCenter.character.status.love;
     var mutableCharacter = gameCenter.mutableCharacter();
-    currentTitles = currentTitles.filter(function (title) { return title !== "couple"; });
     if (love == 100) {
         mutableCharacter.mutableTitleBook().addTitle("couple");
         mutableCharacter.couple();
-        currentTitles.push("couple");
     }
     else if (love < 50) {
         mutableCharacter.mutableTitleBook().removeTitle("couple");
     }
-    reflectTitles(currentTitles);
+    reflectTitles();
 }
-function reflectTitles(titles) {
+function reflectTitles() {
     while (gameCharacterTitlesArea.firstChild)
         gameCharacterTitlesArea.removeChild(gameCharacterTitlesArea.firstChild);
-    titles.forEach(function (title) {
+    var titleVector = gameCenter.character.titleBook.containingTitles();
+    for (var i = 0; i < titleVector.size; i++) {
         var displayName;
-        switch (title) {
+        switch (titleVector.at(i)) {
             case "outsider":
                 displayName = "아싸";
                 break;
@@ -130,7 +129,7 @@ function reflectTitles(titles) {
                 throw new Error("알 수 없는 칭호");
         }
         gameCharacterTitlesArea.appendChild(DOMLiner.element("div", null, displayName));
-    });
+    }
 }
 function reflectMonthEvent(month) {
     currentMonthEvent = getMonthEvent(month);
@@ -292,12 +291,9 @@ function setCellMessage(message) {
 function assignTitles() {
     var increase = gameCenter.getStatusIncrease();
     var titleBook = gameCenter.mutableCharacter().mutableTitleBook();
-    var titles = [];
     var assign = function (title, enable) {
-        if (enable) {
+        if (enable)
             titleBook.addTitle(title);
-            titles.push(title);
-        }
         else
             titleBook.removeTitle(title);
     };
@@ -306,7 +302,6 @@ function assignTitles() {
     assign("circle_resident", increase.selfImprovement > 16);
     assign("nerd", increase.study > -10);
     assign("circle_independent", increase.selfImprovement == 0);
-    return titles;
 }
 ///<reference path="screenapi.ts" />
 ///<reference path="gamefunctions.ts" />
@@ -315,7 +310,6 @@ Module.srand(Date.now() & 65535);
 var gameCenter;
 var currentMonth = Module.Month.March;
 var currentMonthEvent;
-var currentTitles = [];
 var charInCell;
 var gameProgressArea;
 var cover;

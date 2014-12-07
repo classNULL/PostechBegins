@@ -8,6 +8,13 @@
 }
 
 declare module Module {
+    class EmscriptenStringVector {
+        at(index: number): string;
+        size: number;
+    }
+}
+
+declare module Module {
     function srand(seed: number): void;
     class MonthDay extends EmscriptenClass {
         static fromIndex(dateIndex: number): MonthDay;
@@ -132,6 +139,7 @@ declare module Module {
         hasTitle(name: string): boolean;
         addTitle(name: string): void;
         removeTitle(name: string): void;
+        containingTitles(): EmscriptenStringVector;
     }
 
     class Score extends EmscriptenClass {

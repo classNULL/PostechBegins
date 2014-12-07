@@ -116,6 +116,8 @@ EMSCRIPTEN_BINDINGS(PostechBegins_Main) {
 
   class_<TitleBook>("TitleBook")
     .property("totalTitleEffect", &TitleBook::get_total_title_effect)
+    .property("size", &TitleBook::size)
+    .function("containingTitles", &TitleBook::containing_titles)
     .function("hasTitle", &TitleBook::has_title)
     .function("addTitle", &TitleBook::add_title)
     .function("removeTitle", &TitleBook::remove_title);
@@ -143,4 +145,8 @@ EMSCRIPTEN_BINDINGS(PostechBegins_Main) {
   class_<october_event, base<month_event>>("OctoberEvent").constructor();
   class_<november_event, base<month_event>>("NovemberEvent").constructor();
   class_<december_event, base<month_event>>("DecemberEvent").constructor();
+
+  class_<vector<string>>("EmscriptenStringVector")
+    .property("size", &vector<string>::size)
+    .function("at", select_overload<string&(unsigned int)>(&vector<string>::at));
 }

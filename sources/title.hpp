@@ -3,7 +3,9 @@
 
 #include "global.hpp"
 #include <map>
-//칭호를 설정해주는 것에 대해서 설정을 하는 struct이다. 
+#include <vector>
+
+//칭호를 설정해주는 것에 대해서 설정을 하는 struct이다.
 struct TitleEffect {
 public:
   PersonalStatus alcohol;
@@ -24,7 +26,7 @@ public:
     };
   }
 
-  TitleEffect multiply(const TitleEffect& effect) {//칭호의 효과를 원래의 효과에 곱해서 실현될 수 있도록한다. 
+  TitleEffect multiply(const TitleEffect& effect) {//칭호의 효과를 원래의 효과에 곱해서 실현될 수 있도록한다.
     auto result = *this;
 
     result.alcohol = result.alcohol.multiply(effect.alcohol);
@@ -38,12 +40,15 @@ public:
   }
 };
 
-class TitleBook {//칭호를 설정하는데 필요한 기능들을 모두 모아놓은 class이다. 
+class TitleBook {//칭호를 설정하는데 필요한 기능들을 모두 모아놓은 class이다.
 private:
   map<string, TitleEffect> titles;
   TitleEffect total_title_effect = TitleEffect::get_base();
   void calc_total_title_effect();
 public:
+  vector<string> containing_titles() const;
+  int size() const { return titles.size(); };
+
   bool has_title(string) const;
   void add_title(string);
   void remove_title(string);
@@ -52,7 +57,7 @@ public:
   };
 };
 
-class Titles {//칭호가 어떤 역할을 하는지에 대해서 정의를 하는 class 이다. 
+class Titles {//칭호가 어떤 역할을 하는지에 대해서 정의를 하는 class 이다.
 private:
   Titles() = delete;
 
