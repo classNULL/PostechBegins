@@ -18,6 +18,7 @@ declare var dice: HTMLImageElement;
 declare var dicebutton: HTMLDivElement;
 declare var stressDisplayBar: HTMLProgressElement;
 declare var energyDisplayBar: HTMLProgressElement;
+declare var gameGradeSpan: HTMLSpanElement;
 
 declare var cellPanel: HTMLDivElement;
 declare var cellMessage: HTMLDivElement;
@@ -27,6 +28,7 @@ declare var gameStartButton: HTMLDivElement;
 declare var gameResumeButton: HTMLDivElement;
 declare var gameIntroButton: HTMLDivElement;
 
+declare var resultGradeSpan: HTMLSpanElement;
 declare var resultPanelCharacter: HTMLDivElement;
 declare var resultGradeScoreProgress: HTMLProgressElement;
 declare var resultRelationshipProgress: HTMLProgressElement;
@@ -47,10 +49,10 @@ window.addEventListener("DOMContentLoaded", () => {
     cover = <HTMLDivElement>document.querySelector(".cover");
     optionResultDisplay = <HTMLDivElement>document.querySelector(".option-result-display");
 
-
+    /*
     StartScreen.hide();
     ResultScreen.show();
-
+    */
     /*
     createGameCenter(Module.Sexuality.Man);
     reflectDate(gameCenter.currentPosition);

@@ -94,10 +94,13 @@ EMSCRIPTEN_BINDINGS(PostechBegins_Main) {
   class_<hero>("Hero")
     .constructor<PersonalStatus, sexuality>()
     .property("sexuality", &hero::get_sexuality)
+    .property("spring", &hero::is_spring)
     .property("status", &hero::status)
     .property("maxStatus", &hero::max_status)
     .property("titleBook", &hero::get_title_book)
-    .function("mutableTitleBook", &hero::get_title_book_pointer, allow_raw_pointers());
+    .function("mutableTitleBook", &hero::get_title_book_pointer, allow_raw_pointers())
+    .function("getSemesterGrade", &hero::get_semester_grade)
+    .function("getAverageGrade", &hero::get_average_grade);
 
   value_object<TitleEffect>("TitleEffect")
     .field("alcohol", &TitleEffect::alcohol)

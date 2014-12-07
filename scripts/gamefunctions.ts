@@ -46,6 +46,7 @@ function rollDice() {
     coverScreen();
 
     var optionBook: Module.CellOptionBook;
+    var cell: Module.Cell;
     return timeoutPromise(500)
         .then(() => {
             dice.classList.remove("rotate");
@@ -58,8 +59,9 @@ function rollDice() {
             var newPosition = gameCenter.move(step);
             reflectDate(newPosition);
 
-            optionBook = gameCenter.map.at(newPosition).callOption(gameCenter.mutableCharacter(), newPosition - currentPosition);
-            setCellMessage(gameCenter.map.at(gameCenter.currentPosition).cellMessage);
+            cell = gameCenter.map.at(newPosition);
+            optionBook = cell.callOption(gameCenter.mutableCharacter(), newPosition - currentPosition);
+            setCellMessage(cell.cellMessage);
         })
         .then(() => timeoutPromise(500))
         .then(() => {
@@ -68,9 +70,22 @@ function rollDice() {
             return waitOptionSelection();
         })
         .then((index) => {
+            if (cell instanceof Module.WinterVacationCell) {
+                GameScreen.hide();
+                ResultScreen.reflectResult(gameCenter.character);
+                ResultScreen.show();
+
+                gameCenter.delete();
+                return;
+            }
+
             var result = optionBook.at(index).apply();
             optionResultDisplay.textContent = result;
             optionBook.delete();
+
+            if (cell instanceof Module.ExamCell) {
+                gameGradeSpan.textContent = gameCenter.character.getSemesterGrade(gameCenter.character.spring).toFixed(2);
+            }
 
             reflectStatus(gameCenter.mutableCharacter());
             reflectDate(gameCenter.passSkips());

@@ -104,6 +104,9 @@ declare module Module {
     class Hero extends EmscriptenClass {
         constructor(maxStatus: PersonalStatus, sex: Sexuality);
         sexuality: Sexuality;
+        spring: boolean;
+        getSemesterGrade(spring: boolean): number;
+        getAverageGrade(): number;
         status: PersonalStatus;
         maxStatus: PersonalStatus;
         titleBook: TitleBook;

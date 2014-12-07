@@ -84,6 +84,7 @@ function rollDice() {
     dicebutton.classList.add("pushed");
     coverScreen();
     var optionBook;
+    var cell;
     return timeoutPromise(500).then(function () {
         dice.classList.remove("rotate");
         var step = gameCenter.dice();
@@ -92,16 +93,27 @@ function rollDice() {
         var currentPosition = gameCenter.currentPosition;
         var newPosition = gameCenter.move(step);
         reflectDate(newPosition);
-        optionBook = gameCenter.map.at(newPosition).callOption(gameCenter.mutableCharacter(), newPosition - currentPosition);
-        setCellMessage(gameCenter.map.at(gameCenter.currentPosition).cellMessage);
+        cell = gameCenter.map.at(newPosition);
+        optionBook = cell.callOption(gameCenter.mutableCharacter(), newPosition - currentPosition);
+        setCellMessage(cell.cellMessage);
     }).then(function () { return timeoutPromise(500); }).then(function () {
         setOptions(optionBook);
         showOptions();
         return waitOptionSelection();
     }).then(function (index) {
+        if (cell instanceof Module.WinterVacationCell) {
+            GameScreen.hide();
+            ResultScreen.reflectResult(gameCenter.character);
+            ResultScreen.show();
+            gameCenter.delete();
+            return;
+        }
         var result = optionBook.at(index).apply();
         optionResultDisplay.textContent = result;
         optionBook.delete();
+        if (cell instanceof Module.ExamCell) {
+            gameGradeSpan.textContent = gameCenter.character.getSemesterGrade(gameCenter.character.spring).toFixed(2);
+        }
         reflectStatus(gameCenter.mutableCharacter());
         reflectDate(gameCenter.passSkips());
         reflectFace(gameCenter.character);
@@ -203,8 +215,10 @@ window.addEventListener("DOMContentLoaded", function () {
     gameProgressArea = document.querySelector(".gameprogressarea");
     cover = document.querySelector(".cover");
     optionResultDisplay = document.querySelector(".option-result-display");
+    /*
     StartScreen.hide();
     ResultScreen.show();
+    */
     /*
     createGameCenter(Module.Sexuality.Man);
     reflectDate(gameCenter.currentPosition);
