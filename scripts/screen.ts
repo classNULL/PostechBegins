@@ -82,8 +82,15 @@ module ResultScreen {
         var sex = character.sexuality == Module.Sexuality.Woman ? "여자" : "남자";
         resultPanelCharacter.style.backgroundImage = "url(UI/캐릭터/" + sex + "/" + sex + "1.png)";
 
+        resultGradeSpan.textContent = character.getAverageGrade().toFixed(2);
         resultGradeScoreProgress.value = score.gradeScore;
         resultRelationshipProgress.value = score.relationship;
         resultSelfImprovementProgress.value = score.selfImprovement;
+
+        resultTotalGrade.textContent = score.total.toFixed(2);
+        resultTotalEvaluation.textContent = score.evaluateTotal();
+        resultGradeEvaluation.textContent = score.evaluateGradeScore();
+        resultRelationshipEvaluation.textContent = score.evaluateRelationship();
+        resultSelfImprovementEvaluation.textContent = score.evaluateSelfImprovement();
     }
 }

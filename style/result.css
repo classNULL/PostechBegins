@@ -25,7 +25,7 @@
   .result-panel .progress {
     font-size: 50px;
     flex: 1;
-    padding: 80px;
+    padding: 0 60px 60px 60px;
   }
   .result-panel progress {
     width: 600px;
@@ -44,4 +44,8 @@
     background-color: rgba(256, 256, 256, 0.58);
     padding: 20px;
     font-size: 42px;
+  }
+
+  .result-panel .result-total-grade {
+    color: red;
   }

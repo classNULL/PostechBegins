@@ -37,45 +37,61 @@ Score Score::score(const hero& _hero) {
     .self_develop = static_cast<int>(_hero.status().self_develop * 3)
   };
 }
-
-string Score::evaluate_grade_score() {
+wstring Score::evaluate_total() {
+  float total = this->get_total();
+  if (total > 800) {
+   return L"1학년 생활을 굉장히 잘 보내었군요! 당신은 훌륭한 POSTECH의 인재가 될 것입니다!";
+  }
+  else if (total > 600) {
+    return L"높은 점수를 받으셨군요! 축하드립니다! 다음엔 최고를 향해서 도전해 보시기 바랍니다!";
+  }
+  else if (total > 400) {
+    return L"무언가 잊고 사시지는 않았나요? 한가지, 두가지 놓치고 산 것이 큰 영향을 미칠 수 있답니다.";
+  }
+  else if (total > 200) {
+    return L"아메바는 면하셨군요. 이러한 대학생활에 만족하십니까?";
+  }
+  else
+    return L"재입학하시는게 어떠십니까?";
+}
+wstring Score::evaluate_grade_score() {
   switch (this->grade_score / 100) {
     case 4:
-      return "와 학점왕! 일 년 동안 후회 없이 공부했네요!";
+      return L"와 학점왕! 일 년 동안 후회 없이 공부했네요!";
     case 3://300이상
-      return "오 학점, 좋아 좋아. 일 학년이라면 적당히 놀고 적당히 공부하고. 딱 좋네요.";
+      return L"오 학점, 좋아 좋아. 일 학년이라면 적당히 놀고 적당히 공부하고. 딱 좋네요.";
     case 2://200이상
-      return "음...학점이 참...거참.... 일 학년이지만 이건 아닌데...음...아닌데...";
+      return L"음...학점이 참...거참.... 일 학년이지만 이건 아닌데...음...아닌데...";
     case 1://100이상
-      return "학점이 가관입니다. 혼자 허리케인 같은 일학년 삶을 살았구만요. 계속되면 안됩니다..";
+      return L"학점이 가관입니다. 혼자 허리케인 같은 일학년 삶을 살았구만요. 계속되면 안됩니다..";
     case 0://100미만
-      return "오 학점 0점...대? 당신은 카이스트 생?";
+      return L"오 학점 0점...대? 당신은 카이스트 생?";
   }
   throw runtime_error("학점 점수가 이상합니다.");
 }
-string Score::evaluate_relationship() {
-  switch (this->relationship / 100){
+wstring Score::evaluate_relationship() {
+  switch (this->relationship / 100) {
     case 3:
-      return "일학년 동안 만날 사람 다 만났네요. 인간 관계가 아주 훌륭합니다.";
+      return L"일학년 동안 만날 사람 다 만났네요. 인간 관계가 아주 훌륭합니다.";
     case 2://200이상
-      return "인간 관계 좋아요. 적절히 잘 쌓았군요.";
+      return L"인간 관계 좋아요. 적절히 잘 쌓았군요.";
     case 1://100이상
-      return "인간 관계가 약간 부족해요. 일학년 때 놓치면 안될 사람들도 많은데!";
+      return L"인간 관계가 약간 부족해요. 일학년 때 놓치면 안될 사람들도 많은데!";
     case 0://100미만
-      return "인간관계 점수가... 영...0.... 인생은 혼자 사는 게 아니에요~ 다양한 사람과의 교류를 즐겨봅시다.";
+      return L"인간관계 점수가... 영...0.... 인생은 혼자 사는 게 아니에요~ 다양한 사람과의 교류를 즐겨봅시다.";
   }
   throw runtime_error("인간관계 점수가 이상합니다.");
 }
-string Score::evaluate_self_develop() {
-  switch (this->self_develop / 100){
+wstring Score::evaluate_self_develop() {
+  switch (this->self_develop / 100) {
     case 3:
-      return "탄탄한 자기 계발로 보낸 1년. 많이 성장했겠습니다~!";
+      return L"탄탄한 자기 계발로 보낸 1년. 많이 성장했겠습니다~!";
     case 2://200이상
-      return "가끔은 자기 계발에도 시간을 투자하는 것도 좋아요.";
+      return L"가끔은 자기 계발에도 시간을 투자하는 것도 좋아요.";
     case 1://100이상
-      return "음... 자기 계발에 더 시간을 투자해야만 해요. 앞으로 신경쓰기!";
+      return L"음... 자기 계발에 더 시간을 투자해야만 해요. 앞으로 신경쓰기!";
     case 0://100미만
-      return "이건 아닌데.... 진정한 포스테키안이라면 자기 계발은 선택이 아니라 필수입니다. 분발하세요!";
+      return L"이건 아닌데.... 진정한 포스테키안이라면 자기 계발은 선택이 아니라 필수입니다. 분발하세요!";
   }
   throw runtime_error("자기계발 점수가 이상합니다.");
 }

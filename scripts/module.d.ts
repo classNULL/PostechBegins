@@ -131,9 +131,11 @@ declare module Module {
 
     class Score extends EmscriptenClass {
         static score(hero: Hero): Score;
+        total: number;
         gradeScore: number;
         relationship: number;
         selfImprovement: number;
+        evaluateTotal(): string;
         evaluateGradeScore(): string;
         evaluateRelationship(): string;
         evaluateSelfImprovement(): string;

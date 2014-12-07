@@ -118,9 +118,11 @@ EMSCRIPTEN_BINDINGS(PostechBegins_Main) {
 
   class_<Score>("Score")
     .class_function("score", &Score::score)
+    .property("total", &Score::get_total)
     .property("gradeScore", &Score::get_grade_score)
     .property("relationship", &Score::get_relationship)
     .property("selfImprovement", &Score::get_self_develop)
+    .function("evaluateTotal", &Score::evaluate_total)
     .function("evaluateGradeScore", &Score::evaluate_grade_score)
     .function("evaluateRelationship", &Score::evaluate_relationship)
     .function("evaluateSelfImprovement", &Score::evaluate_self_develop);

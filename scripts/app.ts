@@ -28,11 +28,16 @@ declare var gameStartButton: HTMLDivElement;
 declare var gameResumeButton: HTMLDivElement;
 declare var gameIntroButton: HTMLDivElement;
 
+declare var resultTotalGrade: HTMLSpanElement;
 declare var resultGradeSpan: HTMLSpanElement;
 declare var resultPanelCharacter: HTMLDivElement;
 declare var resultGradeScoreProgress: HTMLProgressElement;
 declare var resultRelationshipProgress: HTMLProgressElement;
 declare var resultSelfImprovementProgress: HTMLProgressElement;
+declare var resultTotalEvaluation: HTMLSpanElement;
+declare var resultGradeEvaluation: HTMLSpanElement;
+declare var resultRelationshipEvaluation: HTMLSpanElement;
+declare var resultSelfImprovementEvaluation: HTMLSpanElement;
 
 window.screen.lock("landscape-primary");
 Module.srand(Date.now() & 65535);

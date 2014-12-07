@@ -36,12 +36,14 @@ public:
   */
   static Score score(const hero& _hero);
 
+  int get_total() const { return this->grade_score + this->relationship + this->self_develop; }
   int get_grade_score() const { return this->grade_score; }
   int get_relationship() const { return this->relationship; }
   int get_self_develop() const { return this->self_develop; }
-  string evaluate_grade_score();
-  string evaluate_relationship();
-  string evaluate_self_develop();
+  wstring evaluate_total();
+  wstring evaluate_grade_score();
+  wstring evaluate_relationship();
+  wstring evaluate_self_develop();
 };
 
 #endif
