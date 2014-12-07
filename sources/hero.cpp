@@ -59,9 +59,6 @@ float hero::get_energy_consuming_rate() {
 	else
 		throw runtime_error("스트레스 지수에 이상이 있습니다.");
 }
-void hero::recover_energy() {
-	this->current_status.energy = MAX_STATUS.energy;
-}
 
 void hero::change_energy(float energy, int day){ // energy status 변화
 	auto result = this->current_status.energy + energy * day;

@@ -12,7 +12,6 @@ class hero{
 public:
   hero(const PersonalStatus& status_max, sexuality sex);
   float get_energy_consuming_rate();
-  void recover_energy();
   void change_energy(float, int);
 	void change_love(float, int);
 	void change_relationship(float, int);
