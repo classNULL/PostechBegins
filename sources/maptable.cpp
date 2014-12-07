@@ -18,7 +18,7 @@ int MapTable::check_stop(int reference, int step) {//board에서 구현되어야
       return i;
   }
   return max;
-}
+}//
 
 int MapTable::check_skip(int reference){
   int next = reference;
@@ -70,6 +70,18 @@ void MapTable::install_events() {
   this->_map.at(indices.at(0)) = new eve_1;
   this->_map.at(indices.at(1)) = new eve_2;
   this->_map.at(indices.at(2)) = new eve_3;
+}
+
+void MaptTable::set_event(int order, int day){
+	if(order==1){
+		this->_map.at(day)=new eve_1;
+	}
+	else if(order==2){
+		this->_map.at(day)=new eve_2;
+	}
+	else if(order==3){
+		this->_map.at(day)=new eve_3;
+	}
 }
 
 void MapTable::set_birthday() {

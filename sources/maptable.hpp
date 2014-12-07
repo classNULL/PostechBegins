@@ -17,6 +17,7 @@ private:
   void set_birthday();
 public:
   static MapTable generate_default();
+  void set_event(int i, int j);
   static MapTable generate(const std::vector<cell*>& map) {
     MapTable maptable;
     maptable._map = map;
