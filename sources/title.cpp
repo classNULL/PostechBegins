@@ -1,18 +1,18 @@
 
 #include "title.hpp"
 
-bool TitleBook::has_title(string title_name) const {
+bool TitleBook::has_title(string title_name) const {//칭호를 가지고 있는지를 판단한다. 
   return (this->titles.find(title_name) != this->titles.end());
 }
-void TitleBook::add_title(string title_name) {
+void TitleBook::add_title(string title_name) {//칭호를 추가시켜주는 역할을 한다. 
   this->titles.insert({ title_name, Titles::map.at(title_name) });
   this->calc_total_title_effect();
 }
-void TitleBook::remove_title(string title_name) {
+void TitleBook::remove_title(string title_name) {//칭호를 없애주는 역할을 한다. 
   this->titles.erase(title_name);
   this->calc_total_title_effect();
 }
-void TitleBook::calc_total_title_effect() {
+void TitleBook::calc_total_title_effect() {//칭호로 인한 효과를 계산해주도록 한다. 
   auto result = TitleEffect::get_base();
 
   for (const auto& pair: this->titles)
