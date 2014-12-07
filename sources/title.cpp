@@ -1,3 +1,4 @@
+
 #include "title.hpp"
 
 bool TitleBook::has_title(string title_name) const {
@@ -29,7 +30,7 @@ TitleEffect Titles::outsider = { // 아싸
   .home = { .energy = 1, .relationship = 1, .love = 1, .study = 1, .self_develop = 1, .stress = 1 }
 };
 TitleEffect Titles::alcoholic = { // 술쟁이
-  .alcohol = { .energy = 1, .relationship = 1.1, .love = 1, .study = 1, .self_develop = -1, .stress = 1 },
+  .alcohol = { .energy = 1, .relationship = 1.1, .love = 1, .study = 1, .self_develop = 1, .stress = -1 },
   .study = { .energy = 1, .relationship = 1, .love = 1, .study = 0.9, .self_develop = 1, .stress = 1 },
   .circle = { .energy = 1, .relationship = 1, .love = 1, .study = 1, .self_develop = 1, .stress = 1 },
   .love = { .energy = 1, .relationship = 1, .love = 1, .study = 1, .self_develop = 1, .stress = 1 },
@@ -53,9 +54,9 @@ TitleEffect Titles::nerd = { // 공부벌레
   .home = { .energy = 1, .relationship = 0.95, .love = 1, .study = 1.1, .self_develop = 1, .stress = 0.95 }
 };
 TitleEffect Titles::couple = { // 연애중
-  .alcohol = { .energy = 1.1, .relationship = 0.9, .love = 1, .study = 0.9, .self_develop = 0, .stress = 0.9 },
-  .study = { .energy = 1.1, .relationship = 0.9, .love = 1, .study = 0.9, .self_develop = 0, .stress = 0.9 },
-  .circle = { .energy = 1.1, .relationship = 0.9, .love = 1, .study = 0.9, .self_develop = 0, .stress = 0.9 },
+  .alcohol = { .energy = 1.1, .relationship = 0.9, .love = -1, .study = 0.9, .self_develop = 0, .stress = 0.9 },
+  .study = { .energy = 1.1, .relationship = 0.9, .love = -1, .study = 0.9, .self_develop = 0, .stress = 0.9 },
+  .circle = { .energy = 1.1, .relationship = 0.9, .love = -1, .study = 0.9, .self_develop = 0, .stress = 0.9 },
   .love = { .energy = 1.1, .relationship = 0.9, .love = 1, .study = 0.9, .self_develop = 0, .stress = 0.9 },
   .rest = { .energy = 1.1, .relationship = 0.9, .love = 1, .study = 0.9, .self_develop = 0, .stress = 0.9 },
   .home = { .energy = 1.1, .relationship = 0.9, .love = 1, .study = 0.9, .self_develop = 0, .stress = 0.9 }
