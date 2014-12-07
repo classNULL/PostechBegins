@@ -72,6 +72,8 @@ declare module Module {
 
     class MapTable extends EmscriptenClass {
         at(index: number): Cell;
+        set(index: number, input: Cell): void;
+        size: number;
     }
 
     class Cell extends EmscriptenClass {

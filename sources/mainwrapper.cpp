@@ -34,6 +34,7 @@ EMSCRIPTEN_BINDINGS(PostechBegins_Main) {
 
   class_<GameCenter>("GameCenter")
     .constructor<sexuality>()
+    .class_function("load", &GameCenter::load)
     .property("map", &GameCenter::get_map)
     .property("currentPosition", &GameCenter::get_current_position)
     .property("character", &GameCenter::get_character)
@@ -42,13 +43,22 @@ EMSCRIPTEN_BINDINGS(PostechBegins_Main) {
     .function("move", &GameCenter::move)
     .function("passSkips", &GameCenter::pass_skips)
     .function("recordCurrentStatus", &GameCenter::record_current_status)
-    .function("getStatusIncrease", &GameCenter::get_status_increase);
+    .function("getStatusIncrease", &GameCenter::get_status_increase)
+    .function("getCurrentGameStatus", &GameCenter::get_current_game_status);
+
+  value_object<GameStatus>("GameStatus")
+    .field("characterMaxStatus", &GameStatus::character_max_status)
+    .field("characterStatus", &GameStatus::character_status)
+    .field("characterSexuality", &GameStatus::character_sexuality)
+    .field("characterPosition", &GameStatus::character_position);
 
   class_<MapTable>("MapTable")
     .class_function("generate", &MapTable::generate)
     .class_function("generateDefault", &MapTable::generate_default)
+    .property("size", &MapTable::size)
     .function("checkStop", &MapTable::check_stop)
-    .function("at", &MapTable::at, allow_raw_pointers());
+    .function("at", &MapTable::at, allow_raw_pointers())
+    .function("set", &MapTable::set, allow_raw_pointers());
 
   class_<cell>("Cell")
     .property("isStop", &cell::stop_cell)

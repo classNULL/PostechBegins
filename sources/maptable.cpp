@@ -72,16 +72,8 @@ void MapTable::install_events() {
   this->_map.at(indices.at(2)) = new eve_3;
 }
 
-void MaptTable::set_event(int order, int day){
-	if(order==1){
-		this->_map.at(day)=new eve_1;
-	}
-	else if(order==2){
-		this->_map.at(day)=new eve_2;
-	}
-	else if(order==3){
-		this->_map.at(day)=new eve_3;
-	}
+void MapTable::set(int index, cell* input){
+		this->_map.at(index) = input;
 }
 
 void MapTable::set_birthday() {
@@ -89,7 +81,7 @@ void MapTable::set_birthday() {
   this->_map.at(birthday)->set_birth(true);
 }
 
-MapTable MapTable::generate_default() {
+MapTable MapTable::generate_default(bool random_event) {
   MapTable maptable;
   auto& array = maptable._map = vector<cell*>(306);
   array[MonthDay::from_calendar(March, 1).get_index()] = new weekend;
@@ -408,7 +400,8 @@ MapTable MapTable::generate_default() {
   array[MonthDay::from_calendar(December, 30).get_index()] = new win_vac;
   array[MonthDay::from_calendar(December, 31).get_index()] = new win_vac;
 
-  maptable.install_events();
+  if (random_event)
+    maptable.install_events();
   maptable.set_birthday();
   return maptable;
 }

@@ -78,7 +78,7 @@ function reflectDate(dateIndex) {
         reflectMonthEvent(monthday.month);
         gameCenter.recordCurrentStatus();
     }
-    else if (monthday.day > 15) {
+    else if (monthday.day > 6) {
         gameMonthEventResultDisplay.textContent = "";
     }
     reflectLove();

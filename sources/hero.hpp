@@ -8,8 +8,11 @@
 #include "score.hpp"
 #include "title.hpp"
 class hero{
+private:
+  void set_default_initial_status(sexuality sex);
 public:
   hero(const PersonalStatus& status_max, sexuality sex);
+  hero(const PersonalStatus& status_max, const PersonalStatus& initial_status, sexuality sex);
   //생성자
   float get_energy_consuming_rate();
   //선택 시 체력이 얼마나 감소하는지
@@ -55,8 +58,8 @@ private:
   PersonalStatus current_status = {
     .energy = 0,
     .love = 0,
+    .relationship = 0,
 
-    .relationship = 30,
     .self_develop = 30,
     .study = 100,
     .stress = 0

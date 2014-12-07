@@ -16,17 +16,19 @@ private:
   void install_events();
   void set_birthday();
 public:
-  static MapTable generate_default();
-  void set_event(int i, int j);
-  static MapTable generate(const std::vector<cell*>& map) {
+  static MapTable generate_default(bool random_event = true);
+  static MapTable generate(const std::vector<cell*>& map, bool random_event = true) {
     MapTable maptable;
     maptable._map = map;
-    maptable.install_events();
+    if (random_event)
+      maptable.install_events();
     maptable.set_birthday();
     return maptable;
   }
 
-  cell* at(int i) { return this->_map.at(i); }
+  cell* at(int index) { return this->_map.at(index); }
+  int size() const { return this->_map.size(); }
+  void set(int index, cell* input);
   ~MapTable();
 
   int check_stop(int reference, int step);

@@ -8,6 +8,13 @@
 #include <array>
 #include <algorithm>
 
+struct GameStatus {
+  PersonalStatus character_status;
+  PersonalStatus character_max_status;
+  sexuality character_sexuality;
+  int character_position;
+};
+
 class GameCenter {
 private:
   // int date;
@@ -30,10 +37,13 @@ public:
 private:
   MapTable _map = MapTable::generate_default();
   int _current_position = 2;
+  GameCenter() = default;
 public:
   const MapTable& get_map() const { return this->_map; }
   int get_current_position() const { return this->_current_position; }
   GameCenter(sexuality sex);
+  static GameCenter load(GameStatus initial_status);
+  GameStatus get_current_game_status();
 
 public:
   /** 1과 6 사이 숫자를 무작위로 리턴한다. */

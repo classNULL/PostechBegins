@@ -1,6 +1,6 @@
 #include "hero.hpp"
 
-hero::hero(const PersonalStatus& status_max, sexuality sex) : MAX_STATUS(status_max) {
+void hero::set_default_initial_status(sexuality sex) {
 	if(sex == sexuality::man){
 		this->sex = man;
 		current_status.relationship = 20;
@@ -15,6 +15,15 @@ hero::hero(const PersonalStatus& status_max, sexuality sex) : MAX_STATUS(status_
 		current_status.energy = 80;
 		//성별이 여자일 때
 	}
+}
+
+hero::hero(const PersonalStatus& status_max, sexuality sex) : MAX_STATUS(status_max) {
+	this->set_default_initial_status(sex);
+}
+
+hero::hero(const PersonalStatus& status_max, const PersonalStatus& initial_status, sexuality sex) : MAX_STATUS(status_max) {
+	this->set_default_initial_status(sex);
+	this->current_status = initial_status;
 }
 
 void hero::take_exam() {
