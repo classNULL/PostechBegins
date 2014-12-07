@@ -81,6 +81,7 @@ function reflectDate(dateIndex) {
     else if (monthday.day > 15) {
         gameMonthEventResultDisplay.textContent = "";
     }
+    reflectLove();
     moveCharacter(monthday.day);
     monthday.delete();
 }
