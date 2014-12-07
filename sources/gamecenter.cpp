@@ -379,20 +379,9 @@ GameCenter::GameCenter(sexuality sex) {
     this->_character = new hero({ .energy = 80, .study = 100, .relationship = 80, .self_develop = 100, .love = 100, .stress = 100 }, sex);
 }
 
-GameCenter GameCenter::load(GameStatus initial_status) {
-  GameCenter center;
-  center._character = new hero(initial_status.character_max_status, initial_status.character_status, initial_status.character_sexuality);
-  center._current_position = initial_status.character_position;
-  return center;
-}
-
-GameStatus GameCenter::get_current_game_status() {
-  return {
-    .character_max_status = this->_character->max_status(),
-    .character_status = this->_character->status(),
-    .character_sexuality = this->_character->get_sexuality(),
-    .character_position = this->_current_position
-  };
+GameCenter::GameCenter(CharacterProperty property, int position) {
+  this->_character = new hero(property.max_status, property.status, property.gender == "male" ? sexuality::man : sexuality::woman);
+  this->_current_position = position;
 }
 
 int GameCenter::move(int step){

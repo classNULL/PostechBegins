@@ -34,7 +34,7 @@ EMSCRIPTEN_BINDINGS(PostechBegins_Main) {
 
   class_<GameCenter>("GameCenter")
     .constructor<sexuality>()
-    .class_function("load", &GameCenter::load)
+    .constructor<CharacterProperty, int>()
     .property("map", &GameCenter::get_map)
     .property("currentPosition", &GameCenter::get_current_position)
     .property("character", &GameCenter::get_character)
@@ -43,14 +43,12 @@ EMSCRIPTEN_BINDINGS(PostechBegins_Main) {
     .function("move", &GameCenter::move)
     .function("passSkips", &GameCenter::pass_skips)
     .function("recordCurrentStatus", &GameCenter::record_current_status)
-    .function("getStatusIncrease", &GameCenter::get_status_increase)
-    .function("getCurrentGameStatus", &GameCenter::get_current_game_status);
+    .function("getStatusIncrease", &GameCenter::get_status_increase);
 
-  value_object<GameStatus>("GameStatus")
-    .field("characterMaxStatus", &GameStatus::character_max_status)
-    .field("characterStatus", &GameStatus::character_status)
-    .field("characterSexuality", &GameStatus::character_sexuality)
-    .field("characterPosition", &GameStatus::character_position);
+  value_object<CharacterProperty>("CharacterProperty")
+    .field("maxStatus", &CharacterProperty::max_status)
+    .field("status", &CharacterProperty::status)
+    .field("gender", &CharacterProperty::gender);
 
   class_<MapTable>("MapTable")
     .class_function("generate", &MapTable::generate)
@@ -114,7 +112,8 @@ EMSCRIPTEN_BINDINGS(PostechBegins_Main) {
     .function("getSemesterGrade", &hero::get_semester_grade)
     .function("getAverageGrade", &hero::get_average_grade)
     .function("takeExam", &hero::take_exam)
-    .function("finishSemester", &hero::finish_semester);
+    .function("finishSemester", &hero::finish_semester)
+    .function("getCurrentProperty", &hero::get_current_property);
 
   value_object<TitleEffect>("TitleEffect")
     .field("alcohol", &TitleEffect::alcohol)

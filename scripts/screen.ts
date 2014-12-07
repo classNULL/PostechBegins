@@ -2,6 +2,36 @@
     export function show() { startarea.style.display = ""; }
     export function hide() { startarea.style.cssText += "display: none !important"; }
 
+    export function reflectResumability() {
+        localforage.getItem(gameSaveVersion)
+            .then((value: GameStatus) => {
+                if (!value) {
+                    gameResumeButton.classList.add("disabled");
+                    gameResumeButton.onclick = null;
+                    return;
+                }
+
+                gameResumeButton.classList.remove("disabled");
+                gameCenter = new Module.GameCenter(value.characterProperty, value.position);
+                gameResumeButton.onclick = () => { 
+                    StartScreen.hide();
+                    ComicScreen.show();
+                    ComicScreen.play()
+                        .then(() => {
+                            ComicScreen.hide();
+                            GameScreen.show();
+                            var monthday = Module.MonthDay.fromIndex(gameCenter.currentPosition);
+                            reflectGender(gameCenter.character.sexuality);
+                            reflectMonth(monthday.month);
+                            reflectMonthEvent(monthday.month);
+                            reflectMaxStatus(gameCenter.character);
+                            reflectStatus(gameCenter.character);
+                            reflectDate(gameCenter.currentPosition);
+                            monthday.delete();
+                        });
+                };
+            });
+    }
     export function startGame() {
         StartScreen.hide();
         CharacterSelectionScreen.show();

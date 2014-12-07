@@ -50,18 +50,39 @@ function colorize(maptable, month) {
 ///<reference path="colorizer.ts" />
 function createGameCenter(gender) {
     gameCenter = new Module.GameCenter(gender);
+    reflectGender(gender);
+    reflectMonth(Module.Month.March);
+    reflectMonthEvent(Module.Month.March);
+    reflectMaxStatus(gameCenter.mutableCharacter());
+    reflectStatus(gameCenter.mutableCharacter());
+    gameCenter.recordCurrentStatus();
+    beforeunloadSubscription = EventPromise.subscribeEvent(window, "beforeunload", function (ev) {
+        return ev.returnValue = "게임을 종료하시겠습니까? 현재 상태는 매 20초 및 매달마다 자동으로 저장됩니다.";
+    });
+    var saver = function () {
+        if (!gameCenter)
+            return;
+        saveGame().then(function () { return timeoutPromise(20000); }).then(function () { return saver(); });
+        console.log("Saved");
+    };
+    timeoutPromise(20000).then(function () { return saver(); });
+}
+function saveGame() {
+    return localforage.setItem(gameSaveVersion, {
+        characterProperty: gameCenter.character.getCurrentProperty(),
+        position: gameCenter.currentPosition
+    });
+}
+function removeSave() {
+    return localforage.removeItem(gameSaveVersion);
+}
+function reflectGender(gender) {
     if (gender == Module.Sexuality.Man) {
         faceArea.style.backgroundImage = charInCell.style.backgroundImage = "url(UI/캐릭터/남자/남자1.png)";
     }
     else if (gender == Module.Sexuality.Woman) {
         faceArea.style.backgroundImage = charInCell.style.backgroundImage = "url(UI/캐릭터/여자/여자1.png)";
     }
-    moveCharacter(1);
-    reflectMonth(Module.Month.March);
-    reflectMonthEvent(Module.Month.March);
-    reflectMaxStatus(gameCenter.mutableCharacter());
-    reflectStatus(gameCenter.mutableCharacter());
-    gameCenter.recordCurrentStatus();
 }
 function moveCharacter(day) {
     charInCell.classList.remove("cell" + charInCell.dataset["day"]);
@@ -77,6 +98,7 @@ function reflectDate(dateIndex) {
         passMonthEvent();
         reflectMonthEvent(monthday.month);
         gameCenter.recordCurrentStatus();
+        saveGame();
     }
     else if (monthday.day > 6) {
         gameMonthEventResultDisplay.textContent = "";
@@ -171,6 +193,8 @@ function rollDice() {
             GameScreen.hide();
             ResultScreen.reflectResult(gameCenter.character);
             ResultScreen.show();
+            beforeunloadSubscription.cease();
+            removeSave();
             gameCenter.delete();
             return;
         }
@@ -314,11 +338,14 @@ var charInCell;
 var gameProgressArea;
 var cover;
 var optionResultDisplay;
+var beforeunloadSubscription;
+var gameSaveVersion = "gameSave14120801";
 window.addEventListener("DOMContentLoaded", function () {
     charInCell = document.querySelector(".charInCell");
     gameProgressArea = document.querySelector(".gameprogressarea");
     cover = document.querySelector(".cover");
     optionResultDisplay = document.querySelector(".option-result-display");
+    StartScreen.reflectResumability();
     /*
     StartScreen.hide();
     ResultScreen.show();
@@ -343,6 +370,34 @@ var StartScreen;
         startarea.style.cssText += "display: none !important";
     }
     StartScreen.hide = hide;
+    function reflectResumability() {
+        localforage.getItem(gameSaveVersion).then(function (value) {
+            if (!value) {
+                gameResumeButton.classList.add("disabled");
+                gameResumeButton.onclick = null;
+                return;
+            }
+            gameResumeButton.classList.remove("disabled");
+            gameCenter = new Module.GameCenter(value.characterProperty, value.position);
+            gameResumeButton.onclick = function () {
+                StartScreen.hide();
+                ComicScreen.show();
+                ComicScreen.play().then(function () {
+                    ComicScreen.hide();
+                    GameScreen.show();
+                    var monthday = Module.MonthDay.fromIndex(gameCenter.currentPosition);
+                    reflectGender(gameCenter.character.sexuality);
+                    reflectMonth(monthday.month);
+                    reflectMonthEvent(monthday.month);
+                    reflectMaxStatus(gameCenter.character);
+                    reflectStatus(gameCenter.character);
+                    reflectDate(gameCenter.currentPosition);
+                    monthday.delete();
+                });
+            };
+        });
+    }
+    StartScreen.reflectResumability = reflectResumability;
     function startGame() {
         StartScreen.hide();
         CharacterSelectionScreen.show();

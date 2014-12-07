@@ -56,6 +56,7 @@ declare module Module {
 
     class GameCenter extends EmscriptenClass {
         constructor(sex: Sexuality);
+        constructor(property: CharacterProperty, position: number);
 
         date: number;
         currentPosition: number;
@@ -68,6 +69,12 @@ declare module Module {
         passSkips(): number;
         recordCurrentStatus(): PersonalStatus;
         getStatusIncrease(): PersonalStatus;
+    }
+
+    interface CharacterProperty {
+        maxStatus: PersonalStatus;
+        status: PersonalStatus;
+        gender: Sexuality;
     }
 
     class MapTable extends EmscriptenClass {
@@ -125,6 +132,8 @@ declare module Module {
         getAverageGrade(): number;
         takeExam(): void;
         finishSemester(): void;
+
+        getCurrentProperty(): CharacterProperty;
     }
 
     interface TitleEffect {

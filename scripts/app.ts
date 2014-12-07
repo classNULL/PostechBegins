@@ -52,12 +52,18 @@ var charInCell: HTMLDivElement;
 var gameProgressArea: HTMLDivElement;
 var cover: HTMLDivElement;
 var optionResultDisplay: HTMLDivElement;
+
+var beforeunloadSubscription: EventPromise.EventSubscription;
+
+var gameSaveVersion = "gameSave14120801";
+
 window.addEventListener("DOMContentLoaded", () => {
     charInCell = <HTMLDivElement>document.querySelector(".charInCell");
     gameProgressArea = <HTMLDivElement>document.querySelector(".gameprogressarea");
     cover = <HTMLDivElement>document.querySelector(".cover");
     optionResultDisplay = <HTMLDivElement>document.querySelector(".option-result-display");
 
+    StartScreen.reflectResumability();
     /*
     StartScreen.hide();
     ResultScreen.show();
@@ -72,4 +78,9 @@ function timeoutPromise(time: number) {
     return new Promise<void>((resolve, reject) => {
         setTimeout(() => resolve(), time);
     });
+}
+
+interface GameStatus {
+    characterProperty: Module.CharacterProperty;
+    position: number;
 }

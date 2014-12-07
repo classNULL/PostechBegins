@@ -26,6 +26,14 @@ hero::hero(const PersonalStatus& status_max, const PersonalStatus& initial_statu
 	this->current_status = initial_status;
 }
 
+CharacterProperty hero::get_current_property() {
+	return {
+		.max_status = this->max_status(),
+		.status = this->status(),
+		.gender = this->get_sexuality() == sexuality::man ? "male" : "female"
+	};
+}
+
 void hero::take_exam() {
 	if (this->_is_spring) {
 		if (this->spring_grades.size() < 2)

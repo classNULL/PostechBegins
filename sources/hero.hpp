@@ -7,6 +7,13 @@
 #include "global.hpp"
 #include "score.hpp"
 #include "title.hpp"
+
+struct CharacterProperty {
+  PersonalStatus status;
+  PersonalStatus max_status;
+  string gender;
+};
+
 class hero{
 private:
   void set_default_initial_status(sexuality sex);
@@ -52,6 +59,9 @@ public:
   //1학기인지 아닌지 return
   void finish_semester();
   //학기 종료
+
+  CharacterProperty get_current_property();
+
 private:
   const PersonalStatus MAX_STATUS;
   //스테이터스

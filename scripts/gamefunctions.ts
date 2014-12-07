@@ -3,6 +3,39 @@
 function createGameCenter(gender: Module.Sexuality) {
     gameCenter = new Module.GameCenter(gender);
 
+    reflectGender(gender);
+    reflectMonth(Module.Month.March);
+    reflectMonthEvent(Module.Month.March);
+    reflectMaxStatus(gameCenter.mutableCharacter());
+    reflectStatus(gameCenter.mutableCharacter());
+    gameCenter.recordCurrentStatus();
+
+    beforeunloadSubscription = EventPromise.subscribeEvent(window, "beforeunload", (ev: BeforeUnloadEvent) => {
+        return ev.returnValue = "게임을 종료하시겠습니까? 현재 상태는 매 20초 및 매달마다 자동으로 저장됩니다.";
+    });
+    var saver = () => {
+        if (!gameCenter)
+            return;
+
+        saveGame()
+            .then(() => timeoutPromise(20000))
+            .then(() => saver());
+        console.log("Saved");
+    };
+    timeoutPromise(20000).then(() => saver());
+}
+function saveGame() {
+    return localforage.setItem(gameSaveVersion,
+        <GameStatus>{
+            characterProperty: gameCenter.character.getCurrentProperty(),
+            position: gameCenter.currentPosition
+        });
+}
+function removeSave() {
+    return localforage.removeItem(gameSaveVersion);
+}
+
+function reflectGender(gender: Module.Sexuality) {
     if (gender == Module.Sexuality.Man) {
         faceArea.style.backgroundImage
         = charInCell.style.backgroundImage
@@ -13,12 +46,6 @@ function createGameCenter(gender: Module.Sexuality) {
         = charInCell.style.backgroundImage
         = "url(UI/캐릭터/여자/여자1.png)";
     }
-    moveCharacter(1);
-    reflectMonth(Module.Month.March);
-    reflectMonthEvent(Module.Month.March);
-    reflectMaxStatus(gameCenter.mutableCharacter());
-    reflectStatus(gameCenter.mutableCharacter());
-    gameCenter.recordCurrentStatus();
 }
 
 function moveCharacter(day: number) {
@@ -36,6 +63,7 @@ function reflectDate(dateIndex: number) {
         passMonthEvent();
         reflectMonthEvent(monthday.month);
         gameCenter.recordCurrentStatus();
+        saveGame();
     }
     else if (monthday.day > 6) {
         gameMonthEventResultDisplay.textContent = "";
@@ -130,6 +158,9 @@ function rollDice() {
                 GameScreen.hide();
                 ResultScreen.reflectResult(gameCenter.character);
                 ResultScreen.show();
+
+                beforeunloadSubscription.cease();
+                removeSave();
 
                 gameCenter.delete();
                 return;
