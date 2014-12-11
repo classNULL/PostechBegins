@@ -48,14 +48,23 @@ function colorize(maptable, month) {
     }
 }
 ///<reference path="colorizer.ts" />
-function createGameCenter(gender) {
-    gameCenter = new Module.GameCenter(gender);
-    reflectGender(gender);
-    reflectMonth(Module.Month.March);
-    reflectMonthEvent(Module.Month.March);
-    reflectMaxStatus(gameCenter.mutableCharacter());
-    reflectStatus(gameCenter.mutableCharacter());
+function initializeGame() {
+    reflectGameStatus();
     gameCenter.recordCurrentStatus();
+    runWorkers();
+}
+function reflectGameStatus() {
+    var monthday = Module.MonthDay.fromIndex(gameCenter.currentPosition);
+    reflectMonth(monthday.month);
+    reflectMonthEvent(monthday.month);
+    reflectDate(gameCenter.currentPosition);
+    monthday.delete();
+    reflectGender(gameCenter.character.sexuality);
+    reflectMaxStatus(gameCenter.character);
+    reflectStatus(gameCenter.character);
+    reflectFace(gameCenter.character);
+}
+function runWorkers() {
     beforeunloadSubscription = EventPromise.subscribeEvent(window, "beforeunload", function (ev) {
         return ev.returnValue = "게임을 종료하시겠습니까? 현재 상태는 매 20초 및 매달마다 자동으로 저장됩니다.";
     });
@@ -378,22 +387,8 @@ var StartScreen;
                 return;
             }
             gameResumeButton.classList.remove("disabled");
-            gameCenter = new Module.GameCenter(value.characterProperty, value.position);
             gameResumeButton.onclick = function () {
-                StartScreen.hide();
-                ComicScreen.show();
-                ComicScreen.play().then(function () {
-                    ComicScreen.hide();
-                    GameScreen.show();
-                    var monthday = Module.MonthDay.fromIndex(gameCenter.currentPosition);
-                    reflectGender(gameCenter.character.sexuality);
-                    reflectMonth(monthday.month);
-                    reflectMonthEvent(monthday.month);
-                    reflectMaxStatus(gameCenter.character);
-                    reflectStatus(gameCenter.character);
-                    reflectDate(gameCenter.currentPosition);
-                    monthday.delete();
-                });
+                StartScreen.resumeGame(value);
             };
         });
     }
@@ -403,7 +398,15 @@ var StartScreen;
         CharacterSelectionScreen.show();
     }
     StartScreen.startGame = startGame;
-    function resumeGame() {
+    function resumeGame(value) {
+        StartScreen.hide();
+        ComicScreen.show();
+        ComicScreen.play().then(function () {
+            ComicScreen.hide();
+            GameScreen.show();
+            gameCenter = new Module.GameCenter(value.characterProperty, value.position);
+            initializeGame();
+        });
     }
     StartScreen.resumeGame = resumeGame;
     function introduce() {
@@ -423,14 +426,14 @@ var CharacterSelectionScreen;
         selectorPanel.style.cssText += "display: none !important";
     }
     CharacterSelectionScreen.hide = hide;
-    function select(sexuality) {
+    function select(gender) {
         CharacterSelectionScreen.hide();
         ComicScreen.show();
         ComicScreen.play().then(function () {
             ComicScreen.hide();
             GameScreen.show();
-            createGameCenter(sexuality);
-            reflectDate(gameCenter.currentPosition);
+            gameCenter = new Module.GameCenter(gender);
+            initializeGame();
         });
     }
     CharacterSelectionScreen.select = select;
@@ -515,6 +518,7 @@ var ResultScreen;
         var sex = character.sexuality == Module.Sexuality.Woman ? "여자" : "남자";
         resultPanelCharacter.style.backgroundImage = "url(UI/캐릭터/" + sex + "/" + sex + "1.png)";
         resultGradeSpan.textContent = character.getAverageGrade().toFixed(2);
+        resultNotMosol.textContent = character.mosol ? "X" : "O";
         resultGradeScoreProgress.value = score.gradeScore;
         resultRelationshipProgress.value = score.relationship;
         resultSelfImprovementProgress.value = score.selfImprovement;

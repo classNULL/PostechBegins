@@ -12,23 +12,8 @@
                 }
 
                 gameResumeButton.classList.remove("disabled");
-                gameCenter = new Module.GameCenter(value.characterProperty, value.position);
                 gameResumeButton.onclick = () => { 
-                    StartScreen.hide();
-                    ComicScreen.show();
-                    ComicScreen.play()
-                        .then(() => {
-                            ComicScreen.hide();
-                            GameScreen.show();
-                            var monthday = Module.MonthDay.fromIndex(gameCenter.currentPosition);
-                            reflectGender(gameCenter.character.sexuality);
-                            reflectMonth(monthday.month);
-                            reflectMonthEvent(monthday.month);
-                            reflectMaxStatus(gameCenter.character);
-                            reflectStatus(gameCenter.character);
-                            reflectDate(gameCenter.currentPosition);
-                            monthday.delete();
-                        });
+                    StartScreen.resumeGame(value);
                 };
             });
     }
@@ -36,7 +21,18 @@
         StartScreen.hide();
         CharacterSelectionScreen.show();
     }
-    export function resumeGame() { }
+    export function resumeGame(value: GameStatus) {
+        StartScreen.hide();
+        ComicScreen.show();
+        ComicScreen.play()
+            .then(() => {
+                ComicScreen.hide();
+                GameScreen.show();
+
+                gameCenter = new Module.GameCenter(value.characterProperty, value.position);
+                initializeGame();
+            });
+    }
     export function introduce() {
         StartScreen.hide();
         IntroScreen.show();
@@ -50,15 +46,16 @@ module CharacterSelectionScreen {
     }
     export function hide() { selectorPanel.style.cssText += "display: none !important"; }
 
-    export function select(sexuality: Module.Sexuality) {
+    export function select(gender: Module.Sexuality) {
         CharacterSelectionScreen.hide();
         ComicScreen.show();
         ComicScreen.play()
             .then(() => {
                 ComicScreen.hide();
                 GameScreen.show();
-                createGameCenter(sexuality);
-                reflectDate(gameCenter.currentPosition);
+
+                gameCenter = new Module.GameCenter(gender);
+                initializeGame();
             });
     }
 }
@@ -122,6 +119,7 @@ module ResultScreen {
         resultPanelCharacter.style.backgroundImage = "url(UI/캐릭터/" + sex + "/" + sex + "1.png)";
 
         resultGradeSpan.textContent = character.getAverageGrade().toFixed(2);
+        resultNotMosol.textContent = character.mosol ? "X" : "O";
         resultGradeScoreProgress.value = score.gradeScore;
         resultRelationshipProgress.value = score.relationship;
         resultSelfImprovementProgress.value = score.selfImprovement;

@@ -1,15 +1,23 @@
 ﻿///<reference path="colorizer.ts" />
 
-function createGameCenter(gender: Module.Sexuality) {
-    gameCenter = new Module.GameCenter(gender);
-
-    reflectGender(gender);
-    reflectMonth(Module.Month.March);
-    reflectMonthEvent(Module.Month.March);
-    reflectMaxStatus(gameCenter.mutableCharacter());
-    reflectStatus(gameCenter.mutableCharacter());
+function initializeGame() {
+    reflectGameStatus();
     gameCenter.recordCurrentStatus();
+    runWorkers();
+}
+function reflectGameStatus() {
+    var monthday = Module.MonthDay.fromIndex(gameCenter.currentPosition);
+    reflectMonth(monthday.month);
+    reflectMonthEvent(monthday.month);
+    reflectDate(gameCenter.currentPosition);
+    monthday.delete();
 
+    reflectGender(gameCenter.character.sexuality);
+    reflectMaxStatus(gameCenter.character);
+    reflectStatus(gameCenter.character);
+    reflectFace(gameCenter.character);
+}
+function runWorkers() {
     beforeunloadSubscription = EventPromise.subscribeEvent(window, "beforeunload", (ev: BeforeUnloadEvent) => {
         return ev.returnValue = "게임을 종료하시겠습니까? 현재 상태는 매 20초 및 매달마다 자동으로 저장됩니다.";
     });

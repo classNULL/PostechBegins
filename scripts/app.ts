@@ -32,6 +32,7 @@ declare var gameResumeButton: HTMLDivElement;
 declare var gameIntroButton: HTMLDivElement;
 
 declare var resultTotalGrade: HTMLSpanElement;
+declare var resultNotMosol: HTMLSpanElement;
 declare var resultGradeSpan: HTMLSpanElement;
 declare var resultPanelCharacter: HTMLDivElement;
 declare var resultGradeScoreProgress: HTMLProgressElement;
