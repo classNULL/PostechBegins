@@ -36,11 +36,26 @@ function saveGame() {
     return localforage.setItem(gameSaveVersion,
         <GameStatus>{
             characterProperty: gameCenter.character.getCurrentProperty(),
-            position: gameCenter.currentPosition
+            position: gameCenter.currentPosition,
+            titles: convertStringVectorToArray(gameCenter.character.titleBook.containingTitles())
         });
 }
 function removeSave() {
     return localforage.removeItem(gameSaveVersion);
+}
+function convertStringVectorToArray(vector: Module.EmscriptenStringVector) {
+    var array: string[] = [];
+    for (var i = 0; i < vector.size(); i++) {
+        array.push(vector.get(i));
+    }
+    return array;
+}
+function convertStringArrayToVector(array: string[]) {
+    var vector = new Module.EmscriptenStringVector();
+    for (var i = 0; i < array.length; i++) {
+        vector.push_back(array[i]);
+    }
+    return vector;
 }
 
 function reflectGender(gender: Module.Sexuality) {
@@ -100,9 +115,9 @@ function reflectTitles() {
         gameCharacterTitlesArea.removeChild(gameCharacterTitlesArea.firstChild);
 
     var titleVector = gameCenter.character.titleBook.containingTitles();
-    for (var i = 0; i < titleVector.size; i++) {
+    for (var i = 0; i < titleVector.size(); i++) {
         var displayName: string;
-        switch (titleVector.at(i)) {
+        switch (titleVector.get(i)) {
             case "outsider": displayName = "아싸"; break;
             case "alcoholic": displayName = "술쟁이"; break;
             case "circle_resident": displayName = "동방충"; break;
@@ -110,7 +125,7 @@ function reflectTitles() {
             case "couple": displayName = "연애중"; break;
             case "circle_independent": displayName = "무동아리"; break;
             case "weak": displayName = "체력낮음"; break;
-            default: throw new Error("알 수 없는 칭호");
+            default: displayName = "알 수 없는 칭호"; console.log(titleVector.get(i)); break;
         }
         gameCharacterTitlesArea.appendChild(DOMLiner.element("div", null, displayName));
     }

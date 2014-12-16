@@ -35,7 +35,7 @@ public:
   const MapTable& get_map() const { return this->_map; }
   int get_current_position() const { return this->_current_position; }
   GameCenter(sexuality sex);
-  GameCenter(CharacterProperty property, int position);
+  GameCenter(const CharacterProperty& property, const vector<string>& titles, int position);
 
 public:
   /** 1과 6 사이 숫자를 무작위로 리턴한다. */

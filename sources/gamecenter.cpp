@@ -379,9 +379,13 @@ GameCenter::GameCenter(sexuality sex) {
     this->_character = new hero({ .energy = 80, .study = 100, .relationship = 80, .self_develop = 100, .love = 100, .stress = 100 }, sex);
 }
 
-GameCenter::GameCenter(CharacterProperty property, int position) {
+GameCenter::GameCenter(const CharacterProperty& property, const vector<string>& titles, int position) {
   this->_character = new hero(property.max_status, property.status, property.gender == "male" ? sexuality::man : sexuality::woman);
   this->_current_position = position;
+
+  for (const auto& item: titles) {
+    this->_character->get_title_book_pointer()->add_title(item);
+  }
 }
 
 int GameCenter::move(int step){

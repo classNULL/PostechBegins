@@ -79,11 +79,26 @@ function runWorkers() {
 function saveGame() {
     return localforage.setItem(gameSaveVersion, {
         characterProperty: gameCenter.character.getCurrentProperty(),
-        position: gameCenter.currentPosition
+        position: gameCenter.currentPosition,
+        titles: convertStringVectorToArray(gameCenter.character.titleBook.containingTitles())
     });
 }
 function removeSave() {
     return localforage.removeItem(gameSaveVersion);
+}
+function convertStringVectorToArray(vector) {
+    var array = [];
+    for (var i = 0; i < vector.size(); i++) {
+        array.push(vector.get(i));
+    }
+    return array;
+}
+function convertStringArrayToVector(array) {
+    var vector = new Module.EmscriptenStringVector();
+    for (var i = 0; i < array.length; i++) {
+        vector.push_back(array[i]);
+    }
+    return vector;
 }
 function reflectGender(gender) {
     if (gender == Module.Sexuality.Man) {
@@ -132,9 +147,9 @@ function reflectTitles() {
     while (gameCharacterTitlesArea.firstChild)
         gameCharacterTitlesArea.removeChild(gameCharacterTitlesArea.firstChild);
     var titleVector = gameCenter.character.titleBook.containingTitles();
-    for (var i = 0; i < titleVector.size; i++) {
+    for (var i = 0; i < titleVector.size(); i++) {
         var displayName;
-        switch (titleVector.at(i)) {
+        switch (titleVector.get(i)) {
             case "outsider":
                 displayName = "아싸";
                 break;
@@ -157,7 +172,9 @@ function reflectTitles() {
                 displayName = "체력낮음";
                 break;
             default:
-                throw new Error("알 수 없는 칭호");
+                displayName = "알 수 없는 칭호";
+                console.log(titleVector.get(i));
+                break;
         }
         gameCharacterTitlesArea.appendChild(DOMLiner.element("div", null, displayName));
     }
@@ -348,7 +365,7 @@ var gameProgressArea;
 var cover;
 var optionResultDisplay;
 var beforeunloadSubscription;
-var gameSaveVersion = "gameSave14120801";
+var gameSaveVersion = "gameSave14121600";
 window.addEventListener("DOMContentLoaded", function () {
     charInCell = document.querySelector(".charInCell");
     gameProgressArea = document.querySelector(".gameprogressarea");
@@ -404,7 +421,9 @@ var StartScreen;
         ComicScreen.play().then(function () {
             ComicScreen.hide();
             GameScreen.show();
-            gameCenter = new Module.GameCenter(value.characterProperty, value.position);
+            var titleVector = convertStringArrayToVector(value.titles);
+            gameCenter = new Module.GameCenter(value.characterProperty, titleVector, value.position);
+            titleVector.delete();
             initializeGame();
         });
     }

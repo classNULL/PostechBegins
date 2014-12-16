@@ -67,7 +67,7 @@ cell_option_book normal::call_option(hero* _hero, int day) {
     if (rand() % 100 == 1)
         return this->call_option_special(_hero, day);
 
-    clog << "'this' pointer" << _hero << endl; vector<cell_option> options;
+    vector<cell_option> options;
 
     options.push_back(cell_option(L"공부하기", [_hero, day]() {
         _hero->change_status(

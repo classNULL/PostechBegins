@@ -34,7 +34,7 @@ EMSCRIPTEN_BINDINGS(PostechBegins_Main) {
 
   class_<GameCenter>("GameCenter")
     .constructor<sexuality>()
-    .constructor<CharacterProperty, int>()
+    .constructor<const CharacterProperty&, const vector<string>&, int>()
     .property("map", &GameCenter::get_map)
     .property("currentPosition", &GameCenter::get_current_position)
     .property("character", &GameCenter::get_character)
@@ -155,7 +155,14 @@ EMSCRIPTEN_BINDINGS(PostechBegins_Main) {
   class_<november_event, base<month_event>>("NovemberEvent").constructor();
   class_<december_event, base<month_event>>("DecemberEvent").constructor();
 
-  class_<vector<string>>("EmscriptenStringVector")
-    .property("size", &vector<string>::size)
-    .function("at", select_overload<string&(unsigned int)>(&vector<string>::at));
+  register_vector<string>("EmscriptenStringVector");
+  // class_<vector<string>>("EmscriptenStringVector")
+  //   .constructor()
+  //   .function("at", select_overload<string&(unsigned int)>(&vector<string>::at))
+  //   .function("insert", select_overload<vector<string>::iterator(vector<string>::const_iterator, const string&)>(&vector<string>::insert))
+  //   .property("begin", &vector<string>::begin)
+  //   .property("end", &vector<string>::end)
+  //   .property("size", &vector<string>::size);
+  // class_<vector<string>::iterator>("EmscriptenStringVectorIterator")
+  //   .function("plus", &vector<string>::iterator::operator+);
 }

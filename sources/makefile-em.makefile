@@ -36,3 +36,6 @@ clean:
 
 cleano:
   rm gamecenter.o hero.o cell.o monthday.o maptable.o score.o title.o celloption.o event.o mainwrapper.o
+
+cleanwrapper:
+	rm mainwrapper.o

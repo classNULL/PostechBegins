@@ -56,7 +56,7 @@ var optionResultDisplay: HTMLDivElement;
 
 var beforeunloadSubscription: EventPromise.EventSubscription;
 
-var gameSaveVersion = "gameSave14120801";
+var gameSaveVersion = "gameSave14121600";
 
 window.addEventListener("DOMContentLoaded", () => {
     charInCell = <HTMLDivElement>document.querySelector(".charInCell");
@@ -84,4 +84,5 @@ function timeoutPromise(time: number) {
 interface GameStatus {
     characterProperty: Module.CharacterProperty;
     position: number;
+    titles: string[];
 }

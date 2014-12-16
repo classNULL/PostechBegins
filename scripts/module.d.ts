@@ -1,6 +1,9 @@
 ﻿declare module Module {
     class EmscriptenClass {
         delete(): void;
+        clone(): any; // this;
+        isAliasOf(other: any): boolean;
+        isDeleted(): boolean;
     }
     interface EmscriptenEnum {
         value: number;
@@ -8,9 +11,12 @@
 }
 
 declare module Module {
-    class EmscriptenStringVector {
-        at(index: number): string;
-        size: number;
+    class EmscriptenStringVector extends EmscriptenClass {
+        constructor();
+        get(index: number): string;
+        set(index: number, value: string): boolean;
+        push_back(value: string): void;
+        size(): number;
     }
 }
 
@@ -56,7 +62,7 @@ declare module Module {
 
     class GameCenter extends EmscriptenClass {
         constructor(sex: Sexuality);
-        constructor(property: CharacterProperty, position: number);
+        constructor(property: CharacterProperty, titleVector: EmscriptenStringVector, position: number);
 
         date: number;
         currentPosition: number;

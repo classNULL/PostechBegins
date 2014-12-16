@@ -29,7 +29,9 @@
                 ComicScreen.hide();
                 GameScreen.show();
 
-                gameCenter = new Module.GameCenter(value.characterProperty, value.position);
+                var titleVector = convertStringArrayToVector(value.titles);
+                gameCenter = new Module.GameCenter(value.characterProperty, titleVector, value.position);
+                titleVector.delete();
                 initializeGame();
             });
     }
