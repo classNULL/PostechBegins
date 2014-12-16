@@ -1,5 +1,8 @@
-postechbegins: gamecenter.o hero.o cell.o monthday.o maptable.o score.o title.o celloption.o event.o mainwrapper.o
-  emcc --bind gamecenter.o hero.o cell.o monthday.o maptable.o score.o title.o celloption.o event.o mainwrapper.o -o ../postechbegins.out.js
+objectfiles = gamecenter.o hero.o cell.o monthday.o maptable.o score.o title.o celloption.o event.o mainwrapper.o
+jsfiles = ../postechbegins.out.js ../postechbegins.out.js.map
+
+postechbegins: $(objectfiles)
+  emcc --bind $(objectfiles) -o ../postechbegins.out.js
 
 gamecenter.o:
   emcc -std=c++11 -c gamecenter.cpp
@@ -32,10 +35,10 @@ mainwrapper.o:
   emcc --bind -std=c++11 -c mainwrapper.cpp
 
 clean:
-  rm gamecenter.o hero.o cell.o monthday.o maptable.o score.o title.o celloption.o event.o mainwrapper.o ../postechbegins.out.js ../postechbegins.out.js.map
+  rm $(objectfiles) $(jsfiles)
 
 cleano:
-  rm gamecenter.o hero.o cell.o monthday.o maptable.o score.o title.o celloption.o event.o mainwrapper.o
+  rm $(objectfiles)
 
 cleanwrapper:
 	rm mainwrapper.o
