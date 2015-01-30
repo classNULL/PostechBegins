@@ -10,3 +10,6 @@
 [submodule "submodules/eventpromise"]
 	path = submodules/eventpromise
 	url = https://github.com/SaschaNaz/EventPromise.git
+[submodule "submodules/fixedviewport"]
+	path = submodules/fixedviewport
+	url = https://github.com/SaschaNaz/fixedviewport.js.git

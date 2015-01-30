@@ -58,6 +58,8 @@ var beforeunloadSubscription: EventPromise.EventSubscription;
 
 var gameSaveVersion = "gameSave14121600";
 
+FixedViewport.polyfill(1920, 1080).onDOMContentLoaded();
+
 window.addEventListener("DOMContentLoaded", () => {
     charInCell = <HTMLDivElement>document.querySelector(".charInCell");
     gameProgressArea = <HTMLDivElement>document.querySelector(".gameprogressarea");

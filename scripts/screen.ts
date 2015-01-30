@@ -70,7 +70,7 @@ module ComicScreen {
     export function hide() { comicPanel.style.cssText += "display: none !important"; }
     export function play() { 
         var parent = comicPanel;
-        var sequence = Promise.resolve<void>();
+        var sequence = Promise.resolve();
         for (var i = 2; i <= 6; i++) {
             ((index: number) => {
                 sequence = sequence.then(() => timeoutPromise(2000)).then(() => {
