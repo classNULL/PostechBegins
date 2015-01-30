@@ -44,8 +44,8 @@
     <TypeScriptCompile Include="scripts\screenapi.ts" />
     <TypeScriptCompile Include="scripts\screen.ts" />
     <TypeScriptCompile Include="submodules\domliner\domliner.d.ts" />
-    <TypeScriptCompile Include="submodules\es6-promise.d.ts" />
     <TypeScriptCompile Include="submodules\eventpromise\eventpromise.d.ts" />
+    <TypeScriptCompile Include="submodules\fixedviewport\fixedviewport.d.ts" />
     <TypeScriptCompile Include="submodules\localForage.d.ts" />
   </ItemGroup>
   <PropertyGroup>
