@@ -26,6 +26,10 @@
       background-color: #4A579F;
       padding: 20px 50px 20px 50px;
       margin: 20px;
+      cursor: default;
+    }
+    .startarea .start-buttonarea > div:hover {
+      background-color: #6579C9;
     }
     .startarea .start-buttonarea > div.disabled {
       background-color: gray;
