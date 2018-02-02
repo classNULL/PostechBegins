@@ -2,38 +2,36 @@
     export function show() { startarea.style.display = ""; }
     export function hide() { startarea.style.cssText += "display: none !important"; }
 
-    export function reflectResumability() {
-        localforage.getItem(gameSaveVersion)
-            .then((value: GameStatus) => {
-                if (!value) {
-                    gameResumeButton.classList.add("disabled");
-                    gameResumeButton.onclick = null;
-                    return;
-                }
+    export async function reflectResumability() {
+        const value = await localforage.getItem(gameSaveVersion);
+    
+        if (!value) {
+            gameResumeButton.classList.add("disabled");
+            gameResumeButton.onclick = null;
+            return;
+        }
 
-                gameResumeButton.classList.remove("disabled");
-                gameResumeButton.onclick = () => { 
-                    StartScreen.resumeGame(value);
-                };
-            });
+        gameResumeButton.classList.remove("disabled");
+        gameResumeButton.onclick = () => { 
+            StartScreen.resumeGame(value);
+        };
     }
     export function startGame() {
         StartScreen.hide();
         CharacterSelectionScreen.show();
     }
-    export function resumeGame(value: GameStatus) {
+    export async function resumeGame(value: GameStatus) {
         StartScreen.hide();
         ComicScreen.show();
-        ComicScreen.play()
-            .then(() => {
-                ComicScreen.hide();
-                GameScreen.show();
+        await ComicScreen.play();
 
-                var titleVector = convertStringArrayToVector(value.titles);
-                gameCenter = new Module.GameCenter(value.characterProperty, titleVector, value.position);
-                titleVector.delete();
-                initializeGame();
-            });
+        ComicScreen.hide();
+        GameScreen.show();
+
+        var titleVector = convertStringArrayToVector(value.titles);
+        gameCenter = new Module.GameCenter(value.characterProperty, titleVector, value.position);
+        titleVector.delete();
+        initializeGame();
     }
     export function introduce() {
         StartScreen.hide();
@@ -48,17 +46,15 @@ module CharacterSelectionScreen {
     }
     export function hide() { selectorPanel.style.cssText += "display: none !important"; }
 
-    export function select(gender: Module.Sexuality) {
+    export async function select(gender: Module.Sexuality) {
         CharacterSelectionScreen.hide();
         ComicScreen.show();
-        ComicScreen.play()
-            .then(() => {
-                ComicScreen.hide();
-                GameScreen.show();
+        await ComicScreen.play();   
+        ComicScreen.hide();
+        GameScreen.show();
 
-                gameCenter = new Module.GameCenter(gender);
-                initializeGame();
-            });
+        gameCenter = new Module.GameCenter(gender);
+        initializeGame();
     }
 }
 
@@ -68,24 +64,17 @@ module ComicScreen {
         document.documentElement.style.backgroundImage = 'url("UI/로딩화면/배경.png")';
     }
     export function hide() { comicPanel.style.cssText += "display: none !important"; }
-    export function play() { 
+    export async function play() { 
         var parent = comicPanel;
-        var sequence = Promise.resolve();
-        for (var i = 2; i <= 6; i++) {
-            ((index: number) => {
-                sequence = sequence.then(() => timeoutPromise(2000)).then(() => {
-                    var child = <HTMLDivElement>DOMLiner.element("div", { style: 'background-image: url("UI/로딩화면/' + index + '.png")' });
-                    parent.appendChild(child);
-                    parent = child;
-                });
-            })(i);
+        for (let i = 2; i <= 6; i++) {
+            await timeoutPromise(2000);
+            var child = <HTMLDivElement>DOMLiner.element("div", { style: 'background-image: url("UI/로딩화면/' + i + '.png")' });
+            parent.appendChild(child);
+            parent = child;
         }
-        return sequence
-            .then(() => timeoutPromise(2000))
-            .then(() => {
-                parent.appendChild(DOMLiner.element("div", { class: "fade-in", style: 'background-image: url("UI/로딩화면/logo.jpg")' }));
-            })
-            .then(() => timeoutPromise(4000));
+        await timeoutPromise(2000);
+        parent.appendChild(DOMLiner.element("div", { class: "fade-in", style: 'background-image: url("UI/로딩화면/logo.jpg")' }));
+        await timeoutPromise(4000);
     }
     function clear() {
         while (comicPanel.firstChild)

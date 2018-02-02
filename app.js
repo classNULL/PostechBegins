@@ -1,3 +1,11 @@
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 if (!Screen.prototype.lock)
     Screen.prototype.lock = (orientation) => {
         return new Promise((resolve, reject) => {
@@ -65,18 +73,16 @@ function reflectGameStatus() {
     reflectFace(gameCenter.character);
 }
 function runWorkers() {
-    beforeunloadSubscription = EventPromise.subscribeEvent(window, "beforeunload", (ev) => {
-        return ev.returnValue = "게임을 종료하시겠습니까? 현재 상태는 매 20초 및 매달마다 자동으로 저장됩니다.";
+    return __awaiter(this, void 0, void 0, function* () {
+        beforeunloadSubscription = EventPromise.subscribeEvent(window, "beforeunload", (ev) => {
+            return ev.returnValue = "게임을 종료하시겠습니까? 현재 상태는 매 20초 및 매달마다 자동으로 저장됩니다.";
+        });
+        while (gameCenter) {
+            yield timeoutPromise(20000);
+            yield saveGame();
+            console.log("Saved");
+        }
     });
-    var saver = () => {
-        if (!gameCenter)
-            return;
-        saveGame()
-            .then(() => timeoutPromise(20000))
-            .then(() => saver());
-        console.log("Saved");
-    };
-    timeoutPromise(20000).then(() => saver());
 }
 function saveGame() {
     return localforage.setItem(gameSaveVersion, {
@@ -200,13 +206,13 @@ function dateIndexToString(index) {
     return result;
 }
 function rollDice() {
-    dice.classList.add("rotate");
-    dicebutton.classList.add("pushed");
-    coverScreen();
-    var optionBook;
-    var cell;
-    return timeoutPromise(500)
-        .then(() => {
+    return __awaiter(this, void 0, void 0, function* () {
+        dice.classList.add("rotate");
+        dicebutton.classList.add("pushed");
+        coverScreen();
+        var optionBook;
+        var cell;
+        yield timeoutPromise(500);
         dice.classList.remove("rotate");
         var step = gameCenter.dice();
         optionResultDisplay.textContent = "주사위를 던져서 " + step + "이 나왔다.";
@@ -217,14 +223,10 @@ function rollDice() {
         cell = gameCenter.map.at(newPosition);
         optionBook = cell.callOption(gameCenter.mutableCharacter(), newPosition - currentPosition);
         setCellMessage(cell.cellMessage);
-    })
-        .then(() => timeoutPromise(500))
-        .then(() => {
+        yield timeoutPromise(500);
         setOptions(optionBook);
         showOptions();
-        return waitOptionSelection();
-    })
-        .then((index) => {
+        const index = yield waitOptionSelection();
         if (cell instanceof Module.WinterVacationCell) {
             GameScreen.hide();
             ResultScreen.reflectResult(gameCenter.character);
@@ -395,8 +397,8 @@ var StartScreen;
     function hide() { startarea.style.cssText += "display: none !important"; }
     StartScreen.hide = hide;
     function reflectResumability() {
-        localforage.getItem(gameSaveVersion)
-            .then((value) => {
+        return __awaiter(this, void 0, void 0, function* () {
+            const value = yield localforage.getItem(gameSaveVersion);
             if (!value) {
                 gameResumeButton.classList.add("disabled");
                 gameResumeButton.onclick = null;
@@ -415,10 +417,10 @@ var StartScreen;
     }
     StartScreen.startGame = startGame;
     function resumeGame(value) {
-        StartScreen.hide();
-        ComicScreen.show();
-        ComicScreen.play()
-            .then(() => {
+        return __awaiter(this, void 0, void 0, function* () {
+            StartScreen.hide();
+            ComicScreen.show();
+            yield ComicScreen.play();
             ComicScreen.hide();
             GameScreen.show();
             var titleVector = convertStringArrayToVector(value.titles);
@@ -444,10 +446,10 @@ var CharacterSelectionScreen;
     function hide() { selectorPanel.style.cssText += "display: none !important"; }
     CharacterSelectionScreen.hide = hide;
     function select(gender) {
-        CharacterSelectionScreen.hide();
-        ComicScreen.show();
-        ComicScreen.play()
-            .then(() => {
+        return __awaiter(this, void 0, void 0, function* () {
+            CharacterSelectionScreen.hide();
+            ComicScreen.show();
+            yield ComicScreen.play();
             ComicScreen.hide();
             GameScreen.show();
             gameCenter = new Module.GameCenter(gender);
@@ -466,23 +468,18 @@ var ComicScreen;
     function hide() { comicPanel.style.cssText += "display: none !important"; }
     ComicScreen.hide = hide;
     function play() {
-        var parent = comicPanel;
-        var sequence = Promise.resolve();
-        for (var i = 2; i <= 6; i++) {
-            ((index) => {
-                sequence = sequence.then(() => timeoutPromise(2000)).then(() => {
-                    var child = DOMLiner.element("div", { style: 'background-image: url("UI/로딩화면/' + index + '.png")' });
-                    parent.appendChild(child);
-                    parent = child;
-                });
-            })(i);
-        }
-        return sequence
-            .then(() => timeoutPromise(2000))
-            .then(() => {
+        return __awaiter(this, void 0, void 0, function* () {
+            var parent = comicPanel;
+            for (let i = 2; i <= 6; i++) {
+                yield timeoutPromise(2000);
+                var child = DOMLiner.element("div", { style: 'background-image: url("UI/로딩화면/' + i + '.png")' });
+                parent.appendChild(child);
+                parent = child;
+            }
+            yield timeoutPromise(2000);
             parent.appendChild(DOMLiner.element("div", { class: "fade-in", style: 'background-image: url("UI/로딩화면/logo.jpg")' }));
-        })
-            .then(() => timeoutPromise(4000));
+            yield timeoutPromise(4000);
+        });
     }
     ComicScreen.play = play;
     function clear() {

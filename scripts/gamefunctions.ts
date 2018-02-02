@@ -17,20 +17,15 @@ function reflectGameStatus() {
     reflectStatus(gameCenter.character);
     reflectFace(gameCenter.character);
 }
-function runWorkers() {
+async function runWorkers() {
     beforeunloadSubscription = EventPromise.subscribeEvent(window, "beforeunload", (ev: BeforeUnloadEvent) => {
         return ev.returnValue = "게임을 종료하시겠습니까? 현재 상태는 매 20초 및 매달마다 자동으로 저장됩니다.";
     });
-    var saver = () => {
-        if (!gameCenter)
-            return;
-
-        saveGame()
-            .then(() => timeoutPromise(20000))
-            .then(() => saver());
+    while (gameCenter) {
+        await timeoutPromise(20000);
+        await saveGame();
         console.log("Saved");
-    };
-    timeoutPromise(20000).then(() => saver());
+    }
 }
 function saveGame() {
     return localforage.setItem(gameSaveVersion,
@@ -147,66 +142,65 @@ function dateIndexToString(index: number) {
     return result;
 }
 
-function rollDice() {
+async function rollDice() {
     dice.classList.add("rotate");
     dicebutton.classList.add("pushed");
     coverScreen();
 
     var optionBook: Module.CellOptionBook;
     var cell: Module.Cell;
-    return timeoutPromise(500)
-        .then(() => {
-            dice.classList.remove("rotate");
 
-            var step = gameCenter.dice();
-            optionResultDisplay.textContent = "주사위를 던져서 " + step + "이 나왔다.";
-            dice.src = "UI/UI/기타/dice" + step + ".png";
+    await timeoutPromise(500);
 
-            var currentPosition = gameCenter.currentPosition;
-            var newPosition = gameCenter.move(step);
-            reflectDate(newPosition);
+    dice.classList.remove("rotate");
 
-            cell = gameCenter.map.at(newPosition);
-            optionBook = cell.callOption(gameCenter.mutableCharacter(), newPosition - currentPosition);
-            setCellMessage(cell.cellMessage);
-        })
-        .then(() => timeoutPromise(500))
-        .then(() => {
-            setOptions(optionBook);
-            showOptions();
-            return waitOptionSelection();
-        })
-        .then((index) => {
-            if (cell instanceof Module.WinterVacationCell) {
-                GameScreen.hide();
-                ResultScreen.reflectResult(gameCenter.character);
-                ResultScreen.show();
+    var step = gameCenter.dice();
+    optionResultDisplay.textContent = "주사위를 던져서 " + step + "이 나왔다.";
+    dice.src = "UI/UI/기타/dice" + step + ".png";
 
-                beforeunloadSubscription.cease();
-                removeSave();
+    var currentPosition = gameCenter.currentPosition;
+    var newPosition = gameCenter.move(step);
+    reflectDate(newPosition);
 
-                gameCenter.delete();
-                return;
-            }
+    cell = gameCenter.map.at(newPosition);
+    optionBook = cell.callOption(gameCenter.mutableCharacter(), newPosition - currentPosition);
+    setCellMessage(cell.cellMessage);
 
-            var result = optionBook.at(index).apply();
-            optionResultDisplay.textContent = result;
-            optionBook.delete();
+    await timeoutPromise(500)
 
-            if (cell instanceof Module.ExamCell) {
-                gameGradeSpan.textContent = gameCenter.character.getSemesterGrade(gameCenter.character.spring).toFixed(2);
-            }
+    setOptions(optionBook);
+    showOptions();
+    const index = await waitOptionSelection();
 
-            reflectStatus(gameCenter.mutableCharacter());
-            reflectDate(gameCenter.passSkips());
-            reflectFace(gameCenter.character);
+    if (cell instanceof Module.WinterVacationCell) {
+        GameScreen.hide();
+        ResultScreen.reflectResult(gameCenter.character);
+        ResultScreen.show();
 
-            dicebutton.classList.remove("pushed");
-            dice.src = "UI/UI/기타/dice.png";
-            hideOptions();
-            clearOptions();
-            uncoverScreen();
-        });
+        beforeunloadSubscription.cease();
+        removeSave();
+
+        gameCenter.delete();
+        return;
+    }
+
+    var result = optionBook.at(index).apply();
+    optionResultDisplay.textContent = result;
+    optionBook.delete();
+
+    if (cell instanceof Module.ExamCell) {
+        gameGradeSpan.textContent = gameCenter.character.getSemesterGrade(gameCenter.character.spring).toFixed(2);
+    }
+
+    reflectStatus(gameCenter.mutableCharacter());
+    reflectDate(gameCenter.passSkips());
+    reflectFace(gameCenter.character);
+
+    dicebutton.classList.remove("pushed");
+    dice.src = "UI/UI/기타/dice.png";
+    hideOptions();
+    clearOptions();
+    uncoverScreen();
 }
 
 function reflectMonth(month: Module.Month) {

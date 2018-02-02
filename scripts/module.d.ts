@@ -1,7 +1,7 @@
 ﻿declare module Module {
     class EmscriptenClass {
         delete(): void;
-        clone(): any; // this;
+        clone(): this;
         isAliasOf(other: any): boolean;
         isDeleted(): boolean;
     }
