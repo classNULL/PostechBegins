@@ -1,6 +1,6 @@
 if (!Screen.prototype.lock)
-    Screen.prototype.lock = function (orientation) {
-        return new Promise(function (resolve, reject) {
+    Screen.prototype.lock = (orientation) => {
+        return new Promise((resolve, reject) => {
             var lockOrientation = screen.lockOrientation || screen.mozLockOrientation || screen.msLockOrientation;
             if (lockOrientation && lockOrientation.call(screen, orientation))
                 resolve();
@@ -65,16 +65,18 @@ function reflectGameStatus() {
     reflectFace(gameCenter.character);
 }
 function runWorkers() {
-    beforeunloadSubscription = EventPromise.subscribeEvent(window, "beforeunload", function (ev) {
+    beforeunloadSubscription = EventPromise.subscribeEvent(window, "beforeunload", (ev) => {
         return ev.returnValue = "게임을 종료하시겠습니까? 현재 상태는 매 20초 및 매달마다 자동으로 저장됩니다.";
     });
-    var saver = function () {
+    var saver = () => {
         if (!gameCenter)
             return;
-        saveGame().then(function () { return timeoutPromise(20000); }).then(function () { return saver(); });
+        saveGame()
+            .then(() => timeoutPromise(20000))
+            .then(() => saver());
         console.log("Saved");
     };
-    timeoutPromise(20000).then(function () { return saver(); });
+    timeoutPromise(20000).then(() => saver());
 }
 function saveGame() {
     return localforage.setItem(gameSaveVersion, {
@@ -102,10 +104,14 @@ function convertStringArrayToVector(array) {
 }
 function reflectGender(gender) {
     if (gender == Module.Sexuality.Man) {
-        faceArea.style.backgroundImage = charInCell.style.backgroundImage = "url(UI/캐릭터/남자/남자1.png)";
+        faceArea.style.backgroundImage
+            = charInCell.style.backgroundImage
+                = "url(UI/캐릭터/남자/남자1.png)";
     }
     else if (gender == Module.Sexuality.Woman) {
-        faceArea.style.backgroundImage = charInCell.style.backgroundImage = "url(UI/캐릭터/여자/여자1.png)";
+        faceArea.style.backgroundImage
+            = charInCell.style.backgroundImage
+                = "url(UI/캐릭터/여자/여자1.png)";
     }
 }
 function moveCharacter(day) {
@@ -199,7 +205,8 @@ function rollDice() {
     coverScreen();
     var optionBook;
     var cell;
-    return timeoutPromise(500).then(function () {
+    return timeoutPromise(500)
+        .then(() => {
         dice.classList.remove("rotate");
         var step = gameCenter.dice();
         optionResultDisplay.textContent = "주사위를 던져서 " + step + "이 나왔다.";
@@ -210,11 +217,14 @@ function rollDice() {
         cell = gameCenter.map.at(newPosition);
         optionBook = cell.callOption(gameCenter.mutableCharacter(), newPosition - currentPosition);
         setCellMessage(cell.cellMessage);
-    }).then(function () { return timeoutPromise(500); }).then(function () {
+    })
+        .then(() => timeoutPromise(500))
+        .then(() => {
         setOptions(optionBook);
         showOptions();
         return waitOptionSelection();
-    }).then(function (index) {
+    })
+        .then((index) => {
         if (cell instanceof Module.WinterVacationCell) {
             GameScreen.hide();
             ResultScreen.reflectResult(gameCenter.character);
@@ -306,8 +316,8 @@ function createOptionItemBlock(option, index) {
 }
 function waitOptionSelection() {
     var optionItemBlocks = optionDisplay.children;
-    return new Promise(function (resolve, reject) {
-        var waiter = function (ev) {
+    return new Promise((resolve, reject) => {
+        var waiter = (ev) => {
             for (var i = 0; i < optionItemBlocks.length; i++)
                 optionItemBlocks[i].removeEventListener("click", waiter);
             resolve(parseInt(ev.target.dataset["optionIndex"]));
@@ -332,7 +342,7 @@ function setCellMessage(message) {
 function assignTitles() {
     var increase = gameCenter.getStatusIncrease();
     var titleBook = gameCenter.mutableCharacter().mutableTitleBook();
-    var assign = function (title, enable) {
+    var assign = (title, enable) => {
         if (enable)
             titleBook.addTitle(title);
         else
@@ -358,7 +368,7 @@ var optionResultDisplay;
 var beforeunloadSubscription;
 var gameSaveVersion = "gameSave14121600";
 FixedViewport.polyfill(1920, 1080).onDOMContentLoaded();
-window.addEventListener("DOMContentLoaded", function () {
+window.addEventListener("DOMContentLoaded", () => {
     charInCell = document.querySelector(".charInCell");
     gameProgressArea = document.querySelector(".gameprogressarea");
     cover = document.querySelector(".cover");
@@ -374,29 +384,26 @@ window.addEventListener("DOMContentLoaded", function () {
     */
 });
 function timeoutPromise(time) {
-    return new Promise(function (resolve, reject) {
-        setTimeout(function () { return resolve(); }, time);
+    return new Promise((resolve, reject) => {
+        setTimeout(() => resolve(), time);
     });
 }
 var StartScreen;
 (function (StartScreen) {
-    function show() {
-        startarea.style.display = "";
-    }
+    function show() { startarea.style.display = ""; }
     StartScreen.show = show;
-    function hide() {
-        startarea.style.cssText += "display: none !important";
-    }
+    function hide() { startarea.style.cssText += "display: none !important"; }
     StartScreen.hide = hide;
     function reflectResumability() {
-        localforage.getItem(gameSaveVersion).then(function (value) {
+        localforage.getItem(gameSaveVersion)
+            .then((value) => {
             if (!value) {
                 gameResumeButton.classList.add("disabled");
                 gameResumeButton.onclick = null;
                 return;
             }
             gameResumeButton.classList.remove("disabled");
-            gameResumeButton.onclick = function () {
+            gameResumeButton.onclick = () => {
                 StartScreen.resumeGame(value);
             };
         });
@@ -410,7 +417,8 @@ var StartScreen;
     function resumeGame(value) {
         StartScreen.hide();
         ComicScreen.show();
-        ComicScreen.play().then(function () {
+        ComicScreen.play()
+            .then(() => {
             ComicScreen.hide();
             GameScreen.show();
             var titleVector = convertStringArrayToVector(value.titles);
@@ -433,14 +441,13 @@ var CharacterSelectionScreen;
         document.documentElement.style.backgroundImage = 'url("UI/게임 설명화면/선택화면배경.jpg")';
     }
     CharacterSelectionScreen.show = show;
-    function hide() {
-        selectorPanel.style.cssText += "display: none !important";
-    }
+    function hide() { selectorPanel.style.cssText += "display: none !important"; }
     CharacterSelectionScreen.hide = hide;
     function select(gender) {
         CharacterSelectionScreen.hide();
         ComicScreen.show();
-        ComicScreen.play().then(function () {
+        ComicScreen.play()
+            .then(() => {
             ComicScreen.hide();
             GameScreen.show();
             gameCenter = new Module.GameCenter(gender);
@@ -456,25 +463,26 @@ var ComicScreen;
         document.documentElement.style.backgroundImage = 'url("UI/로딩화면/배경.png")';
     }
     ComicScreen.show = show;
-    function hide() {
-        comicPanel.style.cssText += "display: none !important";
-    }
+    function hide() { comicPanel.style.cssText += "display: none !important"; }
     ComicScreen.hide = hide;
     function play() {
         var parent = comicPanel;
         var sequence = Promise.resolve();
         for (var i = 2; i <= 6; i++) {
-            (function (index) {
-                sequence = sequence.then(function () { return timeoutPromise(2000); }).then(function () {
+            ((index) => {
+                sequence = sequence.then(() => timeoutPromise(2000)).then(() => {
                     var child = DOMLiner.element("div", { style: 'background-image: url("UI/로딩화면/' + index + '.png")' });
                     parent.appendChild(child);
                     parent = child;
                 });
             })(i);
         }
-        return sequence.then(function () { return timeoutPromise(2000); }).then(function () {
+        return sequence
+            .then(() => timeoutPromise(2000))
+            .then(() => {
             parent.appendChild(DOMLiner.element("div", { class: "fade-in", style: 'background-image: url("UI/로딩화면/logo.jpg")' }));
-        }).then(function () { return timeoutPromise(4000); });
+        })
+            .then(() => timeoutPromise(4000));
     }
     ComicScreen.play = play;
     function clear() {
@@ -484,13 +492,9 @@ var ComicScreen;
 })(ComicScreen || (ComicScreen = {}));
 var IntroScreen;
 (function (IntroScreen) {
-    function show() {
-        introPanel.style.display = "";
-    }
+    function show() { introPanel.style.display = ""; }
     IntroScreen.show = show;
-    function hide() {
-        introPanel.style.cssText += "display: none !important";
-    }
+    function hide() { introPanel.style.cssText += "display: none !important"; }
     IntroScreen.hide = hide;
     function returnToStartScreen() {
         IntroScreen.hide();
@@ -500,24 +504,16 @@ var IntroScreen;
 })(IntroScreen || (IntroScreen = {}));
 var GameScreen;
 (function (GameScreen) {
-    function show() {
-        gamearea.style.display = "";
-    }
+    function show() { gamearea.style.display = ""; }
     GameScreen.show = show;
-    function hide() {
-        gamearea.style.cssText += "display: none !important";
-    }
+    function hide() { gamearea.style.cssText += "display: none !important"; }
     GameScreen.hide = hide;
 })(GameScreen || (GameScreen = {}));
 var ResultScreen;
 (function (ResultScreen) {
-    function show() {
-        resultPanel.style.display = "";
-    }
+    function show() { resultPanel.style.display = ""; }
     ResultScreen.show = show;
-    function hide() {
-        resultPanel.style.cssText += "display: none !important";
-    }
+    function hide() { resultPanel.style.cssText += "display: none !important"; }
     ResultScreen.hide = hide;
     function returnToStartScreen() {
         ResultScreen.hide();
@@ -541,4 +537,3 @@ var ResultScreen;
     }
     ResultScreen.reflectResult = reflectResult;
 })(ResultScreen || (ResultScreen = {}));
-//# sourceMappingURL=app.js.map

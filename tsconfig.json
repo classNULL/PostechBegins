@@ -1,0 +1,14 @@
+{
+    "compilerOptions": {
+        "target": "es2015",
+        "noImplicitAny": true,
+        "outFile": "app.js",
+    },
+    "include": [
+        "scripts/",
+        "submodules/domliner/domliner.d.ts",
+        "submodules/eventpromise/eventpromise.d.ts",
+        "submodules/fixedviewport/fixedviewport.d.ts",
+        "submodules/localForage.d.ts",
+    ]
+}

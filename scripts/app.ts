@@ -1,10 +1,6 @@
 ﻿///<reference path="screenapi.ts" />
 ///<reference path="gamefunctions.ts" />
 
-interface DOMStringMap {
-    [key: string]: string;
-}
-
 declare var startarea: HTMLDivElement;
 declare var selectorPanel: HTMLDivElement;
 declare var introPanel: HTMLDivElement;
