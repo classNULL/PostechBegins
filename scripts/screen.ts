@@ -4,7 +4,7 @@
 
     export async function reflectResumability() {
         const value = await localforage.getItem(gameSaveVersion);
-    
+
         if (!value) {
             gameResumeButton.classList.add("disabled");
             gameResumeButton.onclick = null;
@@ -12,7 +12,7 @@
         }
 
         gameResumeButton.classList.remove("disabled");
-        gameResumeButton.onclick = () => { 
+        gameResumeButton.onclick = () => {
             StartScreen.resumeGame(value);
         };
     }
@@ -40,7 +40,7 @@
 }
 
 module CharacterSelectionScreen {
-    export function show() { 
+    export function show() {
         selectorPanel.style.display = "";
         document.documentElement.style.backgroundImage = 'url("UI/게임 설명화면/선택화면배경.jpg")';
     }
@@ -49,7 +49,7 @@ module CharacterSelectionScreen {
     export async function select(gender: Module.Sexuality) {
         CharacterSelectionScreen.hide();
         ComicScreen.show();
-        await ComicScreen.play();   
+        await ComicScreen.play();
         ComicScreen.hide();
         GameScreen.show();
 
@@ -64,11 +64,11 @@ module ComicScreen {
         document.documentElement.style.backgroundImage = 'url("UI/로딩화면/배경.png")';
     }
     export function hide() { comicPanel.style.cssText += "display: none !important"; }
-    export async function play() { 
+    export async function play() {
         var parent = comicPanel;
         for (let i = 2; i <= 6; i++) {
             await timeoutPromise(2000);
-            var child = <HTMLDivElement>DOMLiner.element("div", { style: 'background-image: url("UI/로딩화면/' + i + '.png")' });
+            var child = <HTMLDivElement>DOMLiner.element("div", { style: `background-image: url("UI/로딩화면/${i}.png")` });
             parent.appendChild(child);
             parent = child;
         }
@@ -107,7 +107,7 @@ module ResultScreen {
     export function reflectResult(character: Module.Hero) {
         var score = Module.Score.score(character);
         var sex = character.sexuality == Module.Sexuality.Woman ? "여자" : "남자";
-        resultPanelCharacter.style.backgroundImage = "url(UI/캐릭터/" + sex + "/" + sex + "1.png)";
+        resultPanelCharacter.style.backgroundImage = `url(UI/캐릭터/${sex}/${sex}1.png)`;
 
         resultGradeSpan.textContent = character.getAverageGrade().toFixed(2);
         resultNotMosol.textContent = character.mosol ? "X" : "O";

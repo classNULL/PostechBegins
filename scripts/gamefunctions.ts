@@ -67,8 +67,8 @@ function reflectGender(gender: Module.Sexuality) {
 }
 
 function moveCharacter(day: number) {
-    charInCell.classList.remove("cell" + charInCell.dataset["day"]);
-    charInCell.classList.add("cell" + day);
+    charInCell.classList.remove(`cell${charInCell.dataset["day"]}`);
+    charInCell.classList.add(`cell${day}`);
     charInCell.dataset["day"] = day.toString();
 }
 
@@ -137,7 +137,7 @@ function passMonthEvent() {
 
 function dateIndexToString(index: number) {
     var monthday = Module.MonthDay.fromIndex(index);
-    var result = monthday.month.value + "월 " + monthday.day + "일";
+    var result = `${monthday.month.value}월 ${monthday.day}일`;
     monthday.delete();
     return result;
 }
@@ -155,8 +155,8 @@ async function rollDice() {
     dice.classList.remove("rotate");
 
     var step = gameCenter.dice();
-    optionResultDisplay.textContent = "주사위를 던져서 " + step + "이 나왔다.";
-    dice.src = "UI/UI/기타/dice" + step + ".png";
+    optionResultDisplay.textContent = `주사위를 던져서 ${step}이 나왔다.`;
+    dice.src = `UI/UI/기타/dice${step}.png`;
 
     var currentPosition = gameCenter.currentPosition;
     var newPosition = gameCenter.move(step);
@@ -210,8 +210,8 @@ function reflectMonth(month: Module.Month) {
     }
     currentMonth = month;
 
-    gameTitleArea.textContent = month.value + "월";
-    document.documentElement.style.backgroundImage = 'url("UI/wallpaper/' + month.value + '.jpg")';
+    gameTitleArea.textContent = `${month.value}월`;
+    document.documentElement.style.backgroundImage = `url("UI/wallpaper/${month.value}.jpg")`;
     colorize(gameCenter.map, month);
 }
 
@@ -225,7 +225,7 @@ function getMonthEvent(month: Module.Month) {
         case Module.Month.October: return new Module.OctoberEvent();
         case Module.Month.November: return new Module.NovemberEvent();
         case Module.Month.December: return new Module.DecemberEvent();
-        
+
         default: throw new Error("이 달에는 이벤트가 발생할 수 없습니다");
     }
 }
@@ -255,16 +255,16 @@ function reflectFace(character: Module.Hero) {
     var sex = character.sexuality == Module.Sexuality.Woman ? "여자" : "남자";
     var stress = character.status.stress;
     if (stress < 25) {
-        faceArea.style.backgroundImage = "url(UI/캐릭터/" + sex + "/" + sex + "1.png)";
+        faceArea.style.backgroundImage = `url(UI/캐릭터/${sex}/${sex}1.png)`;
     }
     else if (stress < 50) {
-        faceArea.style.backgroundImage = "url(UI/캐릭터/" + sex + "/" + sex + "2.png)";
+        faceArea.style.backgroundImage = `url(UI/캐릭터/${sex}/${sex}2.png)`;
     }
     else if (stress < 75) {
-        faceArea.style.backgroundImage = "url(UI/캐릭터/" + sex + "/" + sex + "3.png)";
+        faceArea.style.backgroundImage = `url(UI/캐릭터/${sex}/${sex}3.png)`;
     }
     else {
-        faceArea.style.backgroundImage = "url(UI/캐릭터/" + sex + "/" + sex + "4.png)";
+        faceArea.style.backgroundImage = `url(UI/캐릭터/${sex}/${sex}4.png)`;
     }
 }
 
@@ -311,7 +311,7 @@ function assignTitles() {
     var assign = (title: string, enable: boolean) => {
         if (enable)
             titleBook.addTitle(title);
-        else 
+        else
             titleBook.removeTitle(title);
     };
 

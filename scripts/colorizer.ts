@@ -29,15 +29,15 @@
         else if (cell instanceof Module.SpecialCell)
             type = "special";
 
-        var cellElement = <HTMLDivElement>map.querySelector(".cell" + (i + 1));
-        if (type) 
+        var cellElement = <HTMLDivElement>map.querySelector(`.cell${i + 1}`);
+        if (type)
             cellElement.dataset["cellType"] = type;
-        else 
+        else
             cellElement.dataset["cellType"] = "";
         cellElement.style.display = "";
     }
     for (var i = days; i < 31; i++) {
-        var cellElement = <HTMLDivElement>map.querySelector(".cell" + (i + 1));
+        var cellElement = <HTMLDivElement>map.querySelector(`.cell${i + 1}`);
         cellElement.style.display = "none";
     }
 }

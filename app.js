@@ -34,7 +34,7 @@ function colorize(maptable, month) {
             type = "dance";
         else if (cell instanceof Module.SpecialCell)
             type = "special";
-        var cellElement = map.querySelector(".cell" + (i + 1));
+        var cellElement = map.querySelector(`.cell${i + 1}`);
         if (type)
             cellElement.dataset["cellType"] = type;
         else
@@ -42,7 +42,7 @@ function colorize(maptable, month) {
         cellElement.style.display = "";
     }
     for (var i = days; i < 31; i++) {
-        var cellElement = map.querySelector(".cell" + (i + 1));
+        var cellElement = map.querySelector(`.cell${i + 1}`);
         cellElement.style.display = "none";
     }
 }
@@ -112,8 +112,8 @@ function reflectGender(gender) {
     }
 }
 function moveCharacter(day) {
-    charInCell.classList.remove("cell" + charInCell.dataset["day"]);
-    charInCell.classList.add("cell" + day);
+    charInCell.classList.remove(`cell${charInCell.dataset["day"]}`);
+    charInCell.classList.add(`cell${day}`);
     charInCell.dataset["day"] = day.toString();
 }
 function reflectDate(dateIndex) {
@@ -192,7 +192,7 @@ function passMonthEvent() {
 }
 function dateIndexToString(index) {
     var monthday = Module.MonthDay.fromIndex(index);
-    var result = monthday.month.value + "월 " + monthday.day + "일";
+    var result = `${monthday.month.value}월 ${monthday.day}일`;
     monthday.delete();
     return result;
 }
@@ -206,8 +206,8 @@ function rollDice() {
         yield timeoutPromise(500);
         dice.classList.remove("rotate");
         var step = gameCenter.dice();
-        optionResultDisplay.textContent = "주사위를 던져서 " + step + "이 나왔다.";
-        dice.src = "UI/UI/기타/dice" + step + ".png";
+        optionResultDisplay.textContent = `주사위를 던져서 ${step}이 나왔다.`;
+        dice.src = `UI/UI/기타/dice${step}.png`;
         var currentPosition = gameCenter.currentPosition;
         var newPosition = gameCenter.move(step);
         reflectDate(newPosition);
@@ -249,8 +249,8 @@ function reflectMonth(month) {
         monthProgressDiv.classList.add("progressin");
     }
     currentMonth = month;
-    gameTitleArea.textContent = month.value + "월";
-    document.documentElement.style.backgroundImage = 'url("UI/wallpaper/' + month.value + '.jpg")';
+    gameTitleArea.textContent = `${month.value}월`;
+    document.documentElement.style.backgroundImage = `url("UI/wallpaper/${month.value}.jpg")`;
     colorize(gameCenter.map, month);
 }
 function getMonthEvent(month) {
@@ -286,16 +286,16 @@ function reflectFace(character) {
     var sex = character.sexuality == Module.Sexuality.Woman ? "여자" : "남자";
     var stress = character.status.stress;
     if (stress < 25) {
-        faceArea.style.backgroundImage = "url(UI/캐릭터/" + sex + "/" + sex + "1.png)";
+        faceArea.style.backgroundImage = `url(UI/캐릭터/${sex}/${sex}1.png)`;
     }
     else if (stress < 50) {
-        faceArea.style.backgroundImage = "url(UI/캐릭터/" + sex + "/" + sex + "2.png)";
+        faceArea.style.backgroundImage = `url(UI/캐릭터/${sex}/${sex}2.png)`;
     }
     else if (stress < 75) {
-        faceArea.style.backgroundImage = "url(UI/캐릭터/" + sex + "/" + sex + "3.png)";
+        faceArea.style.backgroundImage = `url(UI/캐릭터/${sex}/${sex}3.png)`;
     }
     else {
-        faceArea.style.backgroundImage = "url(UI/캐릭터/" + sex + "/" + sex + "4.png)";
+        faceArea.style.backgroundImage = `url(UI/캐릭터/${sex}/${sex}4.png)`;
     }
 }
 /* options */
@@ -462,7 +462,7 @@ var ComicScreen;
             var parent = comicPanel;
             for (let i = 2; i <= 6; i++) {
                 yield timeoutPromise(2000);
-                var child = DOMLiner.element("div", { style: 'background-image: url("UI/로딩화면/' + i + '.png")' });
+                var child = DOMLiner.element("div", { style: `background-image: url("UI/로딩화면/${i}.png")` });
                 parent.appendChild(child);
                 parent = child;
             }
@@ -510,7 +510,7 @@ var ResultScreen;
     function reflectResult(character) {
         var score = Module.Score.score(character);
         var sex = character.sexuality == Module.Sexuality.Woman ? "여자" : "남자";
-        resultPanelCharacter.style.backgroundImage = "url(UI/캐릭터/" + sex + "/" + sex + "1.png)";
+        resultPanelCharacter.style.backgroundImage = `url(UI/캐릭터/${sex}/${sex}1.png)`;
         resultGradeSpan.textContent = character.getAverageGrade().toFixed(2);
         resultNotMosol.textContent = character.mosol ? "X" : "O";
         resultGradeScoreProgress.value = score.gradeScore;
