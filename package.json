@@ -1,0 +1,24 @@
+{
+  "name": "postechbegins",
+  "version": "1.0.0",
+  "description": "PostechBegins",
+  "main": "app.js",
+  "scripts": {
+    "build": "npx tsc",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/classNULL/PostechBegins.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/classNULL/PostechBegins/issues"
+  },
+  "homepage": "https://github.com/classNULL/PostechBegins#readme",
+  "private": true,
+  "devDependencies": {
+    "typescript": "^4.0.5"
+  }
+}
