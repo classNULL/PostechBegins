@@ -7,16 +7,6 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-if (!Screen.prototype.lock)
-    Screen.prototype.lock = (orientation) => {
-        return new Promise((resolve, reject) => {
-            var lockOrientation = screen.lockOrientation || screen.mozLockOrientation || screen.msLockOrientation;
-            if (lockOrientation && lockOrientation.call(screen, orientation))
-                resolve();
-            else
-                reject(new Error("Screen couldn't be locked."));
-        });
-    };
 function colorize(maptable, month) {
     var map = document.querySelector(".map");
     var firstday = Module.MonthDay.fromCalendar(month, 1);
@@ -357,9 +347,8 @@ function assignTitles() {
     assign("nerd", increase.study > -10);
     assign("circle_independent", increase.selfImprovement == 0);
 }
-///<reference path="screenapi.ts" />
 ///<reference path="gamefunctions.ts" />
-window.screen.lock("landscape-primary");
+window.screen.orientation.lock("landscape-primary");
 Module.srand(Date.now() & 65535);
 var gameCenter;
 var currentMonth = Module.Month.March;

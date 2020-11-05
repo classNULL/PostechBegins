@@ -1,5 +1,4 @@
-﻿///<reference path="screenapi.ts" />
-///<reference path="gamefunctions.ts" />
+﻿///<reference path="gamefunctions.ts" />
 
 declare var startarea: HTMLDivElement;
 declare var selectorPanel: HTMLDivElement;
@@ -39,7 +38,7 @@ declare var resultGradeEvaluation: HTMLSpanElement;
 declare var resultRelationshipEvaluation: HTMLSpanElement;
 declare var resultSelfImprovementEvaluation: HTMLSpanElement;
 
-window.screen.lock("landscape-primary");
+window.screen.orientation.lock("landscape-primary");
 Module.srand(Date.now() & 65535);
 var gameCenter: Module.GameCenter;
 var currentMonth = Module.Month.March;
