@@ -1,9 +1,6 @@
 [submodule "submodules/domliner"]
 	path = submodules/domliner
 	url = https://github.com/SaschaNaz/DOMLiner.git
-[submodule "submodules/gridlayout"]
-	path = submodules/gridlayout
-	url = https://github.com/FremyCompany/css-grid-polyfill.git
 [submodule "submodules/promise"]
 	path = submodules/promise
 	url = https://github.com/taylorhakes/promise-polyfill.git
