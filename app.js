@@ -349,10 +349,13 @@ function assignTitles() {
 }
 ///<reference path="gamefunctions.ts" />
 window.screen.orientation.lock("landscape-primary");
-Module.srand(Date.now() & 65535);
 var gameCenter;
-var currentMonth = Module.Month.March;
+var currentMonth;
 var currentMonthEvent;
+Module.onRuntimeInitialized = () => {
+    Module.srand(Date.now() & 65535);
+    currentMonth = Module.Month.March;
+};
 var charInCell;
 var gameProgressArea;
 var cover;
@@ -524,3 +527,4 @@ var ResultScreen;
     }
     ResultScreen.reflectResult = reflectResult;
 })(ResultScreen || (ResultScreen = {}));
+//# sourceMappingURL=app.js.map
