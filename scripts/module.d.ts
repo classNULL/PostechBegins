@@ -21,6 +21,7 @@ declare module Module {
 }
 
 declare module Module {
+    var onRuntimeInitialized: () => void;
     function srand(seed: number): void;
     class MonthDay extends EmscriptenClass {
         static fromIndex(dateIndex: number): MonthDay;
@@ -93,7 +94,7 @@ declare module Module {
         isStop: boolean;
         cellName: string;
         cellMessage: string;
-        callOption(hero: Hero, day: number): CellOptionBook;        
+        callOption(hero: Hero, day: number): CellOptionBook;
     }
     class NormalCell extends Cell { }
     class WeekendCell extends Cell { }

@@ -39,10 +39,13 @@ declare var resultRelationshipEvaluation: HTMLSpanElement;
 declare var resultSelfImprovementEvaluation: HTMLSpanElement;
 
 window.screen.orientation.lock("landscape-primary");
-Module.srand(Date.now() & 65535);
 var gameCenter: Module.GameCenter;
-var currentMonth = Module.Month.March;
+var currentMonth: Module.Month;
 var currentMonthEvent: Module.MonthEvent;
+Module.onRuntimeInitialized = () => {
+    Module.srand(Date.now() & 65535);
+    currentMonth = Module.Month.March;
+};
 
 var charInCell: HTMLDivElement;
 var gameProgressArea: HTMLDivElement;

@@ -7,5 +7,5 @@ PostechBegins
 
 # Build
 
-* Emscripten SDK 1.27.0
-* TypeScript 2.6
+* Emscripten SDK 2.0.29
+* TypeScript 4.0.5
