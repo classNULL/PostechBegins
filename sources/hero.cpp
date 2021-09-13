@@ -1,4 +1,5 @@
 #include "hero.hpp"
+#include "score.hpp"
 
 void hero::set_default_initial_status(sexuality sex) {
 	if(sex == sexuality::man){
@@ -28,8 +29,8 @@ hero::hero(const PersonalStatus& status_max, const PersonalStatus& initial_statu
 
 CharacterProperty hero::get_current_property() {
 	return {
-		.max_status = this->max_status(),
 		.status = this->status(),
+		.max_status = this->max_status(),
 		.gender = this->get_sexuality() == sexuality::man ? "male" : "female"
 	};
 }
@@ -49,7 +50,7 @@ void hero::take_exam() {
 	}
 }
 float hero::get_semester_grade(bool is_spring) const {
-	float result;
+	float result = 0;
 	auto& semester_grades = is_spring ? this->spring_grades : this->autumn_grades;
 	for (const auto& grade: semester_grades) {
 		result += grade;

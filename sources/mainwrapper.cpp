@@ -26,10 +26,10 @@ EMSCRIPTEN_BINDINGS(PostechBegins_Main) {
 
   value_object<PersonalStatus>("PersonalStatus")
     .field("energy", &PersonalStatus::energy)
-    .field("relationship", &PersonalStatus::relationship)
     .field("love", &PersonalStatus::love)
-    .field("study", &PersonalStatus::study)
+    .field("relationship", &PersonalStatus::relationship)
     .field("selfImprovement", &PersonalStatus::self_develop)
+    .field("study", &PersonalStatus::study)
     .field("stress", &PersonalStatus::stress);
 
   class_<GameCenter>("GameCenter")

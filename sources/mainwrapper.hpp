@@ -9,6 +9,7 @@
 #include "cell.hpp"
 #include "celloption.hpp"
 #include "event.hpp"
+#include "score.hpp"
 
 #ifndef EMBIND_H
 #define EMBIND_H

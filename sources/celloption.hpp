@@ -1,6 +1,8 @@
 #ifndef POSTECHBEGINS_CELLOPTION_H
 #define POSTECHBEGINS_CELLOPTION_H
 
+#include <functional>
+
 #include "global.hpp"
 #include "hero.hpp"
 

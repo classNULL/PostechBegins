@@ -374,9 +374,9 @@
 
 GameCenter::GameCenter(sexuality sex) {
   if (sex == sexuality::man)
-    this->_character = new hero({ .energy = 100, .study = 100, .relationship = 100, .self_develop = 100, .love = 100, .stress = 100 }, sex);
+    this->_character = new hero({ .energy = 100, .love = 100, .relationship = 100, .self_develop = 100, .study = 100, .stress = 100 }, sex);
   else if (sex == sexuality::woman) // woman
-    this->_character = new hero({ .energy = 80, .study = 100, .relationship = 80, .self_develop = 100, .love = 100, .stress = 100 }, sex);
+    this->_character = new hero({ .energy = 80, .love = 100, .relationship = 80, .self_develop = 100, .study = 100, .stress = 100 }, sex);
 }
 
 GameCenter::GameCenter(const CharacterProperty& property, const vector<string>& titles, int position) {

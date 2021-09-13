@@ -5,7 +5,6 @@
 #include <map>
 #include <algorithm>
 #include "global.hpp"
-#include "score.hpp"
 #include "title.hpp"
 
 struct CharacterProperty {

@@ -26,7 +26,7 @@ public:
     return maptable;
   }
 
-  cell* at(int index) { return this->_map.at(index); }
+  cell* at(int index) const { return this->_map.at(index); }
   int size() const { return this->_map.size(); }
   void set(int index, cell* input);
   ~MapTable();

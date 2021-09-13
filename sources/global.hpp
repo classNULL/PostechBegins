@@ -11,19 +11,19 @@ enum sexuality{
 
 struct PersonalStatus {
 	float energy;
-	float relationship;
 	float love;
-	float study;
+	float relationship;
 	float self_develop;
+	float study;
 	float stress;
 
 	static PersonalStatus get_ones() {
 		return {
 			.energy = 1,
-			.relationship = 1,
 			.love = 1,
-			.study = 1,
+			.relationship = 1,
 			.self_develop = 1,
+			.study = 1,
 			.stress = 1
 		};
 	}

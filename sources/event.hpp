@@ -19,9 +19,10 @@ public:
 	//월 정보를 넘겨준다.
 	virtual wstring introduction_message() const = 0;
 	//이벤트를 설명하는 메시지를 전달한다. 즉, 이벤트 정보가 들어있다.
+	virtual ~month_event() = default;
 };
 
-class march_event : public month_event{
+class march_event final : public month_event{
 	//각 월 별 이벤트는 base class를 상속받아 만들어진다.
 protected:
 	Month month = Month::March;
@@ -30,7 +31,7 @@ public:
 	wstring check_success(hero* hero, const PersonalStatus& increased_status);
 };
 
-class april_event : public month_event{
+class april_event final : public month_event{
 protected:
 	Month month = Month::April;
 public:
@@ -38,7 +39,7 @@ public:
 	wstring check_success(hero* hero, const PersonalStatus& increased_status);
 };
 
-class may_event : public month_event{
+class may_event final : public month_event{
 protected:
 	Month month = Month::May;
 public:
@@ -46,7 +47,7 @@ public:
 	wstring check_success(hero* hero, const PersonalStatus& increased_status);
 };
 
-class june_event : public month_event{
+class june_event final : public month_event{
 protected:
 	Month month = Month::June;
 public:
@@ -54,7 +55,7 @@ public:
 	wstring check_success(hero* hero, const PersonalStatus& increased_status);
 };
 
-class september_event : public month_event{
+class september_event final : public month_event{
 protected:
 	Month month = Month::September;
 public:
@@ -62,7 +63,7 @@ public:
 	wstring check_success(hero* hero, const PersonalStatus& increased_status);
 };
 
-class october_event : public month_event{
+class october_event final : public month_event{
 protected:
 	Month month = Month::October;
 public:
@@ -70,7 +71,7 @@ public:
 	wstring check_success(hero* hero, const PersonalStatus& increased_status);
 };
 
-class november_event : public month_event{
+class november_event final : public month_event{
 protected:
 	Month month = Month::November;
 public:
@@ -78,7 +79,7 @@ public:
 	wstring check_success(hero* hero, const PersonalStatus& increased_status);
 };
 
-class december_event : public month_event{
+class december_event final : public month_event{
 protected:
 	Month month = Month::December;
 public:

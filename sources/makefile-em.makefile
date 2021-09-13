@@ -1,44 +1,47 @@
 objectfiles = gamecenter.o hero.o cell.o monthday.o maptable.o score.o title.o celloption.o event.o mainwrapper.o
-jsfiles = ../postechbegins.out.js ../postechbegins.out.js.map
+jsfiles = ../postechbegins.out.js ../postechbegins.out.wasm ../postechbegins.out.wasm.map
+
+CXX = emcc
+CXXFLAGS = -std=c++11 -Werror -Wno-error=potentially-evaluated-expression
 
 postechbegins: $(objectfiles)
-  emcc --bind $(objectfiles) -o ../postechbegins.out.js
+	$(CXX) --bind $(objectfiles) --source-map-base ./ -o ../postechbegins.out.js
 
 gamecenter.o:
-  emcc -std=c++11 -c gamecenter.cpp
+	$(CXX) $(CXXFLAGS) -c gamecenter.cpp
 
 hero.o:
-  emcc -std=c++11 -c hero.cpp
+	$(CXX) $(CXXFLAGS) -c hero.cpp
 
 cell.o:
-  emcc -std=c++11 -c cell.cpp
+	$(CXX) $(CXXFLAGS) -c cell.cpp
 
 monthday.o:
-  emcc -std=c++11 -c monthday.cpp
+	$(CXX) $(CXXFLAGS) -c monthday.cpp
 
 maptable.o:
-	emcc -std=c++11 -c maptable.cpp
+	$(CXX) $(CXXFLAGS) -c maptable.cpp
 
 score.o:
-	emcc -std=c++11 -c score.cpp
+	$(CXX) $(CXXFLAGS) -c score.cpp
 
 title.o:
-	emcc -std=c++11 -c title.cpp
+	$(CXX) $(CXXFLAGS) -c title.cpp
 
 celloption.o:
-	emcc -std=c++11 -c celloption.cpp
+	$(CXX) $(CXXFLAGS) -c celloption.cpp
 
 event.o:
-	emcc -std=c++11 -c event.cpp
+	$(CXX) $(CXXFLAGS) -c event.cpp
 
 mainwrapper.o:
-  emcc --bind -std=c++11 -c mainwrapper.cpp
+	$(CXX) $(CXXFLAGS) --bind -c mainwrapper.cpp
 
 clean:
-  rm $(objectfiles) $(jsfiles)
+	rm $(objectfiles) $(jsfiles)
 
 cleano:
-  rm $(objectfiles)
+	rm $(objectfiles)
 
 cleanwrapper:
 	rm mainwrapper.o
