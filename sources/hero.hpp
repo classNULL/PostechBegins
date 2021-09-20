@@ -28,7 +28,8 @@ public:
 	//마찬가지
 	void change_relationship(float, int);
 	void change_self_develop(float, int);
-	void change_study(float, int);//status 변화시키는 method
+  /** status 변화시키는 method */
+	void change_study(float, int);
   void change_stress(float, int);
   //스트레스 변화
   void change_status(PersonalStatus status_change, int day);
@@ -73,8 +74,10 @@ private:
     .study = 100,
     .stress = 0
   };
-	vector<float> spring_grades; // 시험 기간에 결정
-  vector<float> autumn_grades; // 시험 기간에 결정
+  /** 시험 기간에 결정 */
+	vector<float> spring_grades;
+  /** 시험 기간에 결정 */
+  vector<float> autumn_grades;
 	sexuality sex;
   TitleBook title_book;
   int cleared_event = 0;

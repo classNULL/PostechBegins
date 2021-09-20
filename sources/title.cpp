@@ -1,18 +1,22 @@
 
 #include "title.hpp"
 
-bool TitleBook::has_title(string title_name) const {//칭호를 가지고 있는지를 판단한다.
+/** 칭호를 가지고 있는지를 판단한다. */
+bool TitleBook::has_title(string title_name) const {
   return (this->titles.find(title_name) != this->titles.end());
 }
-void TitleBook::add_title(string title_name) {//칭호를 추가시켜주는 역할을 한다.
+/** 칭호를 추가시켜주는 역할을 한다. */
+void TitleBook::add_title(string title_name) {
   this->titles.insert({ title_name, Titles::map.at(title_name) });
   this->calc_total_title_effect();
 }
-void TitleBook::remove_title(string title_name) {//칭호를 없애주는 역할을 한다.
+/** 칭호를 없애주는 역할을 한다. */
+void TitleBook::remove_title(string title_name) {
   this->titles.erase(title_name);
   this->calc_total_title_effect();
 }
-void TitleBook::calc_total_title_effect() {//칭호로 인한 효과를 계산해주도록 한다.
+/** 칭호로 인한 효과를 계산해주도록 한다. */
+void TitleBook::calc_total_title_effect() {
   auto result = TitleEffect::get_base();
 
   for (const auto& pair: this->titles)
@@ -27,7 +31,8 @@ vector<string> TitleBook::containing_titles() const {
   return contained;
 }
 
-TitleEffect Titles::outsider = { // 아싸
+/** 아싸 */
+TitleEffect Titles::outsider = {
   .alcohol = { .energy = 1, .love = 1, .relationship = 1.1, .self_develop = 1, .study = 1, .stress = 1 },
   .study = { .energy = 1, .love = 1, .relationship = 1.1, .self_develop = 1, .study = 1, .stress = 1 },
   .circle = { .energy = 1, .love = 1, .relationship = 1.1, .self_develop = 1, .study = 1, .stress = 1 },
@@ -35,7 +40,8 @@ TitleEffect Titles::outsider = { // 아싸
   .rest = { .energy = 1, .love = 1, .relationship = 1, .self_develop = 1, .study = 1, .stress = 1 },
   .home = { .energy = 1, .love = 1, .relationship = 1, .self_develop = 1, .study = 1, .stress = 1 }
 };
-TitleEffect Titles::alcoholic = { // 술쟁이
+/** 술쟁이 */
+TitleEffect Titles::alcoholic = {
   .alcohol = { .energy = 1, .love = 1, .relationship = 1.1, .self_develop = 1, .study = 1, .stress = -1 },
   .study = { .energy = 1, .love = 1, .relationship = 1, .self_develop = 1, .study = 0.9, .stress = 1 },
   .circle = { .energy = 1, .love = 1, .relationship = 1, .self_develop = 1, .study = 1, .stress = 1 },
@@ -43,7 +49,8 @@ TitleEffect Titles::alcoholic = { // 술쟁이
   .rest = { .energy = 1, .love = 1, .relationship = 1, .self_develop = 1, .study = 1, .stress = 1 },
   .home = { .energy = 1, .love = 1, .relationship = 1, .self_develop = 1, .study = 1, .stress = 1 }
 };
-TitleEffect Titles::circle_resident = { // 동방충
+/** 동방충 */
+TitleEffect Titles::circle_resident = {
   .alcohol = { .energy = 1, .love = 1, .relationship = 1, .self_develop = 1, .study = 1, .stress = 1 },
   .study = { .energy = 1, .love = 1, .relationship = 1, .self_develop = 1, .study = 1, .stress = 1 },
   .circle = { .energy = 1, .love = 1, .relationship = 1.05, .self_develop = 1, .study = 1, .stress = 1.05 },
@@ -51,7 +58,8 @@ TitleEffect Titles::circle_resident = { // 동방충
   .rest = { .energy = 1, .love = 1, .relationship = 1, .self_develop = 1, .study = 1, .stress = 1 },
   .home = { .energy = 1, .love = 1, .relationship = 1, .self_develop = 1, .study = 1, .stress = 1 }
 };
-TitleEffect Titles::nerd = { // 공부벌레
+/** 공부벌레 */
+TitleEffect Titles::nerd = {
   .alcohol = { .energy = 1, .love = 1, .relationship = 0.95, .self_develop = 1, .study = 1.1, .stress = 0.95 },
   .study = { .energy = 1, .love = 1, .relationship = 0.95, .self_develop = 1, .study = 1.1, .stress = 0.95 },
   .circle = { .energy = 1, .love = 1, .relationship = 0.95, .self_develop = 1, .study = 1.1, .stress = 0.95 },
@@ -59,7 +67,8 @@ TitleEffect Titles::nerd = { // 공부벌레
   .rest = { .energy = 1, .love = 1, .relationship = 0.95, .self_develop = 1, .study = 1.1, .stress = 0.95 },
   .home = { .energy = 1, .love = 1, .relationship = 0.95, .self_develop = 1, .study = 1.1, .stress = 0.95 }
 };
-TitleEffect Titles::couple = { // 연애중
+/** 연애중 */
+TitleEffect Titles::couple = {
   .alcohol = { .energy = 1.1, .love = -1, .relationship = 0.9, .self_develop = 0, .study = 0.9, .stress = 0.9 },
   .study = { .energy = 1.1, .love = -1, .relationship = 0.9, .self_develop = 0, .study = 0.9, .stress = 0.9 },
   .circle = { .energy = 1.1, .love = -1, .relationship = 0.9, .self_develop = 0, .study = 0.9, .stress = 0.9 },
@@ -67,7 +76,8 @@ TitleEffect Titles::couple = { // 연애중
   .rest = { .energy = 1.1, .love = 1, .relationship = 0.9, .self_develop = 0, .study = 0.9, .stress = 0.9 },
   .home = { .energy = 1.1, .love = 1, .relationship = 0.9, .self_develop = 0, .study = 0.9, .stress = 0.9 }
 };
-TitleEffect Titles::circle_independent = { // 무동아리
+/** 무동아리 */
+TitleEffect Titles::circle_independent = {
   .alcohol = { .energy = 1, .love = 1, .relationship = 0.9, .self_develop = 1, .study = 1, .stress = 1 },
   .study = { .energy = 1, .love = 1, .relationship = 0.9, .self_develop = 1, .study = 1, .stress = 1 },
   .circle = { .energy = 1, .love = 1, .relationship = 0.9, .self_develop = 1, .study = 1, .stress = 1 },
@@ -75,7 +85,8 @@ TitleEffect Titles::circle_independent = { // 무동아리
   .rest = { .energy = 1, .love = 1, .relationship = 0.9, .self_develop = 1, .study = 1, .stress = 1 },
   .home = { .energy = 1, .love = 1, .relationship = 0.9, .self_develop = 1, .study = 1, .stress = 1 }
 };
-TitleEffect Titles::weak = { // 체력낮음
+/** 체력낮음 */
+TitleEffect Titles::weak = {
   .alcohol = { .energy = 1, .love = 1, .relationship = 1, .self_develop = 1, .study = 1, .stress = 1 },
   .study = { .energy = 1, .love = 1, .relationship = 1, .self_develop = 1, .study = 1, .stress = 1 },
   .circle = { .energy = 1, .love = 1, .relationship = 1, .self_develop = 1, .study = 1, .stress = 1 },

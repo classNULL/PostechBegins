@@ -7,7 +7,8 @@ MapTable::~MapTable() {
   }
 }
 
-int MapTable::check_stop(int reference, int step) {//board에서 구현되어야하는 함수로, 주사위의 굴려진 값에따라 이동해야 하는 칸의 위치를 return한다.
+/** board에서 구현되어야하는 함수로, 주사위의 굴려진 값에따라 이동해야 하는 칸의 위치를 return한다. */
+int MapTable::check_stop(int reference, int step) {
   //인자로는 현재 캐릭터의 위치(예를 들어 3일), 주사위를 굴려서 나온 숫자, 그리고 현재 달에 해당하는 cell 배열을 가리키는 cell pointer를 받는다(예를들어 march, november등 월에 해당하는 cell array가 될것)
   int max = reference + step;
   for(int i = reference + 1; i <= max; i++) {

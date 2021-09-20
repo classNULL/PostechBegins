@@ -1,6 +1,7 @@
 #include "score.hpp"
 
-float Score::calc_grade_score(float grade) {//게임을 진행하여 받은 학점을 최종 점수에 합산할 수 있는 점수로 변환해주는 함수이다. grade의 범위에 따라 점수 변환이 다른 식으로 계산된다. 이는 학점에 따라 학사경고, 장학금 짤림 등이 결정되기 때문이다.
+/** 게임을 진행하여 받은 학점을 최종 점수에 합산할 수 있는 점수로 변환해주는 함수이다. grade의 범위에 따라 점수 변환이 다른 식으로 계산된다. 이는 학점에 따라 학사경고, 장학금 짤림 등이 결정되기 때문이다. */
+float Score::calc_grade_score(float grade) {
   if (grade < 0)//grade가 0보다 작으면 runtime error임을 알려준다.
     throw runtime_error("0보다 작으면 안됨");
   else if (grade < 2.0)//아래에는 grade의 범위에 따라 각각에 따른 점수 변환을 해준다.
@@ -21,7 +22,8 @@ float Score::calc_grade_score(float grade) {//게임을 진행하여 받은 학�
     return 400;
 }
 
-float Score::generate_grade(float study) {//게임 진행 결과 학점을 정해주는 함수이다. 게임에서 얻은 공부점수 만큼 학점을 부여하는데, 학점은 어느 정도의 운이 따르기 때문에 rand()를 이용하여 약간의 오차가 발생하도록 설정하였다.
+/** 게임 진행 결과 학점을 정해주는 함수이다. 게임에서 얻은 공부점수 만큼 학점을 부여하는데, 학점은 어느 정도의 운이 따르기 때문에 rand()를 이용하여 약간의 오차가 발생하도록 설정하였다. */
+float Score::generate_grade(float study) {
   return max(0.0, min(4.3, (study / 100) * 4.3 + ((rand() % 30 - 15) / 100.0)));
 }
 
@@ -36,7 +38,8 @@ Score Score::score(const hero& _hero) {
     .love = _hero.is_mosol()?0:100
   };
 }
-wstring Score::evaluate_total() {//전체 점수를 평가하여 그에 대한 메시지를 출력한다.
+/** 전체 점수를 평가하여 그에 대한 메시지를 출력한다. */
+wstring Score::evaluate_total() {
   float total = this->get_total();
   if (total > 800) {
    return L"1학년 생활을 굉장히 잘 보내었군요! 당신은 훌륭한 POSTECH의 인재가 될 것입니다!";
@@ -53,7 +56,8 @@ wstring Score::evaluate_total() {//전체 점수를 평가하여 그에 대한 �
   else
     return L"재입학하시는게 어떠십니까?";
 }
-wstring Score::evaluate_grade_score() {//학점에 대한 점수를 평가하여 그에 대한 메시지를 출력한다.
+/** 학점에 대한 점수를 평가하여 그에 대한 메시지를 출력한다. */
+wstring Score::evaluate_grade_score() {
   switch (this->grade_score / 100) {
     case 4: case 3://300이상
       return L"와 학점왕! 일 년 동안 후회 없이 공부했네요!";
@@ -66,7 +70,8 @@ wstring Score::evaluate_grade_score() {//학점에 대한 점수를 평가하여
   }
   throw runtime_error("학점 점수가 이상합니다.");
 }
-wstring Score::evaluate_relationship() {//인간관계에 대한 점수를 평가하여 그에 대한 메시지를 출력한다.
+/** 인간관계에 대한 점수를 평가하여 그에 대한 메시지를 출력한다. */
+wstring Score::evaluate_relationship() {
   switch (this->relationship / 100){
     case 3:case 2://200이상
       return L"일학년 동안 만날 사람 다 만났네요. 인간 관계가 아주 훌륭합니다.";
@@ -78,7 +83,8 @@ wstring Score::evaluate_relationship() {//인간관계에 대한 점수를 평�
   }
   throw runtime_error("인간관계 점수가 이상합니다.");
 }
-wstring Score::evaluate_self_develop() {//자기계발에 대한 평가를 하여 이에 대한 메시지를 출력한다.
+/** 자기계발에 대한 평가를 하여 이에 대한 메시지를 출력한다. */
+wstring Score::evaluate_self_develop() {
   switch (this->self_develop / 100){
     case 3: case 2://200이상
       return L"탄탄한 자기 계발로 보낸 1년. 많이 성장했겠습니다~!";

@@ -8,9 +8,11 @@
 
 using namespace std;
 
-class month_event{//각각 event의 base class
+/** 각각 event의 base class */
+class month_event{
 protected:
-	Month month;//월 정보를 갖는다.
+	/** 월 정보를 갖는다. */
+	Month month;
 
 public:
 	virtual wstring check_success(hero* hero, const PersonalStatus& increased_status) = 0;
