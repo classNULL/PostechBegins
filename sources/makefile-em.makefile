@@ -49,3 +49,6 @@ cleanwrapper:
 
 lint:
 	clang-tidy $(sourcefiles)
+
+format:
+	clang-format -style=Google -i $(sourcefiles) mainwrapper.cpp

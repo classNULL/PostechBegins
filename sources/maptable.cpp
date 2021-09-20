@@ -1,22 +1,23 @@
 #include "maptable.hpp"
 
 MapTable::~MapTable() {
-  for (const auto& cellp: this->_map) {
-    if (cellp != NULL)
-      delete cellp;
+  for (const auto& cellp : this->_map) {
+    if (cellp != NULL) delete cellp;
   }
 }
 
-/** board에서 구현되어야하는 함수로, 주사위의 굴려진 값에따라 이동해야 하는 칸의 위치를 return한다. */
+/** board에서 구현되어야하는 함수로, 주사위의 굴려진 값에따라 이동해야 하는 칸의
+ * 위치를 return한다. */
 int MapTable::check_stop(int reference, int step) {
-  //인자로는 현재 캐릭터의 위치(예를 들어 3일), 주사위를 굴려서 나온 숫자, 그리고 현재 달에 해당하는 cell 배열을 가리키는 cell pointer를 받는다(예를들어 march, november등 월에 해당하는 cell array가 될것)
+  //인자로는 현재 캐릭터의 위치(예를 들어 3일), 주사위를 굴려서 나온 숫자,
+  //그리고 현재 달에 해당하는 cell 배열을 가리키는 cell pointer를
+  //받는다(예를들어 march, november등 월에 해당하는 cell array가 될것)
   int max = reference + step;
-  for(int i = reference + 1; i <= max; i++) {
+  for (int i = reference + 1; i <= max; i++) {
     //만약 현재가 3일에 위치해 있는데 주사위를 굴려 5가 나왔다고 가정하자.
     //이때, 7일이 특수칸일 경우 캐릭터는 8일이 아니라 7일에서 멈추어야 하므로,
     //그 사이에 stop정보가 true인 값이 있는지를 파악하여야 한다.
-    if(this->at(i)->stop_cell() == true)
-      return i;
+    if (this->at(i)->stop_cell() == true) return i;
   }
   return max;
 }
@@ -25,31 +26,33 @@ static bool has_same_type(const cell& cell1, const cell& cell2) {
   return typeid(cell1) == typeid(cell2);
 }
 
-int MapTable::check_skip(int reference){
+int MapTable::check_skip(int reference) {
   int next = reference;
-  while(this->at(next)->skip_cell() == true && has_same_type(*(this->at(reference)), *(this->at(next)))) {
+  while (this->at(next)->skip_cell() == true &&
+         has_same_type(*(this->at(reference)), *(this->at(next)))) {
     next += 1;
   }
   return next;
 }
 
 bool MapTable::check_birth(int reference, int step) {
-    int max = reference + step;
-    for(int i = reference + 1; i <= max; i++) {
-        if(this->at(i)->birth_cell() == true)
-            return true;
-    }
-    return false;
+  int max = reference + step;
+  for (int i = reference + 1; i <= max; i++) {
+    if (this->at(i)->birth_cell() == true) return true;
+  }
+  return false;
 }
 
-bool MapTable::is_proper_new_event_day(MonthDay monthday, const vector<Month>& previous_monthes, const vector<int>& previous_indices) {
+bool MapTable::is_proper_new_event_day(MonthDay monthday,
+                                       const vector<Month>& previous_monthes,
+                                       const vector<int>& previous_indices) {
   clog << "Checking: " << monthday.get_index() << endl;
   auto* cell = this->at(monthday.get_index());
-  if (cell == NULL || typeid(*cell)!= typeid(normal))
-    return false;
+  if (cell == NULL || typeid(*cell) != typeid(normal)) return false;
 
   clog << "Passing: " << monthday.get_index() << endl;
-  return MapTable::is_new(monthday.get_month(), previous_monthes) && MapTable::is_new(monthday.get_index(), previous_indices);
+  return MapTable::is_new(monthday.get_month(), previous_monthes) &&
+         MapTable::is_new(monthday.get_index(), previous_indices);
 }
 
 void MapTable::install_events() {
@@ -77,9 +80,7 @@ void MapTable::install_events() {
   this->_map.at(indices.at(2)) = new eve_3;
 }
 
-void MapTable::set(int index, cell* input){
-		this->_map.at(index) = input;
-}
+void MapTable::set(int index, cell* input) { this->_map.at(index) = input; }
 
 void MapTable::set_birthday() {
   int birthday = rand() % this->_map.size();
@@ -93,13 +94,16 @@ MapTable MapTable::generate_default(bool random_event) {
   array[MonthDay::from_calendar(March, 2).get_index()] = new weekend;
   array[MonthDay::from_calendar(March, 3).get_index()] = new weekend;
   array[MonthDay::from_calendar(March, 4).get_index()] = new march;
-  array[MonthDay::from_calendar(March, 5).get_index()] = new bunban_lecstart;    //lecstartparty 개총. 후에 special을 상속.
+  array[MonthDay::from_calendar(March, 5).get_index()] =
+      new bunban_lecstart;  // lecstartparty 개총. 후에 special을 상속.
   array[MonthDay::from_calendar(March, 6).get_index()] = new march;
   array[MonthDay::from_calendar(March, 7).get_index()] = new dept_lecstart;
   array[MonthDay::from_calendar(March, 8).get_index()] = new march;
-  array[MonthDay::from_calendar(March, 9).get_index()] = new bunban_mt;       //mt 엠티, special을 상속.
+  array[MonthDay::from_calendar(March, 9).get_index()] =
+      new bunban_mt;  // mt 엠티, special을 상속.
   array[MonthDay::from_calendar(March, 10).get_index()] = new weekend;
-  array[MonthDay::from_calendar(March, 11).get_index()] = new bunban_face;   //faceparty 대면식, special을 상속.
+  array[MonthDay::from_calendar(March, 11).get_index()] =
+      new bunban_face;  // faceparty 대면식, special을 상속.
   array[MonthDay::from_calendar(March, 12).get_index()] = new march;
   array[MonthDay::from_calendar(March, 13).get_index()] = new march;
   array[MonthDay::from_calendar(March, 14).get_index()] = new dept_face;
@@ -186,7 +190,8 @@ MapTable MapTable::generate_default(bool random_event) {
 
   array[MonthDay::from_calendar(June, 1).get_index()] = new weekend;
   array[MonthDay::from_calendar(June, 2).get_index()] = new weekend;
-  array[MonthDay::from_calendar(June, 3).get_index()] = new bunban_lecend;     //lecendparty 종강
+  array[MonthDay::from_calendar(June, 3).get_index()] =
+      new bunban_lecend;  // lecendparty 종강
   array[MonthDay::from_calendar(June, 4).get_index()] = new normal;
   array[MonthDay::from_calendar(June, 5).get_index()] = new dept_lecend;
   array[MonthDay::from_calendar(June, 6).get_index()] = new weekend;
@@ -207,7 +212,8 @@ MapTable MapTable::generate_default(bool random_event) {
   array[MonthDay::from_calendar(June, 21).get_index()] = new exam;
   array[MonthDay::from_calendar(June, 22).get_index()] = new vacation;
   array[MonthDay::from_calendar(June, 23).get_index()] = new vacation;
-  array[MonthDay::from_calendar(June, 24).get_index()] = new vacation;   //방학 vacation, 한꺼번에 다 넘기기.
+  array[MonthDay::from_calendar(June, 24).get_index()] =
+      new vacation;  //방학 vacation, 한꺼번에 다 넘기기.
   array[MonthDay::from_calendar(June, 25).get_index()] = new vacation;
   array[MonthDay::from_calendar(June, 26).get_index()] = new vacation;
   array[MonthDay::from_calendar(June, 27).get_index()] = new vacation;
@@ -281,7 +287,8 @@ MapTable MapTable::generate_default(bool random_event) {
 
   array[MonthDay::from_calendar(September, 1).get_index()] = new vacation;
   array[MonthDay::from_calendar(September, 2).get_index()] = new normal;
-  array[MonthDay::from_calendar(September, 3).get_index()] = new bunban_lecstart;
+  array[MonthDay::from_calendar(September, 3).get_index()] =
+      new bunban_lecstart;
   array[MonthDay::from_calendar(September, 4).get_index()] = new dept_lecstart;
   array[MonthDay::from_calendar(September, 5).get_index()] = new normal;
   array[MonthDay::from_calendar(September, 6).get_index()] = new normal;
@@ -305,7 +312,8 @@ MapTable MapTable::generate_default(bool random_event) {
   array[MonthDay::from_calendar(September, 24).get_index()] = new normal;
   array[MonthDay::from_calendar(September, 25).get_index()] = new normal;
   array[MonthDay::from_calendar(September, 26).get_index()] = new normal;
-  array[MonthDay::from_calendar(September, 27).get_index()] = new poka;    //poka 포카전, festival을 상속.
+  array[MonthDay::from_calendar(September, 27).get_index()] =
+      new poka;  // poka 포카전, festival을 상속.
   array[MonthDay::from_calendar(September, 28).get_index()] = new poka;
   array[MonthDay::from_calendar(September, 29).get_index()] = new weekend;
   array[MonthDay::from_calendar(September, 30).get_index()] = new normal;
@@ -349,7 +357,8 @@ MapTable MapTable::generate_default(bool random_event) {
   array[MonthDay::from_calendar(November, 5).get_index()] = new normal;
   array[MonthDay::from_calendar(November, 6).get_index()] = new normal;
   array[MonthDay::from_calendar(November, 7).get_index()] = new normal;
-  array[MonthDay::from_calendar(November, 8).get_index()] = new pop;     //pop 피오피, special을 상속.
+  array[MonthDay::from_calendar(November, 8).get_index()] =
+      new pop;  // pop 피오피, special을 상속.
   array[MonthDay::from_calendar(November, 9).get_index()] = new weekend;
   array[MonthDay::from_calendar(November, 10).get_index()] = new weekend;
   array[MonthDay::from_calendar(November, 11).get_index()] = new normal;
@@ -405,8 +414,7 @@ MapTable MapTable::generate_default(bool random_event) {
   array[MonthDay::from_calendar(December, 30).get_index()] = new win_vac;
   array[MonthDay::from_calendar(December, 31).get_index()] = new win_vac;
 
-  if (random_event)
-    maptable.install_events();
+  if (random_event) maptable.install_events();
   maptable.set_birthday();
   return maptable;
 }

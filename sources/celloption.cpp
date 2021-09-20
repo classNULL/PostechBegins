@@ -15,7 +15,8 @@ wstring cell_option::apply() {
 cell_option_book::cell_option_book(const vector<cell_option>& options) {
   this->_options = options;
 }
-cell_option_book::cell_option_book(wstring title, const vector<cell_option>& options) {
+cell_option_book::cell_option_book(wstring title,
+                                   const vector<cell_option>& options) {
   this->_book_title = title;
   this->_options = options;
 }
