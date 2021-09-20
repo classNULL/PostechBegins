@@ -1,3 +1,4 @@
+sourcefiles = gamecenter.cpp hero.cpp cell.cpp monthday.cpp maptable.cpp score.cpp title.cpp celloption.cpp event.cpp
 objectfiles = gamecenter.o hero.o cell.o monthday.o maptable.o score.o title.o celloption.o event.o mainwrapper.o
 jsfiles = ../postechbegins.out.js ../postechbegins.out.wasm ../postechbegins.out.wasm.map
 
@@ -45,3 +46,6 @@ cleano:
 
 cleanwrapper:
 	rm mainwrapper.o
+
+lint:
+	clang-tidy $(sourcefiles)

@@ -1,5 +1,12 @@
 #include "mainwrapper.hpp"
 
+#ifndef EMBIND_H
+#define EMBIND_H
+#include <emscripten/bind.h>
+#endif
+
+using namespace emscripten;
+
 EMSCRIPTEN_BINDINGS(PostechBegins_Main) {
   emscripten::function("srand", &srand);
   class_<MonthDay>("MonthDay")
@@ -156,13 +163,4 @@ EMSCRIPTEN_BINDINGS(PostechBegins_Main) {
   class_<december_event, base<month_event>>("DecemberEvent").constructor();
 
   register_vector<string>("EmscriptenStringVector");
-  // class_<vector<string>>("EmscriptenStringVector")
-  //   .constructor()
-  //   .function("at", select_overload<string&(unsigned int)>(&vector<string>::at))
-  //   .function("insert", select_overload<vector<string>::iterator(vector<string>::const_iterator, const string&)>(&vector<string>::insert))
-  //   .property("begin", &vector<string>::begin)
-  //   .property("end", &vector<string>::end)
-  //   .property("size", &vector<string>::size);
-  // class_<vector<string>::iterator>("EmscriptenStringVectorIterator")
-  //   .function("plus", &vector<string>::iterator::operator+);
-}
+};

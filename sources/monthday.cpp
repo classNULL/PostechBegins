@@ -79,6 +79,9 @@ MonthDay MonthDay::from_index(int date_index){
 	else if(date_index>=276 && date_index<=306){
 		month=December;
 		month_day_info=date_index-275;
+	} else {
+		// TODO: throw here
+		return monthday;
 	}
 
 	monthday._month = month;

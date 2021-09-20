@@ -18,11 +18,15 @@ int MapTable::check_stop(int reference, int step) {//board에서 구현되어야
       return i;
   }
   return max;
-}//
+}
+
+static bool has_same_type(const cell& cell1, const cell& cell2) {
+  return typeid(cell1) == typeid(cell2);
+}
 
 int MapTable::check_skip(int reference){
   int next = reference;
-  while(this->at(next)->skip_cell() == true && typeid(*(this->at(reference))) == typeid(*(this->at(next)))) {
+  while(this->at(next)->skip_cell() == true && has_same_type(*(this->at(reference)), *(this->at(next)))) {
     next += 1;
   }
   return next;

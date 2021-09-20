@@ -11,19 +11,4 @@
 #include "event.hpp"
 #include "score.hpp"
 
-#ifndef EMBIND_H
-#define EMBIND_H
-#include <emscripten/bind.h>
-#endif
-
-using namespace emscripten;
-
-class MainWrapper {
-private:
-  GameCenter center;
-
-public:
-
-};
-
 #endif
